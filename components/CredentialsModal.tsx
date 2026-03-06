@@ -11,48 +11,48 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
       {isOpen && (
         <div
           className="
-            fixed inset-0 z-[100]
-            overflow-y-auto
-            flex items-start md:items-center justify-center
-            px-4 py-10
-            "
+          fixed inset-0 z-[100]
+          overflow-y-auto
+          flex items-start md:items-center justify-center
+          px-4 py-10
+          "
         >
-          {/* overlay */}
+          {/* OVERLAY */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/70"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
 
-          {/* modal */}
+          {/* MODAL */}
           <motion.div
             initial={{ y: 40, opacity: 0, scale: 0.96 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 40, opacity: 0, scale: 0.96 }}
             transition={{ type: "spring", damping: 25, stiffness: 280 }}
             className="
-              relative z-10
-              w-full max-w-4xl
-              max-h-[90vh]
-              overflow-y-auto
-              bg-white text-black
-              dark:bg-[#050505] dark:text-white
-              border border-black dark:border-white
-              "
+            relative z-10
+            w-full max-w-5xl
+            max-h-[92vh]
+            overflow-y-auto
+            bg-white text-black
+            dark:bg-[#050505] dark:text-white
+            border border-black dark:border-white
+            "
           >
             {/* CLOSE */}
             <button
               onClick={onClose}
               className="
-                group
-                absolute top-4 right-4
-                border border-black dark:border-white
-                p-2
-                hover:bg-indigo-500 hover:text-white
-                transition
-                "
+              group
+              absolute top-4 right-4
+              border border-black dark:border-white
+              p-2
+              hover:bg-indigo-500 hover:text-white
+              transition
+              "
             >
               <X
                 size={18}
@@ -65,12 +65,12 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
               <div className="flex items-center gap-3 mb-3">
                 <span
                   className="
-                    border border-black dark:border-white
-                    px-2 py-[2px]
-                    text-[10px]
-                    font-mono uppercase
-                    text-indigo-500
-                    "
+                  border border-black dark:border-white
+                  px-2 py-[2px]
+                  text-[10px]
+                  font-mono uppercase
+                  text-indigo-500
+                  "
                 >
                   FIG {cert.id}
                 </span>
@@ -92,26 +92,36 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
             {/* CONTENT */}
             <div className="p-6 md:p-10">
               {/* PDF VIEWER */}
-              <div className="border border-black dark:border-white h-[70vh] md:h-[60vh] overflow-auto mb-6">
+              <div
+                className="
+                border border-black dark:border-white
+                bg-zinc-100 dark:bg-black
+                aspect-[16/10]
+                md:h-[65vh]
+                w-full
+                overflow-hidden
+                mb-6
+                "
+              >
                 <iframe
-                  src={`${cert.pdf}#toolbar=0`}
+                  src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                   className="w-full h-full"
                 />
               </div>
 
-              {/* OPEN PDF */}
+              {/* OPEN PDF BUTTON */}
               <a
                 href={cert.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  group
-                  flex items-center justify-center gap-2
-                  border border-black dark:border-white
-                  py-3 font-bold uppercase
-                  hover:bg-indigo-500 hover:text-white
-                  transition
-                  "
+                group
+                flex items-center justify-center gap-2
+                border border-black dark:border-white
+                py-3 font-bold uppercase
+                hover:bg-indigo-500 hover:text-white
+                transition
+                "
               >
                 <FileText
                   size={16}

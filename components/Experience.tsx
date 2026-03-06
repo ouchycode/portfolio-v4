@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { useExperienceAnimation } from "@/hooks/useAnimations";
 import ExperienceModal from "./ExperienceModal";
@@ -51,7 +51,7 @@ const experiences = [
     period: "2025 — Present",
     location: "Tangerang, Banten, ID",
     description:
-      "Aktif memanajemen komunitas e-sports kampus dan memimpin penyelenggaraan kompetisi game tingkat universitas.",
+      "Aktif memanajemen komunitas e-sports kampus dan memimpin penyelengggaraan kompetisi game tingkat universitas.",
     skills: [
       "Event Management",
       "Leadership",
@@ -99,13 +99,32 @@ export default function Experience() {
 
   useExperienceAnimation(container);
 
+  /* Disable manual scroll on mobile */
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const preventScroll = (e: WheelEvent) => {
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+      }
+    };
+
+    el.addEventListener("wheel", preventScroll, { passive: false });
+
+    return () => {
+      el.removeEventListener("wheel", preventScroll);
+    };
+  }, []);
+
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
 
-    const scrollAmount = window.innerWidth > 768 ? 420 : 320;
+    const cardWidth =
+      window.innerWidth > 768 ? 420 + 1 : window.innerWidth * 0.85 + 1;
 
     scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
+      left: direction === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
     });
   };
@@ -171,14 +190,7 @@ export default function Experience() {
             <div className="flex gap-2 shrink-0">
               <button
                 onClick={() => slide("left")}
-                className="
-                group
-                flex items-center justify-center
-                w-10 h-10
-                border border-black dark:border-white
-                hover:bg-indigo-500 hover:text-white
-                transition
-                "
+                className="group flex items-center justify-center w-10 h-10 border border-black dark:border-white hover:bg-indigo-500 hover:text-white transition"
               >
                 <ArrowLeft
                   size={18}
@@ -188,14 +200,7 @@ export default function Experience() {
 
               <button
                 onClick={() => slide("right")}
-                className="
-                group
-                flex items-center justify-center
-                w-10 h-10
-                border border-black dark:border-white
-                hover:bg-indigo-500 hover:text-white
-                transition
-                "
+                className="group flex items-center justify-center w-10 h-10 border border-black dark:border-white hover:bg-indigo-500 hover:text-white transition"
               >
                 <ArrowRight
                   size={18}
@@ -214,6 +219,9 @@ export default function Experience() {
           snap-x snap-mandatory
           border-t border-black dark:border-white
           [&::-webkit-scrollbar]:hidden
+
+          touch-none md:touch-auto
+          select-none
           "
         >
           {experiences.map((exp, index) => {
