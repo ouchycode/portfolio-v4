@@ -11,7 +11,7 @@ const certificates = [
     id: "01",
     title: "Belajar Dasar AI",
     issuer: "Dicoding Indonesia",
-    year: "2026",
+    year: "2025",
     pdf: "/certs/DICODING_BELAJAR DASAR AI.pdf",
   },
   {
@@ -81,16 +81,22 @@ export default function TechAndCerts() {
 
   useTechCertsAnimation(container);
 
+  /* Disable manual scroll on mobile */
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    const prevent = (e: WheelEvent) => {
-      if (window.innerWidth < 768) e.preventDefault();
+    const preventScroll = (e: WheelEvent) => {
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+      }
     };
 
-    el.addEventListener("wheel", prevent, { passive: false });
-    return () => el.removeEventListener("wheel", prevent);
+    el.addEventListener("wheel", preventScroll, { passive: false });
+
+    return () => {
+      el.removeEventListener("wheel", preventScroll);
+    };
   }, []);
 
   const techStack = [
@@ -189,14 +195,14 @@ export default function TechAndCerts() {
     },
   ];
 
-  const slide = (dir: "left" | "right") => {
+  const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
 
     const cardWidth =
-      window.innerWidth > 768 ? 360 + 1 : window.innerWidth * 0.85 + 1;
+      window.innerWidth > 768 ? 420 + 1 : window.innerWidth * 0.85 + 1;
 
     scrollRef.current.scrollBy({
-      left: dir === "left" ? -cardWidth : cardWidth,
+      left: direction === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
     });
   };
@@ -216,7 +222,11 @@ export default function TechAndCerts() {
     <section
       id="tech"
       ref={container}
-      className="px-5 py-24 md:px-16 md:py-32 bg-white text-black dark:bg-[#050505] dark:text-white"
+      className="
+      px-5 py-24 md:px-16 md:py-32
+      bg-white text-black
+      dark:bg-[#050505] dark:text-white
+      "
     >
       <div className="border border-black dark:border-white grid grid-cols-1 md:grid-cols-12">
         {/* TECH STACK */}
@@ -227,19 +237,33 @@ export default function TechAndCerts() {
             </h2>
           </div>
 
-          <div className="p-6 md:p-10 grid grid-cols-2 gap-3">
+          <div className="p-6 md:p-10 grid grid-cols-2 gap-2">
             {techStack.map((tech) => (
               <div
                 key={tech.name}
-                className="group flex items-center gap-3 px-3 py-2 border border-black dark:border-white text-xs font-mono uppercase min-w-0 hover:bg-indigo-500 hover:text-white transition"
+                className="
+                group
+                tech-tag
+                flex items-center gap-2
+                px-3 py-2
+                border border-black dark:border-white
+                text-xs font-mono uppercase
+                hover:bg-indigo-500 hover:text-white
+                transition
+                "
               >
                 <img
                   src={tech.image}
                   alt={tech.name}
-                  className="w-[16px] h-[16px] object-contain shrink-0 group-hover:brightness-0 group-hover:invert"
+                  className="
+                  w-[14px] h-[14px]
+                  object-contain
+                  transition-all
+                  group-hover:brightness-0 group-hover:invert
+                  "
                 />
 
-                <span className="truncate">{tech.name}</span>
+                {tech.name}
               </div>
             ))}
           </div>
@@ -247,6 +271,7 @@ export default function TechAndCerts() {
 
         {/* CERTS */}
         <div className="md:col-span-8 flex flex-col">
+          {/* HEADER */}
           <div className="grid grid-cols-1 md:grid-cols-12 border-b border-black dark:border-white">
             <div className="md:col-span-9 border-b md:border-b-0 md:border-r border-black dark:border-white p-6 md:p-10">
               <h2 className="tech-tag text-[14vw] md:text-[5vw] font-black uppercase leading-[0.85] tracking-tight">
@@ -254,70 +279,100 @@ export default function TechAndCerts() {
               </h2>
             </div>
 
-            <div className="md:col-span-3 flex items-end justify-end gap-2 p-6 md:p-10">
+            <div className="md:col-span-3 p-6 md:p-10 flex items-end justify-end gap-2">
               <button
                 onClick={() => slide("left")}
-                className="group w-10 h-10 flex items-center justify-center border border-black dark:border-white hover:bg-indigo-500 transition"
+                className="
+                group
+                flex items-center justify-center
+                w-10 h-10
+                border border-black dark:border-white
+                hover:bg-indigo-500 hover:text-white
+                transition
+                "
               >
                 <ArrowLeft
                   size={18}
-                  className="text-indigo-500 group-hover:text-white"
+                  className="text-indigo-500 group-hover:text-white transition"
                 />
               </button>
 
               <button
                 onClick={() => slide("right")}
-                className="group w-10 h-10 flex items-center justify-center border border-black dark:border-white hover:bg-indigo-500 transition"
+                className="
+                group
+                flex items-center justify-center
+                w-10 h-10
+                border border-black dark:border-white
+                hover:bg-indigo-500 hover:text-white
+                transition
+                "
               >
                 <ArrowRight
                   size={18}
-                  className="text-indigo-500 group-hover:text-white"
+                  className="text-indigo-500 group-hover:text-white transition"
                 />
               </button>
             </div>
           </div>
 
-          {/* CERT LIST */}
+          {/* CERT SCROLLER */}
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto snap-x snap-mandatory border-t border-black dark:border-white [&::-webkit-scrollbar]:hidden touch-none md:touch-auto"
+            className="
+            flex overflow-x-auto
+            snap-x snap-mandatory
+            border-t border-black dark:border-white
+            [&::-webkit-scrollbar]:hidden
+            touch-none md:touch-auto
+            select-none
+            "
           >
             {certificates.map((cert) => (
               <div
                 key={cert.id}
                 onClick={() => openCert(cert)}
-                className="group snap-center shrink-0 w-[85vw] md:w-[360px] border-r border-black dark:border-white p-6 md:p-10 cursor-pointer flex flex-col justify-between hover:bg-indigo-500 hover:text-white transition"
+                className="
+                group
+                snap-center shrink-0
+                w-[85vw] md:w-[420px]
+                border-r border-black dark:border-white
+                p-6 md:p-10
+                cursor-pointer
+                flex flex-col justify-between
+                transition
+                hover:bg-indigo-500 hover:text-white
+                "
               >
-                <div className="flex justify-between text-xs font-mono uppercase opacity-70">
-                  <span className="text-indigo-500 group-hover:text-white">
+                <div className="flex justify-between items-center font-mono text-xs uppercase opacity-70">
+                  <span className="text-indigo-500 group-hover:text-white transition">
                     FIG {cert.id}
                   </span>
+
                   <span>{cert.year}</span>
                 </div>
 
-                <div className="relative aspect-[4/3] border border-black dark:border-white mt-6 overflow-hidden bg-white">
+                <div className="relative aspect-[4/3] border border-black dark:border-white mt-10 overflow-hidden bg-white">
                   <iframe
                     src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
                     className="w-full h-full pointer-events-none"
                   />
+
                   <div className="absolute inset-0 bg-transparent" />
                 </div>
 
-                <div className="flex justify-between items-start mt-6">
+                <div className="flex items-center justify-between mt-10">
                   <div>
-                    <span className="font-black uppercase block">
+                    <span className="text-sm md:text-base font-medium block">
                       {cert.title}
                     </span>
 
-                    <span className="font-mono text-[10px] uppercase text-zinc-500 group-hover:text-white">
+                    <span className="font-mono text-[10px] uppercase text-zinc-500 group-hover:text-white transition">
                       {cert.issuer}
                     </span>
                   </div>
 
-                  <ArrowUpRight
-                    size={18}
-                    className="text-indigo-500 group-hover:text-white"
-                  />
+                  <ArrowUpRight className="w-5 h-5 text-indigo-500 group-hover:text-white transition" />
                 </div>
               </div>
             ))}
