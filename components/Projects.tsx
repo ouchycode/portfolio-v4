@@ -101,7 +101,7 @@ const projectsData = [
     id: "07",
     title: "Sistem Pembayaran Iuran Warga",
     category: "Mobile Application",
-    image: "/projects/fkra-iuran.png",
+    image: "/projects/iuran-warga.png",
     description:
       "Aplikasi ini dibuat untuk membantu pencatatan iuran warga dalam rangka kegiatan 17 Agustusan. Dengan antarmuka modern yang mudah digunakan, aplikasi ini sangat cocok untuk panitia RT/RW, pengurus warga, atau komunitas lokal.",
     tech: ["React", "Tailwind CSS", "Firebase"],
