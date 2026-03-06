@@ -187,7 +187,7 @@ export default function Hero() {
       <CVModal
         isOpen={isCVModalOpen}
         onClose={() => setIsCVModalOpen(false)}
-        cvUrl="/CV_KEVIN_ARDIANSYAH.pdf"
+        cvUrl="/CV_KEVIN_ARDIANSYAH_2026.pdf"
       />
     </>
   );
