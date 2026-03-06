@@ -31,7 +31,6 @@ export default function Navbar() {
 
   useEffect(() => setMounted(true), []);
 
-  // detect section from scroll
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -87,67 +86,42 @@ export default function Navbar() {
               key={i}
               href={link.href}
               onClick={() => setActive(link.href)}
-              className="
-              group
-              relative
-              w-12 h-12 md:w-11 md:h-11
-              flex items-center justify-center
-              border-r border-black dark:border-white
-              last:border-r-0
-              overflow-hidden
-              "
+              className={`
+  group
+  relative
+  w-12 h-12 md:w-11 md:h-11
+  flex items-center justify-center
+  border-r border-black dark:border-white
+  last:border-r-0
+  overflow-hidden
+  transition-colors
+  ${
+    isActive
+      ? "bg-indigo-500 text-white"
+      : "text-black dark:text-white hover:text-white"
+  }
+  `}
             >
               {/* hover background */}
               <span
                 className="
-                absolute inset-0
-                bg-indigo-500
-                translate-y-full
-                group-hover:translate-y-0
-                transition-transform duration-200 ease-out
-                pointer-events-none
-                "
+    absolute inset-0
+    bg-indigo-500
+    translate-y-full
+    group-hover:translate-y-0
+    transition-transform duration-200 ease-out
+    pointer-events-none
+    "
               />
 
-              {/* icon */}
               <motion.div
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 320 }}
                 className="relative z-10"
               >
-                <Icon
-                  size={20}
-                  className={`transition ${
-                    isActive
-                      ? "text-white"
-                      : "text-indigo-500 group-hover:text-white"
-                  }`}
-                />
+                <Icon size={20} />
               </motion.div>
-
-              {/* tooltip desktop */}
-              <span
-                className="
-                absolute -bottom-8
-                text-xs
-                opacity-0
-                group-hover:opacity-100
-                transition
-                pointer-events-none
-                hidden md:block
-                "
-              >
-                {link.label}
-              </span>
-
-              {/* active indicator */}
-              {isActive && (
-                <motion.div
-                  layoutId="nav-indicator"
-                  className="absolute bottom-0 w-full h-[2px] bg-indigo-500"
-                />
-              )}
             </a>
           );
         })}
@@ -162,6 +136,7 @@ export default function Navbar() {
           flex items-center justify-center
           border-l border-black dark:border-white
           overflow-hidden
+          text-black dark:text-white
           "
         >
           <span
@@ -177,13 +152,13 @@ export default function Navbar() {
 
           {theme === "dark" ? (
             <Sun
+              className="relative z-10 transition group-hover:text-white"
               size={20}
-              className="relative z-10 text-indigo-500 group-hover:text-white transition"
             />
           ) : (
             <Moon
+              className="relative z-10 transition group-hover:text-white"
               size={20}
-              className="relative z-10 text-indigo-500 group-hover:text-white transition"
             />
           )}
         </button>

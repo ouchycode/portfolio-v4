@@ -47,18 +47,6 @@ export default function About() {
             {/* gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent dark:from-black/60"></div>
 
-            {/* noise */}
-            <div
-              className="
-              pointer-events-none
-              absolute inset-0
-              opacity-[0.05]
-              mix-blend-overlay
-              bg-[url('/noise.png')]
-              "
-            />
-
-            {/* corner accent */}
             {/* blur fade bottom */}
             <div
               className="

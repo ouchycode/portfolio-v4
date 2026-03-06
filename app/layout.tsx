@@ -9,21 +9,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+      <body
+        className="
+        bg-white text-black
+        dark:bg-[#050505] dark:text-white
+        antialiased
+        "
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          {/* GSAP Smooth Scroll Structure */}
-          <div id="smooth-wrapper">
-            <div id="smooth-content">{children}</div>
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

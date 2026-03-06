@@ -91,7 +91,7 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover grayscale hover:grayscale-0 transition duration-700"
+                  className="object-cover"
                 />
               </div>
 
