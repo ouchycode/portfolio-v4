@@ -96,6 +96,22 @@ const projectsData = [
     ],
     link: "https://movie-app-ultimate-hlye7zg8p-ouchycodes-projects.vercel.app/",
   },
+
+  {
+    id: "07",
+    title: "Sistem Pembayaran Iuran Warga",
+    category: "Mobile Application",
+    image: "/projects/fkra-iuran.png",
+    description:
+      "Aplikasi ini dibuat untuk membantu pencatatan iuran warga dalam rangka kegiatan 17 Agustusan. Dengan antarmuka modern yang mudah digunakan, aplikasi ini sangat cocok untuk panitia RT/RW, pengurus warga, atau komunitas lokal.",
+    tech: ["React", "Tailwind CSS", "Firebase"],
+    features: [
+      "Pencatatan data iuran warga secara real-time",
+      "Dashboard rekapitulasi total dana terkumpul",
+      "Manajemen status pelunasan dan transparansi pembayaran",
+    ],
+    link: "https://fkra-app.web.app/",
+  },
 ];
 
 export default function Projects() {
