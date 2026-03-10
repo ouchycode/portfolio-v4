@@ -7,24 +7,28 @@ import Image from "next/image";
 export default function ProjectModal({ isOpen, onClose, project }: any) {
   if (!project) return null;
 
-  const getCategoryColor = (category: string) => {
+  // Diperbarui ke gaya Clean UI (Background soft + Text bold + Border tipis)
+  const getCategoryStyle = (category: string) => {
     switch (category) {
       case "Academic System":
-        return "text-indigo-500 border-indigo-500";
+      case "LMS Platform":
+      case "EdTech":
+        return "bg-indigo-50 text-indigo-600 border border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20";
       case "E-Sports Tech":
-        return "text-pink-500 border-pink-500";
+      case "Event Management":
+        return "bg-pink-50 text-pink-600 border border-pink-100 dark:bg-pink-500/10 dark:text-pink-400 dark:border-pink-500/20";
       case "Journal & SEO":
-        return "text-amber-500 border-amber-500";
-      case "AI / ML":
-        return "text-purple-500 border-purple-500";
+        return "bg-amber-50 text-amber-600 border border-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20";
+      case "Web Application":
+      case "Mobile Application":
       case "Web App":
-        return "text-cyan-500 border-cyan-500";
+        return "bg-cyan-50 text-cyan-600 border border-cyan-100 dark:bg-cyan-500/10 dark:text-cyan-400 dark:border-cyan-500/20";
       default:
-        return "text-indigo-500 border-indigo-500";
+        return "bg-zinc-100 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700/50";
     }
   };
 
-  const categoryColor = getCategoryColor(project.category);
+  const categoryStyle = getCategoryStyle(project.category);
 
   return (
     <AnimatePresence>
@@ -34,96 +38,101 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
           fixed inset-0 z-[100]
           overflow-y-auto
           flex items-start md:items-center justify-center
-          px-4 md:px-10 py-10
+          px-4 md:p-6 py-10
           "
         >
-          {/* overlay */}
+          {/* OVERLAY GLASSMORPHISM */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/70"
+            className="fixed inset-0 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-sm cursor-pointer"
           />
 
-          {/* modal */}
+          {/* MODAL CONTAINER */}
           <motion.div
             initial={{ y: 40, opacity: 0, scale: 0.96 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 40, opacity: 0, scale: 0.96 }}
-            transition={{ type: "spring", damping: 25, stiffness: 280 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="
             relative z-10
-            w-full max-w-5xl
+            w-full max-w-4xl
             max-h-[90vh]
             overflow-y-auto
-            bg-white text-black
-            dark:bg-[#050505] dark:text-white
-            border border-black dark:border-white
+            bg-white dark:bg-[#121212]
+            text-zinc-900 dark:text-zinc-50
+            border border-zinc-200/80 dark:border-zinc-800/80
+            rounded-[2rem] shadow-2xl shadow-black/10 dark:shadow-black/50
+            [&::-webkit-scrollbar]:hidden
             "
           >
-            {/* CLOSE BUTTON */}
+            {/* CLOSE BUTTON - FLOATING PILL */}
             <button
               onClick={onClose}
               className="
-              group
-              absolute top-4 right-4
+              absolute top-6 right-6 md:top-8 md:right-8
               z-50
               flex items-center justify-center
-              w-10 h-10
-              border border-black dark:border-white
-              bg-white dark:bg-black
-              hover:bg-indigo-500 hover:text-white
-              transition
+              w-10 h-10 rounded-full
+              bg-white/80 dark:bg-black/50 backdrop-blur-md
+              text-zinc-600 dark:text-zinc-300
+              border border-zinc-200 dark:border-zinc-700
+              hover:bg-zinc-100 dark:hover:bg-zinc-800
+              hover:text-zinc-900 dark:hover:text-white
+              transition-colors duration-300
               "
             >
-              <X
-                size={18}
-                strokeWidth={3}
-                className="text-indigo-500 group-hover:text-white transition"
-              />
+              <X size={20} strokeWidth={2.5} />
             </button>
 
-            {/* HEADER IMAGE */}
-            <div className="border-b border-black dark:border-white relative">
-              <div className="relative w-full aspect-[16/9] bg-zinc-200 dark:bg-zinc-900">
+            {/* HEADER IMAGE SECTION */}
+            <div className="relative border-b border-zinc-200/80 dark:border-zinc-800/80">
+              <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-zinc-100 dark:bg-zinc-900">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover"
+                  priority
                 />
+                {/* Subtle overlay gradient at the top for badge readability */}
+                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 to-transparent pointer-events-none"></div>
               </div>
 
+              {/* FIGURE BADGE */}
               <div
-                className={`
-                absolute top-6 left-6
-                font-mono text-xs uppercase
-                border px-3 py-1
-                bg-white dark:bg-black
-                ${categoryColor}
-                `}
+                className="
+                absolute top-6 left-6 md:top-8 md:left-8
+                font-mono text-[10px] md:text-xs uppercase font-bold tracking-widest
+                border border-white/20 dark:border-white/10
+                bg-white/90 dark:bg-black/70 backdrop-blur-md
+                text-zinc-900 dark:text-white
+                px-4 py-1.5 rounded-full shadow-sm
+                "
               >
                 FIG. {project.id}
               </div>
             </div>
 
-            {/* HEADER BOX */}
-            <div className="border-b border-black dark:border-white p-6 md:p-10">
+            {/* TITLE BOX */}
+            <div className="border-b border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10 bg-[#fafafa] dark:bg-[#0a0a0a]">
               <div
                 className={`
-                font-mono text-xs uppercase mb-4
-                ${categoryColor.split(" ")[0]}
+                w-fit px-3 py-1.5 rounded-xl
+                font-mono text-[10px] md:text-xs uppercase font-bold tracking-widest mb-5
+                ${categoryStyle}
                 `}
               >
                 {project.category}
               </div>
 
-              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-tight text-zinc-900 dark:text-white">
                 {project.title}
               </h2>
 
-              <p className="mt-4 text-sm md:text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+              <p className="mt-5 text-sm md:text-base font-medium leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-3xl">
                 {project.description}
               </p>
             </div>
@@ -131,21 +140,27 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
             {/* CONTENT GRID */}
             <div className="grid grid-cols-1 md:grid-cols-12">
               {/* TECH STACK */}
-              <div className="md:col-span-5 border-b md:border-b-0 md:border-r border-black dark:border-white p-6 md:p-10">
-                <h3 className="font-mono text-xs uppercase mb-4 text-indigo-500">
-                  Tech Stack
-                </h3>
+              <div className="md:col-span-5 border-b md:border-b-0 md:border-r border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10 bg-zinc-50/50 dark:bg-zinc-900/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-6 h-[2px] bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
+                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">
+                    Tech Stack
+                  </h3>
+                </div>
 
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech: string) => (
                     <span
                       key={tech}
                       className="
-                      border border-black dark:border-white
-                      px-3 py-1
-                      font-mono text-xs uppercase
-                      hover:border-indigo-500 hover:text-indigo-500
-                      transition
+                      bg-white dark:bg-[#121212]
+                      border border-zinc-200/80 dark:border-zinc-800/80
+                      text-zinc-600 dark:text-zinc-300
+                      px-3.5 py-1.5 rounded-xl
+                      font-mono text-[10px] md:text-xs uppercase font-bold
+                      hover:border-indigo-300 dark:hover:border-indigo-500/50
+                      hover:text-indigo-600 dark:hover:text-indigo-400
+                      transition-colors duration-300 cursor-default
                       "
                     >
                       {tech}
@@ -156,45 +171,58 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
 
               {/* FEATURES */}
               <div className="md:col-span-7 p-6 md:p-10">
-                <h3 className="font-mono text-xs uppercase mb-4 text-indigo-500">
-                  Key Features
-                </h3>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-6 h-[2px] bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
+                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">
+                    Key Features
+                  </h3>
+                </div>
 
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {project.features.map((f: string, i: number) => (
-                    <li key={i} className="flex gap-3 items-start">
-                      <ArrowRight
-                        size={16}
-                        className="mt-[2px] text-indigo-500"
-                      />
-
-                      <span className="text-sm md:text-base">{f}</span>
+                    <li key={i} className="group flex gap-4 items-start">
+                      <div className="bg-indigo-50 dark:bg-indigo-500/10 p-1.5 rounded-md shrink-0 mt-0.5 transition-colors group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/20">
+                        <ArrowRight
+                          size={14}
+                          className="text-indigo-600 dark:text-indigo-400"
+                          strokeWidth={3}
+                        />
+                      </div>
+                      <span className="text-sm md:text-base text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed">
+                        {f}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* REPOSITORY */}
-              <div className="md:col-span-12 border-t border-black dark:border-white p-6 md:p-10">
+              {/* REPOSITORY BUTTON */}
+              <div className="md:col-span-12 border-t border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10">
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
                   group
-                  flex items-center justify-center gap-2
-                  border border-black dark:border-white
-                  py-4
-                  font-bold uppercase
-                  hover:bg-indigo-500 hover:text-white
-                  transition
+                  flex items-center justify-center gap-3
+                  w-full md:w-auto
+                  bg-indigo-600 dark:bg-indigo-500
+                  text-white
+                  rounded-2xl px-8 py-5
+                  font-bold uppercase tracking-wider text-sm md:text-base
+                  hover:bg-zinc-900 dark:hover:bg-white
+                  hover:text-white dark:hover:text-black
+                  shadow-md hover:shadow-xl hover:shadow-zinc-900/20 dark:hover:shadow-white/20
+                  transition-all duration-300 hover:-translate-y-1
                   "
                 >
                   View Repository
-                  <ExternalLink
-                    size={18}
-                    className="text-indigo-500 group-hover:text-white transition"
-                  />
+                  <div className="bg-white/20 dark:bg-black/10 p-2 rounded-full group-hover:bg-white/20 dark:group-hover:bg-black/10 transition-colors duration-300">
+                    <ExternalLink
+                      size={18}
+                      className="group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
                 </a>
               </div>
             </div>

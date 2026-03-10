@@ -1,6 +1,6 @@
 "use client";
 
-import { X, FileText } from "lucide-react";
+import { X, FileText, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function CertificateModal({ isOpen, onClose, cert }: any) {
@@ -13,121 +13,134 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
           className="
           fixed inset-0 z-[100]
           overflow-y-auto
-          flex items-start md:items-center justify-center
-          px-4 py-10
+          flex items-center justify-center
+          px-4 py-10 md:p-6
           "
         >
-          {/* OVERLAY */}
+          {/* OVERLAY GLASSMORPHISM */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-sm cursor-pointer"
           />
 
-          {/* MODAL */}
+          {/* MODAL CONTAINER */}
           <motion.div
-            initial={{ y: 40, opacity: 0, scale: 0.96 }}
+            initial={{ y: 20, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 40, opacity: 0, scale: 0.96 }}
-            transition={{ type: "spring", damping: 25, stiffness: 280 }}
+            exit={{ y: 20, opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="
             relative z-10
             w-full max-w-5xl
-            max-h-[92vh]
+            max-h-[90vh]
             overflow-y-auto
-            bg-white text-black
-            dark:bg-[#050505] dark:text-white
-            border border-black dark:border-white
+            bg-white dark:bg-[#121212]
+            text-zinc-900 dark:text-zinc-50
+            border border-zinc-200/80 dark:border-zinc-800/80
+            rounded-[2rem] shadow-2xl shadow-black/10 dark:shadow-black/50
+            [&::-webkit-scrollbar]:hidden
             "
           >
-            {/* CLOSE */}
+            {/* CLOSE BUTTON - FLOATING PILL */}
             <button
               onClick={onClose}
               className="
-              group
-              absolute top-4 right-4
-              border border-black dark:border-white
-              p-2
-              hover:bg-indigo-500 hover:text-white
-              transition
+              absolute top-6 right-6 md:top-8 md:right-8
+              z-50
+              flex items-center justify-center
+              w-10 h-10 rounded-full
+              bg-zinc-100 dark:bg-zinc-800/50
+              text-zinc-500 dark:text-zinc-400
+              hover:bg-zinc-200 dark:hover:bg-zinc-700
+              hover:text-zinc-900 dark:hover:text-white
+              transition-colors duration-300
               "
             >
-              <X
-                size={18}
-                className="text-indigo-500 group-hover:text-white transition"
-              />
+              <X size={20} strokeWidth={2.5} />
             </button>
 
             {/* HEADER */}
-            <div className="border-b border-black dark:border-white p-6 md:p-10">
-              <div className="flex items-center gap-3 mb-3">
+            <div className="border-b border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10 pr-20 bg-[#fafafa] dark:bg-[#0a0a0a]">
+              <div className="flex items-center gap-3 mb-5">
+                {/* ID Badge */}
                 <span
                   className="
-                  border border-black dark:border-white
-                  px-2 py-[2px]
-                  text-[10px]
-                  font-mono uppercase
-                  text-indigo-500
+                  bg-indigo-50 dark:bg-indigo-500/10
+                  border border-indigo-100 dark:border-indigo-500/20
+                  px-3 py-1.5 rounded-xl
+                  text-[10px] md:text-xs font-bold font-mono uppercase tracking-widest
+                  text-indigo-600 dark:text-indigo-400
                   "
                 >
-                  FIG {cert.id}
+                  FIG. {cert.id}
                 </span>
 
-                <span className="font-mono text-xs uppercase text-zinc-500">
+                {/* Year */}
+                <span className="font-mono text-[10px] md:text-xs uppercase font-semibold text-zinc-400 dark:text-zinc-500 tracking-widest">
                   {cert.year}
                 </span>
               </div>
 
-              <h2 className="text-3xl md:text-4xl font-black uppercase">
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-zinc-900 dark:text-white leading-tight">
                 {cert.title}
               </h2>
 
-              <div className="mt-2 font-mono text-xs uppercase text-indigo-500">
-                {cert.issuer}
+              <div className="mt-4 font-mono text-[11px] md:text-xs uppercase font-bold text-zinc-500 dark:text-zinc-400 tracking-wide">
+                Issued by{" "}
+                <span className="text-indigo-600 dark:text-indigo-400">
+                  {cert.issuer}
+                </span>
               </div>
             </div>
 
             {/* CONTENT */}
-            <div className="p-6 md:p-10">
+            <div className="p-6 md:p-10 flex flex-col gap-6">
               {/* PDF VIEWER */}
               <div
                 className="
-                border border-black dark:border-white
-                bg-zinc-100 dark:bg-black
-                aspect-[16/10]
-                md:h-[65vh]
-                w-full
-                overflow-hidden
-                mb-6
+                relative w-full aspect-[16/10] md:h-[60vh]
+                rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80
+                overflow-hidden bg-zinc-50 dark:bg-zinc-900/50 group
                 "
               >
                 <iframe
                   src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                  className="w-full h-full"
+                  title="Certificate Document"
+                  className="w-full h-full border-none opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
 
-              {/* OPEN PDF BUTTON */}
+              {/* ACTION BUTTON */}
               <a
                 href={cert.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
                 group
-                flex items-center justify-center gap-2
-                border border-black dark:border-white
-                py-3 font-bold uppercase
-                hover:bg-indigo-500 hover:text-white
-                transition
+                flex items-center justify-center gap-3
+                w-full
+                bg-indigo-600 dark:bg-indigo-500
+                text-white
+                rounded-2xl py-4
+                font-bold uppercase tracking-wider text-sm md:text-base
+                hover:bg-zinc-900 dark:hover:bg-white
+                hover:text-white dark:hover:text-zinc-900
+                shadow-md hover:shadow-xl hover:shadow-zinc-900/20 dark:hover:shadow-white/20
+                transition-all duration-300 hover:-translate-y-1
                 "
               >
                 <FileText
-                  size={16}
-                  className="text-indigo-500 group-hover:text-white transition"
+                  size={18}
+                  className="transition-transform group-hover:scale-110"
                 />
-                Open PDF
+                Open Original PDF
+                <ArrowUpRight
+                  size={18}
+                  className="group-hover:rotate-45 transition-transform duration-300 opacity-70 group-hover:opacity-100"
+                />
               </a>
             </div>
           </motion.div>

@@ -148,8 +148,9 @@ export default function Projects() {
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
 
+    const gap = window.innerWidth > 768 ? 24 : 20; // Menyesuaikan gap (gap-5)
     const cardWidth =
-      window.innerWidth > 768 ? 420 + 1 : window.innerWidth * 0.85 + 1;
+      window.innerWidth > 768 ? 420 + gap : window.innerWidth * 0.85 + gap;
 
     scrollRef.current.scrollBy({
       left: direction === "left" ? -cardWidth : cardWidth,
@@ -162,43 +163,50 @@ export default function Projects() {
       id="projects"
       ref={container}
       className="
-      px-5 py-24 md:px-16 md:py-32
-      bg-white text-black
-      dark:bg-[#050505] dark:text-white
+      px-4 py-24 md:px-8 md:py-32
+      bg-[#fafafa] text-zinc-900
+      dark:bg-[#0a0a0a] dark:text-zinc-50
       "
     >
-      <div className="border border-black dark:border-white">
-        {/* HEADER */}
-        <div className="grid grid-cols-1 md:grid-cols-12 border-b border-black dark:border-white">
-          <div className="md:col-span-7 border-b md:border-b-0 md:border-r border-black dark:border-white p-6 md:p-10">
-            <h2 className="project-card text-[14vw] md:text-[7vw] font-black uppercase leading-[0.85] tracking-tight">
+      <div className="max-w-7xl mx-auto flex flex-col gap-4 md:gap-5">
+        {/* HEADER BENTO GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+          {/* TITLE CARD */}
+          <div className="md:col-span-7 bg-white dark:bg-[#121212] border border-zinc-200/80 dark:border-zinc-800/80 rounded-[2rem] p-6 md:p-10 shadow-sm flex items-center">
+            <h2 className="project-card text-[12vw] md:text-[6vw] lg:text-[5vw] font-black uppercase leading-[0.85] tracking-tighter">
               Selected <br /> Works
             </h2>
           </div>
 
-          <div className="md:col-span-5 p-6 md:p-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div className="project-card font-mono text-xs uppercase tracking-widest text-indigo-500">
-              [ Portfolio / 2026 ]
+          {/* CONTROLS CARD */}
+          <div className="md:col-span-5 bg-white dark:bg-[#121212] border border-zinc-200/80 dark:border-zinc-800/80 rounded-[2rem] p-6 md:p-10 shadow-sm flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="project-card flex flex-col gap-2">
+              <span className="bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 px-3.5 py-1.5 rounded-xl text-[10px] md:text-xs font-mono uppercase font-bold tracking-widest w-fit">
+                Portfolio
+              </span>
+              <span className="font-mono text-[10px] md:text-xs text-zinc-500 dark:text-zinc-500 font-semibold uppercase tracking-widest">
+                © 2026 Edition
+              </span>
             </div>
 
-            <div className="flex gap-2 shrink-0">
+            <div className="flex gap-3 shrink-0">
               <button
                 onClick={() => slide("left")}
-                className="group flex items-center justify-center w-10 h-10 border border-black dark:border-white hover:bg-indigo-500 hover:text-white transition"
+                className="group flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300"
               >
                 <ArrowLeft
-                  size={18}
-                  className="text-indigo-500 group-hover:text-white transition"
+                  size={20}
+                  className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
                 />
               </button>
 
               <button
                 onClick={() => slide("right")}
-                className="group flex items-center justify-center w-10 h-10 border border-black dark:border-white hover:bg-indigo-500 hover:text-white transition"
+                className="group flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300"
               >
                 <ArrowRight
-                  size={18}
-                  className="text-indigo-500 group-hover:text-white transition"
+                  size={20}
+                  className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
                 />
               </button>
             </div>
@@ -206,75 +214,88 @@ export default function Projects() {
         </div>
 
         {/* PROJECT SCROLLER */}
-        <div
-          ref={scrollRef}
-          className="
-          flex overflow-x-auto
-          snap-x snap-mandatory
-          border-t border-black dark:border-white
-          [&::-webkit-scrollbar]:hidden
-
-          touch-none md:touch-auto
-          select-none
-          "
-        >
-          {projectsData.map((project) => (
-            <div
-              key={project.id}
-              onClick={() => openProject(project)}
-              className="
-              group
-              project-card
-              snap-center shrink-0
-              w-[85vw] md:w-[420px]
-              border-r border-black dark:border-white
-              p-6 md:p-10
-              cursor-pointer
-              flex flex-col justify-between
-              transition
-              hover:bg-indigo-500 hover:text-white
-              "
-            >
-              <div className="flex justify-between items-start font-mono text-xs uppercase opacity-70">
-                <span className="text-indigo-500 group-hover:text-white transition">
-                  FIG {project.id}
-                </span>
-
-                <ArrowUpRight
-                  size={18}
-                  className="text-indigo-500 group-hover:text-white transition"
-                />
-              </div>
-
-              <div className="flex flex-wrap gap-2 mt-10">
-                {project.tech.map((t, idx) => (
-                  <span
-                    key={idx}
-                    className="
-                    border border-black/30 dark:border-white/30
-                    px-2 py-1
-                    text-[10px]
-                    font-mono uppercase
-                    group-hover:border-white
-                    transition
-                    "
-                  >
-                    {t}
+        <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
+          <div
+            ref={scrollRef}
+            className="
+            flex overflow-x-auto gap-4 md:gap-5 py-2
+            snap-x snap-mandatory
+            [&::-webkit-scrollbar]:hidden
+            touch-none md:touch-auto
+            select-none
+            "
+          >
+            {projectsData.map((project) => (
+              <div
+                key={project.id}
+                onClick={() => openProject(project)}
+                className="
+                group
+                project-card
+                snap-center shrink-0
+                w-[85vw] md:w-[420px]
+                bg-white dark:bg-[#121212]
+                border border-zinc-200/80 dark:border-zinc-800/80
+                rounded-[2rem] p-6 md:p-8
+                cursor-pointer
+                flex flex-col justify-between
+                shadow-sm hover:shadow-xl hover:shadow-indigo-500/10
+                hover:border-indigo-500/30 dark:hover:border-indigo-500/30
+                hover:-translate-y-1
+                transition-all duration-500 ease-out
+                min-h-[360px] md:min-h-[400px]
+                "
+              >
+                {/* TOP: ID & ARROW */}
+                <div className="flex justify-between items-start font-mono text-xs uppercase">
+                  <span className="font-bold text-zinc-400 dark:text-zinc-600 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                    FIG {project.id}
                   </span>
-                ))}
-              </div>
 
-              <div className="mt-6">
-                <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight leading-[0.9]">
-                  {project.title}
-                </h3>
+                  <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-2.5 rounded-full group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:border-indigo-600 transition-all duration-300">
+                    <ArrowUpRight
+                      size={18}
+                      className="text-zinc-400 group-hover:text-white group-hover:rotate-45 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
 
-                <p className="font-mono text-xs uppercase mt-2 text-indigo-500 group-hover:text-white transition">
-                  {project.category}
-                </p>
+                {/* MIDDLE: TECH STACK (Lebih rapi pakai style pill) */}
+                <div className="flex flex-wrap gap-2 mt-8">
+                  {project.tech.map((t, idx) => (
+                    <span
+                      key={idx}
+                      className="
+                      bg-zinc-50 dark:bg-zinc-800/30
+                      border border-zinc-200/50 dark:border-zinc-700/50
+                      text-zinc-600 dark:text-zinc-400
+                      px-3 py-1.5 rounded-xl
+                      text-[10px] md:text-xs
+                      font-mono uppercase font-bold
+                      group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10
+                      group-hover:text-indigo-600 dark:group-hover:text-indigo-400
+                      group-hover:border-indigo-200 dark:group-hover:border-indigo-500/20
+                      transition-colors duration-300
+                      "
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* BOTTOM: TITLE & CATEGORY */}
+                <div className="mt-auto pt-8">
+                  <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none text-zinc-900 dark:text-zinc-50 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+
+                  <p className="font-mono text-xs uppercase mt-3 font-semibold text-zinc-500 dark:text-zinc-400 tracking-wide">
+                    {project.category}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 

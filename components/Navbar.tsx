@@ -63,18 +63,19 @@ export default function Navbar() {
   if (!mounted) return null;
 
   return (
-    <nav className="fixed top-4 left-0 right-0 z-40 flex justify-center px-4">
+    <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <motion.div
-        initial={{ y: -40, opacity: 0 }}
+        initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="
-        flex
-        border border-black dark:border-white
-        bg-white/80 dark:bg-[#050505]/80
-        backdrop-blur
-        shadow-lg shadow-black/10 dark:shadow-white/5
-        overflow-hidden
+        pointer-events-auto
+        flex items-center gap-1 md:gap-2
+        p-1.5 rounded-full
+        border border-zinc-200/80 dark:border-zinc-800/80
+        bg-white/70 dark:bg-[#121212]/70
+        backdrop-blur-xl
+        shadow-lg shadow-zinc-800/5 dark:shadow-black/40
         "
       >
         {navLinks.map((link, i) => {
@@ -87,80 +88,59 @@ export default function Navbar() {
               href={link.href}
               onClick={() => setActive(link.href)}
               className={`
-  group
-  relative
-  w-12 h-12 md:w-11 md:h-11
-  flex items-center justify-center
-  border-r border-black dark:border-white
-  last:border-r-0
-  overflow-hidden
-  transition-colors
-  ${
-    isActive
-      ? "bg-indigo-500 text-white"
-      : "text-black dark:text-white hover:text-white"
-  }
-  `}
+              relative
+              w-10 h-10 md:w-11 md:h-11
+              flex items-center justify-center
+              rounded-full
+              transition-all duration-300
+              ${
+                isActive
+                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
+                  : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white"
+              }
+              `}
+              aria-label={link.label}
             >
-              {/* hover background */}
-              <span
-                className="
-    absolute inset-0
-    bg-indigo-500
-    translate-y-full
-    group-hover:translate-y-0
-    transition-transform duration-200 ease-out
-    pointer-events-none
-    "
-              />
-
               <motion.div
-                whileHover={{ y: -4 }}
+                whileHover={{ scale: isActive ? 1 : 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 320 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 className="relative z-10"
               >
-                <Icon size={20} />
+                <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
               </motion.div>
             </a>
           );
         })}
 
-        {/* theme toggle */}
+        {/* Separator */}
+        <div className="w-[1px] h-6 bg-zinc-200 dark:bg-zinc-800 mx-1 rounded-full"></div>
+
+        {/* Theme Toggle */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="
-          group
           relative
-          w-12 h-12 md:w-11 md:h-11
+          w-10 h-10 md:w-11 md:h-11
           flex items-center justify-center
-          border-l border-black dark:border-white
-          overflow-hidden
-          text-black dark:text-white
+          rounded-full
+          text-zinc-500 dark:text-zinc-400
+          hover:bg-zinc-100 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white
+          transition-all duration-300
           "
+          aria-label="Toggle Theme"
         >
-          <span
-            className="
-            absolute inset-0
-            bg-indigo-500
-            translate-y-full
-            group-hover:translate-y-0
-            transition-transform duration-200 ease-out
-            pointer-events-none
-            "
-          />
-
-          {theme === "dark" ? (
-            <Sun
-              className="relative z-10 transition group-hover:text-white"
-              size={20}
-            />
-          ) : (
-            <Moon
-              className="relative z-10 transition group-hover:text-white"
-              size={20}
-            />
-          )}
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 15 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            {theme === "dark" ? (
+              <Sun size={18} strokeWidth={2} />
+            ) : (
+              <Moon size={18} strokeWidth={2} />
+            )}
+          </motion.div>
         </button>
       </motion.div>
     </nav>
