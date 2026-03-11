@@ -8,40 +8,29 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const reveal = {
-  y: 50,
+// Base configuration for a modern, snappy, and consistent reveal across all sections
+const modernReveal = {
+  y: 60,
   opacity: 0,
-  duration: 0.9,
-  ease: "power3.out",
+  duration: 1.2,
+  ease: "expo.out",
+  clearProps: "all", // INI PENTING: Bersihin inline style biar hover Tailwind jalan lagi!
 };
 
 /* ================= HERO ================= */
-
 export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      const tl = gsap.timeline();
-
-      tl.from(".reveal-text", {
-        yPercent: 120,
-        duration: 1.1,
-        stagger: 0.12,
-        ease: "power3.out",
-      }).from(
-        ".reveal-ui",
-        {
-          ...reveal,
-          stagger: 0.1,
-        },
-        "-=0.6",
-      );
+      gsap.from(".reveal-card", {
+        ...modernReveal,
+        stagger: 0.12, // Muncul bergantian dari kiri ke kanan / atas ke bawah
+      });
     },
     { scope: containerRef },
   );
 };
 
 /* ================= ABOUT ================= */
-
 export const useAboutAnimation = (containerRef: any) => {
   useGSAP(
     () => {
@@ -52,8 +41,8 @@ export const useAboutAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...reveal,
-          delay: i * 0.05,
+          ...modernReveal,
+          delay: i * 0.08,
         });
       });
     },
@@ -62,7 +51,6 @@ export const useAboutAnimation = (containerRef: any) => {
 };
 
 /* ================= EXPERIENCE ================= */
-
 export const useExperienceAnimation = (containerRef: any) => {
   useGSAP(
     () => {
@@ -73,7 +61,7 @@ export const useExperienceAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...reveal,
+          ...modernReveal,
           delay: i * 0.08,
         });
       });
@@ -83,7 +71,6 @@ export const useExperienceAnimation = (containerRef: any) => {
 };
 
 /* ================= PROJECTS ================= */
-
 export const useProjectsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
@@ -94,10 +81,7 @@ export const useProjectsAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          y: 70,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
+          ...modernReveal,
           delay: i * 0.08,
         });
       });
@@ -106,24 +90,29 @@ export const useProjectsAnimation = (containerRef: any) => {
   );
 };
 
-/* ================= TECH ================= */
-
+/* ================= TECH & CERTIFICATIONS ================= */
 export const useTechCertsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
+      // Tags teknologi muncul dengan efek pop kecil (Satu-satunya pengecualian agar playful)
       gsap.utils.toArray(".tech-tag").forEach((tag: any, i) => {
         gsap.from(tag, {
           scrollTrigger: {
             trigger: tag,
-            start: "top 90%",
+            start: "top 95%",
             once: true,
           },
-          ...reveal,
-          duration: 0.6,
-          delay: i * 0.03,
+          y: 20,
+          opacity: 0,
+          scale: 0.8, // Efek membesar sedikit
+          duration: 0.8,
+          ease: "back.out(1.5)", // Efek memantul
+          delay: i * 0.03, // Jeda sangat cepat karena itemnya banyak
+          clearProps: "all",
         });
       });
 
+      // Kartu bento dan sertifikat
       gsap.utils.toArray(".cert-card").forEach((card: any, i) => {
         gsap.from(card, {
           scrollTrigger: {
@@ -131,8 +120,8 @@ export const useTechCertsAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...reveal,
-          delay: i * 0.1,
+          ...modernReveal,
+          delay: i * 0.08,
         });
       });
     },
@@ -141,7 +130,6 @@ export const useTechCertsAnimation = (containerRef: any) => {
 };
 
 /* ================= CONTACT ================= */
-
 export const useContactAnimation = (containerRef: any) => {
   useGSAP(
     () => {
@@ -149,12 +137,11 @@ export const useContactAnimation = (containerRef: any) => {
         gsap.from(input, {
           scrollTrigger: {
             trigger: input,
-            start: "top 90%",
+            start: "top 90%", // Sedikit lebih lambat ke bawah layarnya agar terlihat
             once: true,
           },
-          ...reveal,
-          duration: 0.6,
-          delay: i * 0.05,
+          ...modernReveal,
+          delay: i * 0.08,
         });
       });
     },
@@ -163,7 +150,6 @@ export const useContactAnimation = (containerRef: any) => {
 };
 
 /* ================= FOOTER ================= */
-
 export const useFooterAnimation = (containerRef: any) => {
   useGSAP(
     () => {
@@ -171,12 +157,11 @@ export const useFooterAnimation = (containerRef: any) => {
         gsap.from(item, {
           scrollTrigger: {
             trigger: item,
-            start: "top 90%",
+            start: "top 95%", // Paling bawah layar baru muncul
             once: true,
           },
-          ...reveal,
-          duration: 0.8,
-          delay: i * 0.05,
+          ...modernReveal,
+          delay: i * 0.08,
         });
       });
     },

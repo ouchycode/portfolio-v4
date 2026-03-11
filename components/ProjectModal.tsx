@@ -1,13 +1,23 @@
 "use client";
 
-import { X, ExternalLink, ArrowRight } from "lucide-react";
+import {
+  X,
+  ExternalLink,
+  ArrowRight,
+  Sparkles,
+  MonitorSmartphone,
+  ShoppingCart,
+  CalendarDays,
+  Globe,
+  Smartphone,
+  Palette,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export default function ProjectModal({ isOpen, onClose, project }: any) {
   if (!project) return null;
 
-  // Diperbarui ke gaya Clean UI (Background soft + Text bold + Border tipis)
   const getCategoryStyle = (category: string) => {
     switch (category) {
       case "Academic System":
@@ -28,139 +38,143 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
     }
   };
 
+  const getWatermarkIcon = (category: string) => {
+    const className =
+      "absolute -bottom-10 -right-10 w-64 h-64 text-zinc-900/[0.03] dark:text-white/[0.02] -rotate-12 pointer-events-none z-0 transition-colors duration-500";
+    switch (category) {
+      case "LMS Platform":
+      case "EdTech":
+        return <MonitorSmartphone className={className} />;
+      case "E-Commerce":
+        return <ShoppingCart className={className} />;
+      case "Event Management":
+        return <CalendarDays className={className} />;
+      case "Modern Portfolio":
+        return <Palette className={className} />;
+      case "Mobile Application":
+        return <Smartphone className={className} />;
+      default:
+        return <Globe className={className} />;
+    }
+  };
+
   const categoryStyle = getCategoryStyle(project.category);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div
-          className="
-          fixed inset-0 z-[100]
-          overflow-y-auto
-          flex items-start md:items-center justify-center
-          px-4 md:p-6 py-10
-          "
-        >
-          {/* OVERLAY GLASSMORPHISM */}
+        <div className="fixed inset-0 z-[100] overflow-y-auto flex items-start md:items-center justify-center px-4 md:p-6 py-10">
+          {/* OVERLAY */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-sm cursor-pointer"
+            className="fixed inset-0 bg-zinc-900/60 dark:bg-black/80 backdrop-blur-md cursor-pointer transition-colors duration-500"
           />
 
           {/* MODAL CONTAINER */}
           <motion.div
-            initial={{ y: 40, opacity: 0, scale: 0.96 }}
+            initial={{ y: 50, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 40, opacity: 0, scale: 0.96 }}
+            exit={{ y: 50, opacity: 0, scale: 0.9 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="
             relative z-10
-            w-full max-w-4xl
+            w-full max-w-5xl
             max-h-[90vh]
             overflow-y-auto
             bg-white dark:bg-[#121212]
             text-zinc-900 dark:text-zinc-50
             border border-zinc-200/80 dark:border-zinc-800/80
-            rounded-[2rem] shadow-2xl shadow-black/10 dark:shadow-black/50
+            rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)]
             [&::-webkit-scrollbar]:hidden
+            transition-colors duration-500
             "
           >
-            {/* CLOSE BUTTON - FLOATING PILL */}
+            {/* CLOSE BUTTON */}
             <button
               onClick={onClose}
               className="
               absolute top-6 right-6 md:top-8 md:right-8
               z-50
               flex items-center justify-center
-              w-10 h-10 rounded-full
-              bg-white/80 dark:bg-black/50 backdrop-blur-md
-              text-zinc-600 dark:text-zinc-300
+              w-12 h-12 rounded-full
+              bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md
+              text-zinc-500 dark:text-zinc-400
+              hover:bg-indigo-600 dark:hover:bg-indigo-500
+              hover:text-white dark:hover:text-white
               border border-zinc-200 dark:border-zinc-700
-              hover:bg-zinc-100 dark:hover:bg-zinc-800
-              hover:text-zinc-900 dark:hover:text-white
-              transition-colors duration-300
+              transition-all duration-300 shadow-lg
               "
             >
-              <X size={20} strokeWidth={2.5} />
+              <X size={24} strokeWidth={2.5} />
             </button>
 
             {/* HEADER IMAGE SECTION */}
-            <div className="relative border-b border-zinc-200/80 dark:border-zinc-800/80">
-              <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-zinc-100 dark:bg-zinc-900">
+            <div className="relative border-b border-zinc-200/80 dark:border-zinc-800/80 group transition-colors duration-500">
+              <div className="relative w-full aspect-[16/9] md:aspect-[21/8] bg-zinc-100 dark:bg-zinc-900 overflow-hidden transition-colors duration-500">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                   priority
                 />
-                {/* Subtle overlay gradient at the top for badge readability */}
-                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 to-transparent pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent opacity-60"></div>
               </div>
 
               {/* FIGURE BADGE */}
-              <div
-                className="
-                absolute top-6 left-6 md:top-8 md:left-8
-                font-mono text-[10px] md:text-xs uppercase font-bold tracking-widest
-                border border-white/20 dark:border-white/10
-                bg-white/90 dark:bg-black/70 backdrop-blur-md
-                text-zinc-900 dark:text-white
-                px-4 py-1.5 rounded-full shadow-sm
-                "
-              >
+              <div className="absolute top-6 left-6 md:top-8 md:left-8 font-mono text-[10px] md:text-xs uppercase font-black tracking-[0.2em] border border-white/20 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full shadow-xl">
                 FIG. {project.id}
               </div>
             </div>
 
             {/* TITLE BOX */}
-            <div className="border-b border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10 bg-[#fafafa] dark:bg-[#0a0a0a]">
-              <div
-                className={`
-                w-fit px-3 py-1.5 rounded-xl
-                font-mono text-[10px] md:text-xs uppercase font-bold tracking-widest mb-5
-                ${categoryStyle}
-                `}
-              >
-                {project.category}
+            <div className="relative overflow-hidden border-b border-zinc-200/80 dark:border-zinc-800/80 p-8 md:p-12 bg-gradient-to-br from-[#fafafa] to-white dark:from-[#0a0a0a] dark:to-[#121212] transition-colors duration-500">
+              {getWatermarkIcon(project.category)}
+
+              <div className="relative z-10">
+                <div
+                  className={`w-fit px-4 py-1.5 rounded-full font-mono text-[10px] md:text-xs font-black uppercase tracking-widest mb-6 shadow-sm transition-colors duration-500 ${categoryStyle}`}
+                >
+                  {project.category}
+                </div>
+
+                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none text-zinc-900 dark:text-white mb-6 transition-colors duration-500">
+                  {project.title}
+                </h2>
+
+                <p className="text-base md:text-xl font-medium leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-4xl transition-colors duration-500">
+                  {project.description}
+                </p>
               </div>
-
-              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-tight text-zinc-900 dark:text-white">
-                {project.title}
-              </h2>
-
-              <p className="mt-5 text-sm md:text-base font-medium leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-3xl">
-                {project.description}
-              </p>
             </div>
 
             {/* CONTENT GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-12">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 bg-white dark:bg-[#121212] transition-colors duration-500">
               {/* TECH STACK */}
-              <div className="md:col-span-5 border-b md:border-b-0 md:border-r border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10 bg-zinc-50/50 dark:bg-zinc-900/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-6 h-[2px] bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
-                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">
-                    Tech Stack
+              <div className="md:col-span-5 border-b md:border-b-0 md:border-r border-zinc-200/80 dark:border-zinc-800/80 p-8 md:p-12 bg-zinc-50/50 dark:bg-zinc-900/40 transition-colors duration-500">
+                <div className="flex items-center gap-3 mb-8 text-zinc-400 dark:text-zinc-600 transition-colors duration-500">
+                  <div className="w-8 h-[2px] bg-current rounded-full"></div>
+                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-black tracking-[0.2em]">
+                    Core Technology
                   </h3>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {project.tech.map((tech: string) => (
                     <span
                       key={tech}
                       className="
-                      bg-white dark:bg-[#121212]
-                      border border-zinc-200/80 dark:border-zinc-800/80
+                      bg-white dark:bg-[#18181b]
+                      border border-zinc-200/80 dark:border-zinc-800
                       text-zinc-600 dark:text-zinc-300
-                      px-3.5 py-1.5 rounded-xl
+                      px-4 py-2 rounded-2xl
                       font-mono text-[10px] md:text-xs uppercase font-bold
-                      hover:border-indigo-300 dark:hover:border-indigo-500/50
+                      shadow-sm transition-all duration-300
+                      hover:border-indigo-500/50 dark:hover:border-indigo-500/50
                       hover:text-indigo-600 dark:hover:text-indigo-400
-                      transition-colors duration-300 cursor-default
                       "
                     >
                       {tech}
@@ -170,58 +184,57 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
               </div>
 
               {/* FEATURES */}
-              <div className="md:col-span-7 p-6 md:p-10">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-6 h-[2px] bg-zinc-200 dark:bg-zinc-800 rounded-full"></div>
-                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">
-                    Key Features
+              <div className="md:col-span-7 p-8 md:p-12 transition-colors duration-500">
+                <div className="flex items-center gap-3 mb-8 text-zinc-400 dark:text-zinc-600 transition-colors duration-500">
+                  <div className="w-8 h-[2px] bg-current rounded-full"></div>
+                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-black tracking-[0.2em]">
+                    Key Functionalities
                   </h3>
                 </div>
 
-                <ul className="space-y-4">
+                <div className="grid gap-5">
                   {project.features.map((f: string, i: number) => (
-                    <li key={i} className="group flex gap-4 items-start">
-                      <div className="bg-indigo-50 dark:bg-indigo-500/10 p-1.5 rounded-md shrink-0 mt-0.5 transition-colors group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/20">
+                    <div key={i} className="group flex gap-5 items-start">
+                      <div className="bg-indigo-50 dark:bg-indigo-500/10 p-2 rounded-lg shrink-0 transition-colors group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500">
                         <ArrowRight
                           size={14}
-                          className="text-indigo-600 dark:text-indigo-400"
-                          strokeWidth={3}
+                          className="text-indigo-600 dark:text-indigo-400 group-hover:text-white"
+                          strokeWidth={4}
                         />
                       </div>
-                      <span className="text-sm md:text-base text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed">
+                      <span className="text-base md:text-lg text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300">
                         {f}
                       </span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              {/* REPOSITORY BUTTON */}
-              <div className="md:col-span-12 border-t border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-10">
+              {/* ACTION BUTTON */}
+              <div className="md:col-span-12 border-t border-zinc-200/80 dark:border-zinc-800/80 p-8 md:p-12 bg-zinc-50/30 dark:bg-[#0c0c0c] transition-colors duration-500">
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
                   group
-                  flex items-center justify-center gap-3
-                  w-full md:w-auto
-                  bg-indigo-600 dark:bg-indigo-500
+                  flex items-center justify-between
+                  w-full md:w-fit md:min-w-[280px]
+                  bg-zinc-900 dark:bg-indigo-600
                   text-white
-                  rounded-2xl px-8 py-5
-                  font-bold uppercase tracking-wider text-sm md:text-base
-                  hover:bg-zinc-900 dark:hover:bg-white
-                  hover:text-white dark:hover:text-black
-                  shadow-md hover:shadow-xl hover:shadow-zinc-900/20 dark:hover:shadow-white/20
+                  rounded-[1.5rem] px-8 py-5
+                  font-bold uppercase tracking-widest text-sm md:text-base
+                  hover:bg-indigo-600 dark:hover:bg-indigo-500
+                  shadow-xl shadow-zinc-900/10 dark:shadow-indigo-500/20
                   transition-all duration-300 hover:-translate-y-1
                   "
                 >
-                  View Repository
-                  <div className="bg-white/20 dark:bg-black/10 p-2 rounded-full group-hover:bg-white/20 dark:group-hover:bg-black/10 transition-colors duration-300">
-                    <ExternalLink
-                      size={18}
-                      className="group-hover:scale-110 transition-transform duration-300"
-                    />
+                  <div className="flex items-center gap-3">
+                    <Sparkles size={20} className="hidden md:block" />
+                    <span>View Repository</span>
+                  </div>
+                  <div className="bg-white/20 dark:bg-black/10 p-2.5 rounded-full group-hover:rotate-45 transition-transform duration-500">
+                    <ExternalLink size={20} />
                   </div>
                 </a>
               </div>

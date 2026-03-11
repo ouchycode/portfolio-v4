@@ -64,7 +64,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div id="smooth-wrapper">
+            <div id="smooth-content">{children}</div>
+          </div>
 
           <Analytics />
           <SpeedInsights />

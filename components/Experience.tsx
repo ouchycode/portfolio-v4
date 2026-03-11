@@ -1,7 +1,17 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowLeft,
+  ArrowRight,
+  Sparkles,
+  Briefcase,
+  GraduationCap,
+  Code,
+  Users,
+  Zap,
+} from "lucide-react";
 import { useExperienceAnimation } from "@/hooks/useAnimations";
 import ExperienceModal from "./ExperienceModal";
 
@@ -120,7 +130,6 @@ export default function Experience() {
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
 
-    // Menambahkan gap (24px untuk md:gap-6) ke kalkulasi lebar scroll
     const gap = window.innerWidth > 768 ? 24 : 16;
     const cardWidth =
       window.innerWidth > 768 ? 420 + gap : window.innerWidth * 0.85 + gap;
@@ -145,15 +154,32 @@ export default function Experience() {
   const getTypeStyle = (type: string) => {
     switch (type) {
       case "Education":
-        return "bg-emerald-50 text-emerald-600 border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20";
+        return "bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20";
       case "Bootcamp":
-        return "bg-indigo-50 text-indigo-600 border border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20";
+        return "bg-indigo-50 text-indigo-600 border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20";
       case "Internship":
-        return "bg-amber-50 text-amber-600 border border-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20";
+        return "bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20";
       case "Organization":
-        return "bg-purple-50 text-purple-600 border border-purple-100 dark:bg-purple-500/10 dark:text-purple-400 dark:border-purple-500/20";
+        return "bg-purple-50 text-purple-600 border-purple-100 dark:bg-purple-500/10 dark:text-purple-400 dark:border-purple-500/20";
       default:
-        return "bg-zinc-100 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700/50";
+        return "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700/50";
+    }
+  };
+
+  const getWatermarkIcon = (type: string) => {
+    const className =
+      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 text-zinc-900/[0.03] dark:text-white/[0.02] pointer-events-none z-0 rotate-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6";
+    switch (type) {
+      case "Education":
+        return <GraduationCap className={className} strokeWidth={1} />;
+      case "Bootcamp":
+        return <Code className={className} strokeWidth={1} />;
+      case "Internship":
+        return <Briefcase className={className} strokeWidth={1} />;
+      case "Organization":
+        return <Users className={className} strokeWidth={1} />;
+      default:
+        return <Zap className={className} strokeWidth={1} />;
     }
   };
 
@@ -162,55 +188,76 @@ export default function Experience() {
       id="experience"
       ref={container}
       className="
+      relative overflow-hidden
       px-4 py-24 md:px-8 md:py-32
       bg-[#fafafa] text-zinc-900
       dark:bg-[#0a0a0a] dark:text-zinc-50
+      transition-colors duration-500
       "
     >
-      <div className="max-w-7xl mx-auto flex flex-col gap-4 md:gap-5">
+      {/* ============================================================ */}
+      {/* BACKGROUND EXPERIENCE */}
+      {/* ============================================================ */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none z-0 transition-colors duration-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-transparent to-[#fafafa] dark:from-[#0a0a0a] dark:via-transparent dark:to-[#0a0a0a] opacity-80 pointer-events-none z-0 transition-colors duration-500"></div>
+
+      {/* ============================================================ */}
+      {/* CONTENT CONTAINER */}
+      {/* ============================================================ */}
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-5">
         {/* HEADER BENTO GRID */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
-          {/* TITLE CARD */}
-          <div className="md:col-span-7 bg-white dark:bg-[#121212] border border-zinc-200/80 dark:border-zinc-800/80 rounded-[2rem] p-6 md:p-10 shadow-sm flex items-center">
-            <h2
-              className="
-              exp-row
-              text-[12vw] md:text-[6vw] lg:text-[5vw]
-              font-black uppercase
-              leading-[0.85] tracking-tighter
-              "
-            >
-              Pathway
-            </h2>
+          {/* TITLE CARD (Fokus Utama) */}
+          <div className="exp-row md:col-span-7 h-full">
+            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] p-6 md:p-10 shadow-sm flex flex-col justify-center transition-colors duration-500">
+              <Briefcase
+                className="absolute -bottom-16 -left-12 w-80 h-80 text-zinc-900/[0.03] dark:text-white/[0.02] -rotate-12 pointer-events-none z-0"
+                strokeWidth={1.5}
+              />
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800/80 rounded-full w-fit mb-6 border border-zinc-200/80 dark:border-zinc-700/50 transition-colors duration-500">
+                  <Sparkles
+                    size={14}
+                    className="text-indigo-600 dark:text-indigo-400"
+                  />
+                  <span className="text-xs md:text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300 transition-colors duration-500">
+                    My Career Journey
+                  </span>
+                </div>
+                <h2 className="text-[12vw] md:text-[6vw] lg:text-[5vw] font-black uppercase leading-[0.85] tracking-tighter text-zinc-900 dark:text-white transition-colors duration-500">
+                  Pathway
+                </h2>
+              </div>
+            </div>
           </div>
 
-          {/* CONTROLS CARD */}
-          <div className="md:col-span-5 bg-white dark:bg-[#121212] border border-zinc-200/80 dark:border-zinc-800/80 rounded-[2rem] p-6 md:p-10 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <p className="exp-row font-medium text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-[200px] leading-relaxed">
-              Jejak pengalaman akademis dan teknikal dalam membangun fondasi
-              karir.
-            </p>
-
-            <div className="flex gap-3 shrink-0">
-              <button
-                onClick={() => slide("left")}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300"
-              >
-                <ArrowLeft
-                  size={20}
-                  className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
-                />
-              </button>
-
-              <button
-                onClick={() => slide("right")}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300"
-              >
-                <ArrowRight
-                  size={20}
-                  className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
-                />
-              </button>
+          {/* CONTROLS CARD (Fokus Sekunder) */}
+          <div className="exp-row md:col-span-5 h-full">
+            <div className="w-full h-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/60 rounded-[2.5rem] p-6 md:p-10 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-6 transition-colors duration-500">
+              <p className="font-medium text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-[200px] leading-relaxed transition-colors duration-500">
+                Jejak pengalaman akademis dan teknikal dalam membangun fondasi
+                karir.
+              </p>
+              <div className="flex gap-3 shrink-0">
+                <button
+                  onClick={() => slide("left")}
+                  className="group flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#18181b] border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 shadow-sm"
+                >
+                  <ArrowLeft
+                    size={20}
+                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                  />
+                </button>
+                <button
+                  onClick={() => slide("right")}
+                  className="group flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#18181b] border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 shadow-sm"
+                >
+                  <ArrowRight
+                    size={20}
+                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -219,74 +266,59 @@ export default function Experience() {
         <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
           <div
             ref={scrollRef}
-            className="
-            flex overflow-x-auto gap-4 md:gap-5 py-2
-            snap-x snap-mandatory
-            [&::-webkit-scrollbar]:hidden
-            touch-none md:touch-auto
-            select-none
-            "
+            className="flex overflow-x-auto gap-4 md:gap-5 py-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden touch-none md:touch-auto select-none"
           >
             {experiences.map((exp, index) => {
               const typeStyle = getTypeStyle(exp.type);
 
               return (
+                // Pembungkus GSAP (.exp-row)
                 <div
                   key={exp.id}
-                  onClick={() => openDetail(exp)}
-                  className="
-                  group
-                  exp-row
-                  snap-center shrink-0
-                  w-[85vw] md:w-[420px]
-                  bg-white dark:bg-[#121212]
-                  border border-zinc-200/80 dark:border-zinc-800/80
-                  rounded-[2rem] p-6 md:p-8
-                  cursor-pointer
-                  flex flex-col justify-between
-                  shadow-sm hover:shadow-xl hover:shadow-indigo-500/10
-                  hover:border-indigo-500/30 dark:hover:border-indigo-500/30
-                  hover:-translate-y-1
-                  transition-all duration-500 ease-out
-                  min-h-[320px] md:min-h-[380px]
-                  "
+                  className="exp-row snap-center shrink-0 w-[85vw] md:w-[420px] h-full min-h-[320px] md:min-h-[380px] z-10"
                 >
-                  {/* TOP: NUMBER & BADGE */}
-                  <div className="flex justify-between items-start">
-                    <span className="font-black text-4xl text-zinc-200 dark:text-zinc-800/80 group-hover:text-indigo-100 dark:group-hover:text-indigo-900/50 transition-colors duration-500">
-                      {(index + 1).toString().padStart(2, "0")}
-                    </span>
+                  {/* Isi Card dengan Styling Tailwind */}
+                  <div
+                    onClick={() => openDetail(exp)}
+                    className="group relative overflow-hidden w-full h-full bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] p-6 md:p-8 cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:-translate-y-2 transition-all duration-500 ease-out"
+                  >
+                    {/* WATERMARK ICON */}
+                    {getWatermarkIcon(exp.type)}
 
-                    <div className="flex flex-col items-end gap-2 text-right">
-                      <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400">
-                        {exp.period}
-                      </span>
-                      <span
-                        className={`
-                        px-3 py-1.5 rounded-full
-                        text-[10px] md:text-xs
-                        font-mono uppercase font-bold tracking-wide
-                        ${typeStyle}
-                        `}
-                      >
-                        {exp.type}
-                      </span>
-                    </div>
-                  </div>
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      {/* TOP: NUMBER & BADGE */}
+                      <div className="flex justify-between items-start">
+                        <span className="font-black text-4xl text-zinc-100 dark:text-zinc-800 group-hover:text-indigo-100 dark:group-hover:text-indigo-900/50 transition-colors duration-500">
+                          {(index + 1).toString().padStart(2, "0")}
+                        </span>
 
-                  {/* BOTTOM: ROLE & COMPANY */}
-                  <div className="mt-auto pt-8">
-                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none mb-4 text-zinc-900 dark:text-zinc-50 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
-                      {exp.role}
-                    </h3>
+                        <div className="flex flex-col items-end gap-2 text-right">
+                          <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
+                            {exp.period}
+                          </span>
+                          <span
+                            className={`px-3 py-1.5 rounded-full text-[10px] md:text-xs font-mono uppercase font-bold tracking-wide border transition-colors duration-500 ${typeStyle}`}
+                          >
+                            {exp.type}
+                          </span>
+                        </div>
+                      </div>
 
-                    <div className="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800/50 pt-5">
-                      <span className="text-sm md:text-base font-semibold text-zinc-600 dark:text-zinc-400">
-                        {exp.company}
-                      </span>
+                      {/* BOTTOM: ROLE & COMPANY */}
+                      <div className="mt-auto pt-8">
+                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none mb-4 text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                          {exp.role}
+                        </h3>
 
-                      <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800/50 p-2.5 rounded-full group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:border-indigo-600 transition-all duration-300">
-                        <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-white group-hover:rotate-45 transition-transform duration-300" />
+                        <div className="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800/80 pt-5 transition-colors duration-500">
+                          <span className="text-sm md:text-base font-semibold text-zinc-600 dark:text-zinc-400 transition-colors duration-500">
+                            {exp.company}
+                          </span>
+
+                          <div className="relative z-10 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700/50 p-3 rounded-full group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:border-transparent transition-all duration-300 shadow-sm">
+                            <ArrowUpRight className="w-4 h-4 text-zinc-400 dark:text-zinc-500 group-hover:text-white group-hover:rotate-45 transition-transform duration-300" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
