@@ -15,35 +15,36 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function ExperienceModal({ isOpen, onClose, data }: any) {
   if (!data) return null;
 
+  // Disamakan dengan palet warna retro brutalism dari halaman utama
   const getTypeStyle = (type: string) => {
     switch (type) {
       case "Education":
-        return "bg-emerald-50 text-emerald-600 border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20";
+        return "bg-blue-300 dark:bg-blue-600 text-blue-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       case "Bootcamp":
-        return "bg-indigo-50 text-indigo-600 border border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20";
+        return "bg-violet-300 dark:bg-violet-600 text-violet-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       case "Internship":
-        return "bg-amber-50 text-amber-600 border border-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20";
+        return "bg-orange-300 dark:bg-orange-600 text-orange-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       case "Organization":
-        return "bg-purple-50 text-purple-600 border border-purple-100 dark:bg-purple-500/10 dark:text-purple-400 dark:border-purple-500/20";
+        return "bg-emerald-300 dark:bg-emerald-600 text-emerald-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       default:
-        return "bg-zinc-100 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700/50";
+        return "bg-zinc-300 dark:bg-zinc-600 text-zinc-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
     }
   };
 
   const getWatermarkIcon = (type: string) => {
     const className =
-      "absolute -bottom-10 -left-10 w-72 h-72 text-zinc-900/[0.03] dark:text-white/[0.02] -rotate-12 pointer-events-none z-0 transition-colors duration-500";
+      "absolute -bottom-10 -left-10 w-72 h-72 text-zinc-900/[0.04] dark:text-white/[0.03] -rotate-12 pointer-events-none z-0 transition-colors duration-500";
     switch (type) {
       case "Education":
-        return <GraduationCap className={className} />;
+        return <GraduationCap className={className} strokeWidth={2} />;
       case "Bootcamp":
-        return <Code className={className} />;
+        return <Code className={className} strokeWidth={2} />;
       case "Internship":
-        return <Briefcase className={className} />;
+        return <Briefcase className={className} strokeWidth={2} />;
       case "Organization":
-        return <Users className={className} />;
+        return <Users className={className} strokeWidth={2} />;
       default:
-        return <Zap className={className} />;
+        return <Zap className={className} strokeWidth={2} />;
     }
   };
 
@@ -59,10 +60,10 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-zinc-900/60 dark:bg-black/80 backdrop-blur-md cursor-pointer transition-colors duration-500"
+            className="fixed inset-0 bg-zinc-900/80 dark:bg-black/90 cursor-pointer transition-colors duration-500"
           />
 
-          {/* MODAL CONTAINER */}
+          {/* MODAL CONTAINER - Neo Brutalism */}
           <motion.div
             initial={{ y: 50, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -73,10 +74,10 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
             w-full max-w-5xl
             max-h-[90vh]
             overflow-y-auto
-            bg-white dark:bg-[#121212]
+            bg-white dark:bg-zinc-900
             text-zinc-900 dark:text-zinc-50
-            border border-zinc-200/80 dark:border-zinc-800/80
-            rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)]
+            border-2 md:border-4 border-zinc-900 dark:border-zinc-100
+            rounded-md shadow-[10px_10px_0_0_#18181b] dark:shadow-[10px_10px_0_0_#e4e4e7]
             [&::-webkit-scrollbar]:hidden
             transition-colors duration-500
             "
@@ -84,82 +85,82 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
             {/* WATERMARK ICON HEADER */}
             {getWatermarkIcon(data.type)}
 
-            {/* CLOSE BUTTON */}
+            {/* CLOSE BUTTON - RETRO */}
             <button
               onClick={onClose}
               className="
-              absolute top-6 right-6 md:top-8 md:right-8
+              absolute top-0 right-0
               z-50
               flex items-center justify-center
-              w-12 h-12 rounded-full
-              bg-zinc-100 dark:bg-zinc-800/80
-              text-zinc-500 dark:text-zinc-400
-              hover:bg-indigo-600 dark:hover:bg-indigo-500
-              hover:text-white dark:hover:text-white
-              transition-all duration-300 shadow-sm
+              w-12 h-12 md:w-16 md:h-16
+              bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500
+              border-l-2 md:border-l-4 border-b-2 md:border-b-4 border-zinc-900 dark:border-zinc-100
+              text-zinc-900 dark:text-white
+              transition-colors duration-200
               "
             >
-              <X size={24} strokeWidth={2.5} />
+              <X size={28} strokeWidth={3} />
             </button>
 
             {/* HEADER AREA */}
-            <div className="relative z-10 border-b border-zinc-200/80 dark:border-zinc-800/80 p-6 md:p-12 pr-20 bg-gradient-to-br from-white/50 to-zinc-50/50 dark:from-[#121212]/50 dark:to-[#0a0a0a]/50 backdrop-blur-md transition-colors duration-500">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="relative z-10 border-b-2 md:border-b-4 border-zinc-900 dark:border-zinc-100 p-6 md:p-12 pr-20 bg-zinc-100 dark:bg-zinc-800 transition-colors duration-500">
+              <div className="flex flex-wrap items-center gap-3 mb-6">
                 <span
-                  className={`px-4 py-1.5 rounded-full text-[10px] md:text-xs font-black font-mono uppercase tracking-widest shadow-sm transition-colors duration-500 ${typeStyle}`}
+                  className={`px-3 py-1.5 rounded-sm font-pixel text-[8px] md:text-[10px] uppercase font-bold tracking-widest transition-colors duration-500 ${typeStyle}`}
                 >
                   {data.type}
                 </span>
 
-                <div className="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800/60 px-4 py-1.5 rounded-full border border-zinc-200/50 dark:border-zinc-700/50 transition-colors duration-500">
+                <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 px-3 py-1.5 rounded-sm border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-colors duration-500">
                   <Sparkles
                     size={12}
-                    className="text-zinc-400 dark:text-zinc-500 transition-colors duration-500"
+                    className="text-yellow-500 dark:text-yellow-400"
                   />
-                  <span className="font-mono text-[10px] md:text-xs uppercase font-bold text-zinc-500 dark:text-zinc-400 tracking-wider transition-colors duration-500">
+                  <span className="font-pixel text-[8px] md:text-[10px] uppercase font-bold text-zinc-900 dark:text-zinc-100 tracking-widest transition-colors duration-500">
                     {data.period}
                   </span>
                 </div>
               </div>
 
-              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-zinc-900 dark:text-white leading-[0.9] mb-6 transition-colors duration-500">
+              <h2 className="font-pixel text-3xl md:text-5xl font-black uppercase tracking-widest text-zinc-900 dark:text-white leading-tight mb-6 transition-colors duration-500 drop-shadow-[2px_2px_0_#d4d4d8] dark:drop-shadow-[2px_2px_0_#3f3f46]">
                 {data.role}
               </h2>
 
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                <span className="text-lg md:text-xl font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-tight transition-colors duration-500">
+                <span className="font-pixel text-sm md:text-base font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest transition-colors duration-500">
                   {data.company}
                 </span>
-                <span className="hidden md:block text-zinc-300 dark:text-zinc-700 transition-colors duration-500">
+                <span className="hidden md:block font-pixel text-zinc-900 dark:text-zinc-100 transition-colors duration-500">
                   |
                 </span>
-                <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 font-medium italic text-sm md:text-base transition-colors duration-500">
+                <div className="flex items-center gap-2 font-pixel text-[8px] md:text-[10px] text-zinc-600 dark:text-zinc-400 font-bold tracking-widest transition-colors duration-500">
                   <span>{data.location}</span>
                 </div>
               </div>
             </div>
 
             {/* CONTENT GRID */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 bg-white dark:bg-[#121212] transition-colors duration-500">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 bg-[#fafafa] dark:bg-zinc-900 transition-colors duration-500">
               {/* OVERVIEW */}
-              <div className="md:col-span-7 border-b md:border-b-0 md:border-r border-zinc-200/80 dark:border-zinc-800/80 p-8 md:p-12 transition-colors duration-500">
-                <div className="flex items-center gap-3 mb-6 text-zinc-400 dark:text-zinc-600 transition-colors duration-500">
-                  <div className="w-8 h-[2px] bg-current rounded-full"></div>
-                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-black tracking-[0.2em]">
-                    Overview
+              <div className="md:col-span-7 border-b-2 md:border-b-0 md:border-r-2 md:border-r-4 border-zinc-900 dark:border-zinc-100 p-8 md:p-12 transition-colors duration-500 bg-white dark:bg-zinc-800/50">
+                <div className="flex items-center gap-3 mb-6 text-zinc-900 dark:text-zinc-100 transition-colors duration-500">
+                  <div className="w-8 h-[4px] bg-zinc-900 dark:bg-zinc-100 rounded-sm"></div>
+                  <h3 className="font-pixel text-[10px] md:text-xs uppercase font-bold tracking-widest">
+                    OVERVIEW
                   </h3>
                 </div>
-                <p className="text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300 font-medium transition-colors duration-500">
+                {/* Font mono untuk kesan retro/terminal */}
+                <p className="font-mono text-sm md:text-base leading-relaxed text-zinc-700 dark:text-zinc-300 font-bold transition-colors duration-500">
                   {data.description}
                 </p>
               </div>
 
               {/* TECH & SKILLS */}
-              <div className="md:col-span-5 p-8 md:p-12 bg-zinc-50/50 dark:bg-zinc-900/40 transition-colors duration-500">
-                <div className="flex items-center gap-3 mb-6 text-zinc-400 dark:text-zinc-600 transition-colors duration-500">
-                  <div className="w-8 h-[2px] bg-current rounded-full"></div>
-                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-black tracking-[0.2em]">
-                    Competencies
+              <div className="md:col-span-5 p-8 md:p-12 bg-zinc-100 dark:bg-zinc-900 transition-colors duration-500 border-b-2 md:border-b-0 border-zinc-900 dark:border-zinc-100">
+                <div className="flex items-center gap-3 mb-6 text-zinc-900 dark:text-zinc-100 transition-colors duration-500">
+                  <div className="w-8 h-[4px] bg-zinc-900 dark:bg-zinc-100 rounded-sm"></div>
+                  <h3 className="font-pixel text-[10px] md:text-xs uppercase font-bold tracking-widest">
+                    COMPETENCIES
                   </h3>
                 </div>
                 <div className="flex flex-wrap gap-2 md:gap-3">
@@ -167,14 +168,16 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
                     <span
                       key={skill}
                       className="
-                      bg-white dark:bg-[#18181b]
-                      border border-zinc-200/80 dark:border-zinc-800
-                      text-zinc-600 dark:text-zinc-300
-                      px-4 py-2 rounded-2xl
-                      font-mono text-[10px] md:text-xs uppercase font-bold
-                      shadow-sm transition-all duration-300
-                      hover:border-indigo-500/50 dark:hover:border-indigo-500/50
-                      hover:text-indigo-600 dark:hover:text-indigo-400
+                      bg-white dark:bg-zinc-800
+                      border-2 border-zinc-900 dark:border-zinc-100
+                      text-zinc-900 dark:text-zinc-100
+                      px-3 py-2 rounded-sm
+                      font-pixel text-[8px] md:text-[10px] uppercase font-bold tracking-widest
+                      shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7]
+                      transition-all duration-300
+                      hover:-translate-y-0.5 hover:shadow-[3px_3px_0_0_#18181b] dark:hover:shadow-[3px_3px_0_0_#e4e4e7]
+                      hover:bg-violet-300 dark:hover:bg-violet-600 hover:text-violet-950 dark:hover:text-white
+                      cursor-default
                       "
                     >
                       {skill}
@@ -184,25 +187,25 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
               </div>
 
               {/* KEY RESPONSIBILITIES */}
-              <div className="md:col-span-12 border-t border-zinc-200/80 dark:border-zinc-800/80 p-8 md:p-12 bg-white dark:bg-[#0c0c0c] transition-colors duration-500">
-                <div className="flex items-center gap-3 mb-8 text-zinc-400 dark:text-zinc-600 transition-colors duration-500">
-                  <div className="w-8 h-[2px] bg-current rounded-full"></div>
-                  <h3 className="font-mono text-[10px] md:text-xs uppercase font-black tracking-[0.2em]">
-                    Key Contributions
+              <div className="md:col-span-12 border-t-2 md:border-t-4 border-zinc-900 dark:border-zinc-100 p-8 md:p-12 bg-white dark:bg-[#121212] transition-colors duration-500">
+                <div className="flex items-center gap-3 mb-8 text-zinc-900 dark:text-zinc-100 transition-colors duration-500">
+                  <div className="w-8 h-[4px] bg-zinc-900 dark:bg-zinc-100 rounded-sm"></div>
+                  <h3 className="font-pixel text-[10px] md:text-xs uppercase font-bold tracking-widest">
+                    KEY CONTRIBUTIONS
                   </h3>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 md:gap-x-16">
                   {data.details.map((item: string, i: number) => (
-                    <div key={i} className="group flex gap-5 items-start">
-                      <div className="bg-indigo-600 dark:bg-indigo-500 p-1.5 rounded-lg shrink-0 mt-1 shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform duration-300">
+                    <div key={i} className="group flex gap-4 items-start">
+                      <div className="bg-indigo-500 border-2 border-zinc-900 dark:border-zinc-100 p-1 rounded-sm shrink-0 mt-1 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-transform duration-300 group-hover:scale-110">
                         <ArrowRight
                           size={14}
-                          className="text-white"
+                          className="text-white dark:text-zinc-900"
                           strokeWidth={4}
                         />
                       </div>
-                      <span className="text-sm md:text-lg text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300">
+                      <span className="text-sm md:text-base text-zinc-700 dark:text-zinc-300 font-bold leading-relaxed group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300">
                         {item}
                       </span>
                     </div>

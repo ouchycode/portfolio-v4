@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
+import { Press_Start_2P } from "next/font/google"; // 1. Import font pixel
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+
+// 2. Setup font pixel dengan variabel CSS
+const pressStart2P = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pixel",
+  display: "swap",
+});
 
 // SETUP METADATA & SEO (Untuk Preview Link WhatsApp/LinkedIn)
 export const metadata: Metadata = {
@@ -52,11 +61,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className="
-        bg-[#fafafa] text-zinc-900
-        dark:bg-[#0a0a0a] dark:text-zinc-50
+        className={`
+        ${pressStart2P.variable} 
+        bg-[#e0e0e0] text-zinc-900
+        dark:bg-[#1a1a1a] dark:text-zinc-50
         antialiased
-        "
+        `}
       >
         <ThemeProvider
           attribute="class"

@@ -77,7 +77,7 @@ const experiences = [
   {
     id: "uym-study",
     type: "Education",
-    role: "Computer Science Undergraduate",
+    role: "Computer Science Undergrad",
     company: "Universitas Yatsi Madani (UYM)",
     period: "2023 — Present",
     location: "Tangerang, Banten, ID",
@@ -154,32 +154,32 @@ export default function Experience() {
   const getTypeStyle = (type: string) => {
     switch (type) {
       case "Education":
-        return "bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20";
+        return "bg-blue-300 dark:bg-blue-600 text-blue-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       case "Bootcamp":
-        return "bg-indigo-50 text-indigo-600 border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20";
+        return "bg-violet-300 dark:bg-violet-600 text-violet-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       case "Internship":
-        return "bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20";
+        return "bg-orange-300 dark:bg-orange-600 text-orange-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       case "Organization":
-        return "bg-purple-50 text-purple-600 border-purple-100 dark:bg-purple-500/10 dark:text-purple-400 dark:border-purple-500/20";
+        return "bg-emerald-300 dark:bg-emerald-600 text-emerald-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
       default:
-        return "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700/50";
+        return "bg-zinc-300 dark:bg-zinc-600 text-zinc-950 dark:text-white border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0px_0px_#18181b] dark:shadow-[2px_2px_0px_0px_#e4e4e7]";
     }
   };
 
   const getWatermarkIcon = (type: string) => {
     const className =
-      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 text-zinc-900/[0.03] dark:text-white/[0.02] pointer-events-none z-0 rotate-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6";
+      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-72 md:h-72 text-zinc-900/[0.04] dark:text-white/[0.03] pointer-events-none z-0 rotate-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6";
     switch (type) {
       case "Education":
-        return <GraduationCap className={className} strokeWidth={1} />;
+        return <GraduationCap className={className} strokeWidth={2} />;
       case "Bootcamp":
-        return <Code className={className} strokeWidth={1} />;
+        return <Code className={className} strokeWidth={2} />;
       case "Internship":
-        return <Briefcase className={className} strokeWidth={1} />;
+        return <Briefcase className={className} strokeWidth={2} />;
       case "Organization":
-        return <Users className={className} strokeWidth={1} />;
+        return <Users className={className} strokeWidth={2} />;
       default:
-        return <Zap className={className} strokeWidth={1} />;
+        return <Zap className={className} strokeWidth={2} />;
     }
   };
 
@@ -196,36 +196,39 @@ export default function Experience() {
       "
     >
       {/* ============================================================ */}
-      {/* BACKGROUND EXPERIENCE */}
+      {/* BACKGROUND EXPERIENCE - Pixel Dot Pattern */}
       {/* ============================================================ */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none z-0 transition-colors duration-500"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-transparent to-[#fafafa] dark:from-[#0a0a0a] dark:via-transparent dark:to-[#0a0a0a] opacity-80 pointer-events-none z-0 transition-colors duration-500"></div>
+      {/* Opacity dipertahankan di 70 agar background tidak mendominasi, tapi tetap terlihat jelas pola pixel-nya */}
+      <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_2px,transparent_2px)] dark:bg-[radial-gradient(#3f3f46_2px,transparent_2px)] [background-size:24px_24px] opacity-70 pointer-events-none z-0 transition-colors duration-500"></div>
+
+      {/* <REMOVE> Gradient fade dihapus agar efek pixel tidak terpotong blur </REMOVE> */}
 
       {/* ============================================================ */}
       {/* CONTENT CONTAINER */}
       {/* ============================================================ */}
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-5">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-6">
         {/* HEADER BENTO GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
           {/* TITLE CARD (Fokus Utama) */}
           <div className="exp-row md:col-span-7 h-full">
-            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] p-6 md:p-10 shadow-sm flex flex-col justify-center transition-colors duration-500">
+            {/* Shadow diubah menjadi 5px untuk konsistensi Neo-Brutalism */}
+            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] flex flex-col justify-center transition-colors duration-500">
               <Briefcase
-                className="absolute -bottom-16 -left-12 w-80 h-80 text-zinc-900/[0.03] dark:text-white/[0.02] -rotate-12 pointer-events-none z-0"
-                strokeWidth={1.5}
+                className="absolute -bottom-16 -left-12 w-80 h-80 text-zinc-900/[0.04] dark:text-white/[0.03] -rotate-12 pointer-events-none z-0"
+                strokeWidth={2}
               />
               <div className="relative z-10">
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800/80 rounded-full w-fit mb-6 border border-zinc-200/80 dark:border-zinc-700/50 transition-colors duration-500">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-yellow-300 dark:bg-yellow-600 border-2 border-zinc-900 dark:border-zinc-100 rounded-sm w-fit mb-6 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-colors duration-500">
                   <Sparkles
                     size={14}
-                    className="text-indigo-600 dark:text-indigo-400"
+                    className="text-yellow-900 dark:text-yellow-100"
                   />
-                  <span className="text-xs md:text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300 transition-colors duration-500">
+                  <span className="font-pixel text-[8px] md:text-[10px] font-bold tracking-widest text-yellow-950 dark:text-yellow-50 uppercase">
                     My Career Journey
                   </span>
                 </div>
-                <h2 className="text-[12vw] md:text-[6vw] lg:text-[5vw] font-black uppercase leading-[0.85] tracking-tighter text-zinc-900 dark:text-white transition-colors duration-500">
-                  Pathway
+                <h2 className="font-pixel text-[12vw] md:text-[6vw] lg:text-[5vw] font-black uppercase leading-none tracking-tighter text-zinc-900 dark:text-white drop-shadow-[2px_2px_0_#d4d4d8] dark:drop-shadow-[2px_2px_0_#3f3f46] transition-colors duration-500">
+                  PATHWAY
                 </h2>
               </div>
             </div>
@@ -233,28 +236,33 @@ export default function Experience() {
 
           {/* CONTROLS CARD (Fokus Sekunder) */}
           <div className="exp-row md:col-span-5 h-full">
-            <div className="w-full h-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/60 rounded-[2.5rem] p-6 md:p-10 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-6 transition-colors duration-500">
-              <p className="font-medium text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-[200px] leading-relaxed transition-colors duration-500">
+            <div className="w-full h-full bg-[#fafafa] dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] flex flex-col md:flex-row md:items-center md:justify-between gap-6 transition-colors duration-500">
+              {/* Teks diubah ke font-mono agar terasa lebih teknikal dan raw */}
+              <p className="font-mono font-bold text-sm md:text-base text-zinc-700 dark:text-zinc-300 md:max-w-[200px] leading-relaxed transition-colors duration-500">
                 Jejak pengalaman akademis dan teknikal dalam membangun fondasi
                 karir.
               </p>
-              <div className="flex gap-3 shrink-0">
+
+              {/* Retro Buttons for Scroll */}
+              <div className="flex gap-4 shrink-0 mt-auto md:mt-0">
                 <button
                   onClick={() => slide("left")}
-                  className="group flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#18181b] border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 shadow-sm"
+                  className="group flex items-center justify-center w-12 h-12 rounded-sm bg-white dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] dark:shadow-[3px_3px_0px_0px_rgba(228,228,231,1)] hover:bg-violet-500 hover:text-white dark:hover:bg-violet-500 dark:hover:text-white transition-all duration-200 active:translate-y-1 active:translate-x-1 active:shadow-none"
                 >
                   <ArrowLeft
-                    size={20}
-                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                    size={24}
+                    strokeWidth={3}
+                    className="text-zinc-900 dark:text-zinc-100 group-hover:text-white transition-colors"
                   />
                 </button>
                 <button
                   onClick={() => slide("right")}
-                  className="group flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#18181b] border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 shadow-sm"
+                  className="group flex items-center justify-center w-12 h-12 rounded-sm bg-white dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] dark:shadow-[3px_3px_0px_0px_rgba(228,228,231,1)] hover:bg-violet-500 hover:text-white dark:hover:bg-violet-500 dark:hover:text-white transition-all duration-200 active:translate-y-1 active:translate-x-1 active:shadow-none"
                 >
                   <ArrowRight
-                    size={20}
-                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                    size={24}
+                    strokeWidth={3}
+                    className="text-zinc-900 dark:text-zinc-100 group-hover:text-white transition-colors"
                   />
                 </button>
               </div>
@@ -263,24 +271,23 @@ export default function Experience() {
         </div>
 
         {/* EXPERIENCE LIST */}
-        <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
+        <div className="relative -mx-4 px-4 md:mx-0 md:px-0 mt-2">
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-4 md:gap-5 py-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden touch-none md:touch-auto select-none"
+            className="flex overflow-x-auto gap-4 md:gap-6 py-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden touch-none md:touch-auto select-none"
           >
             {experiences.map((exp, index) => {
               const typeStyle = getTypeStyle(exp.type);
 
               return (
-                // Pembungkus GSAP (.exp-row)
                 <div
                   key={exp.id}
-                  className="exp-row snap-center shrink-0 w-[85vw] md:w-[420px] h-full min-h-[320px] md:min-h-[380px] z-10"
+                  className="exp-row snap-center shrink-0 w-[85vw] md:w-[420px] h-full min-h-[340px] md:min-h-[380px] z-10"
                 >
-                  {/* Isi Card dengan Styling Tailwind */}
+                  {/* Hover efek disempurnakan: naik (-translate-y-1) dan shadow berubah violet agar pop-out */}
                   <div
                     onClick={() => openDetail(exp)}
-                    className="group relative overflow-hidden w-full h-full bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] p-6 md:p-8 cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:-translate-y-2 transition-all duration-500 ease-out"
+                    className="group relative overflow-hidden w-full h-full bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 cursor-pointer flex flex-col justify-between shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(124,58,237,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(139,92,246,1)] transition-all duration-300 ease-out"
                   >
                     {/* WATERMARK ICON */}
                     {getWatermarkIcon(exp.type)}
@@ -288,16 +295,16 @@ export default function Experience() {
                     <div className="relative z-10 flex flex-col h-full justify-between">
                       {/* TOP: NUMBER & BADGE */}
                       <div className="flex justify-between items-start">
-                        <span className="font-black text-4xl text-zinc-100 dark:text-zinc-800 group-hover:text-indigo-100 dark:group-hover:text-indigo-900/50 transition-colors duration-500">
+                        <span className="font-pixel text-4xl md:text-5xl text-zinc-300 dark:text-zinc-800 group-hover:text-violet-500 dark:group-hover:text-violet-400 transition-colors duration-300 drop-shadow-[2px_2px_0_#f4f4f5] dark:drop-shadow-[2px_2px_0_#18181b]">
                           {(index + 1).toString().padStart(2, "0")}
                         </span>
 
-                        <div className="flex flex-col items-end gap-2 text-right">
-                          <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
+                        <div className="flex flex-col items-end gap-3 text-right">
+                          <span className="font-pixel text-[8px] md:text-[10px] font-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-300 bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 px-2 py-1 rounded-sm shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7]">
                             {exp.period}
                           </span>
                           <span
-                            className={`px-3 py-1.5 rounded-full text-[10px] md:text-xs font-mono uppercase font-bold tracking-wide border transition-colors duration-500 ${typeStyle}`}
+                            className={`px-2 md:px-3 py-1 md:py-1.5 rounded-sm font-pixel text-[8px] md:text-[10px] uppercase font-bold tracking-widest transition-colors duration-300 ${typeStyle}`}
                           >
                             {exp.type}
                           </span>
@@ -306,17 +313,21 @@ export default function Experience() {
 
                       {/* BOTTOM: ROLE & COMPANY */}
                       <div className="mt-auto pt-8">
-                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none mb-4 text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                        <h3 className="font-pixel text-lg md:text-xl uppercase tracking-widest leading-relaxed mb-4 text-zinc-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-300">
                           {exp.role}
                         </h3>
 
-                        <div className="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800/80 pt-5 transition-colors duration-500">
-                          <span className="text-sm md:text-base font-semibold text-zinc-600 dark:text-zinc-400 transition-colors duration-500">
+                        <div className="flex items-center justify-between border-t-4 border-zinc-900 dark:border-zinc-100 pt-5 transition-colors duration-300">
+                          <span className="text-sm md:text-base font-bold text-zinc-700 dark:text-zinc-300 transition-colors duration-300 line-clamp-1">
                             {exp.company}
                           </span>
 
-                          <div className="relative z-10 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700/50 p-3 rounded-full group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:border-transparent transition-all duration-300 shadow-sm">
-                            <ArrowUpRight className="w-4 h-4 text-zinc-400 dark:text-zinc-500 group-hover:text-white group-hover:rotate-45 transition-transform duration-300" />
+                          {/* Tombol arrow ini sudah sangat pas shadow brutalisnya */}
+                          <div className="relative z-10 bg-white dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 p-2 md:p-3 rounded-sm group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 transition-all duration-300 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] shrink-0 ml-3">
+                            <ArrowUpRight
+                              strokeWidth={3}
+                              className="w-5 h-5 text-zinc-900 dark:text-white group-hover:text-white dark:group-hover:text-zinc-900 transition-transform duration-300"
+                            />
                           </div>
                         </div>
                       </div>

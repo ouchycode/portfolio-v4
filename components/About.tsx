@@ -6,7 +6,8 @@ import { useAboutAnimation } from "@/hooks/useAnimations";
 import { MapPin, GraduationCap } from "lucide-react";
 
 export default function About() {
-  const container = useRef(null);
+  // Ditambahkan type HTMLElement agar konsisten dengan Hero dan aman di TS
+  const container = useRef<HTMLElement>(null);
 
   useAboutAnimation(container);
 
@@ -20,67 +21,71 @@ export default function About() {
       bg-[#fafafa] text-zinc-900
       dark:bg-[#0a0a0a] dark:text-zinc-50
       transition-colors duration-500
+      z-10
       "
     >
       {/* ============================================================ */}
-      {/* BACKGROUND ABOUT */}
+      {/* BACKGROUND ABOUT - Pixel Dot Pattern */}
       {/* ============================================================ */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50 pointer-events-none z-0 transition-colors duration-500"></div>
+      {/* Dibiarkan opacity 70 agar tidak terlalu ramai tapi tetap crisp */}
+      <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_2px,transparent_2px)] dark:bg-[radial-gradient(#3f3f46_2px,transparent_2px)] [background-size:24px_24px] opacity-70 pointer-events-none transition-colors duration-500 z-0"></div>
 
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-200 dark:bg-indigo-900/30 rounded-full blur-[120px] opacity-50 pointer-events-none z-0 translate-x-1/3 -translate-y-1/3 transition-colors duration-500"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-zinc-300 dark:bg-zinc-800/40 rounded-full blur-[120px] opacity-40 pointer-events-none z-0 -translate-x-1/3 translate-y-1/3 transition-colors duration-500"></div>
-
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-transparent to-[#fafafa] dark:from-[#0a0a0a] dark:via-transparent dark:to-[#0a0a0a] opacity-80 pointer-events-none z-0 transition-colors duration-500"></div>
+      {/* <REMOVE> Gradient Overlay dihapus agar tidak membuat pixel pattern blur. Kita ingin raw/crisp aesthetic. </REMOVE> */}
 
       {/* ============================================================ */}
       {/* BENTO GRID CONTAINER */}
       {/* ============================================================ */}
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 auto-rows-auto">
-        {/* BENTO 1: IMAGE (Sekunder) */}
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-auto">
+        {/* BENTO 1: IMAGE (Foto Profil) */}
         <div className="about-animate md:col-span-5 md:row-span-3 h-full">
-          <div className="relative w-full aspect-[4/5] md:aspect-auto md:h-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/60 rounded-[2rem] overflow-hidden shadow-sm group transition-all duration-500">
+          {/* Shadow dipertebal sikit, hover shadow pakai warna red biar pop */}
+          <div className="relative w-full aspect-[4/5] md:aspect-auto md:h-full bg-white dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md overflow-hidden shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] group transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(239,68,68,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(248,113,113,1)]">
             <Image
-              src="/profile_kevin_hd.png"
+              src="/profile_kevin_hd.png" // Pastikan gambar ada di /public
               alt="Kevin Ardiansyah"
               fill
-              className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-in-out"
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-80 dark:opacity-100 transition-opacity duration-500"></div>
+            {/* Overlay bayangan ala retro diperhalus */}
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-100 transition-opacity duration-500"></div>
           </div>
         </div>
 
-        {/* BENTO 2: HEADER (Fokus Utama - Kontras Tinggi) */}
+        {/* BENTO 2: HEADER (Fokus Utama) */}
         <div className="about-animate md:col-span-7 h-full">
-          <div className="w-full h-full bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2rem] p-6 md:p-10 flex flex-col justify-center shadow-sm hover:shadow-md transition-all duration-500">
-            <h2 className="text-[12vw] md:text-[5vw] lg:text-[4vw] font-black uppercase leading-[0.85] tracking-tighter mb-6 text-zinc-900 dark:text-white transition-colors duration-500">
-              About
+          <div className="w-full h-full bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 flex flex-col justify-center shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] transition-all duration-300">
+            <h2 className="font-pixel text-[12vw] md:text-[5vw] lg:text-[4.5vw] font-black uppercase leading-none tracking-tighter mb-6 text-zinc-900 dark:text-white transition-colors duration-500 drop-shadow-[2px_2px_0_#d4d4d8] dark:drop-shadow-[2px_2px_0_#3f3f46]">
+              ABOUT
             </h2>
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold transition-colors duration-500">
-                [ Persona ]
+              <span className="font-pixel text-[10px] md:text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-bold">
+                [ PERSONA ]
               </span>
-              <span className="bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700/50 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-xl text-[10px] md:text-xs font-mono uppercase font-bold transition-colors duration-500">
+              {/* Badge persona teksnya diperbesar sedikit (text-xs) biar jelas */}
+              <span className="font-pixel bg-violet-200 dark:bg-violet-900/50 border-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 px-3 py-2 rounded-sm text-xs uppercase font-bold tracking-widest shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] dark:shadow-[2px_2px_0px_0px_rgba(228,228,231,1)]">
                 Frontend Engineer
               </span>
             </div>
           </div>
         </div>
 
-        {/* BENTO 3: DESCRIPTION (Fokus Sekunder - Meredup) */}
+        {/* BENTO 3: DESCRIPTION (Teks Standar + Highlight Pixel) */}
         <div className="about-animate md:col-span-7 h-full">
-          <div className="w-full h-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/60 rounded-[2rem] p-6 md:p-10 flex flex-col gap-6 shadow-sm hover:shadow-md transition-all duration-500">
-            <p className="text-lg md:text-2xl font-bold uppercase leading-tight text-zinc-800 dark:text-zinc-200 tracking-tight transition-colors duration-500">
-              Saya{" "}
-              <span className="text-indigo-600 dark:text-indigo-400 transition-colors duration-500">
+          <div className="w-full h-full bg-[#fafafa] dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 flex flex-col gap-6 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] transition-all duration-300">
+            {/*font-sans danti font-mono (atau serif) biar raw tapi tetap enak dibaca */}
+            <p className="font-mono text-lg md:text-2xl font-bold uppercase leading-relaxed text-zinc-800 dark:text-zinc-200 tracking-tight transition-colors duration-500">
+              Saya {/* Highlight Kevin dipertebal sedikit px-nya */}
+              <span className="font-pixel text-[14px] md:text-[18px] bg-yellow-300 dark:bg-yellow-600 border-2 border-zinc-900 dark:border-zinc-100 px-3 py-1.5 mx-1 rounded-sm shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] dark:shadow-[3px_3px_0px_0px_rgba(228,228,231,1)] text-zinc-900 dark:text-white inline-block -translate-y-1">
                 Kevin
               </span>
               , mahasiswa Universitas Yatsi Madani yang fokus membangun
               antarmuka web yang fungsional dan estetik.
             </p>
-            <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium transition-colors duration-500">
+            {/* Deskripsi sekunder teksnya font-semibold agar lebih kuat */}
+            <p className="text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed font-semibold transition-colors duration-500">
               Berbasis di Tangerang, saya fokus pada pengembangan{" "}
-              <span className="text-indigo-700 dark:text-indigo-300 font-bold bg-indigo-100/50 dark:bg-indigo-900/30 border border-indigo-200/50 dark:border-indigo-800/50 px-2 py-0.5 md:px-2.5 md:py-1 rounded-md md:rounded-lg transition-colors inline-block mt-1">
+              <span className="font-pixel text-[10px] md:text-xs text-indigo-900 dark:text-indigo-100 bg-indigo-200 dark:bg-indigo-900 border-2 border-zinc-900 dark:border-zinc-100 px-2.5 py-1.5 rounded-sm shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] inline-block mx-1 mt-1 mb-1 uppercase tracking-widest">
                 Frontend Ecosystem
               </span>
               . Selain ngoding, saya juga mengeksplorasi desain grafis dan
@@ -90,35 +95,37 @@ export default function About() {
           </div>
         </div>
 
-        {/* BENTO 4: LOCATION (Aksen - Indigo Theme) */}
+        {/* BENTO 4: LOCATION (Tema Merah Retro) */}
         <div className="about-animate md:col-span-3 h-full">
-          <div className="w-full h-full group bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-900/50 rounded-[2rem] p-6 md:p-8 flex flex-col justify-center gap-4 shadow-sm hover:shadow-md transition-all duration-300">
-            <div className="bg-indigo-100/80 dark:bg-indigo-900/50 border border-indigo-200 dark:border-indigo-800/80 w-fit p-3.5 rounded-2xl text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform duration-300 shadow-sm">
-              <MapPin size={22} />
+          {/* Hover shadow pakai warna red biar pop */}
+          <div className="w-full h-full group bg-red-100 dark:bg-red-950/40 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col justify-center gap-4 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(239,68,68,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(248,113,113,1)] transition-all duration-300">
+            <div className="bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 w-fit p-3.5 rounded-sm text-red-600 dark:text-red-400 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] dark:shadow-[2px_2px_0px_0px_rgba(228,228,231,1)]">
+              <MapPin size={24} strokeWidth={2.5} />
             </div>
-            <div>
-              <span className="font-mono text-[10px] md:text-xs uppercase text-indigo-800 dark:text-indigo-200 block mb-1 font-bold tracking-wider transition-colors duration-500">
+            <div className="mt-2">
+              <span className="font-pixel text-[8px] md:text-[10px] uppercase text-zinc-600 dark:text-zinc-400 block mb-2 font-bold tracking-widest">
                 Location
               </span>
-              <span className="font-bold text-sm md:text-base uppercase tracking-tight text-indigo-950 dark:text-indigo-50 transition-colors duration-500">
+              <span className="font-pixel font-bold text-xs md:text-sm uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
                 Tangerang, ID
               </span>
             </div>
           </div>
         </div>
 
-        {/* BENTO 5: EDUCATION (Fokus Sekunder - Sama seperti Deskripsi) */}
+        {/* BENTO 5: EDUCATION (Tema Biru Retro) */}
         <div className="about-animate md:col-span-4 h-full">
-          <div className="w-full h-full group bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/60 rounded-[2rem] p-6 md:p-8 flex flex-col justify-center gap-4 shadow-sm hover:shadow-md transition-all duration-300">
-            <div className="bg-white dark:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 w-fit p-3.5 rounded-2xl text-zinc-500 dark:text-zinc-400 group-hover:scale-110 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-all duration-300 shadow-sm">
-              <GraduationCap size={22} />
+          {/* Hover shadow pakai warna blue biar pop */}
+          <div className="w-full h-full group bg-blue-100 dark:bg-blue-950/40 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col justify-center gap-4 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(96,165,250,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(129,140,248,1)] transition-all duration-300">
+            <div className="bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 w-fit p-3.5 rounded-sm text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] dark:shadow-[2px_2px_0px_0px_rgba(228,228,231,1)]">
+              <GraduationCap size={24} strokeWidth={2.5} />
             </div>
-            <div>
-              <span className="font-mono text-[10px] md:text-xs uppercase text-zinc-500 dark:text-zinc-400 block mb-1 font-bold tracking-wider transition-colors duration-500">
+            <div className="mt-2">
+              <span className="font-pixel text-[8px] md:text-[10px] uppercase text-zinc-600 dark:text-zinc-400 block mb-2 font-bold tracking-widest">
                 Education
               </span>
-              <span className="font-bold text-sm md:text-base uppercase tracking-tight text-zinc-800 dark:text-zinc-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-500">
-                Universitas Yatsi Madani
+              <span className="font-pixel font-bold text-xs md:text-sm uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
+                Univ. Yatsi Madani
               </span>
             </div>
           </div>

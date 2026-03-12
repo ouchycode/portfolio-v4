@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import {
   ArrowUpRight,
   ArrowLeft,
@@ -170,23 +171,24 @@ export default function Projects() {
     });
   };
 
+  // Icon watermark untuk efek retro di latar card
   const getWatermarkIcon = (category: string) => {
     const className =
-      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 text-zinc-900/[0.03] dark:text-white/[0.02] pointer-events-none z-0 rotate-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6";
+      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-72 md:h-72 text-zinc-900/[0.04] dark:text-white/[0.03] pointer-events-none z-0 rotate-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6";
     switch (category) {
       case "LMS Platform":
       case "EdTech":
-        return <MonitorSmartphone className={className} strokeWidth={1} />;
+        return <MonitorSmartphone className={className} strokeWidth={2} />;
       case "E-Commerce":
-        return <ShoppingCart className={className} strokeWidth={1} />;
+        return <ShoppingCart className={className} strokeWidth={2} />;
       case "Event Management":
-        return <CalendarDays className={className} strokeWidth={1} />;
+        return <CalendarDays className={className} strokeWidth={2} />;
       case "Modern Portfolio":
-        return <Palette className={className} strokeWidth={1} />;
+        return <Palette className={className} strokeWidth={2} />;
       case "Mobile Application":
-        return <Smartphone className={className} strokeWidth={1} />;
+        return <Smartphone className={className} strokeWidth={2} />;
       default:
-        return <Globe className={className} strokeWidth={1} />;
+        return <Globe className={className} strokeWidth={2} />;
     }
   };
 
@@ -203,40 +205,37 @@ export default function Projects() {
       "
     >
       {/* ============================================================ */}
-      {/* BACKGROUND PROJECTS */}
+      {/* BACKGROUND PROJECTS - Pixel Dot Pattern */}
       {/* ============================================================ */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50 pointer-events-none z-0 transition-colors duration-500"></div>
-
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-indigo-200 dark:bg-indigo-900/30 rounded-full blur-[120px] opacity-40 pointer-events-none z-0 -translate-x-1/3 -translate-y-1/3 transition-colors duration-500"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-zinc-300 dark:bg-zinc-800/40 rounded-full blur-[120px] opacity-30 pointer-events-none z-0 translate-x-1/3 translate-y-1/3 transition-colors duration-500"></div>
-
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-transparent to-[#fafafa] dark:from-[#0a0a0a] dark:via-transparent dark:to-[#0a0a0a] opacity-80 pointer-events-none z-0 transition-colors duration-500"></div>
+      {/* Gradient overlay dihapus agar pattern pixel tetap tajam/crisp */}
+      <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_2px,transparent_2px)] dark:bg-[radial-gradient(#3f3f46_2px,transparent_2px)] [background-size:24px_24px] opacity-70 pointer-events-none transition-colors duration-500 z-0"></div>
 
       {/* ============================================================ */}
       {/* CONTENT CONTAINER */}
       {/* ============================================================ */}
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-5">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-6">
         {/* HEADER BENTO GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
           {/* TITLE CARD */}
           <div className="project-card md:col-span-7 h-full">
-            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] p-6 md:p-10 shadow-sm flex flex-col justify-center transition-colors duration-500">
+            {/* Shadow diseragamkan ke 5px */}
+            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] flex flex-col justify-center transition-colors duration-500">
               <FolderGit2
-                className="absolute -bottom-16 -right-12 w-80 h-80 text-zinc-900/[0.03] dark:text-white/[0.02] rotate-12 pointer-events-none z-0"
-                strokeWidth={1.5}
+                className="absolute -bottom-16 -right-12 w-80 h-80 text-zinc-900/[0.04] dark:text-white/[0.03] rotate-12 pointer-events-none z-0"
+                strokeWidth={2}
               />
               <div className="relative z-10">
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800/80 rounded-full w-fit mb-6 border border-zinc-200/80 dark:border-zinc-700/50 transition-colors duration-500">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-pink-300 dark:bg-pink-600 border-2 border-zinc-900 dark:border-zinc-100 rounded-sm w-fit mb-6 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-colors duration-500">
                   <Sparkles
                     size={14}
-                    className="text-indigo-600 dark:text-indigo-400"
+                    className="text-pink-900 dark:text-pink-100"
                   />
-                  <span className="text-xs md:text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300 transition-colors duration-500">
+                  <span className="font-pixel text-[8px] md:text-[10px] font-bold tracking-widest text-pink-950 dark:text-pink-50 uppercase">
                     Showcase
                   </span>
                 </div>
-                <h2 className="text-[12vw] md:text-[6vw] lg:text-[5vw] font-black uppercase leading-[0.85] tracking-tighter text-zinc-900 dark:text-white transition-colors duration-500">
-                  Selected <br /> Works
+                <h2 className="font-pixel text-[12vw] md:text-[6vw] lg:text-[5vw] font-black uppercase leading-none tracking-tighter text-zinc-900 dark:text-white drop-shadow-[2px_2px_0_#d4d4d8] dark:drop-shadow-[2px_2px_0_#3f3f46] transition-colors duration-500">
+                  SELECTED <br /> WORKS
                 </h2>
               </div>
             </div>
@@ -244,32 +243,37 @@ export default function Projects() {
 
           {/* CONTROLS CARD */}
           <div className="project-card md:col-span-5 h-full">
-            <div className="w-full h-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/60 rounded-[2.5rem] p-6 md:p-10 shadow-sm flex flex-col md:flex-row md:items-end md:justify-between gap-6 transition-colors duration-500">
+            {/* Shadow diseragamkan ke 5px */}
+            <div className="w-full h-full bg-[#fafafa] dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] flex flex-col md:flex-row md:items-end md:justify-between gap-6 transition-colors duration-500">
               <div className="flex flex-col gap-3">
-                <span className="bg-white dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-xl text-[10px] md:text-xs font-mono uppercase font-bold tracking-widest w-fit shadow-sm transition-colors duration-500">
+                <span className="font-pixel bg-cyan-300 dark:bg-cyan-700 border-2 border-zinc-900 dark:border-zinc-100 text-cyan-950 dark:text-cyan-50 px-3 py-2 rounded-sm text-[8px] md:text-[10px] uppercase font-bold tracking-widest w-fit shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-colors duration-500">
                   Portfolio
                 </span>
-                <span className="font-mono text-[10px] md:text-xs text-zinc-500 dark:text-zinc-500 font-semibold uppercase tracking-widest ml-1 transition-colors duration-500">
+                <span className="font-pixel text-[8px] md:text-[10px] text-zinc-500 dark:text-zinc-400 font-bold uppercase tracking-widest ml-1 mt-1 transition-colors duration-500">
                   © 2026 Edition
                 </span>
               </div>
-              <div className="flex gap-3 shrink-0">
+
+              {/* Retro Nav Buttons */}
+              <div className="flex gap-4 shrink-0 mt-auto md:mt-0">
                 <button
                   onClick={() => slide("left")}
-                  className="group flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#18181b] border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 shadow-sm"
+                  className="group flex items-center justify-center w-12 h-12 rounded-sm bg-white dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] dark:shadow-[3px_3px_0px_0px_rgba(228,228,231,1)] hover:bg-pink-500 hover:text-white dark:hover:bg-pink-500 transition-all duration-200 active:translate-y-1 active:translate-x-1 active:shadow-none"
                 >
                   <ArrowLeft
-                    size={20}
-                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                    size={24}
+                    strokeWidth={3}
+                    className="text-zinc-900 dark:text-zinc-100 group-hover:text-white transition-colors"
                   />
                 </button>
                 <button
                   onClick={() => slide("right")}
-                  className="group flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-[#18181b] border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-all duration-300 shadow-sm"
+                  className="group flex items-center justify-center w-12 h-12 rounded-sm bg-white dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] dark:shadow-[3px_3px_0px_0px_rgba(228,228,231,1)] hover:bg-pink-500 hover:text-white dark:hover:bg-pink-500 transition-all duration-200 active:translate-y-1 active:translate-x-1 active:shadow-none"
                 >
                   <ArrowRight
-                    size={20}
-                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                    size={24}
+                    strokeWidth={3}
+                    className="text-zinc-900 dark:text-zinc-100 group-hover:text-white transition-colors"
                   />
                 </button>
               </div>
@@ -281,42 +285,55 @@ export default function Projects() {
         <div className="relative -mx-4 px-4 md:mx-0 md:px-0 mt-2">
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-4 md:gap-5 py-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden touch-none md:touch-auto select-none"
+            className="flex overflow-x-auto gap-4 md:gap-6 py-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden touch-none md:touch-auto select-none"
           >
-            {projectsData.map((project, index) => (
-              // Pembungkus GSAP (.project-card)
+            {projectsData.map((project) => (
               <div
                 key={project.id}
-                className="project-card snap-center shrink-0 w-[85vw] md:w-[420px] h-full min-h-[360px] md:min-h-[400px] z-10"
+                className="project-card snap-center shrink-0 w-[85vw] md:w-[420px] h-full min-h-[480px] md:min-h-[500px] z-10"
               >
-                {/* Isi Card dengan Styling Tailwind */}
+                {/* Hover effect diperbarui: translate-y-1 dengan shadow Pink pop-up */}
                 <div
                   onClick={() => openProject(project)}
-                  className="group relative overflow-hidden w-full h-full bg-white dark:bg-[#121212] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] p-6 md:p-8 cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:-translate-y-2 transition-all duration-500 ease-out"
+                  className="group relative overflow-hidden w-full h-full bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-5 md:p-6 cursor-pointer flex flex-col shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(236,72,153,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(244,114,182,1)] transition-all duration-300 ease-out"
                 >
                   {/* WATERMARK ICON */}
                   {getWatermarkIcon(project.category)}
 
-                  <div className="relative z-10 flex flex-col h-full justify-between">
+                  <div className="relative z-10 flex flex-col h-full">
                     {/* TOP: ID & ARROW */}
-                    <div className="flex justify-between items-start font-mono text-xs uppercase">
-                      <span className="font-bold text-zinc-400 dark:text-zinc-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors duration-300 bg-zinc-100 dark:bg-zinc-800/50 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-700/50">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="font-pixel text-[10px] md:text-xs font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 px-3 py-1.5 rounded-sm shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] group-hover:bg-pink-300 dark:group-hover:bg-pink-600 transition-colors duration-300">
                         FIG {project.id}
                       </span>
-                      <div className="relative z-10 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800/80 p-3 rounded-full group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 transition-all duration-300 shadow-sm border border-zinc-200 dark:border-zinc-700/50 group-hover:border-transparent">
+                      <div className="bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 p-2 rounded-sm shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 transition-all duration-300">
                         <ArrowUpRight
                           size={20}
-                          className="text-zinc-400 dark:text-zinc-500 group-hover:text-white group-hover:rotate-45 transition-transform duration-300"
+                          strokeWidth={3}
+                          className="text-zinc-900 dark:text-zinc-100 group-hover:text-white dark:group-hover:text-zinc-900 transition-transform duration-300 group-hover:rotate-45"
                         />
                       </div>
                     </div>
 
+                    {/* IMAGE PREVIEW (Kotak retro brutalist) */}
+                    <div className="relative w-full aspect-video border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-sm overflow-hidden mb-5 bg-zinc-100 dark:bg-zinc-800">
+                      <Image
+                        src={project.image}
+                        alt={`Preview of ${project.title}`}
+                        fill
+                        className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                        sizes="(max-width: 768px) 85vw, 420px"
+                      />
+                      {/* Overlay tipis agar menyatu dengan border */}
+                      <div className="absolute inset-0 border-2 border-zinc-900/10 dark:border-white/10 pointer-events-none"></div>
+                    </div>
+
                     {/* MIDDLE: TECH STACK */}
-                    <div className="flex flex-wrap gap-2 mt-8">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {project.tech.map((t, idx) => (
                         <span
                           key={idx}
-                          className="bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200/80 dark:border-zinc-700/80 text-zinc-600 dark:text-zinc-300 px-3.5 py-1.5 rounded-xl text-[10px] md:text-xs font-mono uppercase font-bold shadow-sm group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/20 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 group-hover:border-indigo-200 dark:group-hover:border-indigo-500/40 transition-colors duration-300"
+                          className="font-pixel text-[8px] md:text-[10px] bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 text-zinc-700 dark:text-zinc-300 px-2 py-1 rounded-sm uppercase font-bold shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-colors duration-300"
                         >
                           {t}
                         </span>
@@ -324,11 +341,11 @@ export default function Projects() {
                     </div>
 
                     {/* BOTTOM: TITLE & CATEGORY */}
-                    <div className="mt-auto pt-8">
-                      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none text-zinc-900 dark:text-zinc-50 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                    <div className="mt-auto border-t-4 border-zinc-900 dark:border-zinc-100 pt-4">
+                      <h3 className="font-pixel text-xl md:text-2xl uppercase tracking-widest leading-tight text-zinc-900 dark:text-zinc-50 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-300 line-clamp-2">
                         {project.title}
                       </h3>
-                      <p className="font-mono text-[10px] md:text-xs uppercase mt-4 font-bold text-zinc-500 dark:text-zinc-400 tracking-widest border-t border-zinc-100 dark:border-zinc-800/50 pt-4 group-hover:border-indigo-100 dark:group-hover:border-indigo-900/50 transition-colors duration-300">
+                      <p className="font-mono text-[8px] md:text-[10px] uppercase mt-3 font-bold text-zinc-500 dark:text-zinc-400 tracking-widest transition-colors duration-300">
                         {project.category}
                       </p>
                     </div>
