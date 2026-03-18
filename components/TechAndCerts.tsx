@@ -302,10 +302,9 @@ export default function TechAndCerts() {
         {/* ══════════════════════════════════════ */}
         <div className="flex flex-col gap-6 md:gap-8">
           {/* Section Header */}
-          <div className="flex flex-col gap-3 px-4 md:px-0">
+          <div className="flex flex-col gap-3 px-6 md:px-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
-              <Award size={16} className="text-[#34A853] dark:text-[#81C995]" />{" "}
-              {/* Google Green */}
+              <Award size={16} className="text-[#34A853] dark:text-[#81C995]" />
               <span className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                 Credentials
               </span>
@@ -322,7 +321,7 @@ export default function TechAndCerts() {
                 </p>
               </div>
 
-              {/* Scroll Controls (Desktop Only) */}
+              {/* Scroll Controls (Hanya Desktop) */}
               <div className="hidden md:flex gap-3 shrink-0">
                 <button
                   onClick={() => slide("left")}
@@ -346,11 +345,19 @@ export default function TechAndCerts() {
             </div>
           </div>
 
-          {/* Cert Cards Carousel (Mobile-First Swipeable) */}
-          <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
+          {/* Cert Cards Carousel (Dioptimasi untuk Swipe Mobile) */}
+          <div className="relative w-full">
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto gap-4 md:gap-5 pb-8 pt-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden touch-none md:touch-auto select-none"
+              className="
+                flex overflow-x-auto gap-4 md:gap-6 
+                pb-10 pt-2 px-6 md:px-0
+                snap-x snap-mandatory 
+                scroll-smooth
+                touch-pan-x
+                [&::-webkit-scrollbar]:hidden 
+                select-none
+              "
             >
               {certificates.map((cert) => (
                 <div
@@ -359,9 +366,9 @@ export default function TechAndCerts() {
                 >
                   <div
                     onClick={() => openCert(cert)}
-                    className="group relative w-full h-[380px] rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm cursor-pointer flex flex-col p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                    className="group relative w-full h-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm cursor-pointer flex flex-col p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                   >
-                    {/* Top Accent (Google Drive "Folder" feel) */}
+                    {/* Top Accent (Google Drive Style) */}
                     <div className="flex justify-between items-center mb-4">
                       <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995] text-[11px] font-bold uppercase tracking-wider">
                         {cert.year}
@@ -375,7 +382,7 @@ export default function TechAndCerts() {
                     <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden mb-5 border border-[#DADCE0] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
                       <iframe
                         src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-                        className="w-full h-full pointer-events-none opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 bg-white"
+                        className="w-full h-full pointer-events-none opacity-90 group-hover:opacity-100 transition-all duration-500 bg-white"
                       />
                       {/* Click Capture Overlay */}
                       <div className="absolute inset-0 bg-transparent" />
