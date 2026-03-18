@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Download, FileText, Sparkles } from "lucide-react";
+import { X, Download, FileText, Maximize2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 
@@ -26,148 +26,98 @@ export default function CVModal({ isOpen, onClose, cvUrl }: CVModalProps) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center px-4 py-10 md:p-6">
-          {/* ── Backdrop ─────────────────────────────────────────── */}
+          {/* ── Backdrop (Lebih Solid ala Google Dialog) ─────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-zinc-900/60 dark:bg-black/80 backdrop-blur-sm cursor-pointer"
+            className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm cursor-pointer"
           />
 
           {/* ── Modal Container ───────────────────────────────────── */}
           <motion.div
-            initial={{ y: 40, opacity: 0, scale: 0.95 }}
+            initial={{ y: 20, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 40, opacity: 0, scale: 0.95 }}
-            transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            exit={{ y: 20, opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
             className="
               relative z-10
               w-full max-w-4xl
               max-h-[90vh]
               flex flex-col
-              rounded-2xl
-              border border-zinc-200/80 dark:border-zinc-700/60
-              bg-white/80 dark:bg-zinc-900/80
-              backdrop-blur-xl
-              shadow-[0_32px_80px_0px_rgba(0,0,0,0.18)] dark:shadow-[0_32px_80px_0px_rgba(0,0,0,0.6)]
+              rounded-[24px] md:rounded-[28px]
+              border border-[#DADCE0] dark:border-[#3C4043]
+              bg-white dark:bg-[#303134]
+              shadow-[0_24px_38px_3px_rgba(0,0,0,0.14),0_9px_46px_8px_rgba(0,0,0,0.12),0_11px_15px_-7px_rgba(0,0,0,0.2)]
+              dark:shadow-[0_24px_38px_3px_rgba(0,0,0,0.4)]
               overflow-hidden
               transition-colors duration-500
             "
           >
-            {/* Grain texture */}
-            <div
-              className="pointer-events-none absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] rounded-2xl"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                backgroundRepeat: "repeat",
-                backgroundSize: "128px",
-              }}
-            />
-
-            {/* Subtle inner gradient */}
-            <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-indigo-50/30 via-transparent to-violet-50/20 dark:from-indigo-950/20 dark:via-transparent dark:to-violet-950/10 rounded-2xl" />
-
-            {/* Watermark */}
-            <FileText
-              className="absolute -top-10 -left-10 w-64 h-64 text-zinc-900/[0.03] dark:text-white/[0.03] -rotate-12 pointer-events-none z-0"
-              strokeWidth={1.5}
-            />
-
             {/* ── Close Button ─────────────────────────────────── */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-50 flex items-center justify-center w-10 h-10 rounded-xl border border-zinc-200/80 dark:border-zinc-700/60 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm shadow-sm hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-300 dark:hover:border-red-700/50 transition-all duration-200 group"
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] transition-colors duration-200"
+              aria-label="Close modal"
             >
-              <X
-                size={18}
-                strokeWidth={2}
-                className="text-zinc-500 dark:text-zinc-400 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200"
-              />
+              <X size={24} className="text-[#5F6368] dark:text-[#9AA0A6]" />
             </button>
 
-            {/* ── Header ───────────────────────────────────────── */}
-            <div className="relative z-10 border-b border-zinc-200/60 dark:border-zinc-700/40 p-6 md:p-10 pr-16 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm transition-colors duration-500">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-700/50 bg-indigo-50 dark:bg-indigo-950/40 shadow-sm">
-                  <Sparkles
-                    size={12}
-                    className="text-indigo-500 dark:text-indigo-400"
-                  />
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-indigo-700 dark:text-indigo-300">
-                    Official Document
-                  </span>
+            {/* ── Header Modal ───────────────────────────────────────── */}
+            <div className="border-b border-[#DADCE0] dark:border-[#3C4043] px-6 py-5 md:px-8 md:py-6">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#E8F0FE] dark:bg-[#1A73E8]/15 text-[#1A73E8] dark:text-[#8AB4F8]">
+                  <FileText size={16} strokeWidth={2.5} />
                 </div>
-                <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 hidden sm:block">
-                  REV {new Date().getFullYear()}
+                <span className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                  Dokumen Resmi
                 </span>
               </div>
-
-              <h2
-                className="font-extrabold uppercase leading-[0.88] tracking-[-0.04em] text-4xl md:text-5xl text-zinc-900 dark:text-white mb-4"
-                style={{ fontFamily: "'Syne', sans-serif" }}
-              >
-                CURRICULUM
-                <br className="sm:hidden" /> VITAE
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#202124] dark:text-[#E8EAED] tracking-tight pr-10">
+                Curriculum Vitae
               </h2>
-
-              <div className="flex items-center gap-2">
-                <div className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </div>
-                <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
-                  Kevin Ardiansyah — Frontend Engineer
-                </span>
-              </div>
+              <p className="text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] mt-1">
+                Kevin Ardiansyah — Frontend Engineer
+              </p>
             </div>
 
             {/* ── Content ──────────────────────────────────────── */}
-            <div className="relative z-10 p-6 md:p-10 flex-1 overflow-y-auto flex flex-col gap-6 bg-transparent transition-colors duration-500">
-              {/* PDF Viewer */}
-              <div className="relative w-full h-[55vh] md:h-[60vh] rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-700/40 bg-zinc-100 dark:bg-zinc-800 shadow-[0_4px_20px_0px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_0px_rgba(0,0,0,0.3)] transition-colors duration-500">
+            <div className="p-6 md:p-8 flex-1 overflow-y-auto flex flex-col gap-6 md:gap-8 bg-[#F8F9FA] dark:bg-[#202124] transition-colors duration-500">
+              {/* PDF Viewer (Google Drive File Preview Style) */}
+              <div className="relative w-full h-[55vh] md:h-[60vh] rounded-[16px] overflow-hidden border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
                 <iframe
                   src={`${cvUrl}#toolbar=0&navpanes=0&scrollbar=0`}
                   title="CV Document"
-                  className="w-full h-full border-none opacity-90 hover:opacity-100 transition-opacity duration-300"
+                  className="w-full h-full border-none"
                 />
               </div>
 
-              {/* Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-                {/* Fullscreen */}
+              {/* Action Buttons (Material Pill Buttons) */}
+              <div className="flex flex-col sm:flex-row justify-end gap-3 md:gap-4">
+                {/* Secondary Button: Fullscreen */}
                 <a
                   href={cvUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-3 rounded-2xl border border-zinc-200/80 dark:border-zinc-700/60 bg-white/80 dark:bg-zinc-800/60 backdrop-blur-sm py-4 md:py-5 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-600 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_0px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_24px_0px_rgba(0,0,0,0.3)] active:scale-95 transition-all duration-200"
+                  className="group flex items-center justify-center gap-2 h-12 px-6 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] text-[#1A73E8] dark:text-[#8AB4F8] font-bold text-sm transition-colors duration-200"
                 >
-                  <FileText
+                  <Maximize2
                     size={18}
-                    strokeWidth={2}
-                    className="text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors"
+                    strokeWidth={2.5}
+                    className="text-[#1A73E8] dark:text-[#8AB4F8]"
                   />
-                  <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-300">
-                    Fullscreen
-                  </span>
+                  Buka Layar Penuh
                 </a>
 
-                {/* Download */}
+                {/* Primary Button: Download */}
                 <a
                   href={cvUrl}
                   download
-                  className="group relative overflow-hidden flex items-center justify-center gap-3 rounded-2xl border border-indigo-400/60 dark:border-indigo-600/40 bg-gradient-to-br from-indigo-600 to-indigo-700 dark:from-indigo-700 dark:to-indigo-800 text-white py-4 md:py-5 shadow-[0_4px_20px_0px_rgba(99,102,241,0.25)] hover:shadow-[0_8px_30px_0px_rgba(99,102,241,0.35)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+                  className="group flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-bold text-sm shadow-sm hover:shadow-md transition-all duration-200"
                 >
-                  {/* Shine sweep */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-                  <Download
-                    size={18}
-                    strokeWidth={2}
-                    className="relative z-10 transition-transform group-hover:translate-y-0.5"
-                  />
-                  <span className="relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em]">
-                    Download CV
-                  </span>
+                  <Download size={18} strokeWidth={2.5} />
+                  Unduh PDF
                 </a>
               </div>
             </div>

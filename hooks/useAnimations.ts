@@ -8,12 +8,13 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Base configuration for a modern, snappy, and consistent reveal across all sections
-const modernReveal = {
-  y: 60,
+// Base configuration for Material Design 3 Motion
+// Cepat, tegas, dan jarak travel yang tidak terlalu jauh (40px saja)
+const materialReveal = {
+  y: 40,
   opacity: 0,
-  duration: 1.2,
-  ease: "expo.out",
+  duration: 0.8, // Dipercepat dari 1.2s agar terasa responsif seperti aplikasi Google
+  ease: "power3.out", // Deceleration yang sangat halus khas Material Design
   clearProps: "all", // INI PENTING: Bersihin inline style biar hover Tailwind jalan lagi!
 };
 
@@ -22,8 +23,8 @@ export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
-        ...modernReveal,
-        stagger: 0.12, // Muncul bergantian dari kiri ke kanan / atas ke bawah
+        ...materialReveal,
+        stagger: 0.1, // Muncul bergantian dengan sangat mulus
       });
     },
     { scope: containerRef },
@@ -41,8 +42,8 @@ export const useAboutAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...modernReveal,
-          delay: i * 0.08,
+          ...materialReveal,
+          delay: i * 0.05, // Stagger manual yang cepat
         });
       });
     },
@@ -61,8 +62,8 @@ export const useExperienceAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...modernReveal,
-          delay: i * 0.08,
+          ...materialReveal,
+          delay: i * 0.05,
         });
       });
     },
@@ -81,8 +82,8 @@ export const useProjectsAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...modernReveal,
-          delay: i * 0.08,
+          ...materialReveal,
+          delay: i * 0.05,
         });
       });
     },
@@ -94,7 +95,8 @@ export const useProjectsAnimation = (containerRef: any) => {
 export const useTechCertsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      // Tags teknologi muncul dengan efek pop kecil (Satu-satunya pengecualian agar playful)
+      // Material Design "Chip" Pop-in Effect
+      // Tidak pakai efek memantul berlebihan, melainkan scale-up bersih
       gsap.utils.toArray(".tech-tag").forEach((tag: any, i) => {
         gsap.from(tag, {
           scrollTrigger: {
@@ -102,17 +104,17 @@ export const useTechCertsAnimation = (containerRef: any) => {
             start: "top 95%",
             once: true,
           },
-          y: 20,
+          y: 15,
           opacity: 0,
-          scale: 0.8, // Efek membesar sedikit
-          duration: 0.8,
-          ease: "back.out(1.5)", // Efek memantul
-          delay: i * 0.03, // Jeda sangat cepat karena itemnya banyak
+          scale: 0.9,
+          duration: 0.5,
+          ease: "power2.out",
+          delay: i * 0.02, // Ekstra cepat agar pengguna tidak menunggu
           clearProps: "all",
         });
       });
 
-      // Kartu bento dan sertifikat
+      // Kartu Sertifikat
       gsap.utils.toArray(".cert-card").forEach((card: any, i) => {
         gsap.from(card, {
           scrollTrigger: {
@@ -120,8 +122,8 @@ export const useTechCertsAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...modernReveal,
-          delay: i * 0.08,
+          ...materialReveal,
+          delay: i * 0.05,
         });
       });
     },
@@ -137,11 +139,11 @@ export const useContactAnimation = (containerRef: any) => {
         gsap.from(input, {
           scrollTrigger: {
             trigger: input,
-            start: "top 90%", // Sedikit lebih lambat ke bawah layarnya agar terlihat
+            start: "top 90%",
             once: true,
           },
-          ...modernReveal,
-          delay: i * 0.08,
+          ...materialReveal,
+          delay: i * 0.05,
         });
       });
     },
@@ -157,11 +159,11 @@ export const useFooterAnimation = (containerRef: any) => {
         gsap.from(item, {
           scrollTrigger: {
             trigger: item,
-            start: "top 95%", // Paling bawah layar baru muncul
+            start: "top 95%",
             once: true,
           },
-          ...modernReveal,
-          delay: i * 0.08,
+          ...materialReveal,
+          delay: i * 0.05,
         });
       });
     },

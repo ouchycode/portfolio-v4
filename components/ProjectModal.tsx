@@ -1,291 +1,182 @@
 "use client";
 
-import {
-  X,
-  ExternalLink,
-  ArrowRight,
-  Sparkles,
-  MonitorSmartphone,
-  ShoppingCart,
-  CalendarDays,
-  Globe,
-  Smartphone,
-  Palette,
-} from "lucide-react";
+import { X, ExternalLink, CheckCircle2, FolderGit2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-const categoryConfig: Record<
-  string,
-  { pill: string; accent: string; dot: string }
-> = {
-  "LMS Platform": {
-    pill: "border-blue-200 dark:border-blue-700/50 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300",
-    accent: "from-blue-400 to-cyan-400",
-    dot: "bg-blue-500",
-  },
-  EdTech: {
-    pill: "border-cyan-200 dark:border-cyan-700/50 bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300",
-    accent: "from-cyan-400 to-teal-400",
-    dot: "bg-cyan-500",
-  },
-  "Event Management": {
-    pill: "border-amber-200 dark:border-amber-700/50 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300",
-    accent: "from-amber-400 to-orange-400",
-    dot: "bg-amber-500",
-  },
-  "E-Commerce": {
-    pill: "border-pink-200 dark:border-pink-700/50 bg-pink-50 dark:bg-pink-950/40 text-pink-700 dark:text-pink-300",
-    accent: "from-pink-400 to-rose-400",
-    dot: "bg-pink-500",
-  },
-  "Modern Portfolio": {
-    pill: "border-violet-200 dark:border-violet-700/50 bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300",
-    accent: "from-violet-400 to-purple-400",
-    dot: "bg-violet-500",
-  },
-  "Web Application": {
-    pill: "border-emerald-200 dark:border-emerald-700/50 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300",
-    accent: "from-emerald-400 to-green-400",
-    dot: "bg-emerald-500",
-  },
-  "Mobile Application": {
-    pill: "border-indigo-200 dark:border-indigo-700/50 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300",
-    accent: "from-indigo-400 to-blue-400",
-    dot: "bg-indigo-500",
-  },
-};
-
-const getWatermarkIcon = (category: string) => {
-  const cls =
-    "absolute -bottom-10 -right-10 w-64 h-64 text-zinc-900/[0.03] dark:text-white/[0.03] -rotate-12 pointer-events-none z-0";
-  switch (category) {
-    case "LMS Platform":
-    case "EdTech":
-      return <MonitorSmartphone className={cls} strokeWidth={1.5} />;
-    case "E-Commerce":
-      return <ShoppingCart className={cls} strokeWidth={1.5} />;
-    case "Event Management":
-      return <CalendarDays className={cls} strokeWidth={1.5} />;
-    case "Modern Portfolio":
-      return <Palette className={cls} strokeWidth={1.5} />;
-    case "Mobile Application":
-      return <Smartphone className={cls} strokeWidth={1.5} />;
-    default:
-      return <Globe className={cls} strokeWidth={1.5} />;
+// Mapping warna cerdas menggunakan 4 warna utama Google (Sama seperti di Projects.tsx)
+const getGoogleCategoryTheme = (category: string) => {
+  if (["LMS Platform", "EdTech", "Web Application"].includes(category)) {
+    return {
+      bg: "bg-[#E8F0FE] dark:bg-[#1A73E8]/15",
+      text: "text-[#1A73E8] dark:text-[#8AB4F8]",
+    }; // Blue
   }
+  if (["E-Commerce", "Mobile Application"].includes(category)) {
+    return {
+      bg: "bg-[#E6F4EA] dark:bg-[#81C995]/15",
+      text: "text-[#137333] dark:text-[#81C995]",
+    }; // Green
+  }
+  if (["Event Management"].includes(category)) {
+    return {
+      bg: "bg-[#FEF7E0] dark:bg-[#FDE293]/15",
+      text: "text-[#B06000] dark:text-[#FDE293]",
+    }; // Yellow
+  }
+  return {
+    bg: "bg-[#FCE8E6] dark:bg-[#F28B82]/15",
+    text: "text-[#EA4335] dark:text-[#F28B82]",
+  }; // Red
 };
 
 export default function ProjectModal({ isOpen, onClose, project }: any) {
   if (!project) return null;
 
-  const cfg =
-    categoryConfig[project.category] ?? categoryConfig["Web Application"];
+  const theme = getGoogleCategoryTheme(project.category);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] overflow-y-auto flex items-start md:items-center justify-center px-4 md:p-6 py-10">
-          {/* ── Backdrop ─────────────────────────────────────────── */}
+        <div className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center px-4 py-10 md:p-6">
+          {/* ── Backdrop (Solid Dark ala Google Dialog) ─────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-zinc-900/60 dark:bg-black/80 backdrop-blur-sm cursor-pointer"
+            className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm cursor-pointer"
           />
 
           {/* ── Modal Container ───────────────────────────────────── */}
           <motion.div
-            initial={{ y: 40, opacity: 0, scale: 0.95 }}
+            initial={{ y: 20, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 40, opacity: 0, scale: 0.95 }}
-            transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            exit={{ y: 20, opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
             className="
               relative z-10
-              w-full max-w-5xl
+              w-full max-w-3xl
               max-h-[90vh]
-              overflow-y-auto
-              rounded-2xl
-              border border-zinc-200/80 dark:border-zinc-700/60
-              bg-white/85 dark:bg-zinc-900/85
-              backdrop-blur-xl
-              shadow-[0_32px_80px_0px_rgba(0,0,0,0.15)] dark:shadow-[0_32px_80px_0px_rgba(0,0,0,0.6)]
-              [&::-webkit-scrollbar]:hidden
+              flex flex-col
+              rounded-[24px] md:rounded-[28px]
+              border border-[#DADCE0] dark:border-[#3C4043]
+              bg-white dark:bg-[#303134]
+              shadow-[0_24px_38px_3px_rgba(0,0,0,0.14),0_9px_46px_8px_rgba(0,0,0,0.12),0_11px_15px_-7px_rgba(0,0,0,0.2)]
+              dark:shadow-[0_24px_38px_3px_rgba(0,0,0,0.4)]
+              overflow-hidden
               transition-colors duration-500
             "
           >
-            {/* Grain texture */}
-            <div
-              className="pointer-events-none absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] rounded-2xl"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                backgroundRepeat: "repeat",
-                backgroundSize: "128px",
-              }}
-            />
-
-            {/* Inner gradient */}
-            <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/20 via-transparent to-zinc-50/10 dark:from-zinc-800/20 dark:via-transparent dark:to-zinc-900/10 rounded-2xl" />
-
             {/* ── Close Button ─────────────────────────────────── */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-50 flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-zinc-700/60 bg-black/20 dark:bg-zinc-800/80 backdrop-blur-md shadow-sm hover:bg-red-500/80 hover:border-red-400/50 transition-all duration-200 group"
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] transition-colors duration-200"
+              aria-label="Close modal"
             >
-              <X
-                size={18}
-                strokeWidth={2}
-                className="text-white/80 group-hover:text-white transition-colors duration-200"
-              />
+              <X size={24} className="text-[#5F6368] dark:text-[#9AA0A6]" />
             </button>
 
-            {/* ── Hero Image ───────────────────────────────────── */}
-            <div className="relative overflow-hidden rounded-t-2xl group">
-              <div className="relative w-full aspect-[16/9] md:aspect-[21/8] bg-zinc-200 dark:bg-zinc-800">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  priority
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/70 via-zinc-900/10 to-transparent" />
-
-                {/* Top accent line on image */}
-                <div
-                  className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${cfg.accent} opacity-80`}
-                />
-              </div>
-
-              {/* FIG badge on image */}
-              <div className="absolute top-4 left-4 md:top-6 md:left-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/20 bg-black/30 backdrop-blur-md shadow-sm">
-                <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-white/90">
+            {/* ── Header Modal ───────────────────────────────────────── */}
+            <div className="relative z-10 border-b border-[#DADCE0] dark:border-[#3C4043] px-6 py-5 md:px-8 md:py-6 pr-16 bg-white dark:bg-[#303134] transition-colors duration-500 shrink-0">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <span
+                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider ${theme.bg} ${theme.text}`}
+                >
+                  {project.category}
+                </span>
+                <span className="text-[12px] font-bold text-[#DADCE0] dark:text-[#5F6368]">
                   FIG. {project.id}
                 </span>
               </div>
+
+              <h2 className="font-extrabold text-2xl md:text-3xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight">
+                {project.title}
+              </h2>
             </div>
 
-            {/* ── Title Section ─────────────────────────────────── */}
-            <div className="relative overflow-hidden border-b border-zinc-200/60 dark:border-zinc-700/40 p-7 md:p-10 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm transition-colors duration-500">
-              {getWatermarkIcon(project.category)}
+            {/* ── Content Body ──────────────────────────────────────── */}
+            <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-8 bg-[#F8F9FA] dark:bg-[#202124] transition-colors duration-500 flex flex-col gap-8">
+              {/* Image Preview */}
+              <div className="relative w-full aspect-[16/9] rounded-[16px] overflow-hidden border border-[#DADCE0] dark:border-[#3C4043] bg-zinc-100 dark:bg-zinc-800 shadow-sm">
+                <Image
+                  src={project.image}
+                  alt={`Preview of ${project.title}`}
+                  fill
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
 
-              <div className="relative z-10">
-                {/* Category pill */}
-                <div className="flex flex-wrap items-center gap-3 mb-5">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[9px] font-mono font-bold uppercase tracking-[0.18em] shadow-sm ${cfg.pill}`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
-                    {project.category}
-                  </span>
-                </div>
-
-                <h2
-                  className="font-extrabold uppercase leading-[0.88] tracking-[-0.04em] text-3xl md:text-5xl text-zinc-900 dark:text-white mb-4"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                >
-                  {project.title}
-                </h2>
-
-                <p className="text-sm md:text-[15px] leading-relaxed text-zinc-500 dark:text-zinc-400 font-light max-w-3xl">
+              {/* 1. Overview */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                  Deskripsi Proyek
+                </h3>
+                <p className="text-base md:text-[17px] leading-relaxed text-[#3C4043] dark:text-[#E8EAED]">
                   {project.description}
                 </p>
               </div>
-            </div>
 
-            {/* ── Content Grid ─────────────────────────────────── */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12">
-              {/* Tech Stack */}
-              <div className="md:col-span-5 border-b border-zinc-200/60 dark:border-zinc-700/40 md:border-b-0 md:border-r md:border-r-zinc-200/60 dark:md:border-r-zinc-700/40 p-7 md:p-10 bg-zinc-50/30 dark:bg-zinc-800/20 backdrop-blur-sm transition-colors duration-500">
-                <div className="flex items-center gap-3 mb-5">
-                  <div
-                    className={`w-6 h-0.5 rounded-full bg-gradient-to-r ${cfg.accent}`}
-                  />
-                  <h3 className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-                    Core Technology
-                  </h3>
+              {/* 2. Key Features */}
+              <div className="flex flex-col gap-4">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                  Fitur Utama
+                </h3>
+                <div className="flex flex-col gap-3">
+                  {project.features.map((feature: string, i: number) => (
+                    <div key={i} className="flex items-start gap-3 md:gap-4">
+                      <div className="mt-0.5 text-[#1A73E8] dark:text-[#8AB4F8] shrink-0">
+                        <CheckCircle2 size={20} strokeWidth={2} />
+                      </div>
+                      <span className="text-[15px] md:text-base text-[#3C4043] dark:text-[#E8EAED] leading-relaxed">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex flex-wrap gap-2">
+              </div>
+
+              {/* 3. Tech Stack */}
+              <div className="flex flex-col gap-4 mt-2">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                  Teknologi yang Digunakan
+                </h3>
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {project.tech.map((tech: string) => (
                     <span
                       key={tech}
-                      className="inline-flex items-center px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700/60 bg-white/70 dark:bg-zinc-800/60 backdrop-blur-sm text-[9px] font-mono font-semibold uppercase tracking-widest text-zinc-600 dark:text-zinc-300 shadow-sm hover:-translate-y-0.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:text-indigo-700 dark:hover:text-indigo-300 transition-all duration-200 cursor-default"
+                      className="inline-flex items-center px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] text-[13px] font-semibold text-[#5F6368] dark:text-[#E8EAED] shadow-sm cursor-default"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* Features */}
-              <div className="md:col-span-7 p-7 md:p-10 bg-white/20 dark:bg-zinc-900/20 backdrop-blur-sm transition-colors duration-500">
-                <div className="flex items-center gap-3 mb-5">
-                  <div
-                    className={`w-6 h-0.5 rounded-full bg-gradient-to-r ${cfg.accent}`}
-                  />
-                  <h3 className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-                    Key Functionalities
-                  </h3>
-                </div>
-                <div className="grid gap-4">
-                  {project.features.map((f: string, i: number) => (
-                    <div key={i} className="group flex gap-4 items-start">
-                      <div className="flex-shrink-0 w-7 h-7 mt-0.5 flex items-center justify-center rounded-xl bg-pink-50 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-700/50 shadow-sm group-hover:bg-pink-500 group-hover:border-pink-500 transition-all duration-300">
-                        <ArrowRight
-                          size={13}
-                          strokeWidth={2.5}
-                          className="text-pink-500 dark:text-pink-400 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300"
-                        />
-                      </div>
-                      <span className="text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300">
-                        {f}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+            {/* ── Footer / CTA ──────────────────────────────────────── */}
+            <div className="border-t border-[#DADCE0] dark:border-[#3C4043] p-4 md:p-6 bg-white dark:bg-[#303134] transition-colors duration-500 shrink-0 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="hidden sm:flex items-center gap-2 text-[#5F6368] dark:text-[#9AA0A6]">
+                <FolderGit2 size={18} />
+                <span className="text-sm font-medium">
+                  Repository / Live Demo
+                </span>
               </div>
 
-              {/* CTA */}
-              <div className="md:col-span-12 border-t border-zinc-200/60 dark:border-zinc-700/40 p-7 md:p-10 bg-zinc-50/30 dark:bg-zinc-900/30 backdrop-blur-sm transition-colors duration-500">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative overflow-hidden flex items-center justify-between w-full md:w-fit md:min-w-[320px] rounded-2xl border border-indigo-400/60 dark:border-indigo-600/40 bg-gradient-to-br from-indigo-600 to-indigo-700 dark:from-indigo-700 dark:to-indigo-800 text-white px-7 py-5 shadow-[0_4px_24px_0px_rgba(99,102,241,0.25)] hover:shadow-[0_8px_36px_0px_rgba(99,102,241,0.38)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300"
-                >
-                  {/* Shine sweep */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-
-                  <div className="relative z-10 flex items-center gap-3">
-                    <Sparkles
-                      size={17}
-                      strokeWidth={2}
-                      className="hidden md:block text-indigo-200"
-                    />
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-indigo-200">
-                        Open Link
-                      </span>
-                      <span
-                        className="text-sm md:text-base font-bold text-white tracking-tight"
-                        style={{ fontFamily: "'Syne', sans-serif" }}
-                      >
-                        View Repository
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="relative z-10 w-10 h-10 flex items-center justify-center rounded-xl bg-white/15 border border-white/20 group-hover:bg-white transition-colors duration-300 ml-6 shrink-0">
-                    <ExternalLink
-                      size={16}
-                      strokeWidth={2}
-                      className="text-white group-hover:text-indigo-700 group-hover:rotate-45 transition-all duration-300"
-                    />
-                  </div>
-                </a>
-              </div>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-bold text-sm shadow-sm hover:shadow-md transition-all duration-200"
+              >
+                Lihat Proyek
+                <ExternalLink
+                  size={18}
+                  strokeWidth={2.5}
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </a>
             </div>
           </motion.div>
         </div>

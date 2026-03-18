@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
-import { Press_Start_2P } from "next/font/google"; // 1. Import font pixel
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-// 2. Setup font pixel dengan variabel CSS
-const pressStart2P = Press_Start_2P({
-  weight: "400",
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-pixel",
+  variable: "--font-sans",
   display: "swap",
 });
 
-// SETUP METADATA & SEO (Untuk Preview Link WhatsApp/LinkedIn)
 export const metadata: Metadata = {
   title: "Kevin Ardiansyah | Frontend Engineer",
   description:
@@ -62,10 +59,10 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`
-        ${pressStart2P.variable} 
-        bg-[#e0e0e0] text-zinc-900
-        dark:bg-[#1a1a1a] dark:text-zinc-50
-        antialiased
+          ${inter.variable} font-sans antialiased
+          bg-[#F8F9FA] text-[#202124]
+          dark:bg-[#202124] dark:text-[#E8EAED]
+          transition-colors duration-500
         `}
       >
         <ThemeProvider
@@ -74,7 +71,22 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div id="smooth-wrapper">
+          {/* ── BACKGROUND GRID (Google Blue Theme) ───────────────────────── */}
+          <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
+            <div
+              className="
+    absolute inset-0 
+    bg-[linear-gradient(to_right,rgba(26,115,232,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(26,115,232,0.15)_1px,transparent_1px)] 
+    dark:bg-[linear-gradient(to_right,rgba(138,180,248,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(138,180,248,0.12)_1px,transparent_1px)]
+  "
+              style={{
+                backgroundSize: "38px 38px",
+              }}
+            />
+          </div>
+
+          {/* ── MAIN WRAPPER ───────────────────────────────────────── */}
+          <div id="smooth-wrapper" className="relative z-10">
             <div id="smooth-content">{children}</div>
           </div>
 

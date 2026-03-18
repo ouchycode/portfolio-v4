@@ -3,29 +3,43 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Google Light Mode: Abu-abu sangat muda yang hangat, bukan putih silau */
+  --background: #f8f9fa;
+  /* Google Text: Hitam arang yang lembut agar mata tidak cepat lelah */
+  --foreground: #202124;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* Google Dark Mode: Abu-abu gelap pekat khas aplikasi Google, bukan hitam mati */
+  --background: #202124;
+  /* Google Dark Text: Putih tulang yang lembut */
+  --foreground: #e8eaed;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
-  /* Daftarkan font pixel agar bisa dipanggil dengan class font-pixel */
-  --font-pixel: var(--font-pixel), "Courier New", monospace;
+  /* Kita gunakan font-sans yang sudah diatur di layout.tsx sebelumnya */
+  --font-sans: var(--font-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Tailwind biasanya akan menggunakan variabel font dari class, 
-     tapi ini tetap bagus sebagai fallback dasar */
-  font-family: Arial, Helvetica, sans-serif;
+  /* Menghilangkan scrollbar secara visual tapi tetap bisa di-scroll (Opsional untuk estetika Google) */
+  scrollbar-gutter: stable;
+  antialiased: true;
+}
+
+/* Penyesuaian seleksi teks agar berwarna biru khas Google */
+::selection {
+  background-color: rgba(26, 115, 232, 0.2);
+  color: inherit;
+}
+
+/* Transisi halus saat switch dark/light mode */
+* {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
