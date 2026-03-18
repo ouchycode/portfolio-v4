@@ -2,7 +2,18 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, FolderGit2, ArrowUpRight } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  FolderGit2,
+  ArrowUpRight,
+  BookOpen,
+  Ticket,
+  ShoppingCart,
+  Palette,
+  Globe,
+  Smartphone,
+} from "lucide-react";
 import { useProjectsAnimation } from "@/hooks/useAnimations";
 import ProjectModal from "./ProjectModal";
 
@@ -130,39 +141,67 @@ const getGoogleCategoryTheme = (category: string) => {
   };
 };
 
+// Fungsi helper baru untuk menentukan ikon berdasarkan kategori
+const getProjectIcon = (category: string) => {
+  if (["LMS Platform", "EdTech"].includes(category)) return BookOpen;
+  if (category === "Event Management") return Ticket;
+  if (category === "E-Commerce") return ShoppingCart;
+  if (category === "Modern Portfolio") return Palette;
+  if (category === "Mobile Application") return Smartphone;
+  return Globe; // Default icon
+};
+
 export default function Projects() {
   const container = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [isPaused, setIsPaused] = useState(false);
+
   useProjectsAnimation(container);
-
-  // Perbaikan: Hapus Wheel Event Listener yang mengunci scroll di mobile
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    // Kita biarkan perilaku scroll alami browser untuk swipe yang lebih responsif
-  }, []);
-
-  const openProject = (project: any) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeProject = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
 
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
     const gap = 16;
     const cardWidth = scrollRef.current.offsetWidth * 0.85;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+
+    if (direction === "right" && scrollLeft + clientWidth >= scrollWidth - 10) {
+      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      return;
+    }
+
     scrollRef.current.scrollBy({
       left: direction === "left" ? -(cardWidth + gap) : cardWidth + gap,
       behavior: "smooth",
     });
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (!isPaused) {
+      interval = setInterval(() => {
+        slide("right");
+      }, 3000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isPaused]);
+
+  const openProject = (project: any) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+    setIsPaused(true);
+  };
+
+  const closeProject = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+    setIsPaused(false);
   };
 
   return (
@@ -172,7 +211,7 @@ export default function Projects() {
       className="relative overflow-hidden px-0 py-16 md:px-10 md:py-28 text-[#202124] dark:text-[#E8EAED] transition-colors duration-500"
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-6 md:gap-10">
-        <div className="flex flex-col gap-3 px-6 md:px-0">
+        <div className="relative z-10 flex flex-col gap-3 px-6 md:px-0">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
             <FolderGit2
               size={16}
@@ -186,8 +225,7 @@ export default function Projects() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <h2 className="font-extrabold tracking-tight text-3xl md:text-5xl">
-                {" "}
-                Karya Pilihan{" "}
+                Karya Pilihan
               </h2>
               <p className="text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
                 Eksplorasi kode dan desain dalam membangun aplikasi web yang
@@ -218,13 +256,17 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Carousel Container - Ditingkatkan untuk swipe mobile */}
-        <div className="relative w-full">
+        {/* Carousel Container */}
+        <div className="relative w-full z-20">
           <div
             ref={scrollRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
             className="
               flex overflow-x-auto gap-4 md:gap-6 
-              pb-10 pt-2 px-6 md:px-0
+              pb-12 pt-6 px-6 md:px-0
               snap-x snap-mandatory 
               scroll-smooth
               touch-pan-x
@@ -234,6 +276,8 @@ export default function Projects() {
           >
             {projectsData.map((project) => {
               const theme = getGoogleCategoryTheme(project.category);
+              const ProjectIcon = getProjectIcon(project.category);
+
               return (
                 <div
                   key={project.id}
@@ -241,8 +285,21 @@ export default function Projects() {
                 >
                   <div
                     onClick={() => openProject(project)}
-                    className="group relative w-full h-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm cursor-pointer flex flex-col p-4 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                    className="
+                      group relative w-full h-full flex flex-col p-4 md:p-5 cursor-pointer transition-all duration-300
+                      rounded-[24px] border border-white/60 dark:border-[#3C4043] 
+                      bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
+                      shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
+                      hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
+                    "
                   >
+                    {/* --- ICON MELAYANG DI KARTU --- */}
+                    <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
+                      <ProjectIcon
+                        className={`w-5 h-5 md:w-6 md:h-6 ${theme.text}`}
+                      />
+                    </div>
+
                     <div className="relative w-full aspect-[16/10] rounded-[16px] overflow-hidden mb-5 border border-[#DADCE0] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
                       <Image
                         src={project.image}
@@ -267,8 +324,7 @@ export default function Projects() {
                           {project.category}
                         </span>
                         <span className="text-[12px] font-bold text-[#DADCE0] dark:text-[#5F6368]">
-                          {" "}
-                          {project.id}{" "}
+                          {project.id}
                         </span>
                       </div>
 

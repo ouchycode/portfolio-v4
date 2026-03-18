@@ -57,28 +57,91 @@ export default function Navbar() {
 
   if (!mounted) return null;
 
-  // Mencari label section yang sedang aktif untuk ditampilkan di pill
+  // Mencari label section yang sedang aktif untuk ditampilkan di pill mobile
   const activeLabel =
     navLinks.find((link) => link.href === active)?.label || "Menu";
 
   return (
     <nav className="fixed top-5 left-0 right-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
-      {/* ── Smart Pill Trigger ── */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* 1. DESKTOP FLOATING DOCK (Tampil di layar menengah ke atas) */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <motion.div
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        className="
+          hidden md:flex pointer-events-auto items-center gap-1.5 p-2 
+          rounded-full border border-white/60 dark:border-[#3C4043] 
+          bg-white/80 dark:bg-[#303134]/80 backdrop-blur-md 
+          shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]
+        "
+      >
+        {navLinks.map((link) => {
+          const isActive = active === link.href;
+          const Icon = link.icon;
+          return (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setActive(link.href)}
+              className={`
+                relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300 group
+                ${
+                  isActive
+                    ? "bg-[#1A73E8] text-white shadow-md"
+                    : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#202124] dark:hover:text-white"
+                }
+              `}
+            >
+              <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+              <span
+                className={`text-sm font-bold tracking-wide ${isActive ? "block" : "hidden lg:block"}`}
+              >
+                {link.label}
+              </span>
+
+              {/* Tooltip untuk layar medium (ketika teks disembunyikan) */}
+              {!isActive && (
+                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-[#202124] dark:bg-white text-white dark:text-[#202124] text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity lg:hidden pointer-events-none whitespace-nowrap">
+                  {link.label}
+                </span>
+              )}
+            </a>
+          );
+        })}
+
+        {/* Divider */}
+        <div className="w-px h-8 bg-[#DADCE0] dark:bg-[#5F6368] mx-2" />
+
+        {/* Desktop Theme Toggle */}
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#1A73E8] transition-colors"
+          aria-label="Toggle Theme"
+        >
+          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+      </motion.div>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* 2. MOBILE SMART PILL (Tampil di layar kecil) */}
+      {/* ════════════════════════════════════════════════════════════ */}
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="pointer-events-auto flex items-center gap-2"
+        className="flex md:hidden pointer-events-auto items-center gap-2"
       >
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="
             flex items-center gap-3 px-4 h-12 
-            rounded-full bg-white dark:bg-[#303134] 
-            border border-[#DADCE0] dark:border-[#3C4043]
+            rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
+            border border-white/60 dark:border-[#3C4043]
             text-[#202124] dark:text-[#E8EAED]
-            shadow-[0_2px_5px_0_rgba(60,64,67,0.1)] 
+            shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]
             hover:border-[#1A73E8] dark:hover:border-[#8AB4F8]
-            transition-all duration-300 backdrop-blur-md
+            transition-all duration-300
           "
         >
           <div className="flex items-center justify-center w-6 h-6">
@@ -91,8 +154,8 @@ export default function Navbar() {
 
           <div className="w-px h-4 bg-[#DADCE0] dark:bg-[#5F6368]" />
 
-          <span className="text-sm font-bold tracking-tight min-w-[60px] text-left">
-            {isOpen ? "Close" : activeLabel}
+          <span className="text-sm font-bold tracking-tight min-w-[70px] text-left">
+            {isOpen ? "Tutup" : activeLabel}
           </span>
 
           <motion.div
@@ -103,15 +166,16 @@ export default function Navbar() {
           </motion.div>
         </button>
 
-        {/* Floating Theme Toggle */}
+        {/* Mobile Theme Toggle */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="
             flex items-center justify-center w-12 h-12 
-            rounded-full bg-white dark:bg-[#303134] 
-            border border-[#DADCE0] dark:border-[#3C4043]
+            rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
+            border border-white/60 dark:border-[#3C4043]
             text-[#5F6368] dark:text-[#9AA0A6]
-            backdrop-blur-md shadow-sm active:scale-90 transition-all
+            shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]
+            active:scale-90 transition-all
           "
         >
           {theme === "dark" ? (
@@ -122,17 +186,17 @@ export default function Navbar() {
         </button>
       </motion.div>
 
-      {/* ── Expanded Menu ── */}
+      {/* ── Expanded Mobile Menu ── */}
       <AnimatePresence>
         {isOpen && (
-          <>
+          <div className="md:hidden flex flex-col items-center w-full">
             {/* Backdrop click-away */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeMenu}
-              className="fixed inset-0 bg-black/10 dark:bg-black/40 pointer-events-auto backdrop-blur-[2px]"
+              className="fixed inset-0 bg-black/10 dark:bg-black/40 pointer-events-auto backdrop-blur-[2px] -z-10"
             />
 
             <motion.div
@@ -142,16 +206,16 @@ export default function Navbar() {
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="
                 pointer-events-auto
-                mt-3 p-2 w-full max-w-[260px]
-                rounded-[28px] border border-[#DADCE0] dark:border-[#3C4043]
-                bg-white/95 dark:bg-[#303134]/95
-                backdrop-blur-xl shadow-2xl
+                mt-3 p-3 w-full max-w-[260px]
+                rounded-[28px] border border-white/60 dark:border-[#3C4043]
+                bg-white/90 dark:bg-[#303134]/90
+                backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.75)]
               "
             >
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 <div className="px-4 py-2 mb-1">
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5F6368] dark:text-[#9AA0A6]">
-                    Navigation
+                    Navigasi
                   </p>
                 </div>
 
@@ -199,7 +263,7 @@ export default function Navbar() {
                 })}
               </div>
             </motion.div>
-          </>
+          </div>
         )}
       </AnimatePresence>
     </nav>

@@ -8,6 +8,8 @@ import {
   Send,
   Linkedin,
   Github,
+  Star,
+  Paperclip,
 } from "lucide-react";
 import { useContactAnimation } from "@/hooks/useAnimations";
 
@@ -28,7 +30,7 @@ export default function Contact() {
       "
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-8 md:gap-12">
-        {/* ── Section Header (Konsisten) ──────────────────────────────────────── */}
+        {/* ── Section Header ──────────────────────────────────────── */}
         <div className="flex flex-col gap-3">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
             <MessageSquare
@@ -51,7 +53,7 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Status Badge (Google Online Status Style) */}
+            {/* Status Badge */}
             <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm shrink-0">
               <div className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-75" />
@@ -65,10 +67,22 @@ export default function Contact() {
         </div>
 
         {/* ── Main Content Split ──────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8">
-          {/* LEFT: Info Card (Google Identity Style) */}
-          <div className="contact-input md:col-span-5 flex flex-col gap-5">
-            <div className="w-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm p-8 md:p-10 flex flex-col justify-between h-full transition-shadow duration-300">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 relative">
+          {/* --- ICON MELAYANG STATIS --- */}
+          {/* Icon 1: Paperclip (Kiri Atas Form) */}
+          <div className="absolute top-2 -left-2 md:-top-4 md:left-auto md:right-[55%] z-20 p-2 md:p-3 bg-white dark:bg-[#303134] rounded-lg md:rounded-xl shadow-[0_15px_30px_rgba(26,115,232,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-12 hidden md:block">
+            <Paperclip className="w-5 h-5 md:w-6 md:h-6 text-[#1A73E8] dark:text-[#8AB4F8]" />
+          </div>
+
+          {/* Icon 2: Star (Kanan Bawah Form) */}
+          <div className="absolute -bottom-4 -right-2 md:-bottom-6 md:-right-6 z-20 p-2.5 md:p-3 bg-white dark:bg-[#303134] rounded-full shadow-[0_15px_30px_rgba(250,187,5,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm rotate-12">
+            <Star className="w-5 h-5 md:w-6 md:h-6 text-[#FABB05] fill-[#FABB05]/20" />
+          </div>
+
+          {/* LEFT: Info Card */}
+          <div className="contact-input md:col-span-5 flex flex-col gap-5 z-10">
+            {/* GAYA CARD DIUPDATE */}
+            <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-8 md:p-10 flex flex-col justify-between h-full hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300">
               <div>
                 <h3 className="font-extrabold text-2xl md:text-3xl text-[#202124] dark:text-white mb-3">
                   Informasi Kontak
@@ -115,8 +129,8 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Social Links Card (Small Horizontal) */}
-            <div className="w-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm p-4 flex items-center justify-center gap-4">
+            {/* Social Links Card */}
+            <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-4 flex items-center justify-center gap-4 hover:-translate-y-1 transition-all duration-300">
               <a
                 href="https://www.linkedin.com/in/kevin-ardiansyah-529b96386/"
                 target="_blank"
@@ -136,9 +150,10 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* RIGHT: Form Card (Google Forms Style) */}
-          <div className="contact-input md:col-span-7 h-full">
-            <div className="w-full h-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm p-8 md:p-10 relative overflow-hidden transition-colors duration-300">
+          {/* RIGHT: Form Card */}
+          <div className="contact-input md:col-span-7 h-full z-10">
+            {/* GAYA CARD DIUPDATE */}
+            <div className="w-full h-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-8 md:p-10 relative overflow-hidden hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300">
               {/* Decorative Top Accent (Google Forms style) */}
               <div className="absolute top-0 left-0 right-0 h-2 bg-[#1A73E8]" />
 
@@ -188,7 +203,7 @@ export default function Contact() {
                 <div className="mt-4 flex justify-end">
                   <button
                     type="submit"
-                    className="flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-bold text-base transition-colors duration-300"
+                    className="flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-bold text-base transition-colors duration-300 shadow-sm"
                   >
                     <Send size={18} strokeWidth={2.5} />
                     Kirim Pesan

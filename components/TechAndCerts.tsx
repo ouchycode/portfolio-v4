@@ -1,7 +1,14 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Award, Cpu } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Award,
+  Cpu,
+  BadgeCheck,
+} from "lucide-react";
 
 import CertificateModal from "./CredentialsModal";
 import { useTechCertsAnimation } from "@/hooks/useAnimations";
@@ -203,6 +210,9 @@ export default function TechAndCerts() {
   const [selectedCert, setSelectedCert] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // State untuk deteksi pause
+  const [isPaused, setIsPaused] = useState(false);
+
   useTechCertsAnimation(container);
 
   useEffect(() => {
@@ -215,25 +225,52 @@ export default function TechAndCerts() {
     return () => el.removeEventListener("wheel", preventScroll);
   }, []);
 
+  // Modifikasi fungsi slide untuk fitur auto-rewind
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
     const gap = window.innerWidth > 768 ? 24 : 16;
     const cardWidth =
       window.innerWidth > 768 ? 380 + gap : window.innerWidth * 0.85 + gap;
+
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+
+    // Kalau arah ke kanan dan sudah di ujung akhir, balik lagi ke indeks 0
+    if (direction === "right" && scrollLeft + clientWidth >= scrollWidth - 10) {
+      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      return;
+    }
+
     scrollRef.current.scrollBy({
       left: direction === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
     });
   };
 
+  // Efek interval untuk auto-scroll setiap 3 detik
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (!isPaused) {
+      interval = setInterval(() => {
+        slide("right");
+      }, 3000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isPaused]);
+
   const openCert = (cert: any) => {
     setSelectedCert(cert);
     setIsModalOpen(true);
+    setIsPaused(true); // Pause ketika modal terbuka
     document.body.style.overflow = "hidden";
   };
 
   const closeCert = () => {
     setIsModalOpen(false);
+    setIsPaused(false); // Play lagi ketika modal tertutup
     document.body.style.overflow = "auto";
   };
 
@@ -253,7 +290,6 @@ export default function TechAndCerts() {
         {/* SECTION 1: TECH STACK (Google Tags Style) */}
         {/* ══════════════════════════════════════ */}
         <div className="flex flex-col gap-6 md:gap-8 px-4 md:px-0">
-          {/* Section Header */}
           <div className="flex flex-col gap-3">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
               <Cpu size={16} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
@@ -275,8 +311,8 @@ export default function TechAndCerts() {
             </div>
           </div>
 
-          {/* Tech Chips Grid */}
-          <div className="w-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm p-6 md:p-10 transition-shadow duration-300">
+          {/* GAYA CONTAINER DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
+          <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-6 md:p-10 transition-shadow duration-300">
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
               {techStack.map((tech) => (
                 <div
@@ -301,7 +337,6 @@ export default function TechAndCerts() {
         {/* SECTION 2: CREDENTIALS (Google Drive Style) */}
         {/* ══════════════════════════════════════ */}
         <div className="flex flex-col gap-6 md:gap-8">
-          {/* Section Header */}
           <div className="flex flex-col gap-3 px-6 md:px-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
               <Award size={16} className="text-[#34A853] dark:text-[#81C995]" />
@@ -321,7 +356,6 @@ export default function TechAndCerts() {
                 </p>
               </div>
 
-              {/* Scroll Controls (Hanya Desktop) */}
               <div className="hidden md:flex gap-3 shrink-0">
                 <button
                   onClick={() => slide("left")}
@@ -345,13 +379,17 @@ export default function TechAndCerts() {
             </div>
           </div>
 
-          {/* Cert Cards Carousel (Dioptimasi untuk Swipe Mobile) */}
-          <div className="relative w-full">
+          <div className="relative w-full z-20">
             <div
               ref={scrollRef}
+              // Event listener untuk Pause & Play
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setIsPaused(false)}
               className="
                 flex overflow-x-auto gap-4 md:gap-6 
-                pb-10 pt-2 px-6 md:px-0
+                pb-12 pt-6 px-6 md:px-0 
                 snap-x snap-mandatory 
                 scroll-smooth
                 touch-pan-x
@@ -364,12 +402,23 @@ export default function TechAndCerts() {
                   key={cert.id}
                   className="cert-card snap-center shrink-0 w-[85vw] md:w-[380px] flex flex-col"
                 >
+                  {/* GAYA KARTU DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
                   <div
                     onClick={() => openCert(cert)}
-                    className="group relative w-full h-full rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm cursor-pointer flex flex-col p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                    className="
+                      group relative w-full h-full flex flex-col p-5 cursor-pointer transition-all duration-300
+                      rounded-[24px] border border-white/60 dark:border-[#3C4043] 
+                      bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
+                      shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
+                      hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
+                    "
                   >
-                    {/* Top Accent (Google Drive Style) */}
-                    <div className="flex justify-between items-center mb-4">
+                    {/* --- ICON MELAYANG DI KARTU --- */}
+                    <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
+                      <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-[#34A853] dark:text-[#81C995]" />
+                    </div>
+
+                    <div className="flex justify-between items-center mb-4 pl-6 md:pl-8">
                       <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995] text-[11px] font-bold uppercase tracking-wider">
                         {cert.year}
                       </span>
@@ -378,17 +427,14 @@ export default function TechAndCerts() {
                       </span>
                     </div>
 
-                    {/* PDF Preview (Google Drive File Preview Style) */}
                     <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden mb-5 border border-[#DADCE0] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
                       <iframe
                         src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
                         className="w-full h-full pointer-events-none opacity-90 group-hover:opacity-100 transition-all duration-500 bg-white"
                       />
-                      {/* Click Capture Overlay */}
                       <div className="absolute inset-0 bg-transparent" />
                     </div>
 
-                    {/* Cert Title & Issuer */}
                     <div className="flex flex-col flex-1 px-1">
                       <h3 className="font-bold text-lg md:text-xl leading-snug text-[#202124] dark:text-[#E8EAED] group-hover:text-[#34A853] dark:group-hover:text-[#81C995] transition-colors duration-300 line-clamp-2 mb-2">
                         {cert.title}

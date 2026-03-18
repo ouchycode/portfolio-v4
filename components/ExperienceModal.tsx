@@ -7,10 +7,13 @@ import {
   Code,
   Users,
   CheckCircle2,
+  Loader2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { useLoading } from "@/context/LoadingContext"; // Pastikan path import benar
 
-// Pemetaan Warna Semantik Google (Konsisten dengan halaman Experience)
+// Pemetaan Warna Semantik Google
 const googleTheme: Record<string, { bg: string; text: string; icon: any }> = {
   Education: {
     bg: "bg-[#E8F0FE] dark:bg-[#1A73E8]/15",
@@ -35,6 +38,21 @@ const googleTheme: Record<string, { bg: string; text: string; icon: any }> = {
 };
 
 export default function ExperienceModal({ isOpen, onClose, data }: any) {
+  const { isLoading, startLoading } = useLoading();
+
+  // Efek untuk mengunci scroll dan trigger loading
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      startLoading(600);
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen, startLoading]);
+
   if (!data) return null;
 
   const theme = googleTheme[data.type] || googleTheme["Education"];
@@ -44,7 +62,7 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center px-4 py-10 md:p-6">
-          {/* ── Backdrop (Solid Dark ala Google Dialog) ─────────────────────────────────────────── */}
+          {/* ── Backdrop ─────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,12 +81,12 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
               relative z-10
               w-full max-w-3xl
               max-h-[90vh]
+              min-h-[400px]
               flex flex-col
               rounded-[24px] md:rounded-[28px]
-              border border-[#DADCE0] dark:border-[#3C4043]
-              bg-white dark:bg-[#303134]
-              shadow-[0_24px_38px_3px_rgba(0,0,0,0.14),0_9px_46px_8px_rgba(0,0,0,0.12),0_11px_15px_-7px_rgba(0,0,0,0.2)]
-              dark:shadow-[0_24px_38px_3px_rgba(0,0,0,0.4)]
+              border border-white/60 dark:border-[#3C4043]
+              bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
+              shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.75)]
               overflow-hidden
               transition-colors duration-500
             "
@@ -76,94 +94,110 @@ export default function ExperienceModal({ isOpen, onClose, data }: any) {
             {/* ── Close Button ─────────────────────────────────── */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] transition-colors duration-200"
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center justify-center w-10 h-10 rounded-full bg-white/50 dark:bg-black/20 hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] backdrop-blur-sm transition-colors duration-200"
               aria-label="Close modal"
             >
               <X size={24} className="text-[#5F6368] dark:text-[#9AA0A6]" />
             </button>
 
-            {/* ── Header Modal ───────────────────────────────────────── */}
-            <div className="relative z-10 border-b border-[#DADCE0] dark:border-[#3C4043] p-6 md:p-8 pr-16 bg-white dark:bg-[#303134] transition-colors duration-500 shrink-0">
-              {/* Type & Period Badges */}
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider ${theme.bg} ${theme.text}`}
-                >
-                  <Icon size={14} strokeWidth={2.5} />
-                  {data.type}
-                </span>
-                <span className="inline-flex items-center px-3 py-1.5 rounded-md border border-[#DADCE0] dark:border-[#5F6368] bg-[#F8F9FA] dark:bg-[#202124] text-[11px] font-bold uppercase tracking-wider text-[#5F6368] dark:text-[#9AA0A6]">
-                  {data.period}
-                </span>
-              </div>
-
-              {/* Role Title */}
-              <h2 className="font-extrabold text-2xl md:text-3xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight mb-2">
-                {data.role}
-              </h2>
-
-              {/* Company & Location */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm md:text-base font-medium">
-                <span className="text-[#1A73E8] dark:text-[#8AB4F8]">
-                  {data.company}
-                </span>
-                <span className="hidden sm:block text-[#DADCE0] dark:text-[#5F6368]">
-                  •
-                </span>
-                <span className="text-[#5F6368] dark:text-[#9AA0A6]">
-                  {data.location}
-                </span>
-              </div>
-            </div>
-
-            {/* ── Content Body ──────────────────────────────────────── */}
-            <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-8 bg-[#F8F9FA] dark:bg-[#202124] transition-colors duration-500 flex flex-col gap-8 md:gap-10">
-              {/* 1. Overview */}
-              <div className="flex flex-col gap-3">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
-                  Ringkasan
-                </h3>
-                <p className="text-base md:text-[17px] leading-relaxed text-[#3C4043] dark:text-[#E8EAED]">
-                  {data.description}
+            {/* LOGIKA LOADING */}
+            {isLoading ? (
+              <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] gap-4 bg-transparent text-center px-6">
+                <Loader2
+                  size={40}
+                  className="animate-spin text-[#1A73E8] dark:text-[#8AB4F8]"
+                />
+                <p className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6] animate-pulse">
+                  Menyusun Pengalaman...
                 </p>
               </div>
-
-              {/* 2. Key Contributions */}
-              <div className="flex flex-col gap-4">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
-                  Kontribusi & Pencapaian
-                </h3>
-                <div className="flex flex-col gap-3">
-                  {data.details.map((item: string, i: number) => (
-                    <div key={i} className="flex items-start gap-3 md:gap-4">
-                      <div className="mt-0.5 text-[#1A73E8] dark:text-[#8AB4F8] shrink-0">
-                        <CheckCircle2 size={20} strokeWidth={2} />
-                      </div>
-                      <span className="text-[15px] md:text-base text-[#3C4043] dark:text-[#E8EAED] leading-relaxed">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 3. Competencies / Tech Stack */}
-              <div className="flex flex-col gap-4 mt-2">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
-                  Keahlian & Teknologi
-                </h3>
-                <div className="flex flex-wrap gap-2 md:gap-3">
-                  {data.skills.map((skill: string) => (
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col h-full overflow-hidden"
+              >
+                {/* ── Header Modal ───────────────────────────────────────── */}
+                <div className="relative z-10 border-b border-black/5 dark:border-white/10 p-6 md:p-8 pr-16 bg-transparent transition-colors duration-500 shrink-0">
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span
-                      key={skill}
-                      className="inline-flex items-center px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] text-[13px] font-semibold text-[#5F6368] dark:text-[#E8EAED] shadow-sm hover:shadow transition-shadow cursor-default"
+                      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider ${theme.bg} ${theme.text}`}
                     >
-                      {skill}
+                      <Icon size={14} strokeWidth={2.5} />
+                      {data.type}
                     </span>
-                  ))}
+                    <span className="inline-flex items-center px-3 py-1.5 rounded-md border border-[#DADCE0] dark:border-[#5F6368] bg-white/50 dark:bg-[#202124]/50 backdrop-blur-sm text-[11px] font-bold uppercase tracking-wider text-[#5F6368] dark:text-[#9AA0A6]">
+                      {data.period}
+                    </span>
+                  </div>
+
+                  <h2 className="font-extrabold text-2xl md:text-3xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight mb-2">
+                    {data.role}
+                  </h2>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm md:text-base font-medium">
+                    <span className="text-[#1A73E8] dark:text-[#8AB4F8]">
+                      {data.company}
+                    </span>
+                    <span className="hidden sm:block text-[#DADCE0] dark:text-[#5F6368]">
+                      •
+                    </span>
+                    <span className="text-[#5F6368] dark:text-[#9AA0A6]">
+                      {data.location}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </div>
+
+                {/* ── Content Body ──────────────────────────────────────── */}
+                <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-8 bg-white/40 dark:bg-[#202124]/40 transition-colors duration-500 flex flex-col gap-8 md:gap-10">
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                      Ringkasan
+                    </h3>
+                    <p className="text-base md:text-[17px] leading-relaxed text-[#3C4043] dark:text-[#E8EAED]">
+                      {data.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                      Kontribusi & Pencapaian
+                    </h3>
+                    <div className="flex flex-col gap-3">
+                      {data.details.map((item: string, i: number) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 md:gap-4"
+                        >
+                          <div className="mt-0.5 text-[#1A73E8] dark:text-[#8AB4F8] shrink-0">
+                            <CheckCircle2 size={20} strokeWidth={2} />
+                          </div>
+                          <span className="text-[15px] md:text-base text-[#3C4043] dark:text-[#E8EAED] leading-relaxed">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-4 mt-2">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                      Keahlian & Teknologi
+                    </h3>
+                    <div className="flex flex-wrap gap-2 md:gap-3">
+                      {data.skills.map((skill: string) => (
+                        <span
+                          key={skill}
+                          className="inline-flex items-center px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white/80 dark:bg-[#303134]/80 backdrop-blur-sm text-[13px] font-semibold text-[#5F6368] dark:text-[#E8EAED] shadow-sm hover:shadow transition-shadow cursor-default"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       )}

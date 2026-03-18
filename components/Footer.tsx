@@ -48,8 +48,9 @@ export default function Footer() {
       "
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-10 md:gap-16">
-        {/* ── CTA Banner (Google Upgrade Storage Style) ──────────────────────────────────────── */}
-        <div className="footer-item w-full rounded-[28px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 transition-all duration-300">
+        {/* ── CTA Banner ──────────────────────────────────────── */}
+        {/* GAYA CARD DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
+        <div className="footer-item w-full rounded-[28px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300">
           <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995] text-xs font-bold uppercase tracking-wider mb-2">
               <div className="relative flex h-2 w-2">
@@ -82,7 +83,7 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* ── Classic Minimal Google Footer ────────────────────────────────────────── */}
+        {/* ── Classic Minimal Footer ────────────────────────────────────────── */}
         <div className="flex flex-col gap-6 md:gap-8 pt-8 border-t border-[#DADCE0] dark:border-[#3C4043]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Left: Branding & Status */}
@@ -100,7 +101,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Right: Social Links (Google Account Tabs Style) */}
+            {/* Right: Social Links */}
             <div className="flex flex-wrap items-center justify-center gap-3">
               {socials.map((social) => {
                 const Icon = social.icon;

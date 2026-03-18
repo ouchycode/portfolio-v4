@@ -8,14 +8,15 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Base configuration for Material Design 3 Motion
-// Cepat, tegas, dan jarak travel yang tidak terlalu jauh (40px saja)
-const materialReveal = {
-  y: 40,
+// Base configuration untuk tema Premium Glassmorphism
+// Lebih smooth, ada efek kedalaman (scale), dan melayang.
+const premiumReveal = {
+  y: 50,
   opacity: 0,
-  duration: 0.8, // Dipercepat dari 1.2s agar terasa responsif seperti aplikasi Google
-  ease: "power3.out", // Deceleration yang sangat halus khas Material Design
-  clearProps: "all", // INI PENTING: Bersihin inline style biar hover Tailwind jalan lagi!
+  scale: 0.95, // Tambahan efek kedalaman
+  duration: 1.2, // Sedikit diperpanjang agar terasa elegan
+  ease: "power4.out", // Deceleration yang sangat halus dan "melayang"
+  clearProps: "all", // INI PENTING: Bersihin inline style biar hover Tailwind (transform/shadow) jalan lagi!
 };
 
 /* ================= HERO ================= */
@@ -23,8 +24,8 @@ export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
-        ...materialReveal,
-        stagger: 0.1, // Muncul bergantian dengan sangat mulus
+        ...premiumReveal,
+        stagger: 0.15, // Muncul bergantian dengan sangat mulus
       });
     },
     { scope: containerRef },
@@ -42,8 +43,8 @@ export const useAboutAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...materialReveal,
-          delay: i * 0.05, // Stagger manual yang cepat
+          ...premiumReveal,
+          delay: i * 0.1, // Stagger manual yang halus
         });
       });
     },
@@ -62,8 +63,8 @@ export const useExperienceAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...materialReveal,
-          delay: i * 0.05,
+          ...premiumReveal,
+          delay: i * 0.1,
         });
       });
     },
@@ -75,15 +76,17 @@ export const useExperienceAnimation = (containerRef: any) => {
 export const useProjectsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      gsap.utils.toArray(".project-card").forEach((card: any, i) => {
+      // Menggunakan .snap-center agar otomatis menargetkan kartu di dalam carousel
+      gsap.utils.toArray(".snap-center").forEach((card: any, i) => {
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
             once: true,
           },
-          ...materialReveal,
-          delay: i * 0.05,
+          ...premiumReveal,
+          y: 40, // Y agak dikurangi khusus untuk carousel
+          delay: i * 0.1,
         });
       });
     },
@@ -95,8 +98,7 @@ export const useProjectsAnimation = (containerRef: any) => {
 export const useTechCertsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      // Material Design "Chip" Pop-in Effect
-      // Tidak pakai efek memantul berlebihan, melainkan scale-up bersih
+      // Premium "Chip" Pop-in Effect (Untuk Tech Stack)
       gsap.utils.toArray(".tech-tag").forEach((tag: any, i) => {
         gsap.from(tag, {
           scrollTrigger: {
@@ -104,12 +106,12 @@ export const useTechCertsAnimation = (containerRef: any) => {
             start: "top 95%",
             once: true,
           },
-          y: 15,
+          y: 20,
           opacity: 0,
-          scale: 0.9,
-          duration: 0.5,
-          ease: "power2.out",
-          delay: i * 0.02, // Ekstra cepat agar pengguna tidak menunggu
+          scale: 0.85,
+          duration: 0.7,
+          ease: "back.out(1.5)", // Efek sedikit memantul elegan untuk badge kecil
+          delay: i * 0.03, // Ekstra cepat agar pengguna tidak menunggu
           clearProps: "all",
         });
       });
@@ -122,8 +124,8 @@ export const useTechCertsAnimation = (containerRef: any) => {
             start: "top 85%",
             once: true,
           },
-          ...materialReveal,
-          delay: i * 0.05,
+          ...premiumReveal,
+          delay: i * 0.1,
         });
       });
     },
@@ -142,8 +144,8 @@ export const useContactAnimation = (containerRef: any) => {
             start: "top 90%",
             once: true,
           },
-          ...materialReveal,
-          delay: i * 0.05,
+          ...premiumReveal,
+          delay: i * 0.1,
         });
       });
     },
@@ -162,8 +164,8 @@ export const useFooterAnimation = (containerRef: any) => {
             start: "top 95%",
             once: true,
           },
-          ...materialReveal,
-          delay: i * 0.05,
+          ...premiumReveal,
+          delay: i * 0.1,
         });
       });
     },

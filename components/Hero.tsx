@@ -1,7 +1,15 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowUpRight, MapPin, Sparkles, Code2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  MapPin,
+  Sparkles,
+  Code2,
+  Laptop,
+  Zap,
+  Palette,
+} from "lucide-react";
 import { useHeroAnimation } from "@/hooks/useAnimations";
 import CVModal from "./CVModal";
 
@@ -24,8 +32,10 @@ export default function Hero() {
           overflow-hidden
         "
       >
-        <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 mt-10 md:mt-0">
+        <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-10 md:mt-0">
+          {/* ══════════════════════════════════════ */}
           {/* KIRI: Teks Utama */}
+          {/* ══════════════════════════════════════ */}
           <div className="flex-1 flex flex-col items-start w-full reveal-card">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
               <Sparkles
@@ -59,7 +69,7 @@ export default function Hero() {
               </a>
               <button
                 onClick={() => setIsCVModalOpen(true)}
-                className="flex items-center justify-center gap-2 h-14 px-8 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] text-[#1A73E8] dark:text-[#8AB4F8] font-bold tracking-wide transition-colors"
+                className="flex items-center justify-center gap-2 h-14 px-8 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] text-[#1A73E8] dark:text-[#8AB4F8] font-bold tracking-wide transition-colors shadow-sm"
               >
                 View Resume
                 <ArrowUpRight size={20} strokeWidth={2.5} />
@@ -67,9 +77,28 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* KANAN: Kartu Status (Google Material Cards) */}
-          <div className="w-full md:w-[320px] flex flex-col gap-4 shrink-0 reveal-card">
-            <div className="flex items-center gap-4 p-5 rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
+          {/* ══════════════════════════════════════ */}
+          {/* KANAN: Kartu Status (Dengan Shadow Kuat & Icon Statis) */}
+          {/* ══════════════════════════════════════ */}
+          <div className="relative w-full md:w-[340px] flex flex-col gap-5 shrink-0 reveal-card mt-12 md:mt-0 pt-4 md:pt-0">
+            {/* --- ICON MELAYANG STATIS --- */}
+            {/* Icon 1: Laptop (Top Left) */}
+            <div className="absolute -top-6 -left-2 md:-top-8 md:-left-10 z-20 p-2.5 md:p-3.5 bg-white dark:bg-[#303134] rounded-xl md:rounded-2xl shadow-[0_15px_30px_rgba(26,115,232,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-12">
+              <Laptop className="w-5 h-5 md:w-7 md:h-7 text-[#1A73E8] dark:text-[#8AB4F8]" />
+            </div>
+
+            {/* Icon 2: Zap (Bottom Right) */}
+            <div className="absolute -bottom-4 -right-1 md:-bottom-6 md:-right-8 z-20 p-3 md:p-4 bg-white dark:bg-[#303134] rounded-full shadow-[0_15px_30px_rgba(250,187,5,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm rotate-12">
+              <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#FABB05] fill-[#FABB05]/20" />
+            </div>
+
+            {/* Icon 3: Palette (Middle Right) */}
+            <div className="absolute top-[35%] -right-3 md:-right-12 z-0 p-2 md:p-3 bg-white dark:bg-[#303134] rounded-lg md:rounded-xl shadow-[0_15px_30px_rgba(234,67,53,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm rotate-12">
+              <Palette className="w-5 h-5 md:w-6 md:h-6 text-[#EA4335] dark:text-[#F28B82]" />
+            </div>
+
+            {/* --- KARTU --- */}
+            <div className="relative z-10 flex items-center gap-4 p-5 md:p-6 rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300">
               <div className="w-12 h-12 flex shrink-0 items-center justify-center rounded-full bg-[#FCE8E6] dark:bg-[#F28B82]/15 text-[#EA4335] dark:text-[#F28B82]">
                 <MapPin size={24} />
               </div>
@@ -83,7 +112,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-5 rounded-[24px] border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
+            <div className="relative z-10 flex items-center gap-4 p-5 md:p-6 rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300">
               <div className="w-12 h-12 flex shrink-0 items-center justify-center rounded-full bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#34A853] dark:text-[#81C995]">
                 <div className="relative flex h-3 w-3">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-75" />
