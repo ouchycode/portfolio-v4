@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
   User,
@@ -11,6 +11,9 @@ import {
   MessageSquare,
   Sun,
   Moon,
+  Menu,
+  X,
+  ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -26,9 +29,12 @@ const navLinks = [
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("#");
 
   useEffect(() => setMounted(true), []);
+
+  const closeMenu = () => setIsOpen(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,121 +48,160 @@ export default function Navbar() {
         if (!section) return;
         if (scrollY >= section.offsetTop - offset) current = link.href;
       });
-
       setActive(current);
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (!mounted) return null;
 
+  // Mencari label section yang sedang aktif untuk ditampilkan di pill
+  const activeLabel =
+    navLinks.find((link) => link.href === active)?.label || "Menu";
+
   return (
-    <nav className="fixed top-5 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none">
+    <nav className="fixed top-5 left-0 right-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
+      {/* ── Smart Pill Trigger ── */}
       <motion.div
-        initial={{ y: -50, opacity: 0 }}
+        initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="
-          pointer-events-auto
-          flex items-center gap-1
-          p-1.5 md:p-2
-          rounded-full
-          border border-[#DADCE0] dark:border-[#3C4043]
-          bg-white/90 dark:bg-[#303134]/90
-          backdrop-blur-md
-          shadow-[0_2px_5px_0_rgba(60,64,67,0.1),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:shadow-[0_2px_5px_0_rgba(0,0,0,0.5)]
-          transition-colors duration-500
-        "
+        className="pointer-events-auto flex items-center gap-2"
       >
-        {navLinks.map((link, i) => {
-          const Icon = link.icon;
-          const isActive = active === link.href;
-
-          return (
-            <a
-              key={i}
-              href={link.href}
-              onClick={() => setActive(link.href)}
-              className="group relative flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-full outline-none transition-transform active:scale-95"
-              aria-label={link.label}
-            >
-              {/* Active pill background (Google Blue Light) */}
-              {isActive && (
-                <motion.div
-                  layoutId="active-nav-pill"
-                  className="absolute inset-0 rounded-full bg-[#E8F0FE] dark:bg-[#1A73E8]/20"
-                  transition={{ type: "spring", stiffness: 400, damping: 35 }}
-                />
-              )}
-
-              {/* Hover background (non-active) */}
-              {!isActive && (
-                <span className="absolute inset-0 rounded-full bg-transparent group-hover:bg-[#F1F3F4] dark:group-hover:bg-[#3C4043] transition-colors duration-200" />
-              )}
-
-              {/* Icon */}
-              <motion.div
-                className={`relative z-10 transition-colors duration-200 ${
-                  isActive
-                    ? "text-[#1A73E8] dark:text-[#8AB4F8]"
-                    : "text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#202124] dark:group-hover:text-[#E8EAED]"
-                }`}
-              >
-                <Icon
-                  size={isActive ? 20 : 18}
-                  strokeWidth={isActive ? 2.5 : 2}
-                />
-              </motion.div>
-
-              {/* Material Design Tooltip */}
-              <div className="absolute top-full mt-2.5 px-2.5 py-1.5 rounded-md bg-[#202124] dark:bg-[#E8EAED] text-white dark:text-[#202124] text-[11px] font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 pointer-events-none transition-all duration-200 hidden md:block whitespace-nowrap z-50">
-                {link.label}
-              </div>
-            </a>
-          );
-        })}
-
-        {/* Separator */}
-        <div className="w-px h-6 bg-[#DADCE0] dark:bg-[#5F6368] mx-1 md:mx-2" />
-
-        {/* Theme Toggle */}
         <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="group relative flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-full outline-none transition-transform active:scale-95"
-          aria-label="Toggle Theme"
+          onClick={() => setIsOpen(!isOpen)}
+          className="
+            flex items-center gap-3 px-4 h-12 
+            rounded-full bg-white dark:bg-[#303134] 
+            border border-[#DADCE0] dark:border-[#3C4043]
+            text-[#202124] dark:text-[#E8EAED]
+            shadow-[0_2px_5px_0_rgba(60,64,67,0.1)] 
+            hover:border-[#1A73E8] dark:hover:border-[#8AB4F8]
+            transition-all duration-300 backdrop-blur-md
+          "
         >
-          {/* Hover bg */}
-          <span className="absolute inset-0 rounded-full bg-transparent group-hover:bg-[#F1F3F4] dark:group-hover:bg-[#3C4043] transition-colors duration-200" />
+          <div className="flex items-center justify-center w-6 h-6">
+            {isOpen ? (
+              <X size={20} className="text-[#EA4335]" />
+            ) : (
+              <Menu size={20} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
+            )}
+          </div>
+
+          <div className="w-px h-4 bg-[#DADCE0] dark:bg-[#5F6368]" />
+
+          <span className="text-sm font-bold tracking-tight min-w-[60px] text-left">
+            {isOpen ? "Close" : activeLabel}
+          </span>
 
           <motion.div
-            animate={{ rotate: theme === "dark" ? 0 : 180 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="relative z-10"
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            className="text-[#5F6368] dark:text-[#9AA0A6]"
           >
-            {theme === "dark" ? (
-              <Sun
-                size={18}
-                strokeWidth={2}
-                className="text-[#9AA0A6] group-hover:text-[#FBBC05] transition-colors duration-200"
-              />
-            ) : (
-              <Moon
-                size={18}
-                strokeWidth={2}
-                className="text-[#5F6368] group-hover:text-[#1A73E8] transition-colors duration-200"
-              />
-            )}
+            <ChevronDown size={16} />
           </motion.div>
+        </button>
 
-          {/* Tooltip */}
-          <div className="absolute top-full mt-2.5 px-2.5 py-1.5 rounded-md bg-[#202124] dark:bg-[#E8EAED] text-white dark:text-[#202124] text-[11px] font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 pointer-events-none transition-all duration-200 hidden md:block whitespace-nowrap z-50">
-            {theme === "dark" ? "Tema Terang" : "Tema Gelap"}
-          </div>
+        {/* Floating Theme Toggle */}
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="
+            flex items-center justify-center w-12 h-12 
+            rounded-full bg-white dark:bg-[#303134] 
+            border border-[#DADCE0] dark:border-[#3C4043]
+            text-[#5F6368] dark:text-[#9AA0A6]
+            backdrop-blur-md shadow-sm active:scale-90 transition-all
+          "
+        >
+          {theme === "dark" ? (
+            <Sun size={20} className="text-[#FBBC05]" />
+          ) : (
+            <Moon size={20} className="text-[#1A73E8]" />
+          )}
         </button>
       </motion.div>
+
+      {/* ── Expanded Menu ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop click-away */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeMenu}
+              className="fixed inset-0 bg-black/10 dark:bg-black/40 pointer-events-auto backdrop-blur-[2px]"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="
+                pointer-events-auto
+                mt-3 p-2 w-full max-w-[260px]
+                rounded-[28px] border border-[#DADCE0] dark:border-[#3C4043]
+                bg-white/95 dark:bg-[#303134]/95
+                backdrop-blur-xl shadow-2xl
+              "
+            >
+              <div className="flex flex-col gap-1">
+                <div className="px-4 py-2 mb-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5F6368] dark:text-[#9AA0A6]">
+                    Navigation
+                  </p>
+                </div>
+
+                {navLinks.map((link, i) => {
+                  const Icon = link.icon;
+                  const isActive = active === link.href;
+
+                  return (
+                    <a
+                      key={i}
+                      href={link.href}
+                      onClick={() => {
+                        setActive(link.href);
+                        closeMenu();
+                      }}
+                      className={`
+                        relative flex items-center gap-4 px-4 py-3 rounded-2xl
+                        transition-all duration-200 group
+                        ${
+                          isActive
+                            ? "bg-[#E8F0FE] dark:bg-[#1A73E8]/20 text-[#1A73E8] dark:text-[#8AB4F8]"
+                            : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043]"
+                        }
+                      `}
+                    >
+                      <div
+                        className={`
+                        flex items-center justify-center w-8 h-8 rounded-full transition-colors
+                        ${isActive ? "bg-white dark:bg-[#1A73E8]/30 shadow-sm" : "bg-transparent"}
+                      `}
+                      >
+                        <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+                      </div>
+                      <span className="text-sm font-bold tracking-tight">
+                        {link.label}
+                      </span>
+                      {isActive && (
+                        <motion.div
+                          layoutId="active-indicator"
+                          className="absolute right-4 w-1.5 h-1.5 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8]"
+                        />
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
