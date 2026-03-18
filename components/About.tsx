@@ -6,7 +6,6 @@ import { useAboutAnimation } from "@/hooks/useAnimations";
 import { MapPin, GraduationCap } from "lucide-react";
 
 export default function About() {
-  // Ditambahkan type HTMLElement agar konsisten dengan Hero dan aman di TS
   const container = useRef<HTMLElement>(null);
 
   useAboutAnimation(container);
@@ -16,78 +15,116 @@ export default function About() {
       id="about"
       ref={container}
       className="
-      relative overflow-hidden
-      px-4 py-24 md:px-8 md:py-32
-      bg-[#fafafa] text-zinc-900
-      dark:bg-[#0a0a0a] dark:text-zinc-50
-      transition-colors duration-500
-      z-10
+        relative overflow-hidden
+        px-4 py-24 md:px-10 md:py-32
+        bg-[#f5f3ef] text-zinc-900
+        dark:bg-[#0c0c0e] dark:text-zinc-50
+        transition-colors duration-500
+        z-10
       "
     >
-      {/* ============================================================ */}
-      {/* BACKGROUND ABOUT - Pixel Dot Pattern */}
-      {/* ============================================================ */}
-      {/* Dibiarkan opacity 70 agar tidak terlalu ramai tapi tetap crisp */}
-      <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_2px,transparent_2px)] dark:bg-[radial-gradient(#3f3f46_2px,transparent_2px)] [background-size:24px_24px] opacity-70 pointer-events-none transition-colors duration-500 z-0"></div>
+      {/* ── Grain Texture ──────────────────────────────────────── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.035] dark:opacity-[0.06]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px",
+        }}
+      />
 
-      {/* <REMOVE> Gradient Overlay dihapus agar tidak membuat pixel pattern blur. Kita ingin raw/crisp aesthetic. </REMOVE> */}
+      {/* ── Radial gradient accents ────────────────────────────── */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-violet-300/15 dark:bg-violet-700/8 blur-[120px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-blue-200/20 dark:bg-blue-700/8 blur-[100px]" />
+      </div>
 
-      {/* ============================================================ */}
-      {/* BENTO GRID CONTAINER */}
-      {/* ============================================================ */}
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-auto">
-        {/* BENTO 1: IMAGE (Foto Profil) */}
+      {/* ── Section label ──────────────────────────────────────── */}
+      <div className="relative z-10 max-w-7xl mx-auto mb-10 md:mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200/80 dark:border-zinc-700/60 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-md shadow-sm">
+          <span className="text-[10px] font-mono font-semibold uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-500">
+            01 /
+          </span>
+          <span className="text-[10px] font-mono font-semibold uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-300">
+            About Me
+          </span>
+        </div>
+      </div>
+
+      {/* ── Bento Grid ─────────────────────────────────────────── */}
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 auto-rows-auto">
+        {/* BENTO 1: PROFILE IMAGE */}
         <div className="about-animate md:col-span-5 md:row-span-3 h-full">
-          {/* Shadow dipertebal sikit, hover shadow pakai warna red biar pop */}
-          <div className="relative w-full aspect-[4/5] md:aspect-auto md:h-full bg-white dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md overflow-hidden shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] group transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(239,68,68,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(248,113,113,1)]">
+          <div className="group relative w-full aspect-[4/5] md:aspect-auto md:h-full rounded-2xl overflow-hidden border border-zinc-200/80 dark:border-zinc-800/80 shadow-[0_4px_40px_0px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_40px_0px_rgba(0,0,0,0.4)] transition-all duration-500 hover:shadow-[0_8px_60px_0px_rgba(109,40,217,0.12)] dark:hover:shadow-[0_8px_60px_0px_rgba(109,40,217,0.18)] hover:-translate-y-1">
             <Image
-              src="/profile_kevin_hd.png" // Pastikan gambar ada di /public
+              src="/profile_kevin_hd.png"
               alt="Kevin Ardiansyah"
               fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out"
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out"
               priority
             />
-            {/* Overlay bayangan ala retro diperhalus */}
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-100 transition-opacity duration-500"></div>
+            {/* Bottom gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/70 via-zinc-900/10 to-transparent" />
+
+            {/* Name tag at bottom */}
+            <div className="absolute bottom-5 left-5 right-5 z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[10px] font-mono font-semibold uppercase tracking-[0.2em] text-white/90">
+                  Kevin Ardiansyah
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* BENTO 2: HEADER (Fokus Utama) */}
+        {/* BENTO 2: HEADER */}
         <div className="about-animate md:col-span-7 h-full">
-          <div className="w-full h-full bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 flex flex-col justify-center shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] transition-all duration-300">
-            <h2 className="font-pixel text-[12vw] md:text-[5vw] lg:text-[4.5vw] font-black uppercase leading-none tracking-tighter mb-6 text-zinc-900 dark:text-white transition-colors duration-500 drop-shadow-[2px_2px_0_#d4d4d8] dark:drop-shadow-[2px_2px_0_#3f3f46]">
+          <div className="w-full h-full rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-7 md:p-10 flex flex-col justify-center gap-5 transition-colors duration-500">
+            <h2
+              className="font-extrabold uppercase leading-[0.88] tracking-[-0.04em] text-[14vw] md:text-[6vw] lg:text-[5.5vw] text-zinc-900 dark:text-white"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
               ABOUT
             </h2>
+
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="font-pixel text-[10px] md:text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-bold">
-                [ PERSONA ]
+              <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+                [ Persona ]
               </span>
-              {/* Badge persona teksnya diperbesar sedikit (text-xs) biar jelas */}
-              <span className="font-pixel bg-violet-200 dark:bg-violet-900/50 border-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 px-3 py-2 rounded-sm text-xs uppercase font-bold tracking-widest shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] dark:shadow-[2px_2px_0px_0px_rgba(228,228,231,1)]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-violet-200 dark:border-violet-700/50 bg-violet-50 dark:bg-violet-950/40 text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-violet-700 dark:text-violet-300 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
                 Frontend Engineer
               </span>
             </div>
           </div>
         </div>
 
-        {/* BENTO 3: DESCRIPTION (Teks Standar + Highlight Pixel) */}
+        {/* BENTO 3: DESCRIPTION */}
         <div className="about-animate md:col-span-7 h-full">
-          <div className="w-full h-full bg-[#fafafa] dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-10 flex flex-col gap-6 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] transition-all duration-300">
-            {/*font-sans danti font-mono (atau serif) biar raw tapi tetap enak dibaca */}
-            <p className="font-mono text-lg md:text-2xl font-bold uppercase leading-relaxed text-zinc-800 dark:text-zinc-200 tracking-tight transition-colors duration-500">
-              Saya {/* Highlight Kevin dipertebal sedikit px-nya */}
-              <span className="font-pixel text-[14px] md:text-[18px] bg-yellow-300 dark:bg-yellow-600 border-2 border-zinc-900 dark:border-zinc-100 px-3 py-1.5 mx-1 rounded-sm shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] dark:shadow-[3px_3px_0px_0px_rgba(228,228,231,1)] text-zinc-900 dark:text-white inline-block -translate-y-1">
-                Kevin
+          <div className="w-full h-full rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-7 md:p-10 flex flex-col gap-6 transition-colors duration-500">
+            <p
+              className="text-xl md:text-2xl font-bold leading-snug tracking-tight text-zinc-800 dark:text-zinc-200"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Saya{" "}
+              <span className="relative inline-block px-2 py-0.5 mx-0.5 -translate-y-0.5">
+                <span className="absolute inset-0 rounded-lg bg-amber-300/70 dark:bg-amber-500/30 -rotate-1" />
+                <span className="relative font-extrabold text-zinc-900 dark:text-amber-200">
+                  Kevin
+                </span>
               </span>
               , mahasiswa Universitas Yatsi Madani yang fokus membangun
               antarmuka web yang fungsional dan estetik.
             </p>
-            {/* Deskripsi sekunder teksnya font-semibold agar lebih kuat */}
-            <p className="text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed font-semibold transition-colors duration-500">
+
+            <div className="w-12 h-px bg-gradient-to-r from-zinc-300 dark:from-zinc-600 to-transparent" />
+
+            <p className="text-sm md:text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
               Berbasis di Tangerang, saya fokus pada pengembangan{" "}
-              <span className="font-pixel text-[10px] md:text-xs text-indigo-900 dark:text-indigo-100 bg-indigo-200 dark:bg-indigo-900 border-2 border-zinc-900 dark:border-zinc-100 px-2.5 py-1.5 rounded-sm shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] inline-block mx-1 mt-1 mb-1 uppercase tracking-widest">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 mx-0.5 rounded-lg border border-indigo-200 dark:border-indigo-700/50 bg-indigo-50 dark:bg-indigo-950/40 text-[10px] font-mono font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-300 shadow-sm -translate-y-0.5 inline-block">
                 Frontend Ecosystem
-              </span>
+              </span>{" "}
               . Selain ngoding, saya juga mengeksplorasi desain grafis dan
               branding, serta memiliki ketertarikan pada fotografi dan dunia
               e-sports.
@@ -95,38 +132,56 @@ export default function About() {
           </div>
         </div>
 
-        {/* BENTO 4: LOCATION (Tema Merah Retro) */}
+        {/* BENTO 4: LOCATION */}
         <div className="about-animate md:col-span-3 h-full">
-          {/* Hover shadow pakai warna red biar pop */}
-          <div className="w-full h-full group bg-red-100 dark:bg-red-950/40 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col justify-center gap-4 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(239,68,68,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(248,113,113,1)] transition-all duration-300">
-            <div className="bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 w-fit p-3.5 rounded-sm text-red-600 dark:text-red-400 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] dark:shadow-[2px_2px_0px_0px_rgba(228,228,231,1)]">
-              <MapPin size={24} strokeWidth={2.5} />
-            </div>
-            <div className="mt-2">
-              <span className="font-pixel text-[8px] md:text-[10px] uppercase text-zinc-600 dark:text-zinc-400 block mb-2 font-bold tracking-widest">
-                Location
-              </span>
-              <span className="font-pixel font-bold text-xs md:text-sm uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
-                Tangerang, ID
-              </span>
+          <div className="group w-full h-full rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-red-300/60 dark:hover:border-red-800/40 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_0px_rgba(239,68,68,0.10)]">
+            <div className="w-8 h-0.5 rounded-full bg-gradient-to-r from-red-400 to-pink-400 mb-4" />
+
+            <div className="flex-1 flex flex-col justify-end gap-4">
+              <div className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 shadow-sm group-hover:bg-red-500 transition-colors duration-300">
+                <MapPin
+                  size={20}
+                  className="text-red-500 dark:text-red-400 group-hover:text-white transition-colors duration-300"
+                />
+              </div>
+              <div>
+                <p className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 mb-1">
+                  Location
+                </p>
+                <p
+                  className="font-bold text-sm md:text-base text-zinc-800 dark:text-zinc-100 tracking-wide"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  Tangerang, ID
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* BENTO 5: EDUCATION (Tema Biru Retro) */}
+        {/* BENTO 5: EDUCATION */}
         <div className="about-animate md:col-span-4 h-full">
-          {/* Hover shadow pakai warna blue biar pop */}
-          <div className="w-full h-full group bg-blue-100 dark:bg-blue-950/40 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col justify-center gap-4 shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(96,165,250,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(129,140,248,1)] transition-all duration-300">
-            <div className="bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 w-fit p-3.5 rounded-sm text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] dark:shadow-[2px_2px_0px_0px_rgba(228,228,231,1)]">
-              <GraduationCap size={24} strokeWidth={2.5} />
-            </div>
-            <div className="mt-2">
-              <span className="font-pixel text-[8px] md:text-[10px] uppercase text-zinc-600 dark:text-zinc-400 block mb-2 font-bold tracking-widest">
-                Education
-              </span>
-              <span className="font-pixel font-bold text-xs md:text-sm uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
-                Univ. Yatsi Madani
-              </span>
+          <div className="group w-full h-full rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-gradient-to-br from-blue-50/60 to-indigo-50/40 dark:from-blue-950/20 dark:to-indigo-950/10 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-blue-300/60 dark:hover:border-blue-700/40 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_0px_rgba(96,165,250,0.10)]">
+            <div className="w-8 h-0.5 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 mb-4" />
+
+            <div className="flex-1 flex flex-col justify-end gap-4">
+              <div className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/50 shadow-sm group-hover:bg-blue-500 transition-colors duration-300">
+                <GraduationCap
+                  size={20}
+                  className="text-blue-500 dark:text-blue-400 group-hover:text-white transition-colors duration-300"
+                />
+              </div>
+              <div>
+                <p className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 mb-1">
+                  Education
+                </p>
+                <p
+                  className="font-bold text-sm md:text-base text-zinc-800 dark:text-zinc-100 tracking-wide"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  Univ. Yatsi Madani
+                </p>
+              </div>
             </div>
           </div>
         </div>

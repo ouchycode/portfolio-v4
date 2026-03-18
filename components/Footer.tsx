@@ -43,57 +43,84 @@ export default function Footer() {
     <footer
       ref={container}
       className="
-      relative overflow-hidden
-      px-4 py-8 md:px-8 md:pb-16
-      bg-[#fafafa] text-zinc-900
-      dark:bg-[#0a0a0a] dark:text-zinc-50
-      transition-colors duration-500
+        relative overflow-hidden
+        px-4 py-8 md:px-10 md:pb-16
+        bg-[#f5f3ef] text-zinc-900
+        dark:bg-[#0c0c0e] dark:text-zinc-50
+        transition-colors duration-500
       "
     >
-      {/* ============================================================ */}
-      {/* BACKGROUND FOOTER - Pixel Dot Pattern */}
-      {/* ============================================================ */}
-      {/* Gradient fade dihapus agar pattern pixel tajam sampai bawah */}
-      <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_2px,transparent_2px)] dark:bg-[radial-gradient(#3f3f46_2px,transparent_2px)] [background-size:24px_24px] opacity-70 pointer-events-none transition-colors duration-500"></div>
+      {/* ── Grain Texture ──────────────────────────────────────── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.035] dark:opacity-[0.06]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px",
+        }}
+      />
 
-      {/* ============================================================ */}
-      {/* CONTENT CONTAINER */}
-      {/* ============================================================ */}
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-6">
-        {/* BIG CTA BENTO (Indigo Theme - Grand Finale) */}
-        <div className="footer-item h-full">
-          {/* Shadow diseragamkan ke 5px */}
-          <div className="w-full relative overflow-hidden bg-indigo-500 dark:bg-indigo-600 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-8 md:p-16 flex flex-col items-center justify-center text-center shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] group transition-colors duration-500">
-            {/* WATERMARK */}
+      {/* ── Radial gradient accents ────────────────────────────── */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-indigo-300/15 dark:bg-indigo-700/10 blur-[130px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full bg-violet-300/10 dark:bg-violet-700/6 blur-[100px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-4 md:gap-5">
+        {/* ── BIG CTA BENTO ──────────────────────────────────────── */}
+        <div className="footer-item">
+          <div className="group w-full relative overflow-hidden rounded-2xl border border-indigo-300/60 dark:border-indigo-700/40 bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 p-10 md:p-20 flex flex-col items-center justify-center text-center shadow-[0_8px_60px_0px_rgba(99,102,241,0.30)] dark:shadow-[0_8px_60px_0px_rgba(99,102,241,0.20)] transition-all duration-500 hover:shadow-[0_16px_80px_0px_rgba(99,102,241,0.40)]">
+            {/* Shine sweep on hover */}
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12 pointer-events-none" />
+
+            {/* Watermark */}
             <Send
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96 text-zinc-900/[0.05] dark:text-white/[0.05] -rotate-12 pointer-events-none z-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-700"
-              strokeWidth={2}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 text-white/[0.05] -rotate-12 pointer-events-none z-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-700"
+              strokeWidth={1.5}
             />
 
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="font-pixel text-[8px] md:text-[10px] bg-white dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 px-4 py-2 rounded-sm uppercase font-bold tracking-widest text-zinc-900 dark:text-zinc-100 mb-6 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] transition-colors duration-500">
-                [ OPEN FOR OPPORTUNITIES ]
+            <div className="relative z-10 flex flex-col items-center gap-6 md:gap-8">
+              {/* Opportunity badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm shadow-sm">
+                <div className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-400" />
+                </div>
+                <span className="text-[10px] font-mono font-semibold uppercase tracking-[0.2em] text-white/80">
+                  Open for Opportunities
+                </span>
               </div>
 
-              <h2 className="font-pixel text-[14vw] sm:text-[10vw] md:text-[8vw] font-black uppercase leading-none tracking-tighter mb-8 text-zinc-900 dark:text-white drop-shadow-[3px_3px_0_#a5b4fc] dark:drop-shadow-[3px_3px_0_#312e81] transition-colors duration-500">
-                LET'S <br className="md:hidden" /> CONNECT
+              {/* Headline */}
+              <h2
+                className="font-extrabold uppercase leading-[0.88] tracking-[-0.04em] text-[15vw] sm:text-[11vw] md:text-[9vw] text-white"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
+                LET'S
+                <br className="md:hidden" /> CONNECT
               </h2>
 
+              {/* CTA button */}
               <a
                 href="mailto:kevinnardiansyahh19@gmail.com"
-                className="group/btn flex items-center gap-3 bg-yellow-300 dark:bg-yellow-500 border-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 px-6 md:px-8 py-3 md:py-4 rounded-sm font-pixel text-[10px] md:text-sm uppercase tracking-widest transition-all duration-200 hover:bg-yellow-400 dark:hover:bg-yellow-400 shadow-[4px_4px_0_0_#18181b] dark:shadow-[4px_4px_0_0_#e4e4e7] active:translate-y-1 active:translate-x-1 active:shadow-none"
+                className="group/btn relative overflow-hidden flex items-center gap-3 px-7 md:px-8 py-3.5 md:py-4 rounded-2xl border border-white/20 bg-white/15 backdrop-blur-sm hover:bg-white transition-all duration-300 shadow-[0_4px_20px_0px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_0px_rgba(0,0,0,0.2)] active:scale-95"
               >
                 <Mail
-                  size={20}
-                  strokeWidth={2.5}
-                  className="transition-colors hidden sm:block"
+                  size={18}
+                  strokeWidth={2}
+                  className="text-white group-hover/btn:text-indigo-700 transition-colors duration-300 hidden sm:block"
                 />
-                SEND EMAIL
-                <div className="bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 text-white p-1 md:p-1.5 rounded-sm transition-colors duration-300">
+                <span
+                  className="font-semibold text-sm md:text-base tracking-wide text-white group-hover/btn:text-indigo-700 transition-colors duration-300"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  Send Email
+                </span>
+                <div className="w-7 h-7 flex items-center justify-center rounded-xl bg-white/20 group-hover/btn:bg-indigo-100 transition-colors duration-300">
                   <ArrowUpRight
-                    size={16}
-                    strokeWidth={3}
-                    className="group-hover/btn:rotate-45 transition-transform duration-300 md:w-5 md:h-5"
+                    size={15}
+                    strokeWidth={2.5}
+                    className="text-white group-hover/btn:text-indigo-700 group-hover/btn:rotate-45 transition-all duration-300"
                   />
                 </div>
               </a>
@@ -101,57 +128,79 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 md:gap-6">
-          {/* PROFILE INFO */}
+        {/* ── Bottom Grid ────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 md:gap-5">
+          {/* Profile Info */}
           <div className="footer-item col-span-1 sm:col-span-2 md:col-span-4 h-full">
-            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col justify-between shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] group transition-colors duration-500 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(228,228,231,1)]">
+            <div className="group w-full h-full relative overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_0px_rgba(0,0,0,0.09)] dark:hover:shadow-[0_8px_30px_0px_rgba(0,0,0,0.4)]">
               <Fingerprint
-                className="absolute -bottom-10 -right-10 w-64 h-64 text-zinc-900/[0.04] dark:text-white/[0.03] rotate-12 pointer-events-none z-0 transition-transform duration-500 group-hover:scale-110"
-                strokeWidth={2}
+                className="absolute -bottom-10 -right-10 w-56 h-56 text-zinc-900/[0.03] dark:text-white/[0.03] rotate-12 pointer-events-none z-0 transition-transform duration-500 group-hover:scale-110"
+                strokeWidth={1.5}
               />
 
               <div className="relative z-10">
-                <h3 className="font-pixel text-2xl md:text-3xl font-black uppercase leading-tight tracking-widest mb-4 text-zinc-900 dark:text-white transition-colors duration-500 drop-shadow-[2px_2px_0_#d4d4d8] dark:drop-shadow-[2px_2px_0_#3f3f46]">
-                  KEVIN <br /> ARDIANSYAH
+                <div className="w-8 h-0.5 rounded-full bg-gradient-to-r from-indigo-400 to-violet-400 mb-5" />
+                <h3
+                  className="font-extrabold text-2xl md:text-3xl uppercase leading-tight tracking-tight text-zinc-900 dark:text-white mb-3"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  KEVIN
+                  <br />
+                  ARDIANSYAH
                 </h3>
-                {/* Font mono agar seragam dengan deskripsi di section atas */}
-                <p className="font-mono font-bold text-[10px] md:text-xs text-zinc-600 dark:text-zinc-400 uppercase leading-relaxed max-w-[200px] transition-colors duration-500 border-l-4 border-indigo-500 pl-3">
-                  Mahasiswa Universitas Yatsi Madani
+                <p className="text-[10px] font-mono font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest leading-relaxed border-l-2 border-indigo-400 pl-3">
+                  Mahasiswa Universitas
+                  <br />
+                  Yatsi Madani
                 </p>
               </div>
 
-              <div className="relative z-10 font-pixel text-[8px] md:text-[10px] uppercase font-bold text-zinc-600 dark:text-zinc-400 flex flex-col gap-3 mt-12 tracking-widest transition-colors duration-500">
-                <span className="flex items-center gap-3">
-                  <span className="relative flex h-3 w-3 border-2 border-zinc-900 dark:border-zinc-100 bg-emerald-500">
-                    <span className="absolute inline-flex h-full w-full animate-ping bg-emerald-400 opacity-60"></span>
-                  </span>
-                  Tangerang, ID
-                </span>
-                <span className="flex items-center gap-3">
-                  <span className="h-3 w-3 border-2 border-zinc-900 dark:border-zinc-100 bg-indigo-500 dark:bg-indigo-400"></span>
-                  UTC +7
-                </span>
-                <span className="flex items-center gap-3">
-                  <span className="h-3 w-3 border-2 border-zinc-900 dark:border-zinc-100 bg-pink-500 dark:bg-pink-400"></span>
-                  Frontend Engineer
-                </span>
+              <div className="relative z-10 flex flex-col gap-2.5 mt-10">
+                {[
+                  {
+                    color: "bg-emerald-500",
+                    ping: true,
+                    label: "Tangerang, ID",
+                  },
+                  { color: "bg-indigo-500", ping: false, label: "UTC +7" },
+                  {
+                    color: "bg-pink-500",
+                    ping: false,
+                    label: "Frontend Engineer",
+                  },
+                ].map(({ color, ping, label }) => (
+                  <div key={label} className="flex items-center gap-3">
+                    <div
+                      className={`relative flex h-2.5 w-2.5 rounded-full ${color} shrink-0`}
+                    >
+                      {ping && (
+                        <span
+                          className={`absolute inline-flex h-full w-full animate-ping rounded-full ${color} opacity-60`}
+                        />
+                      )}
+                    </div>
+                    <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                      {label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* SOCIAL LINKS */}
+          {/* Social Links */}
           <div className="footer-item col-span-1 md:col-span-5 h-full">
-            {/* Hover shadow diubah jadi warna Indigo agar matching dengan CTA di atas */}
-            <div className="w-full h-full relative overflow-hidden bg-[#fafafa] dark:bg-zinc-900 border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] group transition-colors duration-500 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(99,102,241,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(129,140,248,1)]">
+            <div className="group w-full h-full relative overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-6 md:p-8 flex flex-col transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200/60 dark:hover:border-indigo-700/40 hover:shadow-[0_8px_30px_0px_rgba(99,102,241,0.09)]">
               <Globe
-                className="absolute -bottom-10 -right-10 w-64 h-64 text-zinc-900/[0.04] dark:text-white/[0.03] -rotate-12 pointer-events-none z-0 transition-transform duration-500 group-hover:scale-110"
-                strokeWidth={2}
+                className="absolute -bottom-10 -right-10 w-56 h-56 text-zinc-900/[0.03] dark:text-white/[0.03] -rotate-12 pointer-events-none z-0 transition-transform duration-500 group-hover:scale-110"
+                strokeWidth={1.5}
               />
 
-              <div className="relative z-10 font-pixel text-[8px] md:text-[10px] uppercase text-zinc-500 dark:text-zinc-400 font-bold mb-6 flex items-center gap-3 tracking-widest transition-colors duration-500">
-                SOCIAL LINKS
-                <div className="flex-1 h-[2px] bg-zinc-900 dark:bg-zinc-100 transition-colors duration-500"></div>
+              <div className="relative z-10 flex items-center gap-3 mb-6">
+                <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
+                  Social Links
+                </span>
+                <div className="flex-1 h-px bg-gradient-to-r from-zinc-200 dark:from-zinc-700 to-transparent" />
               </div>
 
               <div className="relative z-10 grid grid-cols-2 gap-3 mt-auto">
@@ -163,15 +212,15 @@ export default function Footer() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/link flex items-center gap-3 bg-white dark:bg-zinc-800 border-2 border-zinc-900 dark:border-zinc-100 hover:bg-indigo-500 dark:hover:bg-indigo-500 rounded-sm px-3 md:px-4 py-3 md:py-4 transition-all duration-200 active:translate-y-1 active:translate-x-1 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#e4e4e7] active:shadow-none hover:-translate-y-0.5 hover:shadow-[3px_3px_0_0_#18181b] dark:hover:shadow-[3px_3px_0_0_#e4e4e7]"
+                      className="group/link flex items-center gap-3 rounded-xl border border-zinc-200/80 dark:border-zinc-700/60 bg-white/70 dark:bg-zinc-800/60 backdrop-blur-sm px-3 md:px-4 py-3 md:py-3.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
                     >
-                      <div className="bg-zinc-100 dark:bg-zinc-900 border-2 border-zinc-900 dark:border-zinc-100 p-1.5 md:p-2 rounded-sm group-hover/link:bg-zinc-900 dark:group-hover/link:bg-white transition-colors duration-300">
+                      <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-700/60 group-hover/link:bg-indigo-500 group-hover/link:border-indigo-500 transition-colors duration-300 shrink-0">
                         <Icon
-                          size={16}
-                          className="text-zinc-900 dark:text-zinc-100 group-hover/link:text-white dark:group-hover/link:text-zinc-900 transition-colors duration-300 md:w-5 md:h-5"
+                          size={15}
+                          className="text-zinc-600 dark:text-zinc-300 group-hover/link:text-white transition-colors duration-300"
                         />
                       </div>
-                      <span className="font-pixel font-bold uppercase tracking-widest text-[8px] md:text-[10px] text-zinc-900 dark:text-zinc-100 group-hover/link:text-white transition-colors duration-300">
+                      <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.15em] text-zinc-600 dark:text-zinc-400 group-hover/link:text-indigo-700 dark:group-hover/link:text-indigo-300 transition-colors duration-300">
                         {social.name}
                       </span>
                     </a>
@@ -181,26 +230,27 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* COPYRIGHT */}
+          {/* Copyright */}
           <div className="footer-item col-span-1 md:col-span-3 h-full">
-            <div className="w-full h-full relative overflow-hidden bg-white dark:bg-[#121212] border-2 md:border-4 border-zinc-900 dark:border-zinc-100 rounded-md p-6 md:p-8 flex flex-col justify-end shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)] group transition-colors duration-500 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(228,228,231,1)]">
+            <div className="group w-full h-full relative overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-md shadow-[0_2px_20px_0px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_20px_0px_rgba(0,0,0,0.3)] p-6 md:p-8 flex flex-col justify-end transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_0px_rgba(0,0,0,0.09)]">
               <Terminal
-                className="absolute -bottom-10 -right-10 w-48 h-48 text-zinc-900/[0.04] dark:text-white/[0.03] rotate-12 pointer-events-none z-0 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110"
-                strokeWidth={2}
+                className="absolute -bottom-10 -right-10 w-48 h-48 text-zinc-900/[0.03] dark:text-white/[0.03] rotate-12 pointer-events-none z-0 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110"
+                strokeWidth={1.5}
               />
 
-              <p className="relative z-10 font-pixel text-[8px] md:text-[10px] uppercase text-zinc-500 dark:text-zinc-500 font-bold leading-relaxed tracking-widest transition-colors duration-500">
-                <span className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-2 py-1 inline-block mb-3 transition-colors duration-500">
+              <div className="relative z-10 flex flex-col gap-3">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-700/60 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-[9px] font-mono font-bold uppercase tracking-widest w-fit shadow-sm">
                   © 2026 K.A
                 </span>
-                <br />
-                All Rights Reserved.
-                <br />
-                <br />
-                Designed & Built
-                <br />
-                with Precision.
-              </p>
+                <p className="text-[9px] font-mono font-semibold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500 leading-relaxed">
+                  All Rights Reserved.
+                  <br />
+                  <br />
+                  Designed & Built
+                  <br />
+                  with Precision.
+                </p>
+              </div>
             </div>
           </div>
         </div>

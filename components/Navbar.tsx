@@ -12,7 +12,6 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -35,20 +34,13 @@ export default function Navbar() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const offset = 200;
-
       let current = "#";
 
       navLinks.forEach((link) => {
         if (link.href === "#") return;
-
         const section = document.querySelector<HTMLElement>(link.href);
         if (!section) return;
-
-        const sectionTop = section.offsetTop - offset;
-
-        if (scrollY >= sectionTop) {
-          current = link.href;
-        }
+        if (scrollY >= section.offsetTop - offset) current = link.href;
       });
 
       setActive(current);
@@ -56,26 +48,27 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (!mounted) return null;
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none">
+    <nav className="fixed top-5 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none">
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="
-        pointer-events-auto
-        flex items-center gap-1 md:gap-2
-        p-1.5 md:p-2 rounded-md
-        border-2 md:border-4 border-zinc-900 dark:border-zinc-100
-        bg-white dark:bg-zinc-900
-        shadow-[5px_5px_0px_0px_rgba(24,24,27,1)] dark:shadow-[5px_5px_0px_0px_rgba(228,228,231,1)]
-        transition-colors duration-500
+          pointer-events-auto
+          flex items-center gap-1
+          p-1.5
+          rounded-2xl
+          border border-zinc-200/80 dark:border-zinc-700/60
+          bg-white/70 dark:bg-zinc-900/70
+          backdrop-blur-xl
+          shadow-[0_8px_32px_0px_rgba(0,0,0,0.10)] dark:shadow-[0_8px_32px_0px_rgba(0,0,0,0.4)]
+          transition-colors duration-500
         "
       >
         {navLinks.map((link, i) => {
@@ -87,90 +80,80 @@ export default function Navbar() {
               key={i}
               href={link.href}
               onClick={() => setActive(link.href)}
-              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 outline-none transition-transform active:scale-95"
+              className="group relative flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-xl outline-none transition-transform active:scale-90"
               aria-label={link.label}
             >
-              {/* SQUARE ACTIVE INDICATOR - Neo Brutalist Style */}
+              {/* Active pill background */}
               {isActive && (
                 <motion.div
-                  layoutId="active-nav-square"
-                  className="absolute inset-0 bg-indigo-600 dark:bg-indigo-500 rounded-sm border-2 border-zinc-900 dark:border-zinc-100 shadow-[2px_2px_0_0_#18181b] dark:shadow-[2px_2px_0_0_#000]"
-                  transition={{
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 30,
-                  }}
+                  layoutId="active-nav-pill"
+                  className="absolute inset-0 rounded-xl bg-indigo-600 dark:bg-indigo-500 shadow-[0_2px_12px_0px_rgba(99,102,241,0.35)]"
+                  transition={{ type: "spring", stiffness: 420, damping: 32 }}
                 />
               )}
 
-              {/* ICON */}
+              {/* Hover background (non-active) */}
+              {!isActive && (
+                <span className="absolute inset-0 rounded-xl bg-zinc-100/0 group-hover:bg-zinc-100 dark:group-hover:bg-zinc-800/70 transition-colors duration-200" />
+              )}
+
+              {/* Icon */}
               <motion.div
-                className={`
-                relative z-10 transition-colors duration-200
-                ${
+                className={`relative z-10 transition-all duration-200 ${
                   isActive
                     ? "text-white"
-                    : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white group-hover:-translate-y-0.5"
-                }
-                `}
+                    : "text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 group-hover:-translate-y-0.5"
+                }`}
               >
                 <Icon
-                  size={isActive ? 20 : 18}
-                  strokeWidth={isActive ? 3 : 2.5}
+                  size={isActive ? 18 : 17}
+                  strokeWidth={isActive ? 2.5 : 2}
                 />
               </motion.div>
 
-              {/* TOOLTIP PIXEL STYLE - Hard Shadow */}
-              <div className="absolute top-full mt-4 px-3 py-1.5 rounded-sm bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-pixel text-[8px] tracking-[0.15em] uppercase opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 pointer-events-none transition-all duration-200 border-2 border-zinc-900 dark:border-zinc-100 shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#e4e4e7] hidden md:block whitespace-nowrap z-50">
+              {/* Tooltip */}
+              <div className="absolute top-full mt-3 px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700/60 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md shadow-[0_4px_16px_0px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0px_rgba(0,0,0,0.4)] text-[9px] font-mono font-semibold tracking-[0.18em] uppercase text-zinc-600 dark:text-zinc-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 pointer-events-none transition-all duration-200 hidden md:block whitespace-nowrap z-50">
                 {link.label}
               </div>
             </a>
           );
         })}
 
-        {/* Pixel Separator */}
-        <div className="w-[3px] h-8 bg-zinc-900 dark:bg-zinc-100 mx-1 rounded-full opacity-20"></div>
+        {/* Separator */}
+        <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-0.5 rounded-full" />
 
-        {/* Theme Toggle Retro Button - Yellow Pop */}
+        {/* Theme Toggle */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="
-          group relative
-          w-10 h-10 md:w-12 md:h-12
-          flex items-center justify-center
-          rounded-sm outline-none
-          text-zinc-500 dark:text-zinc-400
-          hover:text-zinc-900 dark:hover:text-zinc-900
-          hover:bg-yellow-300 dark:hover:bg-yellow-400
-          hover:border-2 hover:border-zinc-900 dark:hover:border-zinc-900
-          transition-all duration-200
-          active:scale-95
-          "
+          className="group relative flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-xl outline-none transition-all duration-200 active:scale-90"
           aria-label="Toggle Theme"
         >
+          {/* Hover bg */}
+          <span className="absolute inset-0 rounded-xl bg-zinc-100/0 group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors duration-200" />
+
           <motion.div
             animate={{ rotate: theme === "dark" ? 0 : 180 }}
-            transition={{ type: "spring", stiffness: 200 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
             className="relative z-10"
           >
             {theme === "dark" ? (
               <Sun
-                size={18}
-                strokeWidth={2.5}
-                className="group-hover:-translate-y-0.5 transition-transform"
+                size={17}
+                strokeWidth={2}
+                className="text-zinc-400 dark:text-zinc-500 group-hover:text-amber-500 group-hover:-translate-y-0.5 transition-all duration-200"
               />
             ) : (
               <Moon
-                size={18}
-                strokeWidth={2.5}
-                className="group-hover:-translate-y-0.5 transition-transform"
+                size={17}
+                strokeWidth={2}
+                className="text-zinc-400 group-hover:text-indigo-500 group-hover:-translate-y-0.5 transition-all duration-200"
               />
             )}
           </motion.div>
 
-          {/* TOOLTIP THEME */}
-          <div className="absolute top-full mt-4 px-3 py-1.5 rounded-sm bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-pixel text-[8px] tracking-[0.15em] uppercase opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 pointer-events-none transition-all duration-200 border-2 border-zinc-900 dark:border-zinc-100 shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#e4e4e7] hidden md:block whitespace-nowrap z-50">
-            {theme === "dark" ? "LIGHT MODE" : "DARK MODE"}
+          {/* Tooltip */}
+          <div className="absolute top-full mt-3 px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700/60 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md shadow-[0_4px_16px_0px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0px_rgba(0,0,0,0.4)] text-[9px] font-mono font-semibold tracking-[0.18em] uppercase text-zinc-600 dark:text-zinc-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 pointer-events-none transition-all duration-200 hidden md:block whitespace-nowrap z-50">
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </div>
         </button>
       </motion.div>
