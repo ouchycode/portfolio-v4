@@ -203,28 +203,14 @@ const techStack = [
   },
 ];
 
-// 1. Menggandakan data sertifikat untuk efek infinite scroll
-const infiniteCertificatesData = [
-  ...certificates,
-  ...certificates,
-  ...certificates,
-];
-
-// 2. Variasi style berantakan (rotasi dan translasi acak)
-const messyStyles = [
-  "-rotate-2 translate-y-2",
-  "rotate-3 -translate-y-4",
-  "-rotate-3 translate-y-5",
-  "rotate-2 translate-y-1",
-  "-rotate-1 -translate-y-2",
-];
-
 export default function TechAndCerts() {
   const container = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const [selectedCert, setSelectedCert] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // State untuk deteksi pause
   const [isPaused, setIsPaused] = useState(false);
 
   useTechCertsAnimation(container);
@@ -239,54 +225,35 @@ export default function TechAndCerts() {
     return () => el.removeEventListener("wheel", preventScroll);
   }, []);
 
-  // 3. Modifikasi fungsi slide untuk loop infinite yang lebih mulus
+  // Modifikasi fungsi slide untuk fitur auto-rewind
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
     const gap = window.innerWidth > 768 ? 24 : 16;
-    const cardWidth = window.innerWidth > 768 ? 380 : window.innerWidth * 0.85;
-    const scrollAmount = cardWidth + gap;
+    const cardWidth =
+      window.innerWidth > 768 ? 380 + gap : window.innerWidth * 0.85 + gap;
 
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
-    if (direction === "right") {
-      if (scrollLeft + clientWidth >= scrollWidth - 20) {
-        // Reset instan ke awal jika sudah di ujung kanan
-        scrollRef.current.scrollTo({ left: 0, behavior: "instant" });
-        setTimeout(() => {
-          scrollRef.current?.scrollBy({
-            left: scrollAmount,
-            behavior: "smooth",
-          });
-        }, 50);
-        return;
-      }
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    } else {
-      if (scrollLeft <= 0) {
-        // Reset instan ke akhir jika sedang di awal dan digeser ke kiri
-        scrollRef.current.scrollTo({
-          left: scrollWidth - clientWidth,
-          behavior: "instant",
-        });
-        setTimeout(() => {
-          scrollRef.current?.scrollBy({
-            left: -scrollAmount,
-            behavior: "smooth",
-          });
-        }, 50);
-        return;
-      }
-      scrollRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    // Kalau arah ke kanan dan sudah di ujung akhir, balik lagi ke indeks 0
+    if (direction === "right" && scrollLeft + clientWidth >= scrollWidth - 10) {
+      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      return;
     }
+
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -cardWidth : cardWidth,
+      behavior: "smooth",
+    });
   };
 
+  // Efek interval untuk auto-scroll setiap 3 detik
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
     if (!isPaused) {
       interval = setInterval(() => {
         slide("right");
-      }, 2500); // Durasi disamakan dengan komponen Projects
+      }, 3000);
     }
 
     return () => {
@@ -297,13 +264,13 @@ export default function TechAndCerts() {
   const openCert = (cert: any) => {
     setSelectedCert(cert);
     setIsModalOpen(true);
-    setIsPaused(true);
+    setIsPaused(true); // Pause ketika modal terbuka
     document.body.style.overflow = "hidden";
   };
 
   const closeCert = () => {
     setIsModalOpen(false);
-    setIsPaused(false);
+    setIsPaused(false); // Play lagi ketika modal tertutup
     document.body.style.overflow = "auto";
   };
 
@@ -344,6 +311,7 @@ export default function TechAndCerts() {
             </div>
           </div>
 
+          {/* GAYA CONTAINER DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
           <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-6 md:p-10 transition-shadow duration-300">
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
               {techStack.map((tech) => (
@@ -391,7 +359,7 @@ export default function TechAndCerts() {
               <div className="hidden md:flex gap-3 shrink-0">
                 <button
                   onClick={() => slide("left")}
-                  className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors duration-200 z-20"
+                  className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors duration-200"
                 >
                   <ArrowLeft
                     size={20}
@@ -400,7 +368,7 @@ export default function TechAndCerts() {
                 </button>
                 <button
                   onClick={() => slide("right")}
-                  className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors duration-200 z-20"
+                  className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors duration-200"
                 >
                   <ArrowRight
                     size={20}
@@ -411,17 +379,17 @@ export default function TechAndCerts() {
             </div>
           </div>
 
-          <div className="relative w-full z-20 mt-4">
+          <div className="relative w-full z-20">
             <div
               ref={scrollRef}
+              // Event listener untuk Pause & Play
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
               onTouchEnd={() => setIsPaused(false)}
               className="
-                flex overflow-x-auto gap-6 md:gap-8
-                px-6 md:px-0 
-                py-16 md:py-20 /* 4. Padding Y dinaikkan agar kartu yang miring tidak terpotong */
+                flex overflow-x-auto gap-4 md:gap-6 
+                pb-12 pt-6 px-6 md:px-0 
                 snap-x snap-mandatory 
                 scroll-smooth
                 touch-pan-x
@@ -429,69 +397,64 @@ export default function TechAndCerts() {
                 select-none
               "
             >
-              {infiniteCertificatesData.map((cert, index) => {
-                // 5. Menerapkan style berantakan berdasarkan index
-                const currentMessyStyle =
-                  messyStyles[index % messyStyles.length];
-
-                return (
+              {certificates.map((cert) => (
+                <div
+                  key={cert.id}
+                  className="cert-card snap-center shrink-0 w-[85vw] md:w-[380px] flex flex-col"
+                >
+                  {/* GAYA KARTU DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
                   <div
-                    key={`${cert.id}-${index}`}
-                    className={`cert-card snap-center shrink-0 w-[85vw] md:w-[380px] flex flex-col transition-all duration-500 hover:z-50 ${currentMessyStyle}`}
+                    onClick={() => openCert(cert)}
+                    className="
+                      group relative w-full h-full flex flex-col p-5 cursor-pointer transition-all duration-300
+                      rounded-[24px] border border-white/60 dark:border-[#3C4043] 
+                      bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
+                      shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
+                      hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
+                    "
                   >
-                    <div
-                      onClick={() => openCert(cert)}
-                      className="
-                        group relative w-full h-full flex flex-col p-5 cursor-pointer transition-all duration-300
-                        rounded-[24px] border border-white/60 dark:border-[#3C4043] 
-                        bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
-                        shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
-                        hover:rotate-0 hover:translate-y-0 hover:scale-[1.02] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
-                      "
-                    >
-                      {/* --- ICON MELAYANG DI KARTU --- */}
-                      <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
-                        <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-[#34A853] dark:text-[#81C995]" />
-                      </div>
+                    {/* --- ICON MELAYANG DI KARTU --- */}
+                    <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
+                      <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-[#34A853] dark:text-[#81C995]" />
+                    </div>
 
-                      <div className="flex justify-between items-center mb-4 pl-6 md:pl-8">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995] text-[11px] font-bold uppercase tracking-wider">
-                          {cert.year}
-                        </span>
-                        <span className="text-[12px] font-bold text-[#DADCE0] dark:text-[#5F6368]">
-                          FIG {cert.id}
-                        </span>
-                      </div>
+                    <div className="flex justify-between items-center mb-4 pl-6 md:pl-8">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995] text-[11px] font-bold uppercase tracking-wider">
+                        {cert.year}
+                      </span>
+                      <span className="text-[12px] font-bold text-[#DADCE0] dark:text-[#5F6368]">
+                        FIG {cert.id}
+                      </span>
+                    </div>
 
-                      <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden mb-5 border border-[#DADCE0] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
-                        <iframe
-                          src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-                          className="w-full h-full pointer-events-none opacity-90 group-hover:opacity-100 transition-all duration-500 bg-white"
-                        />
-                        <div className="absolute inset-0 bg-transparent" />
-                      </div>
+                    <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden mb-5 border border-[#DADCE0] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
+                      <iframe
+                        src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                        className="w-full h-full pointer-events-none opacity-90 group-hover:opacity-100 transition-all duration-500 bg-white"
+                      />
+                      <div className="absolute inset-0 bg-transparent" />
+                    </div>
 
-                      <div className="flex flex-col flex-1 px-1">
-                        <h3 className="font-bold text-lg md:text-xl leading-snug text-[#202124] dark:text-[#E8EAED] group-hover:text-[#34A853] dark:group-hover:text-[#81C995] transition-colors duration-300 line-clamp-2 mb-2">
-                          {cert.title}
-                        </h3>
+                    <div className="flex flex-col flex-1 px-1">
+                      <h3 className="font-bold text-lg md:text-xl leading-snug text-[#202124] dark:text-[#E8EAED] group-hover:text-[#34A853] dark:group-hover:text-[#81C995] transition-colors duration-300 line-clamp-2 mb-2">
+                        {cert.title}
+                      </h3>
 
-                        <div className="mt-auto flex items-center justify-between">
-                          <p className="text-[13px] md:text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] truncate pr-2">
-                            {cert.issuer}
-                          </p>
-                          <div className="w-8 h-8 shrink-0 rounded-full bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] flex items-center justify-center group-hover:bg-[#34A853] group-hover:border-[#34A853] transition-colors duration-300">
-                            <ArrowUpRight
-                              size={16}
-                              className="text-[#5F6368] dark:text-[#E8EAED] group-hover:text-white transition-colors"
-                            />
-                          </div>
+                      <div className="mt-auto flex items-center justify-between">
+                        <p className="text-[13px] md:text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] truncate pr-2">
+                          {cert.issuer}
+                        </p>
+                        <div className="w-8 h-8 shrink-0 rounded-full bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] flex items-center justify-center group-hover:bg-[#34A853] group-hover:border-[#34A853] transition-colors duration-300">
+                          <ArrowUpRight
+                            size={16}
+                            className="text-[#5F6368] dark:text-[#E8EAED] group-hover:text-white transition-colors"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         </div>
