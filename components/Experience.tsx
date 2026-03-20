@@ -93,7 +93,14 @@ const experiences = [
   },
 ];
 
-// Helper untuk ikon dan warna tema berdasarkan tipe pengalaman
+// Gaya berantakan khusus untuk tumpukan vertikal (rotasi dan geser kiri-kanan)
+const verticalMessyStyles = [
+  "-rotate-1 -translate-x-2",
+  "rotate-2 translate-x-3",
+  "-rotate-2 translate-x-1",
+  "rotate-1 -translate-x-3",
+];
+
 const getTypeStyle = (type: string) => {
   switch (type) {
     case "Education":
@@ -164,63 +171,69 @@ export default function Experience() {
           </p>
         </div>
 
-        {/* ── Vertical Cards (Dengan Floating Icons & Strong Shadow) ──────────────────────────── */}
-        <div className="flex flex-col gap-6 md:gap-8 pt-4">
-          {experiences.map((exp) => {
+        {/* ── Vertical Cards (Messy Style) ──────────────────────────── */}
+        <div className="flex flex-col gap-8 md:gap-10 pt-6">
+          {experiences.map((exp, index) => {
             const { icon: Icon, color } = getTypeStyle(exp.type);
+            const currentMessyStyle =
+              verticalMessyStyles[index % verticalMessyStyles.length];
 
             return (
               <div
                 key={exp.id}
-                onClick={() => openDetail(exp)}
-                className="
-                  relative group w-full cursor-pointer transition-all duration-300 flex flex-col sm:flex-row sm:items-start gap-4 md:gap-6 p-6 md:p-8
-                  rounded-[24px] border border-white/60 dark:border-[#3C4043] 
-                  bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
-                  shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
-                  hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
-                "
+                className={`w-full transition-all duration-500 hover:z-50 ${currentMessyStyle}`}
               >
-                {/* --- ICON MELAYANG DI KARTU --- */}
-                <div className="absolute -top-4 -left-3 md:-top-5 md:-left-5 z-20 p-2.5 md:p-3 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
-                  <Icon className={`w-5 h-5 md:w-6 md:h-6 ${color}`} />
-                </div>
-
-                {/* Konten Utama */}
-                <div className="flex-1 flex flex-col pt-1 md:pt-0 md:pl-2">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 mb-1">
-                    <h3 className="text-xl md:text-2xl font-bold text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
-                      {exp.role}
-                    </h3>
-                    <span className="text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] whitespace-nowrap">
-                      {exp.period}
-                    </span>
+                <div
+                  onClick={() => openDetail(exp)}
+                  className="
+                    group relative w-full cursor-pointer transition-all duration-300 flex flex-col sm:flex-row sm:items-start gap-4 md:gap-6 p-6 md:p-8
+                    rounded-[24px] border border-white/60 dark:border-[#3C4043] 
+                    bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
+                    shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
+                    hover:rotate-0 hover:translate-x-0 hover:translate-y-0 hover:scale-[1.02] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
+                  "
+                >
+                  {/* --- ICON MELAYANG DI KARTU --- */}
+                  <div className="absolute -top-4 -left-3 md:-top-5 md:-left-5 z-20 p-2.5 md:p-3 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
+                    <Icon className={`w-5 h-5 md:w-6 md:h-6 ${color}`} />
                   </div>
 
-                  <p className="text-base font-medium text-[#1A73E8] dark:text-[#8AB4F8] mb-3">
-                    {exp.company} • {exp.type}
-                  </p>
-
-                  <p className="text-sm md:text-base text-[#5F6368] dark:text-[#9AA0A6] leading-relaxed line-clamp-2 md:line-clamp-none mb-5">
-                    {exp.description}
-                  </p>
-
-                  {/* Skills Chips */}
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {exp.skills.map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1.5 rounded-md bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] text-xs font-medium text-[#3C4043] dark:text-[#E8EAED]"
-                      >
-                        {skill}
+                  {/* Konten Utama */}
+                  <div className="flex-1 flex flex-col pt-1 md:pt-0 md:pl-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 mb-1">
+                      <h3 className="text-xl md:text-2xl font-bold text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+                        {exp.role}
+                      </h3>
+                      <span className="text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] whitespace-nowrap">
+                        {exp.period}
                       </span>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                {/* Ikon Panah Kanan (Hanya Desktop) */}
-                <div className="hidden sm:flex shrink-0 w-12 h-12 items-center justify-center rounded-full bg-transparent group-hover:bg-[#E8F0FE] dark:group-hover:bg-[#1A73E8]/15 text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
-                  <ArrowUpRight size={24} />
+                    <p className="text-base font-medium text-[#1A73E8] dark:text-[#8AB4F8] mb-3">
+                      {exp.company} • {exp.type}
+                    </p>
+
+                    <p className="text-sm md:text-base text-[#5F6368] dark:text-[#9AA0A6] leading-relaxed line-clamp-2 md:line-clamp-none mb-5">
+                      {exp.description}
+                    </p>
+
+                    {/* Skills Chips */}
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {exp.skills.map((skill, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1.5 rounded-md bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] text-xs font-medium text-[#3C4043] dark:text-[#E8EAED]"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Ikon Panah Kanan (Hanya Desktop) */}
+                  <div className="hidden sm:flex shrink-0 w-12 h-12 items-center justify-center rounded-full bg-transparent group-hover:bg-[#E8F0FE] dark:group-hover:bg-[#1A73E8]/15 text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+                    <ArrowUpRight size={24} />
+                  </div>
                 </div>
               </div>
             );

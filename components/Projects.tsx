@@ -18,6 +18,7 @@ import { useProjectsAnimation } from "@/hooks/useAnimations";
 import ProjectModal from "./ProjectModal";
 
 const projectsData = [
+  // ... (Data project tetap sama seperti sebelumnya)
   {
     id: "01",
     title: "AkadMeet",
@@ -116,6 +117,13 @@ const projectsData = [
   },
 ];
 
+// Menggandakan data agar scroll otomatis terasa infinite (tidak putus)
+const infiniteProjectsData = [
+  ...projectsData,
+  ...projectsData,
+  ...projectsData,
+];
+
 const getGoogleCategoryTheme = (category: string) => {
   if (["LMS Platform", "EdTech", "Web Application"].includes(category)) {
     return {
@@ -141,52 +149,84 @@ const getGoogleCategoryTheme = (category: string) => {
   };
 };
 
-// Fungsi helper baru untuk menentukan ikon berdasarkan kategori
 const getProjectIcon = (category: string) => {
   if (["LMS Platform", "EdTech"].includes(category)) return BookOpen;
   if (category === "Event Management") return Ticket;
   if (category === "E-Commerce") return ShoppingCart;
   if (category === "Modern Portfolio") return Palette;
   if (category === "Mobile Application") return Smartphone;
-  return Globe; // Default icon
+  return Globe;
 };
+
+// Variasi style agar posisi kartu terlihat "berantakan"
+const messyStyles = [
+  "-rotate-2 translate-y-2",
+  "rotate-3 -translate-y-4",
+  "-rotate-3 translate-y-5",
+  "rotate-2 translate-y-1",
+  "-rotate-1 -translate-y-2",
+];
 
 export default function Projects() {
   const container = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [isPaused, setIsPaused] = useState(false);
 
   useProjectsAnimation(container);
 
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-    const gap = 16;
-    const cardWidth = scrollRef.current.offsetWidth * 0.85;
+    const gap = 24; // Sesuaikan gap jika perlu
+    const cardWidth =
+      scrollRef.current.offsetWidth > 768
+        ? 400
+        : scrollRef.current.offsetWidth * 0.85;
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
-    if (direction === "right" && scrollLeft + clientWidth >= scrollWidth - 10) {
-      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      return;
+    if (direction === "right") {
+      // Jika sudah mencapai ujung kanan, kembalikan ke awal secara instan, lalu slide mulus
+      if (scrollLeft + clientWidth >= scrollWidth - 20) {
+        scrollRef.current.scrollTo({ left: 0, behavior: "instant" }); // Instant snap
+        setTimeout(() => {
+          scrollRef.current?.scrollBy({
+            left: cardWidth + gap,
+            behavior: "smooth",
+          });
+        }, 50);
+        return;
+      }
+      scrollRef.current.scrollBy({ left: cardWidth + gap, behavior: "smooth" });
+    } else {
+      // Logika scroll manual ke kiri
+      if (scrollLeft <= 0) {
+        scrollRef.current.scrollTo({
+          left: scrollWidth - clientWidth,
+          behavior: "instant",
+        });
+        setTimeout(() => {
+          scrollRef.current?.scrollBy({
+            left: -(cardWidth + gap),
+            behavior: "smooth",
+          });
+        }, 50);
+        return;
+      }
+      scrollRef.current.scrollBy({
+        left: -(cardWidth + gap),
+        behavior: "smooth",
+      });
     }
-
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -(cardWidth + gap) : cardWidth + gap,
-      behavior: "smooth",
-    });
   };
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
     if (!isPaused) {
       interval = setInterval(() => {
-        slide("right");
-      }, 3000);
+        slide("right"); // Scroll ke kanan membuat konten bergerak ke kiri
+      }, 2500); // Dipercepat sedikit agar looping terasa dinamis
     }
-
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -236,7 +276,7 @@ export default function Projects() {
             <div className="hidden md:flex gap-3 shrink-0">
               <button
                 onClick={() => slide("left")}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors"
+                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors z-20"
               >
                 <ArrowLeft
                   size={20}
@@ -245,7 +285,7 @@ export default function Projects() {
               </button>
               <button
                 onClick={() => slide("right")}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors"
+                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors z-20"
               >
                 <ArrowRight
                   size={20}
@@ -257,7 +297,7 @@ export default function Projects() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative w-full z-20">
+        <div className="relative w-full z-20 mt-4">
           <div
             ref={scrollRef}
             onMouseEnter={() => setIsPaused(true)}
@@ -265,8 +305,9 @@ export default function Projects() {
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
             className="
-              flex overflow-x-auto gap-4 md:gap-6 
-              pb-12 pt-6 px-6 md:px-0
+              flex overflow-x-auto gap-6 md:gap-8
+              px-6 md:px-0
+              py-16 md:py-20 /* <--- INI KUNCI FIX-NYA: Padding atas-bawah ekstra di dalam container scroll */
               snap-x snap-mandatory 
               scroll-smooth
               touch-pan-x
@@ -274,14 +315,16 @@ export default function Projects() {
               select-none
             "
           >
-            {projectsData.map((project) => {
+            {infiniteProjectsData.map((project, index) => {
               const theme = getGoogleCategoryTheme(project.category);
               const ProjectIcon = getProjectIcon(project.category);
+              // Menentukan style berantakan secara berulang berdasarkan index
+              const currentMessyStyle = messyStyles[index % messyStyles.length];
 
               return (
                 <div
-                  key={project.id}
-                  className="snap-center shrink-0 w-[85vw] md:w-[400px] flex flex-col"
+                  key={`${project.id}-${index}`}
+                  className={`snap-center shrink-0 w-[85vw] md:w-[400px] flex flex-col transition-all duration-500 hover:z-50 ${currentMessyStyle}`}
                 >
                   <div
                     onClick={() => openProject(project)}
@@ -290,7 +333,7 @@ export default function Projects() {
                       rounded-[24px] border border-white/60 dark:border-[#3C4043] 
                       bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
                       shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
-                      hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
+                      hover:rotate-0 hover:translate-y-0 hover:scale-[1.02] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
                     "
                   >
                     {/* --- ICON MELAYANG DI KARTU --- */}
