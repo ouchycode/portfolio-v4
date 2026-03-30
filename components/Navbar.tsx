@@ -36,36 +36,67 @@ export default function Navbar() {
 
   const closeMenu = () => setIsOpen(false);
 
+  const handleScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const elem = document.querySelector(href);
+    if (elem) {
+      const offset = 100;
+      const elementPosition = elem.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const offset = 200;
+
+      const offset = window.innerHeight * 0.3;
       let current = "#";
 
-      navLinks.forEach((link) => {
-        if (link.href === "#") return;
-        const section = document.querySelector<HTMLElement>(link.href);
-        if (!section) return;
-        if (scrollY >= section.offsetTop - offset) current = link.href;
-      });
+      if (scrollY < 100) {
+        current = "#";
+      } else {
+        navLinks.forEach((link) => {
+          if (link.href === "#") return;
+          const section = document.querySelector<HTMLElement>(link.href);
+          if (!section) return;
+          if (scrollY >= section.offsetTop - offset) {
+            current = link.href;
+          }
+        });
+      }
       setActive(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (!mounted) return null;
 
-  // Mencari label section yang sedang aktif untuk ditampilkan di pill mobile
   const activeLabel =
     navLinks.find((link) => link.href === active)?.label || "Menu";
 
   return (
     <nav className="fixed top-5 left-0 right-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* 1. DESKTOP FLOATING DOCK (Tampil di layar menengah ke atas) */}
-      {/* ════════════════════════════════════════════════════════════ */}
+      {/* DESKTOP FLOTING NAVBAR */}
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -84,7 +115,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              onClick={() => setActive(link.href)}
+              onClick={(e) => handleScrollTo(e, link.href)}
               className={`
                 relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300 group
                 ${
@@ -101,7 +132,6 @@ export default function Navbar() {
                 {link.label}
               </span>
 
-              {/* Tooltip untuk layar medium (ketika teks disembunyikan) */}
               {!isActive && (
                 <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-[#202124] dark:bg-white text-white dark:text-[#202124] text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity lg:hidden pointer-events-none whitespace-nowrap">
                   {link.label}
@@ -111,10 +141,8 @@ export default function Navbar() {
           );
         })}
 
-        {/* Divider */}
         <div className="w-px h-8 bg-[#DADCE0] dark:bg-[#5F6368] mx-2" />
 
-        {/* Desktop Theme Toggle */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#1A73E8] transition-colors"
@@ -124,9 +152,7 @@ export default function Navbar() {
         </button>
       </motion.div>
 
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* 2. MOBILE SMART PILL (Tampil di layar kecil) */}
-      {/* ════════════════════════════════════════════════════════════ */}
+      {/* MOBILE SMART BUTTON */}
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -166,7 +192,6 @@ export default function Navbar() {
           </motion.div>
         </button>
 
-        {/* Mobile Theme Toggle */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="
@@ -186,11 +211,9 @@ export default function Navbar() {
         </button>
       </motion.div>
 
-      {/* ── Expanded Mobile Menu ── */}
       <AnimatePresence>
         {isOpen && (
           <div className="md:hidden flex flex-col items-center w-full">
-            {/* Backdrop click-away */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -227,10 +250,7 @@ export default function Navbar() {
                     <a
                       key={i}
                       href={link.href}
-                      onClick={() => {
-                        setActive(link.href);
-                        closeMenu();
-                      }}
+                      onClick={(e) => handleScrollTo(e, link.href)}
                       className={`
                         relative flex items-center gap-4 px-4 py-3 rounded-2xl
                         transition-all duration-200 group

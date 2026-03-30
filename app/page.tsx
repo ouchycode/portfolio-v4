@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -7,9 +9,13 @@ import TechAndCerts from "@/components/TechAndCerts";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
+import useSmoothScroll from "@/hooks/useSmoothScroll";
+
 export default function Home() {
+  useSmoothScroll();
+
   return (
-    <main className="text-black dark:text-white min-h-screen transition-colors duration-700 relative z-10">
+    <main className="relative z-10 flex flex-col w-full overflow-hidden">
       <Navbar />
       <Hero />
       <About />

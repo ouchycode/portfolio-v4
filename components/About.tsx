@@ -22,35 +22,31 @@ export default function About() {
       "
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-8 md:gap-12">
-        {/* ── Section Header ──────────────────────────────────────── */}
+        {/* HEADER */}
         <div className="flex flex-col gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
+          <div className="about-animate inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
             <User size={16} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
             <span className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
               About Me
             </span>
           </div>
-          <h2 className="font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
+          <h2 className="about-animate font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
             Mengenal Lebih Dekat
           </h2>
         </div>
 
-        {/* ── Content Grid ─────────────────────────────────── */}
+        {/* CONTENT UTAMA */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-          {/* Avatar Card (Dengan Floating Icons Statis & Strong Shadow) */}
-          <div className="about-animate md:col-span-4 relative">
-            {/* Floating Icon 1: Camera */}
-            <div className="absolute -top-3 -left-2 md:-top-4 md:-left-6 z-20 p-2 md:p-3 bg-white dark:bg-[#303134] rounded-lg md:rounded-xl shadow-[0_15px_30px_rgba(26,115,232,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6">
+          <div className="md:col-span-4 relative">
+            <div className="about-animate absolute -top-3 -left-2 md:-top-4 md:-left-6 z-20 p-2 md:p-3 bg-white dark:bg-[#303134] rounded-lg md:rounded-xl shadow-[0_15px_30px_rgba(26,115,232,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6">
               <Camera className="w-5 h-5 md:w-6 md:h-6 text-[#1A73E8] dark:text-[#8AB4F8]" />
             </div>
 
-            {/* Floating Icon 2: Gamepad */}
-            <div className="absolute -bottom-2 -right-2 md:-bottom-3 md:-right-5 z-20 p-2.5 md:p-3 bg-white dark:bg-[#303134] rounded-lg md:rounded-xl shadow-[0_15px_30px_rgba(234,67,53,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm rotate-6">
+            <div className="about-animate absolute -bottom-2 -right-2 md:-bottom-3 md:-right-5 z-20 p-2.5 md:p-3 bg-white dark:bg-[#303134] rounded-lg md:rounded-xl shadow-[0_15px_30px_rgba(234,67,53,0.15)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm rotate-6">
               <Gamepad2 className="w-5 h-5 md:w-6 md:h-6 text-[#EA4335] dark:text-[#F28B82]" />
             </div>
 
-            {/* Main Avatar Image */}
-            <div className="relative w-full aspect-square md:aspect-auto md:h-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white dark:bg-[#303134] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-500 group">
+            <div className="about-animate relative w-full aspect-square md:aspect-auto md:h-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white dark:bg-[#303134] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-500 group">
               <Image
                 src="/profile_kevin_hd.png"
                 alt="Kevin Ardiansyah"
@@ -66,9 +62,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* Info Card (Dengan Strong Shadow & Hover) */}
-          <div className="about-animate md:col-span-8 flex flex-col gap-5">
-            <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300 p-6 md:p-10 flex flex-col justify-center h-full">
+          <div className="md:col-span-8 flex flex-col gap-5">
+            <div className="about-animate w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300 p-6 md:p-10 flex flex-col justify-center h-full">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-md bg-[#E8F0FE] dark:bg-[#1A73E8]/15 text-[#1A73E8] dark:text-[#8AB4F8] w-fit">
                 <Code2 size={16} />
                 <span className="text-sm font-bold">Frontend Engineer</span>
@@ -89,8 +84,7 @@ export default function About() {
               </p>
             </div>
 
-            {/* Pendidikan Sub-Card (Mobile First Stack) */}
-            <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300 p-6 flex items-center gap-5">
+            <div className="about-animate w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] transition-all duration-300 p-6 flex items-center gap-5">
               <div className="w-12 h-12 flex shrink-0 items-center justify-center rounded-full bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]">
                 <GraduationCap size={24} />
               </div>

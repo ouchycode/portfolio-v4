@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LoadingProvider } from "@/context/LoadingContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -57,50 +58,51 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body
         className={`
-          ${inter.variable} font-sans antialiased
+          ${inter.variable} font-sans antialiased min-h-screen
           bg-[#F8F9FA] text-[#202124]
           dark:bg-[#202124] dark:text-[#E8EAED]
           transition-colors duration-500
         `}
       >
-        {/* Bungkus dengan LoadingProvider agar state loading bisa diakses di semua Modal */}
-        <LoadingProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {/* ── BACKGROUND GRID (Google Blue Theme) ───────────────────────── */}
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-              <div
-                className="
-                  absolute inset-0 
-                  bg-[linear-gradient(to_right,rgba(26,115,232,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(26,115,232,0.08)_1px,transparent_1px)] 
-                  dark:bg-[linear-gradient(to_right,rgba(138,180,248,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(138,180,248,0.05)_1px,transparent_1px)]
-                "
-                style={{
-                  backgroundSize: "40px 40px",
-                  maskImage:
-                    "radial-gradient(ellipse_at_center, black, transparent 80%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse_at_center, black, transparent 80%)",
-                }}
-              />
-            </div>
+        <LanguageProvider>
+          <LoadingProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {/* BACKGROUND */}
+              <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+                <div
+                  className="
+                    absolute inset-0 
+                    bg-[linear-gradient(to_right,rgba(26,115,232,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(26,115,232,0.08)_1px,transparent_1px)] 
+                    dark:bg-[linear-gradient(to_right,rgba(138,180,248,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(138,180,248,0.05)_1px,transparent_1px)]
+                  "
+                  style={{
+                    backgroundSize: "40px 40px",
+                    maskImage:
+                      "radial-gradient(ellipse_at_center, black, transparent 80%)",
+                    WebkitMaskImage:
+                      "radial-gradient(ellipse_at_center, black, transparent 80%)",
+                  }}
+                />
+              </div>
 
-            {/* ── MAIN WRAPPER ───────────────────────────────────────── */}
-            <div id="smooth-wrapper" className="relative z-10">
-              <div id="smooth-content">{children}</div>
-            </div>
+              {/* GSAP  */}
+              <div id="smooth-wrapper" className="relative z-10">
+                <div id="smooth-content">{children}</div>
+              </div>
 
-            <Analytics />
-            <SpeedInsights />
-          </ThemeProvider>
-        </LoadingProvider>
+              <Analytics />
+              <SpeedInsights />
+            </ThemeProvider>
+          </LoadingProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

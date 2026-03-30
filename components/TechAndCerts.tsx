@@ -210,7 +210,6 @@ export default function TechAndCerts() {
   const [selectedCert, setSelectedCert] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // State untuk deteksi pause
   const [isPaused, setIsPaused] = useState(false);
 
   useTechCertsAnimation(container);
@@ -225,7 +224,6 @@ export default function TechAndCerts() {
     return () => el.removeEventListener("wheel", preventScroll);
   }, []);
 
-  // Modifikasi fungsi slide untuk fitur auto-rewind
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
     const gap = window.innerWidth > 768 ? 24 : 16;
@@ -234,7 +232,6 @@ export default function TechAndCerts() {
 
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
-    // Kalau arah ke kanan dan sudah di ujung akhir, balik lagi ke indeks 0
     if (direction === "right" && scrollLeft + clientWidth >= scrollWidth - 10) {
       scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
       return;
@@ -246,7 +243,6 @@ export default function TechAndCerts() {
     });
   };
 
-  // Efek interval untuk auto-scroll setiap 3 detik
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
@@ -264,13 +260,13 @@ export default function TechAndCerts() {
   const openCert = (cert: any) => {
     setSelectedCert(cert);
     setIsModalOpen(true);
-    setIsPaused(true); // Pause ketika modal terbuka
+    setIsPaused(true);
     document.body.style.overflow = "hidden";
   };
 
   const closeCert = () => {
     setIsModalOpen(false);
-    setIsPaused(false); // Play lagi ketika modal tertutup
+    setIsPaused(false);
     document.body.style.overflow = "auto";
   };
 
@@ -286,12 +282,9 @@ export default function TechAndCerts() {
       "
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-20 md:gap-28">
-        {/* ══════════════════════════════════════ */}
-        {/* SECTION 1: TECH STACK (Google Tags Style) */}
-        {/* ══════════════════════════════════════ */}
         <div className="flex flex-col gap-6 md:gap-8 px-4 md:px-0">
           <div className="flex flex-col gap-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
+            <div className="tech-header inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
               <Cpu size={16} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
               <span className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                 Tech Stack
@@ -300,10 +293,10 @@ export default function TechAndCerts() {
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
-                <h2 className="font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
+                <h2 className="tech-header font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
                   Keahlian & Teknologi
                 </h2>
-                <p className="text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
+                <p className="tech-header text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
                   Koleksi alat, bahasa, dan framework yang saya gunakan untuk
                   mewujudkan ide menjadi produk digital.
                 </p>
@@ -311,7 +304,6 @@ export default function TechAndCerts() {
             </div>
           </div>
 
-          {/* GAYA CONTAINER DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
           <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-6 md:p-10 transition-shadow duration-300">
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
               {techStack.map((tech) => (
@@ -333,12 +325,10 @@ export default function TechAndCerts() {
           </div>
         </div>
 
-        {/* ══════════════════════════════════════ */}
-        {/* SECTION 2: CREDENTIALS (Google Drive Style) */}
-        {/* ══════════════════════════════════════ */}
+        {/* CREDENTIALS */}
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="flex flex-col gap-3 px-6 md:px-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
+            <div className="cert-header inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
               <Award size={16} className="text-[#34A853] dark:text-[#81C995]" />
               <span className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                 Credentials
@@ -347,16 +337,16 @@ export default function TechAndCerts() {
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
-                <h2 className="font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
+                <h2 className="cert-header font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
                   Sertifikasi & Lisensi
                 </h2>
-                <p className="text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
+                <p className="cert-header text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
                   Validasi kompetensi dan komitmen saya terhadap pembelajaran
                   berkelanjutan.
                 </p>
               </div>
 
-              <div className="hidden md:flex gap-3 shrink-0">
+              <div className="cert-header hidden md:flex gap-3 shrink-0">
                 <button
                   onClick={() => slide("left")}
                   className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors duration-200"
@@ -382,7 +372,6 @@ export default function TechAndCerts() {
           <div className="relative w-full z-20">
             <div
               ref={scrollRef}
-              // Event listener untuk Pause & Play
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
@@ -402,7 +391,6 @@ export default function TechAndCerts() {
                   key={cert.id}
                   className="cert-card snap-center shrink-0 w-[85vw] md:w-[380px] flex flex-col"
                 >
-                  {/* GAYA KARTU DIUPDATE KE GLASSMORPHISM & STRONG SHADOW */}
                   <div
                     onClick={() => openCert(cert)}
                     className="
@@ -413,7 +401,6 @@ export default function TechAndCerts() {
                       hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
                     "
                   >
-                    {/* --- ICON MELAYANG DI KARTU --- */}
                     <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
                       <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-[#34A853] dark:text-[#81C995]" />
                     </div>

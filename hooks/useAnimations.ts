@@ -8,165 +8,168 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Base configuration untuk tema Premium Glassmorphism
-// Lebih smooth, ada efek kedalaman (scale), dan melayang.
 const premiumReveal = {
-  y: 50,
+  y: 35,
   opacity: 0,
-  scale: 0.95, // Tambahan efek kedalaman
-  duration: 1.2, // Sedikit diperpanjang agar terasa elegan
-  ease: "power4.out", // Deceleration yang sangat halus dan "melayang"
-  clearProps: "all", // INI PENTING: Bersihin inline style biar hover Tailwind (transform/shadow) jalan lagi!
+  scale: 0.98,
+  duration: 0.9,
+  ease: "power3.out",
+  clearProps: "all",
 };
 
-/* ================= HERO ================= */
+// HERO
 export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
         ...premiumReveal,
-        stagger: 0.15, // Muncul bergantian dengan sangat mulus
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
   );
 };
 
-/* ================= ABOUT ================= */
+// ABOUT
 export const useAboutAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      gsap.utils.toArray(".about-animate").forEach((el: any, i) => {
-        gsap.from(el, {
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            once: true,
-          },
-          ...premiumReveal,
-          delay: i * 0.1, // Stagger manual yang halus
-        });
+      gsap.from(".about-animate", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          once: true,
+        },
+        ...premiumReveal,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
   );
 };
 
-/* ================= EXPERIENCE ================= */
+// EXPERIENCE
 export const useExperienceAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      gsap.utils.toArray(".exp-row").forEach((row: any, i) => {
-        gsap.from(row, {
-          scrollTrigger: {
-            trigger: row,
-            start: "top 85%",
-            once: true,
-          },
-          ...premiumReveal,
-          delay: i * 0.1,
-        });
+      gsap.from(".exp-row", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        ...premiumReveal,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
   );
 };
 
-/* ================= PROJECTS ================= */
+// PROJECT
 export const useProjectsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      // Menggunakan .snap-center agar otomatis menargetkan kartu di dalam carousel
-      gsap.utils.toArray(".snap-center").forEach((card: any, i) => {
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            once: true,
-          },
-          ...premiumReveal,
-          y: 40, // Y agak dikurangi khusus untuk carousel
-          delay: i * 0.1,
-        });
+      gsap.from(".project-animate", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        ...premiumReveal,
+        y: 25,
+        stagger: 0.1,
       });
     },
     { scope: containerRef },
   );
 };
 
-/* ================= TECH & CERTIFICATIONS ================= */
+// TECH & CERTS
 export const useTechCertsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      // Premium "Chip" Pop-in Effect (Untuk Tech Stack)
-      gsap.utils.toArray(".tech-tag").forEach((tag: any, i) => {
-        gsap.from(tag, {
-          scrollTrigger: {
-            trigger: tag,
-            start: "top 95%",
-            once: true,
-          },
-          y: 20,
-          opacity: 0,
-          scale: 0.85,
-          duration: 0.7,
-          ease: "back.out(1.5)", // Efek sedikit memantul elegan untuk badge kecil
-          delay: i * 0.03, // Ekstra cepat agar pengguna tidak menunggu
-          clearProps: "all",
-        });
+      gsap.from(".tech-header", {
+        scrollTrigger: {
+          trigger: ".tech-header",
+          start: "top 85%",
+          once: true,
+        },
+        ...premiumReveal,
+        stagger: 0.1,
       });
 
-      // Kartu Sertifikat
-      gsap.utils.toArray(".cert-card").forEach((card: any, i) => {
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            once: true,
-          },
-          ...premiumReveal,
-          delay: i * 0.1,
-        });
+      gsap.from(".tech-tag", {
+        scrollTrigger: {
+          trigger: ".tech-tag",
+          start: "top 90%",
+          once: true,
+        },
+        y: 15,
+        opacity: 0,
+        scale: 0.85,
+        duration: 0.7,
+        ease: "back.out(1.2)",
+        stagger: 0.05,
+        clearProps: "all",
+      });
+
+      gsap.from(".cert-header", {
+        scrollTrigger: {
+          trigger: ".cert-header",
+          start: "top 85%",
+          once: true,
+        },
+        ...premiumReveal,
+        stagger: 0.1,
+      });
+
+      gsap.from(".cert-card", {
+        scrollTrigger: {
+          trigger: ".cert-card",
+          start: "top 85%",
+          once: true,
+        },
+        ...premiumReveal,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
   );
 };
 
-/* ================= CONTACT ================= */
+// CONTACT
 export const useContactAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      gsap.utils.toArray(".contact-input").forEach((input: any, i) => {
-        gsap.from(input, {
-          scrollTrigger: {
-            trigger: input,
-            start: "top 90%",
-            once: true,
-          },
-          ...premiumReveal,
-          delay: i * 0.1,
-        });
+      gsap.from(".contact-input", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        ...premiumReveal,
+        y: 20,
+        stagger: 0.1,
       });
     },
     { scope: containerRef },
   );
 };
 
-/* ================= FOOTER ================= */
+// FOOTER
 export const useFooterAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      gsap.utils.toArray(".footer-item").forEach((item: any, i) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top 95%",
-            once: true,
-          },
-          ...premiumReveal,
-          delay: i * 0.1,
-        });
+      gsap.from(".footer-item", {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 95%",
+          once: true,
+        },
+        ...premiumReveal,
+        duration: 0.8,
+        stagger: 0.1,
       });
     },
     { scope: containerRef },

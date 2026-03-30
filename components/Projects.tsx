@@ -18,7 +18,6 @@ import { useProjectsAnimation } from "@/hooks/useAnimations";
 import ProjectModal from "./ProjectModal";
 
 const projectsData = [
-  // ... (Data project tetap sama seperti sebelumnya)
   {
     id: "01",
     title: "AkadMeet",
@@ -117,7 +116,6 @@ const projectsData = [
   },
 ];
 
-// Menggandakan data agar scroll otomatis terasa infinite (tidak putus)
 const infiniteProjectsData = [
   ...projectsData,
   ...projectsData,
@@ -158,7 +156,6 @@ const getProjectIcon = (category: string) => {
   return Globe;
 };
 
-// Variasi style agar posisi kartu terlihat "berantakan"
 const messyStyles = [
   "-rotate-2 translate-y-2",
   "rotate-3 -translate-y-4",
@@ -178,7 +175,7 @@ export default function Projects() {
 
   const slide = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-    const gap = 24; // Sesuaikan gap jika perlu
+    const gap = 24;
     const cardWidth =
       scrollRef.current.offsetWidth > 768
         ? 400
@@ -186,9 +183,8 @@ export default function Projects() {
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
     if (direction === "right") {
-      // Jika sudah mencapai ujung kanan, kembalikan ke awal secara instan, lalu slide mulus
       if (scrollLeft + clientWidth >= scrollWidth - 20) {
-        scrollRef.current.scrollTo({ left: 0, behavior: "instant" }); // Instant snap
+        scrollRef.current.scrollTo({ left: 0, behavior: "instant" });
         setTimeout(() => {
           scrollRef.current?.scrollBy({
             left: cardWidth + gap,
@@ -199,7 +195,6 @@ export default function Projects() {
       }
       scrollRef.current.scrollBy({ left: cardWidth + gap, behavior: "smooth" });
     } else {
-      // Logika scroll manual ke kiri
       if (scrollLeft <= 0) {
         scrollRef.current.scrollTo({
           left: scrollWidth - clientWidth,
@@ -224,8 +219,8 @@ export default function Projects() {
     let interval: NodeJS.Timeout;
     if (!isPaused) {
       interval = setInterval(() => {
-        slide("right"); // Scroll ke kanan membuat konten bergerak ke kiri
-      }, 2500); // Dipercepat sedikit agar looping terasa dinamis
+        slide("right");
+      }, 2500);
     }
     return () => {
       if (interval) clearInterval(interval);
@@ -252,7 +247,7 @@ export default function Projects() {
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-6 md:gap-10">
         <div className="relative z-10 flex flex-col gap-3 px-6 md:px-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
+          <div className="project-animate inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
             <FolderGit2
               size={16}
               className="text-[#1A73E8] dark:text-[#8AB4F8]"
@@ -264,16 +259,16 @@ export default function Projects() {
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h2 className="font-extrabold tracking-tight text-3xl md:text-5xl">
+              <h2 className="project-animate font-extrabold tracking-tight text-3xl md:text-5xl">
                 Karya Pilihan
               </h2>
-              <p className="text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
+              <p className="project-animate text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
                 Eksplorasi kode dan desain dalam membangun aplikasi web yang
                 modern dan responsif.
               </p>
             </div>
 
-            <div className="hidden md:flex gap-3 shrink-0">
+            <div className="project-animate hidden md:flex gap-3 shrink-0">
               <button
                 onClick={() => slide("left")}
                 className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors z-20"
@@ -296,7 +291,7 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Carousel Container */}
+        {/* CARAOUSEL CONTAINER */}
         <div className="relative w-full z-20 mt-4">
           <div
             ref={scrollRef}
@@ -318,13 +313,13 @@ export default function Projects() {
             {infiniteProjectsData.map((project, index) => {
               const theme = getGoogleCategoryTheme(project.category);
               const ProjectIcon = getProjectIcon(project.category);
-              // Menentukan style berantakan secara berulang berdasarkan index
+
               const currentMessyStyle = messyStyles[index % messyStyles.length];
 
               return (
                 <div
                   key={`${project.id}-${index}`}
-                  className={`snap-center shrink-0 w-[85vw] md:w-[400px] flex flex-col transition-all duration-500 hover:z-50 ${currentMessyStyle}`}
+                  className={`project-animate snap-center shrink-0 w-[85vw] md:w-[400px] flex flex-col transition-all duration-500 hover:z-50 ${currentMessyStyle}`}
                 >
                   <div
                     onClick={() => openProject(project)}
@@ -336,7 +331,6 @@ export default function Projects() {
                       hover:rotate-0 hover:translate-y-0 hover:scale-[1.02] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
                     "
                   >
-                    {/* --- ICON MELAYANG DI KARTU --- */}
                     <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
                       <ProjectIcon
                         className={`w-5 h-5 md:w-6 md:h-6 ${theme.text}`}

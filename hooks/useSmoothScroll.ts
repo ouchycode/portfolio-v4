@@ -17,12 +17,14 @@ export default function useSmoothScroll() {
       smoother = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
-        smooth: 1.5,
+        smooth: 1.2,
         effects: true,
-        normalizeScroll: true,
+        normalizeScroll: false,
         smoothTouch: 0.1,
+        ignoreMobileResize: true,
       });
     });
+
     return () => {
       if (smoother) smoother.kill();
       ctx.revert();

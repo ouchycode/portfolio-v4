@@ -3,23 +3,23 @@
 import { X, ExternalLink, Award, BadgeCheck, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
-import { useLoading } from "@/context/LoadingContext"; // Pastikan path import benar
+import { useLoading } from "@/context/LoadingContext";
 
 export default function CertificateModal({ isOpen, onClose, cert }: any) {
-  const { isLoading, startLoading } = useLoading();
+  const { isLoading, startLoading, stopLoading } = useLoading();
 
-  // Efek untuk mematikan scroll body saat modal terbuka & trigger loading
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      startLoading(600);
+      startLoading(800);
     } else {
       document.body.style.overflow = "auto";
+      stopLoading();
     }
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isOpen, startLoading]);
+  }, [isOpen, startLoading, stopLoading]);
 
   if (!cert) return null;
 
@@ -27,7 +27,7 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center px-4 py-10 md:p-6">
-          {/* ── Backdrop ─────────────────────────────────────────── */}
+          {/* BACKDROP */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -36,7 +36,6 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
             className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm cursor-pointer"
           />
 
-          {/* ── Modal Container ───────────────────────────────────── */}
           <motion.div
             initial={{ y: 20, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -56,7 +55,6 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
               transition-colors duration-500
             "
           >
-            {/* ── Close Button ─────────────────────────────────── */}
             <button
               onClick={onClose}
               className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center justify-center w-10 h-10 rounded-full bg-white/50 dark:bg-black/20 hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] backdrop-blur-sm transition-colors duration-200"
@@ -65,86 +63,94 @@ export default function CertificateModal({ isOpen, onClose, cert }: any) {
               <X size={24} className="text-[#5F6368] dark:text-[#9AA0A6]" />
             </button>
 
-            {/* LOGIKA LOADING */}
-            {isLoading ? (
-              <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] gap-4 bg-transparent text-center">
-                <Loader2
-                  size={40}
-                  className="animate-spin text-[#34A853] dark:text-[#81C995]"
-                />
-                <p className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6] animate-pulse px-6">
-                  Menampilkan Sertifikat...
-                </p>
-              </div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex flex-col h-full overflow-hidden"
-              >
-                {/* ── Header Modal ───────────────────────────────────────── */}
-                <div className="relative z-10 border-b border-black/5 dark:border-white/10 px-6 py-5 md:px-8 md:py-6 pr-16 bg-transparent transition-colors duration-500 shrink-0">
-                  <div className="flex flex-wrap items-center gap-3 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995]">
-                      <BadgeCheck size={14} strokeWidth={2.5} />
-                      Verified
-                    </span>
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-md border border-[#DADCE0] dark:border-[#5F6368] bg-white/50 dark:bg-[#202124]/50 backdrop-blur-sm text-[11px] font-bold uppercase tracking-wider text-[#5F6368] dark:text-[#9AA0A6]">
-                      {cert.year}
-                    </span>
-                    <span className="text-[12px] font-bold text-[#DADCE0] dark:text-[#5F6368]">
-                      FIG. {cert.id}
-                    </span>
-                  </div>
-
-                  <h2 className="font-extrabold text-2xl md:text-3xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight mb-2">
-                    {cert.title}
-                  </h2>
-
-                  <div className="flex items-center gap-2">
-                    <Award
-                      size={16}
-                      className="text-[#5F6368] dark:text-[#9AA0A6]"
-                    />
-                    <span className="text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6]">
-                      Diterbitkan oleh{" "}
-                      <span className="font-bold text-[#202124] dark:text-[#E8EAED]">
-                        {cert.issuer}
+            <AnimatePresence mode="wait">
+              {isLoading ? (
+                <motion.div
+                  key="loading-state"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex-1 flex flex-col items-center justify-center min-h-[400px] gap-4 bg-transparent text-center"
+                >
+                  <Loader2
+                    size={40}
+                    className="animate-spin text-[#34A853] dark:text-[#81C995]"
+                  />
+                  <p className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6] animate-pulse px-6">
+                    Menampilkan Sertifikat...
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="content-state"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col h-full overflow-hidden"
+                >
+                  {/* HEADER MODAL */}
+                  <div className="relative z-10 border-b border-black/5 dark:border-white/10 px-6 py-5 md:px-8 md:py-6 pr-16 bg-transparent transition-colors duration-500 shrink-0">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995]">
+                        <BadgeCheck size={14} strokeWidth={2.5} />
+                        Verified
                       </span>
-                    </span>
-                  </div>
-                </div>
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-md border border-[#DADCE0] dark:border-[#5F6368] bg-white/50 dark:bg-[#202124]/50 backdrop-blur-sm text-[11px] font-bold uppercase tracking-wider text-[#5F6368] dark:text-[#9AA0A6]">
+                        {cert.year}
+                      </span>
+                      <span className="text-[12px] font-bold text-[#DADCE0] dark:text-[#5F6368]">
+                        FIG. {cert.id}
+                      </span>
+                    </div>
 
-                {/* ── Content Body ──────────────────────────────────────── */}
-                <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-8 bg-white/40 dark:bg-[#202124]/40 transition-colors duration-500 flex flex-col gap-6 md:gap-8">
-                  {/* PDF Viewer */}
-                  <div className="relative w-full h-[55vh] md:h-[60vh] rounded-[16px] overflow-hidden border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
-                    <iframe
-                      src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                      title="Certificate Document"
-                      className="w-full h-full border-none bg-white"
-                    />
-                  </div>
+                    <h2 className="font-extrabold text-2xl md:text-3xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight mb-2">
+                      {cert.title}
+                    </h2>
 
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row justify-end gap-3 md:gap-4 mt-auto">
-                    <a
-                      href={cert.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[#34A853] hover:bg-[#2b8f45] dark:bg-[#81C995] dark:hover:bg-[#6db581] text-white dark:text-[#202124] font-bold text-sm shadow-sm hover:shadow-md transition-all duration-200"
-                    >
-                      Buka Dokumen Asli
-                      <ExternalLink
-                        size={18}
-                        strokeWidth={2.5}
-                        className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                    <div className="flex items-center gap-2">
+                      <Award
+                        size={16}
+                        className="text-[#5F6368] dark:text-[#9AA0A6]"
                       />
-                    </a>
+                      <span className="text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6]">
+                        Diterbitkan oleh{" "}
+                        <span className="font-bold text-[#202124] dark:text-[#E8EAED]">
+                          {cert.issuer}
+                        </span>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            )}
+
+                  {/* CONTENT UTAMA */}
+                  <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-8 bg-white/40 dark:bg-[#202124]/40 transition-colors duration-500 flex flex-col gap-6 md:gap-8">
+                    <div className="relative w-full h-[55vh] md:h-[60vh] rounded-[16px] overflow-hidden border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
+                      <iframe
+                        src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                        title="Certificate Document"
+                        className="w-full h-full border-none bg-white"
+                      />
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row justify-end gap-3 md:gap-4 mt-auto">
+                      <a
+                        href={cert.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[#34A853] hover:bg-[#2b8f45] dark:bg-[#81C995] dark:hover:bg-[#6db581] text-white dark:text-[#202124] font-bold text-sm shadow-sm hover:shadow-md transition-all duration-200"
+                      >
+                        Buka Dokumen Asli
+                        <ExternalLink
+                          size={18}
+                          strokeWidth={2.5}
+                          className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       )}

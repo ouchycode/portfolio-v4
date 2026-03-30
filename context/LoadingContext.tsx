@@ -1,10 +1,17 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  ReactNode,
+  useCallback,
+} from "react";
 
 interface LoadingContextType {
   isLoading: boolean;
-  startLoading: (ms?: number) => void;
+  startLoading: (autoStopMs?: number) => void;
   stopLoading: () => void;
 }
 
@@ -12,16 +19,33 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 
 export function LoadingProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Fungsi untuk menyalakan loading, otomatis mati setelah sekian milidetik (default 600ms)
-  const startLoading = (ms: number = 600) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, ms);
-  };
+  const stopLoading = useCallback(() => {
+    setIsLoading(false);
 
-  const stopLoading = () => setIsLoading(false);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, []);
+
+  const startLoading = useCallback(
+    (autoStopMs?: number) => {
+      setIsLoading(true);
+
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      if (autoStopMs) {
+        timeoutRef.current = setTimeout(() => {
+          stopLoading();
+        }, autoStopMs);
+      }
+    },
+    [stopLoading],
+  );
 
   return (
     <LoadingContext.Provider value={{ isLoading, startLoading, stopLoading }}>
@@ -30,7 +54,7 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Custom hook agar lebih mudah dipanggil
+// CUSTOM HOOK
 export function useLoading() {
   const context = useContext(LoadingContext);
   if (!context) {
