@@ -17,13 +17,14 @@ const premiumReveal = {
   clearProps: "all",
 };
 
-// HERO
+// HERO (Muncul langsung tanpa scroll trigger)
 export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
         ...premiumReveal,
         stagger: 0.15,
+        delay: 0.2, // Memberi waktu sedikit setelah loading screen hilang
       });
     },
     { scope: containerRef },
@@ -37,7 +38,7 @@ export const useAboutAnimation = (containerRef: any) => {
       gsap.from(".about-animate", {
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
+          start: "top 85%",
           once: true,
         },
         ...premiumReveal,
@@ -89,6 +90,7 @@ export const useProjectsAnimation = (containerRef: any) => {
 export const useTechCertsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
+      // Header Tech
       gsap.from(".tech-header", {
         scrollTrigger: {
           trigger: ".tech-header",
@@ -99,6 +101,7 @@ export const useTechCertsAnimation = (containerRef: any) => {
         stagger: 0.1,
       });
 
+      // Tags Ikon Tech (Animasi Back out agar membal)
       gsap.from(".tech-tag", {
         scrollTrigger: {
           trigger: ".tech-tag",
@@ -109,11 +112,12 @@ export const useTechCertsAnimation = (containerRef: any) => {
         opacity: 0,
         scale: 0.85,
         duration: 0.7,
-        ease: "back.out(1.2)",
+        ease: "back.out(1.4)",
         stagger: 0.05,
         clearProps: "all",
       });
 
+      // Header Certs
       gsap.from(".cert-header", {
         scrollTrigger: {
           trigger: ".cert-header",
@@ -124,6 +128,7 @@ export const useTechCertsAnimation = (containerRef: any) => {
         stagger: 0.1,
       });
 
+      // Kartu Sertifikat
       gsap.from(".cert-card", {
         scrollTrigger: {
           trigger: ".cert-card",
@@ -133,6 +138,9 @@ export const useTechCertsAnimation = (containerRef: any) => {
         ...premiumReveal,
         stagger: 0.15,
       });
+
+      // Refresh ScrollTrigger setelah konten dimuat
+      ScrollTrigger.refresh();
     },
     { scope: containerRef },
   );
