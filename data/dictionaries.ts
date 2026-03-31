@@ -4,14 +4,14 @@ export const dictionaries = {
       home: "Beranda",
       about: "Tentang",
       experience: "Pengalaman",
-      projects: "Proyek",
+      projects: "Karya",
       tech: "Teknologi",
       contact: "Kontak",
     },
     hero: {
-      greeting: "Hi, I'm Kevin",
+      greeting: "Halo, saya Kevin",
       role: "Developer.",
-      desc: "Membangun antarmuka web yang cepat, estetik, dan fungsional. Fokus pada pengalaman pengguna yang intuitif dan kode yang bersih.",
+      desc: "Membangun antarmuka web yang cepat, estetik, dan fungsional. Berfokus pada pengalaman pengguna yang intuitif serta penulisan kode yang bersih.",
       btnProject: "Lihat Karya",
       btnResume: "Lihat Resume",
       locationLabel: "Lokasi",
@@ -23,17 +23,17 @@ export const dictionaries = {
       title: "Mengenal Lebih Dekat",
       tag: "Frontend Engineer",
       headline:
-        "Mahasiswa Universitas Yatsi Madani yang fokus menerjemahkan desain menjadi antarmuka web interaktif.",
+        "Mahasiswa Universitas Yatsi Madani yang antusias menerjemahkan desain menjadi antarmuka web interaktif.",
       description:
-        "Berbasis di Tangerang, keseharian saya berpusat pada ekosistem Frontend modern. Selain menulis kode, saya senang mengeksplorasi desain grafis, UI/UX, serta mengikuti tren dunia e-sports dan fotografi.",
-      eduLabel: "Pendidikan Saat Ini",
+        "Berbasis di Tangerang, keseharian saya berpusat pada ekosistem web modern. Selain menulis kode, saya gemar mengeksplorasi desain UI/UX, serta mengikuti tren dunia e-sports dan fotografi.",
+      eduLabel: "Pendidikan Terkini",
       eduValue: "S1 Ilmu Komputer - Universitas Yatsi Madani",
     },
     experience: {
-      badge: "Experience",
+      badge: "Pengalaman",
       title: "Perjalanan Karir",
       subtitle:
-        "Jejak langkah akademis dan profesional dalam membangun fondasi keahlian pengembangan web.",
+        "Jejak langkah akademis dan profesional dalam membangun fondasi keahlian pengembangan perangkat lunak.",
       list: [
         {
           id: "uym-study",
@@ -43,7 +43,7 @@ export const dictionaries = {
           period: "2023 — Sekarang",
           location: "Tangerang, Banten, ID",
           description:
-            "Menempuh pendidikan S1 Ilmu Komputer di Fakultas Teknologi dan Bisnis dengan eksplorasi mendalam pada pengembangan web dan rekayasa perangkat lunak.",
+            "Menempuh pendidikan S1 Ilmu Komputer di Fakultas Teknologi dan Bisnis dengan fokus mendalam pada rekayasa perangkat lunak dan pengembangan web.",
           skills: [
             "Web Development",
             "System Analysis",
@@ -59,12 +59,12 @@ export const dictionaries = {
         {
           id: "highschool-study",
           type: "Education",
-          role: "Siswa Jurusan Rekayasa Perangkat Lunak",
+          role: "Siswa Rekayasa Perangkat Lunak",
           company: "SMKN 4 Tangerang",
           period: "2020 — 2023",
           location: "Tangerang, Banten, ID",
           description:
-            "Membangun fondasi awal dalam dunia pemrograman, logika komputer, serta pemahaman tentang jaringan.",
+            "Membangun fondasi awal dalam dunia pemrograman, logika algoritma, serta pemahaman infrastruktur jaringan.",
           skills: [
             "HTML & CSS",
             "Logika Algoritma",
@@ -73,7 +73,7 @@ export const dictionaries = {
           ],
           details: [
             "Lulus dengan nilai akhir ujian kompetensi keahlian yang memuaskan.",
-            "Aktif dalam kegiatan ekstrakurikuler IT dan menyelesaikan proyek akhir pembuatan website sederhana.",
+            "Aktif dalam kegiatan ekstrakurikuler IT dan menyelesaikan proyek akhir berupa pembuatan website sekolah terintegrasi.",
           ],
         },
         {
@@ -84,7 +84,7 @@ export const dictionaries = {
           period: "2025 — Sekarang",
           location: "Tangerang, Banten, ID",
           description:
-            "Aktif memanajemen komunitas e-sports kampus dan memimpin penyelengggaraan kompetisi game tingkat universitas.",
+            "Memanajemen komunitas e-sports kampus dan memimpin penyelenggaraan kompetisi game tingkat universitas secara berkala.",
           skills: [
             "Event Management",
             "Leadership",
@@ -93,19 +93,19 @@ export const dictionaries = {
           ],
           details: [
             "Menjadi ketua panitia penyelenggara utama untuk turnamen 'Yatsafest MLBB' pada Februari 2026.",
-            "Mengelola pendaftaran peserta, menyusun jadwal pertandingan, dan mendistribusikan pengumuman resmi.",
-            "Mengoordinasikan komunikasi antar tim divisi e-sports untuk memastikan kelancaran operasional acara.",
+            "Mengelola pendaftaran peserta, menyusun jadwal pertandingan, dan mendistribusikan pengumuman resmi acara.",
+            "Mengoordinasikan komunikasi lintas divisi untuk memastikan kelancaran operasional turnamen.",
           ],
         },
         {
           id: "other-org",
           type: "Organization",
-          role: "Ketua Karang Taruna Tingkat RT",
+          role: "Ketua Karang Taruna (Tingkat RT)",
           company: "Organisasi Kepemudaan",
           period: "2024 — Sekarang",
           location: "Tangerang, Banten, ID",
           description:
-            "Memimpin dan mengoordinasikan pemuda-pemudi di tingkat RT dalam berbagai kegiatan sosial dan kemasyarakatan.",
+            "Memimpin dan mengoordinasikan generasi muda di lingkungan sekitar dalam berbagai inisiatif sosial dan kemasyarakatan.",
           skills: [
             "Leadership",
             "Public Speaking",
@@ -113,8 +113,8 @@ export const dictionaries = {
             "Community Organizing",
           ],
           details: [
-            "Menginisiasi dan menyelenggarakan berbagai kegiatan sosial, gotong royong, olahraga, dan perayaan hari besar.",
-            "Menjadi mediator dan jembatan komunikasi antara pengurus RT dan pemuda setempat untuk memajukan lingkungan.",
+            "Menginisiasi dan menyelenggarakan kegiatan sosial rutin, gotong royong, serta perayaan hari besar nasional.",
+            "Menjadi mediator komunikasi antara pengurus RT dan pemuda setempat guna memajukan fasilitas lingkungan.",
           ],
         },
         {
@@ -125,12 +125,12 @@ export const dictionaries = {
           period: "Feb '26 — Sekarang",
           location: "Jakarta (Remote), ID",
           description:
-            "Program beasiswa intensif pengembangan Full-Stack Developer untuk menguasai ekosistem modern web development skala industri.",
+            "Program beasiswa intensif pengembangan Full-Stack Developer untuk menguasai ekosistem web development skala industri modern.",
           skills: ["Next.js", "React", "Node.js", "Tailwind CSS"],
           details: [
-            "Mempelajari arsitektur aplikasi web modern dan skalabilitas.",
-            "Membangun proyek nyata dengan fokus pada best practices coding.",
-            "Mengembangkan soft skill esensial seperti produktivitas personal dan kolaborasi tim.",
+            "Mempelajari arsitektur aplikasi web modern, manajemen state, dan skalabilitas sistem.",
+            "Membangun proyek nyata yang menuntut penerapan clean code dan best practices industri.",
+            "Mengembangkan soft skill esensial seperti produktivitas personal dan kolaborasi tim via Git.",
           ],
         },
         {
@@ -141,26 +141,26 @@ export const dictionaries = {
           period: "Jan '22 — Mar '22",
           location: "Tangerang, Banten, ID",
           description:
-            "Bertanggung jawab dalam mengoptimalkan visibilitas mesin pencari dan peringkat website perusahaan melalui strategi teknis dan analitik.",
+            "Bertanggung jawab dalam mengoptimalkan visibilitas mesin pencari dan peringkat website perusahaan melalui pendekatan teknis dan analitik.",
           skills: [
-            "Search Engine Optimization (SEO)",
+            "Search Engine Optimization",
             "Web Analytics",
             "Technical SEO",
             "Keyword Research",
           ],
           details: [
-            "Melakukan riset kata kunci dan audit teknis website untuk meningkatkan performa pencarian organik.",
-            "Menerapkan praktik terbaik SEO on-page pada struktur website dan konten untuk meningkatkan traffic.",
-            "Menganalisis performa website dan memastikan situs web ramah terhadap mesin pencari.",
+            "Melakukan riset kata kunci komprehensif dan audit teknis website untuk meningkatkan performa organik.",
+            "Menerapkan praktik terbaik SEO on-page pada struktur website dan konten pemasaran digital.",
+            "Menganalisis matriks performa situs web dan memastikan struktur kode ramah terhadap mesin pencari (SEO-friendly).",
           ],
         },
       ],
     },
     projects: {
-      badge: "Projects",
+      badge: "Karya",
       title: "Karya Pilihan",
       subtitle:
-        "Eksplorasi kode dan desain dalam membangun aplikasi web yang modern dan responsif.",
+        "Eksplorasi kode, arsitektur, dan desain dalam membangun aplikasi web yang fungsional dan responsif.",
       list: [
         {
           id: "01",
@@ -168,12 +168,12 @@ export const dictionaries = {
           category: "LMS Platform",
           image: "/projects/akadmeet.png",
           description:
-            "Platform Learning Management System (LMS) komprehensif yang dirancang untuk mendigitalkan ekosistem akademik kampus.",
+            "Platform Learning Management System (LMS) komprehensif yang dirancang untuk mendigitalkan dan menyederhanakan ekosistem akademik kampus.",
           tech: ["Laravel", "MySQL", "Tailwind CSS"],
           features: [
-            "Manajemen mata kuliah",
-            "Penyerahan tugas real-time",
-            "Dashboard analitik",
+            "Manajemen mata kuliah & materi",
+            "Penyerahan tugas secara real-time",
+            "Dashboard analitik mahasiswa",
           ],
           link: "https://github.com/ouchycode/akad-meet-v2",
         },
@@ -183,12 +183,12 @@ export const dictionaries = {
           category: "EdTech",
           image: "/projects/nex-learn.png",
           description:
-            "Platform pembelajaran digital interaktif dengan antarmuka modern.",
+            "Aplikasi e-learning interaktif dengan antarmuka modern yang memudahkan akses materi pendidikan secara daring.",
           tech: ["React", "Next.js", "Tailwind CSS"],
           features: [
-            "Katalog kelas interaktif",
-            "Tracking progres belajar",
-            "Responsive design",
+            "Katalog kelas & modul interaktif",
+            "Pelacakan (tracking) progres belajar",
+            "Desain responsif lintas perangkat",
           ],
           link: "https://github.com/ouchycode/nexlearn",
         },
@@ -198,12 +198,12 @@ export const dictionaries = {
           category: "Event Management",
           image: "/projects/kampustix.png",
           description:
-            "Sistem manajemen acara dan distribusi tiket digital untuk kegiatan kampus.",
+            "Sistem manajemen acara dan distribusi tiket digital yang dirancang khusus untuk memfasilitasi berbagai kegiatan di lingkungan kampus.",
           tech: ["JavaScript", "React", "Tailwind CSS"],
           features: [
-            "Registrasi event",
-            "QR Code validation",
-            "Dashboard panitia",
+            "Registrasi peserta otomatis",
+            "Validasi tiket via QR Code",
+            "Dashboard manajemen panitia",
           ],
           link: "https://github.com/ouchycode/kampustix",
         },
@@ -213,12 +213,12 @@ export const dictionaries = {
           category: "E-Commerce",
           image: "/projects/kryo-shop.png",
           description:
-            "Aplikasi e-commerce modern dengan pengalaman belanja interaktif.",
+            "Aplikasi e-commerce modern yang menawarkan pengalaman berbelanja digital yang cepat, aman, dan interaktif.",
           tech: ["Next.js", "TypeScript", "Tailwind CSS"],
           features: [
-            "Dynamic product catalog",
-            "Real-time cart",
-            "Payment integration",
+            "Katalog produk dinamis",
+            "Keranjang belanja (cart) real-time",
+            "Integrasi sistem pembayaran",
           ],
           link: "https://github.com/ouchycode/toko-online",
         },
@@ -228,12 +228,12 @@ export const dictionaries = {
           category: "Modern Portfolio",
           image: "/projects/portfolio.png",
           description:
-            "Website portofolio personal interaktif dengan animasi modern.",
+            "Website portofolio personal yang memadukan desain minimalis dengan animasi transisi yang modern untuk menampilkan hasil karya.",
           tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
           features: [
-            "Responsive design",
-            "SEO optimization",
-            "Dynamic content structure",
+            "Desain responsif & adaptif",
+            "Optimasi SEO & performa",
+            "Struktur konten yang dinamis",
           ],
           link: "https://craftedbykevin.vercel.app/",
         },
@@ -243,9 +243,13 @@ export const dictionaries = {
           category: "Web Application",
           image: "/projects/movie-app.png",
           description:
-            "Aplikasi pencarian film dengan informasi rating dan sinopsis.",
+            "Aplikasi katalog film yang terintegrasi dengan API eksternal untuk menyajikan informasi rating, sinopsis, dan tren film terkini.",
           tech: ["React", "Tailwind CSS", "API Integration"],
-          features: ["Search real-time", "Movie details", "Trending catalog"],
+          features: [
+            "Pencarian judul real-time",
+            "Detail film & pemeran komprehensif",
+            "Katalog trending harian/mingguan",
+          ],
           link: "https://movie-app-ultimate-hlye7zg8p-ouchycodes-projects.vercel.app/",
         },
         {
@@ -254,12 +258,12 @@ export const dictionaries = {
           category: "Mobile Application",
           image: "/projects/iuran-warga.png",
           description:
-            "Aplikasi pencatatan iuran warga untuk kegiatan komunitas.",
+            "Aplikasi berbasis web untuk mencatat dan memonitor transparansi pembayaran iuran warga pada kegiatan tingkat komunitas.",
           tech: ["React", "Tailwind CSS", "Firebase"],
           features: [
-            "Real-time payment tracking",
-            "Dashboard dana",
-            "Status pembayaran",
+            "Pelacakan status pembayaran real-time",
+            "Dashboard transparansi dana",
+            "Manajemen riwayat transaksi",
           ],
           link: "https://fkra-app.web.app/",
         },
@@ -269,11 +273,11 @@ export const dictionaries = {
       badgeStack: "Tech Stack",
       titleStack: "Keahlian & Teknologi",
       subtitleStack:
-        "Koleksi alat, bahasa, dan framework yang saya gunakan untuk mewujudkan ide menjadi produk digital.",
+        "Koleksi alat, bahasa pemrograman, dan framework yang saya gunakan untuk mewujudkan ide menjadi produk digital yang solid.",
       badgeCert: "Credentials",
       titleCert: "Sertifikasi & Lisensi",
       subtitleCert:
-        "Validasi kompetensi dan komitmen saya terhadap pembelajaran berkelanjutan.",
+        "Validasi kompetensi teknis dan komitmen saya terhadap proses pembelajaran yang berkelanjutan.",
       certs: [
         {
           id: "01",
@@ -371,33 +375,34 @@ export const dictionaries = {
     contact: {
       title: "Mari Berkolaborasi",
       subtitle:
-        "Tertarik untuk bekerja sama, diskusi proyek, atau sekadar menyapa? Inbox saya selalu terbuka.",
+        "Tertarik untuk bekerja sama, berdiskusi mengenai proyek, atau sekadar menyapa? Kotak masuk saya selalu terbuka.",
       fastResponse: "Membalas dalam 1×24 Jam",
       infoTitle: "Informasi Kontak",
       infoDesc:
-        "Jangan ragu untuk menghubungi saya secara langsung melalui email atau media sosial di bawah ini.",
+        "Jangan ragu untuk menghubungi saya secara langsung melalui email atau terhubung via media sosial di bawah ini.",
       formName: "Nama Lengkap",
       formNamePlaceholder: "Masukkan nama Anda",
       formEmail: "Alamat Email",
       formMessage: "Detail Pesan",
-      formMessagePlaceholder: "Ceritakan tentang proyek atau ide Anda...",
+      formMessagePlaceholder:
+        "Ceritakan singkat tentang proyek atau ide Anda...",
       btnSubmit: "Kirim Pesan",
     },
     footer: {
-      available: "Tersedia untuk peluang baru",
-      title: "Siap berkolaborasi?",
-      desc: "Mari diskusikan ide Anda. Saya siap membantu merancang dan membangun antarmuka digital yang berdampak.",
+      available: "Terbuka untuk Peluang Baru",
+      title: "Siap Berkolaborasi?",
+      desc: "Mari diskusikan ide Anda. Saya siap membantu merancang dan membangun antarmuka digital yang memberikan dampak positif.",
       btn: "Mulai Percakapan",
     },
     cvModal: {
       badge: "Dokumen Resmi",
       title: "Curriculum Vitae",
       subtitle: "Kevin Ardiansyah — Frontend Engineer",
-      openFull: "Buka Layar Penuh",
+      openFull: "Buka Tab Baru",
       download: "Unduh PDF",
     },
     experienceModal: {
-      summary: "Ringkasan",
+      summary: "Ringkasan Peran",
       achievements: "Kontribusi & Pencapaian",
       skills: "Keahlian & Teknologi",
     },
@@ -405,10 +410,10 @@ export const dictionaries = {
       descTitle: "Deskripsi Proyek",
       featuresTitle: "Fitur Utama",
       techTitle: "Teknologi yang Digunakan",
-      btn: "Lihat Proyek",
+      btn: "Kunjungi Proyek",
     },
     certModal: {
-      verified: "Verified",
+      verified: "Terverifikasi",
       issuer: "Diterbitkan oleh",
       btn: "Buka Dokumen Asli",
     },
@@ -425,21 +430,21 @@ export const dictionaries = {
     hero: {
       greeting: "Hi, I'm Kevin",
       role: "Developer.",
-      desc: "Building fast, aesthetic, and functional web interfaces. Focused on intuitive user experiences and clean code.",
-      btnProject: "View Projects",
+      desc: "Building fast, aesthetic, and functional web interfaces. Focused on delivering intuitive user experiences and writing clean code.",
+      btnProject: "View Works",
       btnResume: "View Resume",
       locationLabel: "Location",
       locationValue: "Tangerang, ID",
       statusLabel: "Status",
-      statusValue: "Available to work",
+      statusValue: "Available to Work",
     },
     about: {
       title: "Get to Know Me",
       tag: "Frontend Engineer",
       headline:
-        "Undergraduate student at Universitas Yatsi Madani focused on translating designs into interactive web interfaces.",
+        "Undergraduate student at Universitas Yatsi Madani, enthusiastic about translating designs into interactive web interfaces.",
       description:
-        "Based in Tangerang, my daily life revolves around the modern Frontend ecosystem. Besides writing code, I enjoy exploring graphic design, UI/UX, and keeping up with e-sports and photography trends.",
+        "Based in Tangerang, my daily routine revolves around the modern web ecosystem. Besides writing code, I enjoy exploring UI/UX design and keeping up with the latest trends in e-sports and photography.",
       eduLabel: "Current Education",
       eduValue: "B.Sc. in Computer Science - Universitas Yatsi Madani",
     },
@@ -447,7 +452,7 @@ export const dictionaries = {
       badge: "Experience",
       title: "Career Journey",
       subtitle:
-        "Academic and professional footsteps in building a foundation of web development expertise.",
+        "Academic and professional footsteps in building a solid foundation of software development expertise.",
       list: [
         {
           id: "uym-study",
@@ -457,7 +462,7 @@ export const dictionaries = {
           period: "2023 — Present",
           location: "Tangerang, Banten, ID",
           description:
-            "Pursuing a Bachelor's degree in Computer Science at the Faculty of Technology and Business, focusing on web development and software engineering.",
+            "Pursuing a Bachelor's degree in Computer Science at the Faculty of Technology and Business, with a deep focus on software engineering and web development.",
           skills: [
             "Web Development",
             "System Analysis",
@@ -465,9 +470,9 @@ export const dictionaries = {
             "Frontend Development",
           ],
           details: [
-            "Achieved a Current Cumulative GPA of 3.86 / 4.00.",
-            "Played an active role in designing and developing the online academic guidance system 'AkadMeet'.",
-            "Studied the foundations of system architecture, algorithm design, and computer network configuration.",
+            "Achieved a current Cumulative Grade Point Average (CGPA) of 3.86 / 4.00.",
+            "Played an active role in designing and developing 'AkadMeet', an online academic guidance system.",
+            "Studied the foundational concepts of system architecture, algorithm design, and computer network configuration.",
           ],
         },
         {
@@ -478,7 +483,7 @@ export const dictionaries = {
           period: "2020 — 2023",
           location: "Tangerang, Banten, ID",
           description:
-            "Built early foundations in programming, computer logic, and an understanding of networking systems.",
+            "Built early foundations in the programming world, mastering algorithmic logic and understanding basic network infrastructure.",
           skills: [
             "HTML & CSS",
             "Algorithm Logic",
@@ -486,8 +491,8 @@ export const dictionaries = {
             "Teamwork",
           ],
           details: [
-            "Graduated with excellent scores in the vocational competency exam.",
-            "Active in IT extracurricular activities and completed a final project building a simple website.",
+            "Graduated with excellent scores in the final vocational competency examination.",
+            "Actively participated in IT extracurricular activities and successfully built an integrated school website as a final project.",
           ],
         },
         {
@@ -498,7 +503,7 @@ export const dictionaries = {
           period: "2025 — Present",
           location: "Tangerang, Banten, ID",
           description:
-            "Actively managing the campus e-sports community and leading university-level gaming competitions.",
+            "Actively managing the campus e-sports community and leading the execution of university-level gaming competitions.",
           skills: [
             "Event Management",
             "Leadership",
@@ -506,20 +511,20 @@ export const dictionaries = {
             "Public Relations",
           ],
           details: [
-            "Served as the main organizing committee for the campus tournament 'Yatsafest MLBB' in February 2026.",
-            "Managed participant registration, scheduling, and official announcements distribution.",
-            "Coordinated communication between e-sports division teams to ensure smooth event operations.",
+            "Served as the main organizing committee head for the 'Yatsafest MLBB' campus tournament in February 2026.",
+            "Managed participant registrations, created match schedules, and distributed official event announcements.",
+            "Coordinated cross-division communication to ensure the smooth operational flow of the tournament.",
           ],
         },
         {
           id: "other-org",
           type: "Organization",
-          role: "Head of RT Youth Organization (Karang Taruna)",
-          company: "Youth Organization",
+          role: "Head of RT Youth Organization",
+          company: "Local Youth Organization",
           period: "2024 — Present",
           location: "Tangerang, Banten, ID",
           description:
-            "Leading and coordinating the youth at the neighborhood (RT) level in various social and community activities.",
+            "Leading and coordinating the local youth at the neighborhood (RT) level in various social and community initiatives.",
           skills: [
             "Leadership",
             "Public Speaking",
@@ -527,8 +532,8 @@ export const dictionaries = {
             "Community Organizing",
           ],
           details: [
-            "Initiated and organized various social events, mutual cooperation (gotong royong), sports activities, and holiday celebrations.",
-            "Acted as a mediator and communication bridge between the neighborhood committee and local youth to improve the environment.",
+            "Initiated and organized regular social events, mutual cooperation (gotong royong), and national holiday celebrations.",
+            "Acted as a communication mediator between the neighborhood committee and local youth to improve community facilities.",
           ],
         },
         {
@@ -539,12 +544,12 @@ export const dictionaries = {
           period: "Feb '26 — Present",
           location: "Jakarta (Remote), ID",
           description:
-            "Intensive scholarship program for Full-Stack Development to master the modern industrial-scale web development ecosystem.",
+            "An intensive Full-Stack Developer scholarship program aimed at mastering the modern, industrial-scale web development ecosystem.",
           skills: ["Next.js", "React", "Node.js", "Tailwind CSS"],
           details: [
-            "Studied modern web application architecture and scalability.",
-            "Built real-world projects with a focus on coding best practices.",
-            "Developed essential soft skills such as personal productivity and team collaboration.",
+            "Studied modern web application architecture, state management, and system scalability.",
+            "Built real-world projects emphasizing clean code application and industry best practices.",
+            "Developed essential soft skills including personal productivity and team collaboration via Git.",
           ],
         },
         {
@@ -555,17 +560,17 @@ export const dictionaries = {
           period: "Jan '22 — Mar '22",
           location: "Tangerang, Banten, ID",
           description:
-            "Responsible for optimizing search engine visibility and company website rankings through technical and analytical strategies.",
+            "Responsible for optimizing search engine visibility and company website rankings through technical and analytical approaches.",
           skills: [
-            "Search Engine Optimization (SEO)",
+            "Search Engine Optimization",
             "Web Analytics",
             "Technical SEO",
             "Keyword Research",
           ],
           details: [
-            "Conducted keyword research and technical website audits to improve organic search performance.",
-            "Implemented on-page SEO best practices on website structure and content to drive traffic.",
-            "Analyzed website performance ensuring the site is search engine friendly.",
+            "Conducted comprehensive keyword research and technical website audits to boost organic performance.",
+            "Implemented on-page SEO best practices on website structure and digital marketing content.",
+            "Analyzed website performance metrics and ensured the codebase structure was highly SEO-friendly.",
           ],
         },
       ],
@@ -574,7 +579,7 @@ export const dictionaries = {
       badge: "Projects",
       title: "Selected Works",
       subtitle:
-        "Exploring code and design in building modern and responsive web applications.",
+        "An exploration of code, architecture, and design in building functional and responsive web applications.",
       list: [
         {
           id: "01",
@@ -582,12 +587,12 @@ export const dictionaries = {
           category: "LMS Platform",
           image: "/projects/akadmeet.png",
           description:
-            "A comprehensive Learning Management System (LMS) platform designed to digitize the campus academic ecosystem.",
+            "A comprehensive Learning Management System (LMS) platform designed to digitize and simplify the campus academic ecosystem.",
           tech: ["Laravel", "MySQL", "Tailwind CSS"],
           features: [
-            "Course management",
+            "Course & module management",
             "Real-time assignment submission",
-            "Analytics dashboard",
+            "Student analytics dashboard",
           ],
           link: "https://github.com/ouchycode/akad-meet-v2",
         },
@@ -597,12 +602,12 @@ export const dictionaries = {
           category: "EdTech",
           image: "/projects/nex-learn.png",
           description:
-            "Interactive digital learning platform with a modern interface.",
+            "An interactive digital e-learning application featuring a modern interface for easy access to educational materials.",
           tech: ["React", "Next.js", "Tailwind CSS"],
           features: [
-            "Interactive class catalog",
+            "Interactive class & module catalog",
             "Learning progress tracking",
-            "Responsive design",
+            "Cross-device responsive design",
           ],
           link: "https://github.com/ouchycode/nexlearn",
         },
@@ -612,12 +617,12 @@ export const dictionaries = {
           category: "Event Management",
           image: "/projects/kampustix.png",
           description:
-            "Event management and digital ticket distribution system for campus activities.",
+            "A digital event management and ticket distribution system specifically tailored to facilitate campus activities.",
           tech: ["JavaScript", "React", "Tailwind CSS"],
           features: [
-            "Event registration",
-            "QR Code validation",
-            "Committee dashboard",
+            "Automated participant registration",
+            "Ticket validation via QR Code",
+            "Committee management dashboard",
           ],
           link: "https://github.com/ouchycode/kampustix",
         },
@@ -627,12 +632,12 @@ export const dictionaries = {
           category: "E-Commerce",
           image: "/projects/kryo-shop.png",
           description:
-            "Modern e-commerce application with an interactive shopping experience.",
+            "A modern e-commerce application offering a fast, secure, and interactive digital shopping experience.",
           tech: ["Next.js", "TypeScript", "Tailwind CSS"],
           features: [
             "Dynamic product catalog",
-            "Real-time cart",
-            "Payment integration",
+            "Real-time shopping cart",
+            "Payment gateway integration",
           ],
           link: "https://github.com/ouchycode/toko-online",
         },
@@ -642,11 +647,11 @@ export const dictionaries = {
           category: "Modern Portfolio",
           image: "/projects/portfolio.png",
           description:
-            "Interactive personal portfolio website with modern animations.",
+            "A personal interactive portfolio website combining minimalist design with modern transition animations to showcase works.",
           tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
           features: [
-            "Responsive design",
-            "SEO optimization",
+            "Adaptive & responsive design",
+            "SEO & performance optimization",
             "Dynamic content structure",
           ],
           link: "https://craftedbykevin.vercel.app/",
@@ -657,9 +662,13 @@ export const dictionaries = {
           category: "Web Application",
           image: "/projects/movie-app.png",
           description:
-            "Movie search application with rating and synopsis information.",
+            "A movie catalog application integrated with an external API to present ratings, synopses, and the latest film trends.",
           tech: ["React", "Tailwind CSS", "API Integration"],
-          features: ["Real-time search", "Movie details", "Trending catalog"],
+          features: [
+            "Real-time title search",
+            "Comprehensive movie & cast details",
+            "Daily/weekly trending catalog",
+          ],
           link: "https://movie-app-ultimate-hlye7zg8p-ouchycodes-projects.vercel.app/",
         },
         {
@@ -668,12 +677,12 @@ export const dictionaries = {
           category: "Mobile Application",
           image: "/projects/iuran-warga.png",
           description:
-            "Citizen dues recording application for community activities.",
+            "A web-based application designed to record and monitor the transparency of citizen dues payments for community activities.",
           tech: ["React", "Tailwind CSS", "Firebase"],
           features: [
-            "Real-time payment tracking",
-            "Fund dashboard",
-            "Payment status",
+            "Real-time payment status tracking",
+            "Fund transparency dashboard",
+            "Transaction history management",
           ],
           link: "https://fkra-app.web.app/",
         },
@@ -683,11 +692,11 @@ export const dictionaries = {
       badgeStack: "Tech Stack",
       titleStack: "Skills & Technologies",
       subtitleStack:
-        "A collection of tools, languages, and frameworks I use to turn ideas into digital products.",
+        "A curated collection of tools, programming languages, and frameworks I utilize to turn ideas into solid digital products.",
       badgeCert: "Credentials",
       titleCert: "Certifications & Licenses",
       subtitleCert:
-        "Validating my competence and commitment to continuous learning.",
+        "Validating my technical competence and ongoing commitment to a continuous learning process.",
       certs: [
         {
           id: "01",
@@ -785,33 +794,33 @@ export const dictionaries = {
     contact: {
       title: "Let's Collaborate",
       subtitle:
-        "Interested in working together, discussing a project, or just saying hi? My inbox is always open.",
+        "Interested in working together, discussing a potential project, or simply saying hi? My inbox is always open.",
       fastResponse: "Replies within 24 Hours",
       infoTitle: "Contact Information",
       infoDesc:
-        "Feel free to reach out to me directly via email or social media below.",
+        "Please feel free to reach out to me directly via email or connect through the social media links below.",
       formName: "Full Name",
       formNamePlaceholder: "Enter your name",
       formEmail: "Email Address",
       formMessage: "Message Details",
-      formMessagePlaceholder: "Tell me about your project or idea...",
+      formMessagePlaceholder: "Briefly tell me about your project or idea...",
       btnSubmit: "Send Message",
     },
     footer: {
-      available: "Available for new opportunities",
-      title: "Ready to collaborate?",
-      desc: "Let's discuss your ideas. I'm ready to help design and build impactful digital interfaces.",
+      available: "Open for New Opportunities",
+      title: "Ready to Collaborate?",
+      desc: "Let's discuss your ideas. I am prepared to help design and build digital interfaces that make a positive impact.",
       btn: "Start a Conversation",
     },
     cvModal: {
       badge: "Official Document",
       title: "Curriculum Vitae",
       subtitle: "Kevin Ardiansyah — Frontend Engineer",
-      openFull: "Open Full Screen",
+      openFull: "Open in New Tab",
       download: "Download PDF",
     },
     experienceModal: {
-      summary: "Summary",
+      summary: "Role Summary",
       achievements: "Contributions & Achievements",
       skills: "Skills & Technologies",
     },
@@ -819,7 +828,7 @@ export const dictionaries = {
       descTitle: "Project Description",
       featuresTitle: "Key Features",
       techTitle: "Technologies Used",
-      btn: "View Project",
+      btn: "Visit Project",
     },
     certModal: {
       verified: "Verified",

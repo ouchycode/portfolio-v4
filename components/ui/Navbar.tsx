@@ -16,9 +16,8 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/context/LanguageContext"; // Import context bahasa
+import { useLanguage } from "@/context/LanguageContext";
 
-// Kita gunakan 'key' untuk mencocokkan dengan dictionaries
 const navLinks = [
   { href: "#", icon: Home, key: "home" },
   { href: "#about", icon: User, key: "about" },
@@ -30,7 +29,7 @@ const navLinks = [
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const { t, language, setLanguage } = useLanguage(); // Ambil language dan setLanguage
+  const { t, language, setLanguage } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("#");
@@ -39,7 +38,6 @@ export default function Navbar() {
 
   const closeMenu = () => setIsOpen(false);
 
-  // Fungsi ganti bahasa
   const toggleLanguage = () => {
     setLanguage(language === "id" ? "en" : "id");
   };
@@ -72,7 +70,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-
       const offset = window.innerHeight * 0.3;
       let current = "#";
 
@@ -99,7 +96,6 @@ export default function Navbar() {
 
   if (!mounted) return null;
 
-  // Fungsi untuk mengambil label bahasa yang sesuai
   const getLabel = (key: string) => {
     return t.nav[key as keyof typeof t.nav];
   };
@@ -108,7 +104,7 @@ export default function Navbar() {
     active === "#" ? t.nav.home : getLabel(active.replace("#", ""));
 
   return (
-    <nav className="fixed top-5 left-0 right-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
+    <nav className="fixed top-6 left-0 right-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
       {/* ========================================= */}
       {/* DESKTOP FLOATING NAVBAR */}
       {/* ========================================= */}
@@ -118,38 +114,39 @@ export default function Navbar() {
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         className="
           hidden md:flex pointer-events-auto items-center gap-1.5 p-2 
-          rounded-full border border-white/60 dark:border-[#3C4043] 
-          bg-white/80 dark:bg-[#303134]/80 backdrop-blur-md 
-          shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]
+          rounded-full border border-[#DADCE0] dark:border-[#3C4043] 
+          bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm
         "
       >
         {navLinks.map((link) => {
           const isActive = active === link.href;
           const Icon = link.icon;
-          const label = getLabel(link.key); // Terjemahkan label
+          const label = getLabel(link.key);
+
           return (
             <a
               key={link.key}
               href={link.href}
               onClick={(e) => handleScrollTo(e, link.href)}
               className={`
-                relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-300 group
+                relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors duration-200 group
                 ${
                   isActive
-                    ? "bg-[#1A73E8] text-white shadow-md"
-                    : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#202124] dark:hover:text-white"
+                    ? "bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]"
+                    : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-[#E8EAED]"
                 }
               `}
             >
               <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
               <span
-                className={`text-sm font-bold tracking-wide ${isActive ? "block" : "hidden lg:block"}`}
+                className={`text-sm font-medium tracking-wide ${isActive ? "block" : "hidden lg:block"}`}
               >
                 {label}
               </span>
 
+              {/* Material Tooltip (Muncul saat hover di mode ringkas/tablet) */}
               {!isActive && (
-                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-[#202124] dark:bg-white text-white dark:text-[#202124] text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity lg:hidden pointer-events-none whitespace-nowrap">
+                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-2.5 py-1.5 bg-[#444746] dark:bg-[#E8EAED] text-white dark:text-[#202124] text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity lg:hidden pointer-events-none whitespace-nowrap shadow-sm">
                   {label}
                 </span>
               )}
@@ -157,12 +154,13 @@ export default function Navbar() {
           );
         })}
 
-        <div className="w-px h-8 bg-[#DADCE0] dark:bg-[#5F6368] mx-2" />
+        {/* Divider */}
+        <div className="w-px h-6 bg-[#DADCE0] dark:bg-[#5F6368] mx-2" />
 
         {/* TOMBOL BAHASA (DESKTOP) */}
         <button
           onClick={toggleLanguage}
-          className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#1A73E8] transition-colors font-extrabold text-xs"
+          className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] hover:text-[#1A73E8] dark:hover:text-[#8AB4F8] transition-colors font-semibold text-xs tracking-wider"
           aria-label="Toggle Language"
         >
           {language.toUpperCase()}
@@ -171,7 +169,7 @@ export default function Navbar() {
         {/* TOMBOL THEME (DESKTOP) */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#1A73E8] transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] hover:text-[#1A73E8] dark:hover:text-[#8AB4F8] transition-colors"
           aria-label="Toggle Theme"
         >
           {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
@@ -184,23 +182,22 @@ export default function Navbar() {
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="flex md:hidden pointer-events-auto items-center gap-2"
+        className="flex md:hidden pointer-events-auto items-center gap-3"
       >
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="
-            flex items-center gap-3 px-4 h-12 
+            flex items-center gap-3 px-5 h-12 
             rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
-            border border-white/60 dark:border-[#3C4043]
+            border border-[#DADCE0] dark:border-[#3C4043]
             text-[#202124] dark:text-[#E8EAED]
-            shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]
-            hover:border-[#1A73E8] dark:hover:border-[#8AB4F8]
+            shadow-sm hover:shadow-md active:scale-95
             transition-all duration-300
           "
         >
-          <div className="flex items-center justify-center w-6 h-6">
+          <div className="flex items-center justify-center w-5 h-5">
             {isOpen ? (
-              <X size={20} className="text-[#EA4335]" />
+              <X size={20} className="text-[#5F6368] dark:text-[#9AA0A6]" />
             ) : (
               <Menu size={20} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
             )}
@@ -208,7 +205,7 @@ export default function Navbar() {
 
           <div className="w-px h-4 bg-[#DADCE0] dark:bg-[#5F6368]" />
 
-          <span className="text-sm font-bold tracking-tight min-w-[70px] text-left">
+          <span className="text-sm font-medium tracking-wide min-w-[75px] text-left">
             {isOpen ? (language === "id" ? "Tutup" : "Close") : activeLabel}
           </span>
 
@@ -216,43 +213,31 @@ export default function Navbar() {
             animate={{ rotate: isOpen ? 180 : 0 }}
             className="text-[#5F6368] dark:text-[#9AA0A6]"
           >
-            <ChevronDown size={16} />
+            <ChevronDown size={18} />
           </motion.div>
         </button>
 
-        {/* TOMBOL BAHASA (MOBILE) */}
-        <button
-          onClick={toggleLanguage}
-          className="
-            flex items-center justify-center w-12 h-12 
-            rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
-            border border-white/60 dark:border-[#3C4043]
-            text-[#5F6368] dark:text-[#9AA0A6]
-            shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]
-            active:scale-90 transition-all font-extrabold text-sm
-          "
-        >
-          {language.toUpperCase()}
-        </button>
+        <div className="flex items-center gap-2 bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md border border-[#DADCE0] dark:border-[#3C4043] rounded-full p-1 shadow-sm">
+          {/* TOMBOL BAHASA (MOBILE) */}
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] active:scale-90 transition-all font-semibold text-xs"
+          >
+            {language.toUpperCase()}
+          </button>
 
-        {/* TOMBOL THEME (MOBILE) */}
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="
-            flex items-center justify-center w-12 h-12 
-            rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
-            border border-white/60 dark:border-[#3C4043]
-            text-[#5F6368] dark:text-[#9AA0A6]
-            shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]
-            active:scale-90 transition-all
-          "
-        >
-          {theme === "dark" ? (
-            <Sun size={20} className="text-[#FBBC05]" />
-          ) : (
-            <Moon size={20} className="text-[#1A73E8]" />
-          )}
-        </button>
+          {/* TOMBOL THEME (MOBILE) */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] active:scale-90 transition-all"
+          >
+            {theme === "dark" ? (
+              <Sun size={18} className="text-[#FABB05]" />
+            ) : (
+              <Moon size={18} className="text-[#1A73E8]" />
+            )}
+          </button>
+        </div>
       </motion.div>
 
       {/* ========================================= */}
@@ -260,31 +245,29 @@ export default function Navbar() {
       {/* ========================================= */}
       <AnimatePresence>
         {isOpen && (
-          <div className="md:hidden flex flex-col items-center w-full">
+          <div className="md:hidden flex flex-col items-center w-full mt-3">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeMenu}
-              className="fixed inset-0 bg-black/10 dark:bg-black/40 pointer-events-auto backdrop-blur-[2px] -z-10"
+              className="fixed inset-0 bg-black/20 dark:bg-black/50 pointer-events-auto backdrop-blur-sm -z-10"
             />
 
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="
-                pointer-events-auto
-                mt-3 p-3 w-full max-w-[320px]
-                rounded-[28px] border border-white/60 dark:border-[#3C4043]
-                bg-white/90 dark:bg-[#303134]/90
-                backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.75)]
+                pointer-events-auto w-full max-w-[320px]
+                rounded-3xl border border-[#DADCE0] dark:border-[#3C4043]
+                bg-white dark:bg-[#303134] shadow-md overflow-hidden p-3
               "
             >
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 <div className="px-4 py-2 mb-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5F6368] dark:text-[#9AA0A6]">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                     {language === "id" ? "Navigasi" : "Navigation"}
                   </p>
                 </div>
@@ -292,7 +275,7 @@ export default function Navbar() {
                 {navLinks.map((link, i) => {
                   const Icon = link.icon;
                   const isActive = active === link.href;
-                  const label = getLabel(link.key); // Terjemahkan label
+                  const label = getLabel(link.key);
 
                   return (
                     <a
@@ -300,30 +283,24 @@ export default function Navbar() {
                       href={link.href}
                       onClick={(e) => handleScrollTo(e, link.href)}
                       className={`
-                        relative flex items-center gap-4 px-4 py-3 rounded-2xl
-                        transition-all duration-200 group
+                        relative flex items-center gap-4 px-5 py-3.5 rounded-full transition-colors duration-200
                         ${
                           isActive
-                            ? "bg-[#E8F0FE] dark:bg-[#1A73E8]/20 text-[#1A73E8] dark:text-[#8AB4F8]"
-                            : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043]"
+                            ? "bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]"
+                            : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-[#E8EAED]"
                         }
                       `}
                     >
-                      <div
-                        className={`
-                        flex items-center justify-center w-8 h-8 rounded-full transition-colors
-                        ${isActive ? "bg-white dark:bg-[#1A73E8]/30 shadow-sm" : "bg-transparent"}
-                      `}
-                      >
-                        <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
-                      </div>
-                      <span className="text-sm font-bold tracking-tight">
+                      <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                      <span className="text-sm font-medium tracking-wide">
                         {label}
                       </span>
+
+                      {/* Indicator Active Mobile */}
                       {isActive && (
                         <motion.div
-                          layoutId="active-indicator"
-                          className="absolute right-4 w-1.5 h-1.5 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8]"
+                          layoutId="mobile-active-indicator"
+                          className="absolute right-5 w-1.5 h-1.5 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8]"
                         />
                       )}
                     </a>
