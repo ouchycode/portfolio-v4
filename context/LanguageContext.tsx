@@ -1,4 +1,3 @@
-// src/context/LanguageContext.tsx
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
@@ -9,7 +8,7 @@ type Language = "id" | "en";
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: Dictionary; // 't' adalah singkatan dari translation
+  t: Dictionary;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -17,10 +16,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Default bahasa Indonesia
   const [language, setLanguage] = useState<Language>("id");
 
-  // Ambil kamus sesuai bahasa yang sedang aktif
   const t = dictionaries[language];
 
   return (

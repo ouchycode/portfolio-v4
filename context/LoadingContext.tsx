@@ -10,7 +10,7 @@ import {
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext"; // <-- Import untuk multi-bahasa
+import { useLanguage } from "@/context/LanguageContext";
 
 interface LoadingContextType {
   isLoading: boolean;
@@ -23,7 +23,7 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 export function LoadingProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const { language } = useLanguage(); // <-- Ambil state bahasa saat ini
+  const { language } = useLanguage();
 
   const stopLoading = useCallback(() => {
     setIsLoading(false);
@@ -55,22 +55,22 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
     <LoadingContext.Provider value={{ isLoading, startLoading, stopLoading }}>
       {children}
 
-      {/* GLOBAL LOADING UI (Akan muncul di atas semua elemen jika isLoading true) */}
+      {/* GLOBAL LOADING UI */}
       <AnimatePresence>
         {isLoading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/80 dark:bg-[#202124]/80 backdrop-blur-md pointer-events-auto"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#F8F9FA]/90 dark:bg-[#202124]/90 backdrop-blur-sm pointer-events-auto"
           >
             <Loader2
-              size={48}
+              size={44}
               strokeWidth={2.5}
               className="animate-spin text-[#1A73E8] dark:text-[#8AB4F8] mb-4"
             />
-            <p className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6] animate-pulse">
+            <p className="text-sm font-medium uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6] animate-pulse opacity-80">
               {language === "id" ? "Memuat Data..." : "Loading Data..."}
             </p>
           </motion.div>

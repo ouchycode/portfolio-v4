@@ -17,10 +17,15 @@ export default function useSmoothScroll() {
       smoother = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
-        smooth: 1.2,
+
+        smooth: 0.8,
+
         effects: true,
+
         normalizeScroll: false,
-        smoothTouch: 0.1,
+
+        smoothTouch: false,
+
         ignoreMobileResize: true,
       });
     });
