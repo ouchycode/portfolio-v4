@@ -1,13 +1,12 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import TechAndCerts from "@/components/TechAndCerts";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import Experience from "@/components/sections/Experience";
+import Projects from "@/components/sections/Projects";
+import TechAndCerts from "@/components/sections/TechAndCerts";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/ui/Footer";
 
 import useSmoothScroll from "@/hooks/useSmoothScroll";
 
@@ -16,7 +15,6 @@ export default function Home() {
 
   return (
     <main className="relative z-10 flex flex-col w-full overflow-hidden">
-      <Navbar />
       <Hero />
       <About />
       <Experience />

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { LoadingProvider } from "@/context/LoadingContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import Navbar from "@/components/ui/Navbar"; // <-- Import Navbar di sini
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -93,7 +94,10 @@ export default function RootLayout({
                 />
               </div>
 
-              {/* GSAP  */}
+              {/* KUNCI UTAMANYA DI SINI: Letakkan Navbar di LUAR smooth-wrapper */}
+              <Navbar />
+
+              {/* GSAP SCROLL SMOOTHER WRAPPER */}
               <div id="smooth-wrapper" className="relative z-10">
                 <div id="smooth-content">{children}</div>
               </div>

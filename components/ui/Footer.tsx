@@ -11,9 +11,11 @@ import {
 } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
 import { useFooterAnimation } from "@/hooks/useAnimations";
+import { useLanguage } from "@/context/LanguageContext"; // <-- Import context bahasa
 
 export default function Footer() {
   const container = useRef<HTMLElement>(null);
+  const { t } = useLanguage(); // <-- Panggil fungsi translasi
 
   useFooterAnimation(container);
 
@@ -55,30 +57,32 @@ export default function Footer() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#34A853]" />
               </div>
-              Tersedia untuk peluang baru
+              {t.footer.available}
             </div>
 
             <h2 className="footer-item font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
-              Siap berkolaborasi?
+              {t.footer.title}
             </h2>
             <p className="footer-item text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-md mt-1">
-              Mari diskusikan ide Anda. Saya siap membantu merancang dan
-              membangun antarmuka digital yang berdampak.
+              {t.footer.desc}
             </p>
           </div>
 
-          <a
-            href="mailto:kevinnardiansyahh19@gmail.com"
-            className="footer-item group flex items-center justify-center gap-3 shrink-0 h-14 px-8 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-bold text-base shadow-sm transition-all duration-300"
-          >
-            <Mail size={20} strokeWidth={2.5} />
-            Mulai Percakapan
-            <ArrowUpRight
-              size={18}
-              strokeWidth={2.5}
-              className="group-hover:rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
-            />
-          </a>
+          {/* Wrapper GSAP Anti-bentrok untuk tombol */}
+          <div className="footer-item shrink-0">
+            <a
+              href="mailto:kevinnardiansyahh19@gmail.com"
+              className="group flex items-center justify-center gap-3 h-14 px-8 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-bold text-base shadow-sm transition-all duration-300"
+            >
+              <Mail size={20} strokeWidth={2.5} />
+              {t.footer.btn}
+              <ArrowUpRight
+                size={18}
+                strokeWidth={2.5}
+                className="group-hover:rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+              />
+            </a>
+          </div>
         </div>
 
         <div className="flex flex-col gap-6 md:gap-8 pt-8 border-t border-[#DADCE0] dark:border-[#3C4043]">
@@ -101,18 +105,20 @@ export default function Footer() {
               {socials.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-item flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#3C4043] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] text-[#5F6368] dark:text-[#9AA0A6] hover:text-[#1A73E8] dark:hover:text-[#8AB4F8] transition-colors shadow-sm"
-                  >
-                    <Icon size={16} />
-                    <span className="text-xs font-bold uppercase tracking-wider">
-                      {social.name}
-                    </span>
-                  </a>
+                  /* Wrapper GSAP untuk social media links */
+                  <div key={social.name} className="footer-item">
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#3C4043] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] text-[#5F6368] dark:text-[#9AA0A6] hover:text-[#1A73E8] dark:hover:text-[#8AB4F8] transition-colors shadow-sm"
+                    >
+                      <Icon size={16} />
+                      <span className="text-xs font-bold uppercase tracking-wider">
+                        {social.name}
+                      </span>
+                    </a>
+                  </div>
                 );
               })}
             </div>

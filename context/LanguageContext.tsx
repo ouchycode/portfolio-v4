@@ -2,9 +2,9 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-import { dictionaries, Dictionary } from "@/locales/dictionaries";
+import { dictionaries, Dictionary } from "@/data/dictionaries";
 
-type Language = "id" | "en" | "jp";
+type Language = "id" | "en";
 
 interface LanguageContextType {
   language: Language;

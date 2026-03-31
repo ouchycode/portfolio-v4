@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
@@ -9,103 +10,9 @@ import {
   Cpu,
   BadgeCheck,
 } from "lucide-react";
-
-import CertificateModal from "./CredentialsModal";
 import { useTechCertsAnimation } from "@/hooks/useAnimations";
-
-const certificates = [
-  {
-    id: "01",
-    title: "Belajar Dasar Cloud dan Gen AI di AWS",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_BELAJAR DASAR CLOUD DAN GEN AI DI AWS.pdf",
-  },
-  {
-    id: "02",
-    title: "Belajar Dasar Pemrograman JavaScript",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_BELAJAR DASAR PEMPROGRAMAN JAVASCRIPT.pdf",
-  },
-  {
-    id: "03",
-    title: "Belajar Membuat Front-End Web untuk Pemula",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_BELAJAR MEMBUAT FRONT-END WEB UNTUK PEMULA.pdf",
-  },
-  {
-    id: "04",
-    title: "Programming Logic 101",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_PROGRAMMING LOGIC 101.pdf",
-  },
-  {
-    id: "05",
-    title: "Introduction to Financial Literacy",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_INTRODUCTION TO FINANCIAL LITERACY.pdf",
-  },
-  {
-    id: "06",
-    title: "Belajar Membuat Aplikasi Web dengan React",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_BELAJAR MEMBUAT APLIKASI WEB DENGAN REACT.pdf",
-  },
-  {
-    id: "07",
-    title: "Belajar Fundamental Aplikasi Web dengan React",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_BELAJAR FUNDAMENTAL APLIKASI WEB DENGAN REACT.pdf",
-  },
-  {
-    id: "08",
-    title: "Belajar Back-End Pemula dengan JavaScript",
-    issuer: "Dicoding Indonesia",
-    year: "2026",
-    pdf: "/certs/DICODING_BELAJAR BACK-END PEMULA DENGAN JAVASCRIPT.pdf",
-  },
-  {
-    id: "09",
-    title: "Belajar Dasar Pemrograman Web",
-    issuer: "Dicoding Indonesia",
-    year: "2025",
-    pdf: "/certs/DICODING_BELAJAR DASAR PEMPROGRAMAN WEB.pdf",
-  },
-  {
-    id: "10",
-    title: "Belajar Dasar AI",
-    issuer: "Dicoding Indonesia",
-    year: "2025",
-    pdf: "/certs/DICODING_BELAJAR DASAR AI.pdf",
-  },
-  {
-    id: "11",
-    title: "Control Design Onramp with Simulink",
-    issuer: "MathWorks",
-    year: "2025",
-    pdf: "/certs/CONTROL DESIGN ONRAMP WITH SIMULINK.pdf",
-  },
-  {
-    id: "12",
-    title: "Matlab Onramp",
-    issuer: "MathWorks",
-    year: "2025",
-    pdf: "/certs/MATLAP ONRAMP.pdf",
-  },
-  {
-    id: "13",
-    title: "Simulink Onramp",
-    issuer: "MathWorks",
-    year: "2025",
-    pdf: "/certs/SIMULINK ONRAMP.pdf",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
+import { useLoading } from "@/context/LoadingContext"; // <-- Import Loading
 
 const techStack = [
   {
@@ -206,10 +113,9 @@ const techStack = [
 export default function TechAndCerts() {
   const container = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  const [selectedCert, setSelectedCert] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { t } = useLanguage();
+  const { startLoading } = useLoading(); // <-- Panggil fungsi loading
+  const certificates = t.tech.certs;
   const [isPaused, setIsPaused] = useState(false);
 
   useTechCertsAnimation(container);
@@ -229,14 +135,12 @@ export default function TechAndCerts() {
     const gap = window.innerWidth > 768 ? 24 : 16;
     const cardWidth =
       window.innerWidth > 768 ? 380 + gap : window.innerWidth * 0.85 + gap;
-
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
     if (direction === "right" && scrollLeft + clientWidth >= scrollWidth - 10) {
       scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
       return;
     }
-
     scrollRef.current.scrollBy({
       left: direction === "left" ? -cardWidth : cardWidth,
       behavior: "smooth",
@@ -245,41 +149,17 @@ export default function TechAndCerts() {
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
-    if (!isPaused) {
-      interval = setInterval(() => {
-        slide("right");
-      }, 3000);
-    }
-
+    if (!isPaused) interval = setInterval(() => slide("right"), 3000);
     return () => {
       if (interval) clearInterval(interval);
     };
   }, [isPaused]);
 
-  const openCert = (cert: any) => {
-    setSelectedCert(cert);
-    setIsModalOpen(true);
-    setIsPaused(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeCert = () => {
-    setIsModalOpen(false);
-    setIsPaused(false);
-    document.body.style.overflow = "auto";
-  };
-
   return (
     <section
       id="tech"
       ref={container}
-      className="
-        relative overflow-hidden
-        px-0 py-16 md:px-10 md:py-28
-        text-[#202124] dark:text-[#E8EAED]
-        transition-colors duration-500
-      "
+      className="relative overflow-hidden px-0 py-16 md:px-10 md:py-28 text-[#202124] dark:text-[#E8EAED] transition-colors duration-500"
     >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col gap-20 md:gap-28">
         <div className="flex flex-col gap-6 md:gap-8 px-4 md:px-0">
@@ -287,23 +167,20 @@ export default function TechAndCerts() {
             <div className="tech-header inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
               <Cpu size={16} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
               <span className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
-                Tech Stack
+                {t.tech.badgeStack}
               </span>
             </div>
-
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <h2 className="tech-header font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
-                  Keahlian & Teknologi
+                  {t.tech.titleStack}
                 </h2>
                 <p className="tech-header text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
-                  Koleksi alat, bahasa, dan framework yang saya gunakan untuk
-                  mewujudkan ide menjadi produk digital.
+                  {t.tech.subtitleStack}
                 </p>
               </div>
             </div>
           </div>
-
           <div className="w-full rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] p-6 md:p-10 transition-shadow duration-300">
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
               {techStack.map((tech) => (
@@ -325,27 +202,23 @@ export default function TechAndCerts() {
           </div>
         </div>
 
-        {/* CREDENTIALS */}
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="flex flex-col gap-3 px-6 md:px-0">
             <div className="cert-header inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm w-fit">
               <Award size={16} className="text-[#34A853] dark:text-[#81C995]" />
               <span className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
-                Credentials
+                {t.tech.badgeCert}
               </span>
             </div>
-
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
                 <h2 className="cert-header font-extrabold tracking-tight text-3xl md:text-5xl text-[#202124] dark:text-white">
-                  Sertifikasi & Lisensi
+                  {t.tech.titleCert}
                 </h2>
                 <p className="cert-header text-base text-[#5F6368] dark:text-[#9AA0A6] max-w-lg mt-2">
-                  Validasi kompetensi dan komitmen saya terhadap pembelajaran
-                  berkelanjutan.
+                  {t.tech.subtitleCert}
                 </p>
               </div>
-
               <div className="cert-header hidden md:flex gap-3 shrink-0">
                 <button
                   onClick={() => slide("left")}
@@ -376,35 +249,22 @@ export default function TechAndCerts() {
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
               onTouchEnd={() => setIsPaused(false)}
-              className="
-                flex overflow-x-auto gap-4 md:gap-6 
-                pb-12 pt-6 px-6 md:px-0 
-                snap-x snap-mandatory 
-                scroll-smooth
-                touch-pan-x
-                [&::-webkit-scrollbar]:hidden 
-                select-none
-              "
+              className="flex overflow-x-auto gap-4 md:gap-6 pb-12 pt-6 px-6 md:px-0 snap-x snap-mandatory scroll-smooth touch-pan-x [&::-webkit-scrollbar]:hidden select-none"
             >
-              {certificates.map((cert) => (
+              {certificates.map((cert: any) => (
                 <div
                   key={cert.id}
-                  className="cert-card snap-center shrink-0 w-[85vw] md:w-[380px] flex flex-col"
+                  className="cert-card snap-center shrink-0 w-[85vw] md:w-[380px] z-10"
                 >
-                  <div
-                    onClick={() => openCert(cert)}
-                    className="
-                      group relative w-full h-full flex flex-col p-5 cursor-pointer transition-all duration-300
-                      rounded-[24px] border border-white/60 dark:border-[#3C4043] 
-                      bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md 
-                      shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] 
-                      hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]
-                    "
+                  {/* TAMBAHKAN ONCLICK DI SINI */}
+                  <Link
+                    href={`/certificate/${cert.id}`}
+                    onClick={() => startLoading(800)}
+                    className="group relative w-full h-full flex flex-col p-5 cursor-pointer transition-all duration-300 rounded-[24px] border border-white/60 dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)]"
                   >
                     <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.4)] border border-[#DADCE0] dark:border-[#3C4043] backdrop-blur-sm -rotate-6 transition-transform duration-300 group-hover:rotate-0">
                       <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-[#34A853] dark:text-[#81C995]" />
                     </div>
-
                     <div className="flex justify-between items-center mb-4 pl-6 md:pl-8">
                       <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#E6F4EA] dark:bg-[#81C995]/15 text-[#137333] dark:text-[#81C995] text-[11px] font-bold uppercase tracking-wider">
                         {cert.year}
@@ -413,20 +273,18 @@ export default function TechAndCerts() {
                         FIG {cert.id}
                       </span>
                     </div>
-
                     <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden mb-5 border border-[#DADCE0] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
                       <iframe
                         src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
                         className="w-full h-full pointer-events-none opacity-90 group-hover:opacity-100 transition-all duration-500 bg-white"
+                        title={cert.title}
                       />
                       <div className="absolute inset-0 bg-transparent" />
                     </div>
-
                     <div className="flex flex-col flex-1 px-1">
                       <h3 className="font-bold text-lg md:text-xl leading-snug text-[#202124] dark:text-[#E8EAED] group-hover:text-[#34A853] dark:group-hover:text-[#81C995] transition-colors duration-300 line-clamp-2 mb-2">
                         {cert.title}
                       </h3>
-
                       <div className="mt-auto flex items-center justify-between">
                         <p className="text-[13px] md:text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] truncate pr-2">
                           {cert.issuer}
@@ -439,19 +297,13 @@ export default function TechAndCerts() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-
-      <CertificateModal
-        isOpen={isModalOpen}
-        onClose={closeCert}
-        cert={selectedCert}
-      />
     </section>
   );
 }

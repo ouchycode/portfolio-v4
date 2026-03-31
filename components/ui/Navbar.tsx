@@ -16,18 +16,21 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext"; // Import context bahasa
 
+// Kita gunakan 'key' untuk mencocokkan dengan dictionaries
 const navLinks = [
-  { href: "#", icon: Home, label: "Home" },
-  { href: "#about", icon: User, label: "About" },
-  { href: "#experience", icon: GraduationCap, label: "Experience" },
-  { href: "#projects", icon: Briefcase, label: "Projects" },
-  { href: "#tech", icon: Cpu, label: "Tech" },
-  { href: "#contact", icon: MessageSquare, label: "Contact" },
+  { href: "#", icon: Home, key: "home" },
+  { href: "#about", icon: User, key: "about" },
+  { href: "#experience", icon: GraduationCap, key: "experience" },
+  { href: "#projects", icon: Briefcase, key: "projects" },
+  { href: "#tech", icon: Cpu, key: "tech" },
+  { href: "#contact", icon: MessageSquare, key: "contact" },
 ];
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
+  const { t, language, setLanguage } = useLanguage(); // Ambil language dan setLanguage
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("#");
@@ -35,6 +38,11 @@ export default function Navbar() {
   useEffect(() => setMounted(true), []);
 
   const closeMenu = () => setIsOpen(false);
+
+  // Fungsi ganti bahasa
+  const toggleLanguage = () => {
+    setLanguage(language === "id" ? "en" : "id");
+  };
 
   const handleScrollTo = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -91,12 +99,19 @@ export default function Navbar() {
 
   if (!mounted) return null;
 
+  // Fungsi untuk mengambil label bahasa yang sesuai
+  const getLabel = (key: string) => {
+    return t.nav[key as keyof typeof t.nav];
+  };
+
   const activeLabel =
-    navLinks.find((link) => link.href === active)?.label || "Menu";
+    active === "#" ? t.nav.home : getLabel(active.replace("#", ""));
 
   return (
     <nav className="fixed top-5 left-0 right-0 z-[100] flex flex-col items-center px-4 pointer-events-none">
-      {/* DESKTOP FLOTING NAVBAR */}
+      {/* ========================================= */}
+      {/* DESKTOP FLOATING NAVBAR */}
+      {/* ========================================= */}
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -111,9 +126,10 @@ export default function Navbar() {
         {navLinks.map((link) => {
           const isActive = active === link.href;
           const Icon = link.icon;
+          const label = getLabel(link.key); // Terjemahkan label
           return (
             <a
-              key={link.label}
+              key={link.key}
               href={link.href}
               onClick={(e) => handleScrollTo(e, link.href)}
               className={`
@@ -129,12 +145,12 @@ export default function Navbar() {
               <span
                 className={`text-sm font-bold tracking-wide ${isActive ? "block" : "hidden lg:block"}`}
               >
-                {link.label}
+                {label}
               </span>
 
               {!isActive && (
                 <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-[#202124] dark:bg-white text-white dark:text-[#202124] text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity lg:hidden pointer-events-none whitespace-nowrap">
-                  {link.label}
+                  {label}
                 </span>
               )}
             </a>
@@ -143,6 +159,16 @@ export default function Navbar() {
 
         <div className="w-px h-8 bg-[#DADCE0] dark:bg-[#5F6368] mx-2" />
 
+        {/* TOMBOL BAHASA (DESKTOP) */}
+        <button
+          onClick={toggleLanguage}
+          className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#1A73E8] transition-colors font-extrabold text-xs"
+          aria-label="Toggle Language"
+        >
+          {language.toUpperCase()}
+        </button>
+
+        {/* TOMBOL THEME (DESKTOP) */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="flex items-center justify-center w-10 h-10 rounded-full text-[#5F6368] dark:text-[#9AA0A6] hover:bg-black/5 dark:hover:bg-white/10 hover:text-[#1A73E8] transition-colors"
@@ -152,7 +178,9 @@ export default function Navbar() {
         </button>
       </motion.div>
 
+      {/* ========================================= */}
       {/* MOBILE SMART BUTTON */}
+      {/* ========================================= */}
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -181,7 +209,7 @@ export default function Navbar() {
           <div className="w-px h-4 bg-[#DADCE0] dark:bg-[#5F6368]" />
 
           <span className="text-sm font-bold tracking-tight min-w-[70px] text-left">
-            {isOpen ? "Tutup" : activeLabel}
+            {isOpen ? (language === "id" ? "Tutup" : "Close") : activeLabel}
           </span>
 
           <motion.div
@@ -192,6 +220,22 @@ export default function Navbar() {
           </motion.div>
         </button>
 
+        {/* TOMBOL BAHASA (MOBILE) */}
+        <button
+          onClick={toggleLanguage}
+          className="
+            flex items-center justify-center w-12 h-12 
+            rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
+            border border-white/60 dark:border-[#3C4043]
+            text-[#5F6368] dark:text-[#9AA0A6]
+            shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)]
+            active:scale-90 transition-all font-extrabold text-sm
+          "
+        >
+          {language.toUpperCase()}
+        </button>
+
+        {/* TOMBOL THEME (MOBILE) */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="
@@ -211,6 +255,9 @@ export default function Navbar() {
         </button>
       </motion.div>
 
+      {/* ========================================= */}
+      {/* MOBILE DROPDOWN MENU */}
+      {/* ========================================= */}
       <AnimatePresence>
         {isOpen && (
           <div className="md:hidden flex flex-col items-center w-full">
@@ -229,7 +276,7 @@ export default function Navbar() {
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="
                 pointer-events-auto
-                mt-3 p-3 w-full max-w-[260px]
+                mt-3 p-3 w-full max-w-[320px]
                 rounded-[28px] border border-white/60 dark:border-[#3C4043]
                 bg-white/90 dark:bg-[#303134]/90
                 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.75)]
@@ -238,13 +285,14 @@ export default function Navbar() {
               <div className="flex flex-col gap-1.5">
                 <div className="px-4 py-2 mb-1">
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5F6368] dark:text-[#9AA0A6]">
-                    Navigasi
+                    {language === "id" ? "Navigasi" : "Navigation"}
                   </p>
                 </div>
 
                 {navLinks.map((link, i) => {
                   const Icon = link.icon;
                   const isActive = active === link.href;
+                  const label = getLabel(link.key); // Terjemahkan label
 
                   return (
                     <a
@@ -270,7 +318,7 @@ export default function Navbar() {
                         <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
                       </div>
                       <span className="text-sm font-bold tracking-tight">
-                        {link.label}
+                        {label}
                       </span>
                       {isActive && (
                         <motion.div
