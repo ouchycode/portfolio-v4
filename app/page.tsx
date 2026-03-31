@@ -14,7 +14,7 @@ export default function Home() {
   useSmoothScroll();
 
   return (
-    <main className="relative z-10 flex flex-col w-full overflow-hidden">
+    <main className="relative z-10 flex flex-col w-full">
       <Hero />
       <About />
       <Experience />

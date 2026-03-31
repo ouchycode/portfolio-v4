@@ -98,8 +98,13 @@ export default function RootLayout({
               <Navbar />
 
               {/* GSAP SCROLL SMOOTHER WRAPPER */}
-              <div id="smooth-wrapper" className="relative z-10">
-                <div id="smooth-content">{children}</div>
+              <div
+                id="smooth-wrapper"
+                className="relative z-10 w-full min-h-screen"
+              >
+                <div id="smooth-content" className="w-full flex flex-col">
+                  {children}
+                </div>
               </div>
 
               <Analytics />
