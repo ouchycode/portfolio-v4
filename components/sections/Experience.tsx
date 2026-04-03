@@ -61,14 +61,14 @@ export default function Experience() {
     <section
       id="experience"
       ref={container}
-      className="relative overflow-hidden px-6 md:px-12 lg:px-20 py-24 text-[#202124] dark:text-[#E8EAED] transition-colors duration-500"
+      className="relative overflow-visible md:overflow-hidden px-6 md:px-12 lg:px-20 py-24 text-[#202124] dark:text-[#E8EAED] transition-colors duration-500"
     >
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-10 md:gap-14">
         {/* HEADER */}
-        <div className="flex flex-col gap-4">
-          <div className="exp-row inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm w-fit">
+        <div className="flex flex-col gap-3 md:gap-4">
+          <div className="exp-row inline-flex items-center gap-2 px-4 py-1.5 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white/80 dark:bg-[#303134]/80 backdrop-blur-sm shadow-sm w-fit hover:shadow-md transition-shadow">
             <Briefcase
-              size={18}
+              size={16}
               className="text-[#1A73E8] dark:text-[#8AB4F8]"
             />
             <span className="text-sm font-medium tracking-wide text-[#5F6368] dark:text-[#9AA0A6]">
@@ -78,13 +78,13 @@ export default function Experience() {
           <h2 className="exp-row font-bold tracking-tight text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white">
             {t.experience.title}
           </h2>
-          <p className="exp-row text-base md:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-2xl mt-2 leading-relaxed">
+          <p className="exp-row text-base md:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-2xl mt-1 leading-relaxed">
             {t.experience.subtitle}
           </p>
         </div>
 
         {/* LIST PENGALAMAN */}
-        <div className="flex flex-col gap-6 md:gap-8 pt-4">
+        <div className="flex flex-col gap-6 md:gap-8 pt-2">
           {t.experience.list.map((exp: any, index: number) => {
             const { icon: Icon, color, bgColor } = getTypeStyle(exp.type);
 
@@ -93,33 +93,33 @@ export default function Experience() {
                 <Link
                   href={`/experience/${exp.id}`}
                   onClick={() => startLoading(800)}
-                  className="group relative w-full cursor-pointer flex flex-col sm:flex-row sm:items-start gap-5 md:gap-8 p-6 md:p-8 rounded-3xl border border-[#DADCE0] dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+                  className="group relative w-full cursor-pointer flex flex-col sm:flex-row sm:items-start gap-5 md:gap-8 p-6 sm:p-8 rounded-[2rem] border border-[#DADCE0] dark:border-[#5F6368] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
                 >
                   {/* ICON KIRI */}
                   <div
-                    className={`w-14 h-14 shrink-0 flex items-center justify-center rounded-2xl ${bgColor} group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-14 h-14 shrink-0 flex items-center justify-center rounded-[1.25rem] ${bgColor} group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
                   >
                     <Icon className={`w-6 h-6 ${color}`} strokeWidth={2} />
                   </div>
 
                   {/* KONTEN TENGAH */}
                   <div className="flex-1 flex flex-col pt-1">
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-2">
-                      <h3 className="text-xl md:text-2xl font-semibold text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-2">
+                      <h3 className="text-xl md:text-2xl font-bold text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors leading-tight">
                         {exp.role}
                       </h3>
                       {/* Badge Tahun */}
-                      <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] whitespace-nowrap">
+                      <span className="inline-flex w-fit items-center px-3.5 py-1 rounded-full bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] text-xs sm:text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] whitespace-nowrap shadow-sm">
                         {exp.period}
                       </span>
                     </div>
 
-                    <p className="text-base font-medium text-[#1A73E8] dark:text-[#8AB4F8] mb-4">
-                      {exp.company}{" "}
-                      <span className="text-[#DADCE0] dark:text-[#5F6368] mx-2">
+                    <p className="text-base font-semibold text-[#1A73E8] dark:text-[#8AB4F8] mb-4 flex items-center flex-wrap gap-2">
+                      {exp.company}
+                      <span className="text-[#DADCE0] dark:text-[#5F6368] hidden sm:inline">
                         •
-                      </span>{" "}
-                      <span className="text-[#34A853] dark:text-[#81C995]">
+                      </span>
+                      <span className="text-[#34A853] dark:text-[#81C995] px-2 py-0.5 rounded-md bg-[#E6F4EA]/50 dark:bg-[#81C995]/10 text-sm border border-[#34A853]/20 dark:border-[#81C995]/20">
                         {exp.type}
                       </span>
                     </p>
@@ -133,7 +133,7 @@ export default function Experience() {
                       {exp.skills.map((skill: string, idx: number) => (
                         <span
                           key={idx}
-                          className="px-4 py-1.5 rounded-full bg-transparent border border-[#DADCE0] dark:border-[#5F6368] text-xs font-medium text-[#3C4043] dark:text-[#E8EAED] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-colors"
+                          className="px-3.5 py-1.5 rounded-full bg-transparent border border-[#DADCE0] dark:border-[#5F6368] text-xs font-semibold text-[#5F6368] dark:text-[#E8EAED] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-white transition-colors"
                         >
                           {skill}
                         </span>
@@ -141,8 +141,8 @@ export default function Experience() {
                     </div>
                   </div>
 
-                  {/* PANAH KANAN */}
-                  <div className="hidden sm:flex shrink-0 w-12 h-12 items-center justify-center rounded-full bg-transparent group-hover:bg-[#E8F0FE] dark:group-hover:bg-[#1A73E8]/15 text-[#DADCE0] dark:text-[#5F6368] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors mt-2">
+                  {/* PANAH KANAN (Hanya muncul di layar sm ke atas agar tidak membuat sempit di mobile) */}
+                  <div className="hidden sm:flex shrink-0 w-12 h-12 items-center justify-center rounded-full bg-transparent group-hover:bg-[#E8F0FE] dark:group-hover:bg-[#1A73E8]/15 text-[#DADCE0] dark:text-[#5F6368] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 mt-1">
                     <ArrowUpRight size={24} strokeWidth={2} />
                   </div>
                 </Link>

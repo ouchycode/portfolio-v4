@@ -10,6 +10,7 @@ import {
   FolderGit2,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useLoading } from "@/context/LoadingContext"; // 1. Tambahkan import ini
 
 const getGoogleCategoryTheme = (category: string) => {
   if (["LMS Platform", "EdTech", "Web Application"].includes(category)) {
@@ -39,6 +40,7 @@ const getGoogleCategoryTheme = (category: string) => {
 export default function ProjectDetailPage() {
   const params = useParams();
   const { t, language } = useLanguage();
+  const { startLoading } = useLoading(); // 2. Inisialisasi hook loading
   const id = params.id as string;
 
   const project = t.projects.list.find((item: any) => item.id === id);
@@ -46,7 +48,7 @@ export default function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-[#5F6368] dark:text-[#9AA0A6] font-medium tracking-widest uppercase">
+        <div className="animate-pulse text-[#5F6368] dark:text-[#9AA0A6] font-bold tracking-widest uppercase">
           {language === "id" ? "Memuat Proyek..." : "Loading Project..."}
         </div>
       </div>
@@ -61,55 +63,56 @@ export default function ProjectDetailPage() {
       <div
         className="
           relative w-full max-w-5xl flex flex-col
-          rounded-3xl border border-[#DADCE0] dark:border-[#3C4043]
+          rounded-[2rem] border border-[#DADCE0] dark:border-[#5F6368]
           bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md
           shadow-md overflow-hidden transition-colors duration-500
         "
       >
         {/* HEADER HALAMAN */}
-        <div className="relative border-b border-[#DADCE0] dark:border-[#3C4043] p-8 md:p-10 pr-20 bg-transparent flex flex-col gap-4">
+        <div className="relative border-b border-[#DADCE0] dark:border-[#5F6368] p-8 md:p-10 pr-20 bg-transparent flex flex-col gap-4">
           {/* Tombol Kembali ke Beranda */}
           <Link
             href="/#projects"
-            className="absolute top-6 right-6 md:top-8 md:right-8 flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#F1F3F4] dark:hover:bg-[#3C4043] border border-[#DADCE0] dark:border-[#5F6368] transition-colors group"
+            onClick={() => startLoading(800)} // 3. Tambahkan fungsi loading saat klik
+            className="absolute top-6 right-6 md:top-8 md:right-8 flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-[#303134]/80 backdrop-blur-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] border border-[#DADCE0] dark:border-[#5F6368] shadow-sm hover:shadow-md active:scale-95 transition-all duration-300 group z-10"
           >
             <ArrowLeft
               size={18}
-              strokeWidth={2}
+              strokeWidth={2.5}
               className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-1 group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-all"
             />
-            <span className="hidden sm:block text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+            <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
               {language === "id" ? "Kembali" : "Back"}
             </span>
           </Link>
 
           {/* Badges Info */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 mt-8 sm:mt-0">
             <span
-              className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider ${theme.bg} ${theme.text}`}
+              className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${theme.bg} ${theme.text}`}
             >
               {project.category}
             </span>
-            <span className="text-xs font-semibold text-[#5F6368] dark:text-[#9AA0A6]">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-[#F8F9FA] dark:bg-[#202124]/50 text-xs font-bold uppercase tracking-wider text-[#5F6368] dark:text-[#9AA0A6] shadow-sm">
               FIG. {project.id}
             </span>
           </div>
 
-          <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight">
+          <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-[#202124] dark:text-[#E8EAED] tracking-tight leading-tight mt-2">
             {project.title}
           </h1>
         </div>
 
         {/* CONTENT UTAMA */}
-        <div className="flex-1 p-8 md:p-10 bg-[#F8F9FA] dark:bg-[#202124] flex flex-col gap-10 md:gap-12">
+        <div className="flex-1 p-8 md:p-10 bg-[#F8F9FA] dark:bg-[#202124]/50 flex flex-col gap-10 md:gap-12">
           {/* Pratinjau Gambar */}
-          <div className="relative w-full aspect-[16/9] min-h-[250px] md:min-h-[400px] rounded-2xl overflow-hidden border border-[#DADCE0] dark:border-[#3C4043] bg-white dark:bg-[#303134] shadow-sm">
+          <div className="relative w-full aspect-[16/9] min-h-[250px] md:min-h-[400px] rounded-[1.25rem] overflow-hidden border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm">
             <Image
               src={project.image}
               alt={`Preview of ${project.title}`}
               fill
               sizes="(max-width: 768px) 100vw, 1024px"
-              className="object-cover object-center"
+              className="object-cover object-center hover:scale-105 transition-transform duration-700"
               priority
             />
           </div>
@@ -119,7 +122,7 @@ export default function ProjectDetailPage() {
             <div className="md:col-span-7 flex flex-col gap-10">
               {/* Deskripsi */}
               <div className="flex flex-col gap-3">
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                   {t.projectModal.descTitle}
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-[#3C4043] dark:text-[#E8EAED]">
@@ -128,18 +131,18 @@ export default function ProjectDetailPage() {
               </div>
 
               {/* Divider Mobile */}
-              <div className="w-full h-px bg-[#DADCE0] dark:bg-[#3C4043] md:hidden" />
+              <div className="w-full h-px bg-[#DADCE0] dark:bg-[#5F6368] md:hidden" />
 
               {/* Teknologi */}
               <div className="flex flex-col gap-4">
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                   {t.projectModal.techTitle}
                 </h3>
                 <div className="flex flex-wrap gap-2 md:gap-3">
                   {project.tech.map((tech: string) => (
                     <span
                       key={tech}
-                      className="inline-flex items-center px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-transparent text-sm font-medium text-[#3C4043] dark:text-[#E8EAED] cursor-default hover:bg-white dark:hover:bg-[#303134] transition-colors"
+                      className="inline-flex items-center px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white/50 dark:bg-[#303134]/50 text-sm font-semibold text-[#5F6368] dark:text-[#E8EAED] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-white hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300 cursor-default"
                     >
                       {tech}
                     </span>
@@ -150,14 +153,14 @@ export default function ProjectDetailPage() {
 
             {/* Kolom Kanan: Fitur */}
             <div className="md:col-span-5 flex flex-col gap-4">
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
                 {t.projectModal.featuresTitle}
               </h3>
               <div className="flex flex-col gap-4">
                 {project.features.map((feature: string, i: number) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="mt-1 text-[#34A853] dark:text-[#81C995] shrink-0">
-                      <CheckCircle2 size={22} strokeWidth={2} />
+                  <div key={i} className="flex items-start gap-4 group">
+                    <div className="mt-1 text-[#34A853] dark:text-[#81C995] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <CheckCircle2 size={24} strokeWidth={2} />
                     </div>
                     <span className="text-base md:text-lg text-[#3C4043] dark:text-[#E8EAED] leading-relaxed">
                       {feature}
@@ -170,22 +173,24 @@ export default function ProjectDetailPage() {
         </div>
 
         {/* FOOTER AKSI */}
-        <div className="border-t border-[#DADCE0] dark:border-[#3C4043] p-6 md:p-8 bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="border-t border-[#DADCE0] dark:border-[#5F6368] p-6 md:p-8 bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="hidden sm:flex items-center gap-3 text-[#5F6368] dark:text-[#9AA0A6]">
             <FolderGit2 size={24} strokeWidth={2} />
-            <span className="text-sm font-medium">Repository / Live Demo</span>
+            <span className="text-sm font-semibold tracking-wide">
+              Repository / Live Demo
+            </span>
           </div>
 
           <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-center gap-2 w-full sm:w-auto h-14 px-10 rounded-full bg-[#1A73E8] hover:bg-[#1B66C9] dark:bg-[#8AB4F8] dark:hover:bg-[#aecbfa] text-white dark:text-[#202124] font-medium text-base tracking-wide shadow-sm hover:shadow-md transition-all duration-300"
+            className="group flex items-center justify-center gap-3 w-full sm:w-auto h-14 px-10 rounded-full bg-[#1A73E8] hover:bg-[#1B66C9] dark:bg-[#8AB4F8] dark:hover:bg-[#AECBFA] text-white dark:text-[#202124] font-semibold text-base tracking-wide shadow-sm hover:shadow-md active:scale-95 transition-all duration-300"
           >
             {t.projectModal.btn}
             <ExternalLink
               size={20}
-              strokeWidth={2}
+              strokeWidth={2.5}
               className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
             />
           </a>

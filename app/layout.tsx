@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Kevin Ardiansyah Portfolio",
     images: [
       {
-        url: "/profile_kevin.png", // Ganti dengan URL gambar OG yang sesuai (rasio 1.91:1)
+        url: "/profile_kevin.png",
         width: 1200,
         height: 630,
         alt: "Kevin Ardiansyah - Frontend Engineer",
@@ -76,13 +76,14 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
+              {/* Background Grid Biru ala Google Blueprint */}
               <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
                 <div
                   className="
                     absolute inset-0 
-                    bg-[linear-gradient(to_right,#DADCE0_1px,transparent_1px),linear-gradient(to_bottom,#DADCE0_1px,transparent_1px)] 
-                    dark:bg-[linear-gradient(to_right,#3C4043_1px,transparent_1px),linear-gradient(to_bottom,#3C4043_1px,transparent_1px)]
-                    opacity-50 dark:opacity-40
+                    bg-[linear-gradient(to_right,#1A73E8_1px,transparent_1px),linear-gradient(to_bottom,#1A73E8_1px,transparent_1px)] 
+                    dark:bg-[linear-gradient(to_right,#8AB4F8_1px,transparent_1px),linear-gradient(to_bottom,#8AB4F8_1px,transparent_1px)]
+                    opacity-[0.15] dark:opacity-[0.1]
                   "
                   style={{
                     backgroundSize: "48px 48px",

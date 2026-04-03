@@ -19,7 +19,7 @@ import { useProjectsAnimation } from "@/hooks/useAnimations";
 import { useLanguage } from "@/context/LanguageContext";
 import { useLoading } from "@/context/LoadingContext";
 
-// Tema warna khas Google
+// Tema warna khas Google (Dipertahankan karena sudah sangat Material Design)
 const getGoogleCategoryTheme = (category: string) => {
   if (["LMS Platform", "EdTech", "Web Application"].includes(category))
     return {
@@ -121,12 +121,12 @@ export default function Projects() {
       ref={container}
       className="relative overflow-hidden px-0 py-24 md:py-32 text-[#202124] dark:text-[#E8EAED] transition-colors duration-500"
     >
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-8 md:gap-12">
+      <div className="relative z-10 w-full mx-auto flex flex-col gap-8 md:gap-12">
         {/* HEADER */}
-        <div className="relative z-10 flex flex-col gap-4 px-6 md:px-12 lg:px-20">
-          <div className="project-animate inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm w-fit">
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col gap-3 md:gap-4 px-6 md:px-12 lg:px-20">
+          <div className="project-animate inline-flex items-center gap-2 px-4 py-1.5 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white/80 dark:bg-[#303134]/80 backdrop-blur-sm shadow-sm w-fit hover:shadow-md transition-shadow">
             <FolderGit2
-              size={18}
+              size={16}
               className="text-[#1A73E8] dark:text-[#8AB4F8]"
             />
             <span className="text-sm font-medium tracking-wide text-[#5F6368] dark:text-[#9AA0A6]">
@@ -135,22 +135,22 @@ export default function Projects() {
           </div>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h2 className="project-animate font-bold tracking-tight text-4xl md:text-5xl lg:text-6xl">
+            <div className="max-w-2xl">
+              <h2 className="project-animate font-bold tracking-tight text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-tight">
                 {t.projects.title}
               </h2>
-              <p className="project-animate text-base md:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-2xl mt-3 leading-relaxed">
+              <p className="project-animate text-base md:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-3 md:mt-4 leading-relaxed">
                 {t.projects.subtitle}
               </p>
             </div>
 
-            {/* Navigasi Manual */}
-            <div className="project-animate hidden md:flex gap-3 shrink-0">
+            {/* Navigasi Manual (Hanya muncul di desktop) */}
+            <div className="project-animate hidden md:flex gap-3 shrink-0 pb-1">
               <button
                 onClick={() => slide("left")}
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-all hover:shadow-md"
+                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white/80 dark:bg-[#303134]/80 backdrop-blur-sm shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-all hover:shadow-md active:scale-95"
               >
                 <ArrowLeft
                   size={20}
@@ -161,7 +161,7 @@ export default function Projects() {
                 onClick={() => slide("right")}
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-all hover:shadow-md"
+                className="group flex items-center justify-center w-12 h-12 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white/80 dark:bg-[#303134]/80 backdrop-blur-sm shadow-sm hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] transition-all hover:shadow-md active:scale-95"
               >
                 <ArrowRight
                   size={20}
@@ -182,7 +182,7 @@ export default function Projects() {
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
             // snap-x dan snap-mandatory dihapus agar scroll bebas
-            className="flex overflow-x-auto gap-6 md:gap-8 py-8 touch-pan-x [&::-webkit-scrollbar]:hidden select-none"
+            className="flex overflow-x-auto gap-5 sm:gap-6 lg:gap-8 py-8 px-6 md:px-12 lg:px-20 touch-pan-x [&::-webkit-scrollbar]:hidden select-none"
           >
             {infiniteProjectsData.map((project, index) => {
               const theme = getGoogleCategoryTheme(project.category);
@@ -191,16 +191,17 @@ export default function Projects() {
               return (
                 <div
                   key={`${project.id}-${index}`}
-                  className="project-animate shrink-0 w-[85vw] md:w-[400px] z-10"
+                  className="project-animate shrink-0 w-[85vw] sm:w-[360px] md:w-[400px] lg:w-[420px] z-10"
                 >
                   <Link
                     href={`/projects/${project.id}`}
                     onClick={() => startLoading(800)}
-                    className="group relative w-full h-full flex flex-col p-5 md:p-6 cursor-pointer transition-all duration-300 rounded-3xl border border-[#DADCE0] dark:border-[#3C4043] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm hover:shadow-lg hover:-translate-y-2"
+                    className="group relative w-full h-full flex flex-col p-5 sm:p-6 cursor-pointer transition-all duration-500 rounded-[2rem] border border-[#DADCE0] dark:border-[#5F6368] bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md shadow-sm hover:shadow-xl hover:-translate-y-2"
                   >
                     {/* Gambar Thumbnail */}
-                    <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden mb-6 border border-[#F1F3F4] dark:border-[#3C4043] bg-[#F8F9FA] dark:bg-[#202124]">
-                      <div className="absolute top-3 left-3 z-20 p-2.5 bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md rounded-xl shadow-sm border border-[#DADCE0] dark:border-[#3C4043]">
+                    <div className="relative w-full aspect-[16/10] rounded-[1.25rem] overflow-hidden mb-6 border border-[#DADCE0] dark:border-[#5F6368] bg-[#F8F9FA] dark:bg-[#202124]">
+                      {/* Icon Overlay Kiri Atas */}
+                      <div className="absolute top-3 left-3 z-20 p-2.5 bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md rounded-2xl shadow-sm border border-[#DADCE0] dark:border-[#5F6368]">
                         <ProjectIcon
                           className={`w-5 h-5 ${theme.text}`}
                           strokeWidth={2}
@@ -211,15 +212,16 @@ export default function Projects() {
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 85vw, 400px"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 768px) 85vw, 420px"
                       />
 
-                      <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm border border-[#DADCE0]/50 dark:border-white/10">
+                      {/* Icon Panah Kanan Atas (Muncul saat hover) */}
+                      <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 dark:bg-[#303134]/90 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm border border-[#DADCE0] dark:border-[#5F6368] scale-75 group-hover:scale-100">
                         <ArrowUpRight
                           size={20}
-                          className="text-[#202124] dark:text-white"
-                          strokeWidth={2}
+                          className="text-[#1A73E8] dark:text-[#8AB4F8]"
+                          strokeWidth={2.5}
                         />
                       </div>
                     </div>
@@ -228,16 +230,16 @@ export default function Projects() {
                     <div className="flex flex-col flex-1">
                       <div className="flex items-center justify-between mb-4">
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${theme.bg} ${theme.text}`}
+                          className={`px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase ${theme.bg} ${theme.text}`}
                         >
                           {project.category}
                         </span>
-                        <span className="text-xs font-medium text-[#5F6368] dark:text-[#9AA0A6]">
+                        <span className="text-xs font-semibold text-[#5F6368] dark:text-[#9AA0A6] px-3 py-1 bg-[#F1F3F4] dark:bg-[#3C4043] rounded-full border border-[#DADCE0] dark:border-[#5F6368]">
                           {project.id}
                         </span>
                       </div>
 
-                      <h3 className="font-semibold text-2xl leading-tight mb-3 text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+                      <h3 className="font-bold text-2xl leading-tight mb-3 text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
                         {project.title}
                       </h3>
 
@@ -246,11 +248,11 @@ export default function Projects() {
                       </p>
 
                       {/* Chips Teknologi */}
-                      <div className="mt-auto flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-1 mask-linear-fade">
+                      <div className="mt-auto flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-1">
                         {project.tech.map((t: string, idx: number) => (
                           <span
                             key={idx}
-                            className="shrink-0 px-3 py-1 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-transparent text-xs font-medium text-[#3C4043] dark:text-[#E8EAED]"
+                            className="shrink-0 px-3.5 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-transparent text-xs font-semibold text-[#5F6368] dark:text-[#E8EAED] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-white transition-colors"
                           >
                             {t}
                           </span>

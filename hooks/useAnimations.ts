@@ -8,23 +8,23 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Konfigurasi Material Design: Cepat, responsif, dan tidak berlebihan
+// Konfigurasi Material Design: Halus, elegan, "Fast Out, Slow In"
 const materialReveal = {
-  y: 25, // Dikurangi dari 35 agar tidak terlalu jauh melompat
+  y: 35, // Kembalikan ke 35 agar punya ruang untuk meluncur halus
   opacity: 0,
-  scale: 0.98,
-  duration: 0.6, // Dipercepat dari 0.9 agar terasa "snappy"
-  ease: "power3.out", // Easing standar yang nyaman
+  scale: 0.95, // Efek pop-up sedikit lebih terasa dari 0.98
+  duration: 1, // Diperpanjang agar tidak terburu-buru/kaku
+  ease: "expo.out", // Easing terbaik untuk UI: Cepat di awal, sangat mulus di akhir
   clearProps: "all",
 };
 
-// HERO (Muncul langsung setelah loading selesai)
+// HERO
 export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
         ...materialReveal,
-        stagger: 0.1, // Stagger dipercepat
+        stagger: 0.15, // Diperlambat sedikit agar mengalir seperti air
         delay: 0.1,
       });
     },
@@ -43,7 +43,7 @@ export const useAboutAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        stagger: 0.1,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
@@ -61,7 +61,7 @@ export const useExperienceAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        stagger: 0.1,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
@@ -79,8 +79,8 @@ export const useProjectsAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        y: 20, // Proyek muncul lebih halus
-        stagger: 0.1,
+        y: 25,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
@@ -99,22 +99,22 @@ export const useTechCertsAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        stagger: 0.1,
+        stagger: 0.15,
       });
 
-      // Tags Ikon Tech (Diubah dari back.out menjadi power3.out agar lebih elegan/tidak membal ala kartun)
+      // Tags Ikon Tech (Memberikan pantulan SANGAT MINOR agar terasa organik/taktil)
       gsap.from(".tech-tag", {
         scrollTrigger: {
           trigger: ".tech-tag",
           start: "top 90%",
           once: true,
         },
-        y: 15,
+        y: 20,
         opacity: 0,
-        scale: 0.95, // Scale diperkecil perubahannya
-        duration: 0.5,
-        ease: "power3.out", // Material design menghindari efek membal berlebih
-        stagger: 0.03, // Jeda kemunculan antar ikon dipercepat
+        scale: 0.9,
+        duration: 0.8,
+        ease: "back.out(1.2)", // Pantulan elegan, tidak berlebihan
+        stagger: 0.05,
         clearProps: "all",
       });
 
@@ -126,7 +126,7 @@ export const useTechCertsAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        stagger: 0.1,
+        stagger: 0.15,
       });
 
       // Kartu Sertifikat
@@ -137,7 +137,7 @@ export const useTechCertsAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        stagger: 0.15,
+        stagger: 0.2, // Kartu horizontal butuh stagger lebih lama agar matanya enak ngikutin
       });
 
       // Refresh ScrollTrigger setelah konten dimuat
@@ -158,8 +158,8 @@ export const useContactAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        y: 15,
-        stagger: 0.1,
+        y: 20,
+        stagger: 0.15,
       });
     },
     { scope: containerRef },
@@ -177,8 +177,8 @@ export const useFooterAnimation = (containerRef: any) => {
           once: true,
         },
         ...materialReveal,
-        duration: 0.6,
-        stagger: 0.05, // Footer muncul lebih cepat
+        duration: 0.8, // Footer sedikit lebih cepat tidak apa-apa
+        stagger: 0.1,
       });
     },
     { scope: containerRef },

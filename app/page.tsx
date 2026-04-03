@@ -14,18 +14,14 @@ export default function Home() {
   useSmoothScroll();
 
   return (
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
-        <main className="relative z-10 flex flex-col w-full">
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <TechAndCerts />
-          <Contact />
-          <Footer />
-        </main>
-      </div>
-    </div>
+    <main className="relative flex flex-col w-full">
+      <Hero />
+      <About />
+      <Experience />
+      <Projects />
+      <TechAndCerts />
+      <Contact />
+      <Footer />
+    </main>
   );
 }

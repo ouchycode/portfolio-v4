@@ -62,17 +62,26 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#F8F9FA]/90 dark:bg-[#202124]/90 backdrop-blur-sm pointer-events-auto"
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#F8F9FA]/60 dark:bg-[#202124]/60 backdrop-blur-sm pointer-events-auto"
           >
-            <Loader2
-              size={44}
-              strokeWidth={2.5}
-              className="animate-spin text-[#1A73E8] dark:text-[#8AB4F8] mb-4"
-            />
-            <p className="text-sm font-medium uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6] animate-pulse opacity-80">
-              {language === "id" ? "Memuat Data..." : "Loading Data..."}
-            </p>
+            {/* Material You "Loading Pill" */}
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 10 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="flex items-center gap-4 px-6 py-3.5 bg-white dark:bg-[#303134] rounded-full shadow-lg border border-[#DADCE0] dark:border-[#5F6368]"
+            >
+              <Loader2
+                size={22}
+                strokeWidth={3}
+                className="animate-spin text-[#1A73E8] dark:text-[#8AB4F8]"
+              />
+              <span className="text-sm font-semibold tracking-wide text-[#3C4043] dark:text-[#E8EAED]">
+                {language === "id" ? "Memuat..." : "Loading..."}
+              </span>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
