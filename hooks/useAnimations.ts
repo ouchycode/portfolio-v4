@@ -8,177 +8,178 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Konfigurasi Material Design: Halus, elegan, "Fast Out, Slow In"
+// ── Base reveal config ──────────────────────────────────────────────
+// "Fast Out, Slow In" — identik dengan Material Design motion spec
 const materialReveal = {
-  y: 35, // Kembalikan ke 35 agar punya ruang untuk meluncur halus
+  y: 32,
   opacity: 0,
-  scale: 0.95, // Efek pop-up sedikit lebih terasa dari 0.98
-  duration: 1, // Diperpanjang agar tidak terburu-buru/kaku
-  ease: "expo.out", // Easing terbaik untuk UI: Cepat di awal, sangat mulus di akhir
+  scale: 0.96,
+  duration: 0.9,
+  ease: "expo.out",
   clearProps: "all",
 };
 
-// HERO
+// Varian lebih ringan untuk elemen dalam-halaman (form fields, chips)
+const subtleReveal = {
+  y: 18,
+  opacity: 0,
+  scale: 0.98,
+  duration: 0.75,
+  ease: "expo.out",
+  clearProps: "all",
+};
+
+// ── HERO ────────────────────────────────────────────────────────────
+// Tidak pakai ScrollTrigger — langsung muncul saat halaman load
 export const useHeroAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
         ...materialReveal,
-        stagger: 0.15, // Diperlambat sedikit agar mengalir seperti air
-        delay: 0.1,
+        stagger: 0.12,
+        delay: 0.08,
       });
     },
     { scope: containerRef },
   );
 };
 
-// ABOUT
+// ── ABOUT ───────────────────────────────────────────────────────────
 export const useAboutAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".about-animate", {
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 85%",
+          start: "top 82%",
           once: true,
         },
         ...materialReveal,
-        stagger: 0.15,
+        stagger: 0.13,
       });
     },
     { scope: containerRef },
   );
 };
 
-// EXPERIENCE
+// ── EXPERIENCE ──────────────────────────────────────────────────────
+// Cards slide up satu per satu — stagger sedikit lebih panjang
+// agar timeline rail terasa seperti "mengisi" dari atas ke bawah
 export const useExperienceAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".exp-row", {
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 85%",
+          start: "top 82%",
           once: true,
         },
         ...materialReveal,
-        stagger: 0.15,
+        stagger: 0.14,
       });
     },
     { scope: containerRef },
   );
 };
 
-// PROJECT
+// ── PROJECTS ────────────────────────────────────────────────────────
+// Cards carousel — y lebih kecil karena elemen sudah compact horizontal
 export const useProjectsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".project-animate", {
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 85%",
+          start: "top 82%",
           once: true,
         },
-        ...materialReveal,
-        y: 25,
-        stagger: 0.15,
+        ...subtleReveal,
+        y: 22,
+        stagger: 0.1,
       });
     },
     { scope: containerRef },
   );
 };
 
-// TECH & CERTS
+// ── TECH & CERTS ─────────────────────────────────────────────────────
 export const useTechCertsAnimation = (containerRef: any) => {
   useGSAP(
     () => {
-      // Header Tech
+      // Tech stack header + card
       gsap.from(".tech-header", {
         scrollTrigger: {
           trigger: ".tech-header",
-          start: "top 85%",
+          start: "top 82%",
           once: true,
         },
         ...materialReveal,
-        stagger: 0.15,
+        stagger: 0.12,
       });
 
-      // Tags Ikon Tech (Memberikan pantulan SANGAT MINOR agar terasa organik/taktil)
-      gsap.from(".tech-tag", {
-        scrollTrigger: {
-          trigger: ".tech-tag",
-          start: "top 90%",
-          once: true,
-        },
-        y: 20,
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.8,
-        ease: "back.out(1.2)", // Pantulan elegan, tidak berlebihan
-        stagger: 0.05,
-        clearProps: "all",
-      });
-
-      // Header Certs
+      // Certificates header
       gsap.from(".cert-header", {
         scrollTrigger: {
           trigger: ".cert-header",
-          start: "top 85%",
+          start: "top 82%",
           once: true,
         },
         ...materialReveal,
-        stagger: 0.15,
+        stagger: 0.12,
       });
 
-      // Kartu Sertifikat
+      // Certificate cards in carousel
+      // Stagger lebih panjang agar mata bisa mengikuti horizontal flow
       gsap.from(".cert-card", {
         scrollTrigger: {
           trigger: ".cert-card",
-          start: "top 85%",
+          start: "top 88%",
           once: true,
         },
-        ...materialReveal,
-        stagger: 0.2, // Kartu horizontal butuh stagger lebih lama agar matanya enak ngikutin
+        ...subtleReveal,
+        y: 20,
+        stagger: 0.18,
       });
 
-      // Refresh ScrollTrigger setelah konten dimuat
       ScrollTrigger.refresh();
     },
     { scope: containerRef },
   );
 };
 
-// CONTACT
+// ── CONTACT ─────────────────────────────────────────────────────────
 export const useContactAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".contact-input", {
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 85%",
+          start: "top 82%",
           once: true,
         },
-        ...materialReveal,
-        y: 20,
-        stagger: 0.15,
+        ...subtleReveal,
+        stagger: 0.12,
       });
     },
     { scope: containerRef },
   );
 };
 
-// FOOTER
+// ── FOOTER ──────────────────────────────────────────────────────────
+// Footer sering muncul setelah scroll panjang —
+// trigger lebih awal (95%) dan durasi sedikit lebih cepat
 export const useFooterAnimation = (containerRef: any) => {
   useGSAP(
     () => {
       gsap.from(".footer-item", {
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 95%",
+          start: "top 92%",
           once: true,
         },
         ...materialReveal,
-        duration: 0.8, // Footer sedikit lebih cepat tidak apa-apa
-        stagger: 0.1,
+        duration: 0.75,
+        stagger: 0.09,
       });
     },
     { scope: containerRef },
