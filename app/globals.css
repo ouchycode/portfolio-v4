@@ -1,48 +1,94 @@
 @import "tailwindcss";
 
+/* Dark mode via class .dark (dipakai oleh ThemeProvider) */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ── Tokens ──────────────────────────────────────────────────────────────── */
 :root {
   --background: #f8f9fa;
   --foreground: #202124;
+  --surface: #ffffff;
+  --surface-variant: #f1f3f4;
+  --outline: #dadce0;
+  --google-blue: #1a73e8;
+  --scrollbar-thumb: #dadce0;
+  --scrollbar-thumb-hover: #bdc1c6;
 }
 
 .dark {
-  --background: #202124;
+  --background: #1c1c1e;
   --foreground: #e8eaed;
+  --surface: #2d2d2f;
+  --surface-variant: #3c3c3e;
+  --outline: #5f6368;
+  --scrollbar-thumb: #5f6368;
+  --scrollbar-thumb-hover: #9aa0a6;
 }
 
+/* ── Tailwind Theme (v4) ─────────────────────────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --color-surface: var(--surface);
+  --color-surface-variant: var(--surface-variant);
+  --color-outline: var(--outline);
+  --color-google-blue: var(--google-blue);
 }
 
+/* ── Base ────────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
 }
 
 body {
+  min-height: 100%;
   background-color: var(--background);
   color: var(--foreground);
-  scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
 }
 
+/* ── Typography ──────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ── Media Defaults ──────────────────────────────────────────────────────── */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── Selection ───────────────────────────────────────────────────────────── */
 ::selection {
-  background-color: rgba(26, 115, 232, 0.25);
+  background-color: rgba(26, 115, 232, 0.15);
   color: inherit;
 }
 
-.dark ::selection {
-  background-color: rgba(138, 180, 248, 0.3);
-  color: inherit;
+/* ── Focus ring ──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--google-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 ::-webkit-scrollbar {
   width: 14px;
-  height: 14px;
 }
 
 ::-webkit-scrollbar-track {
@@ -50,22 +96,24 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #dadce0;
+  background-color: var(--scrollbar-thumb);
   border-radius: 100vh;
   border: 4px solid var(--background);
   background-clip: padding-box;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background-color: #5f6368;
-  border: 4px solid var(--background);
-  background-clip: padding-box;
-}
-
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #bdc1c6;
+  background-color: var(--scrollbar-thumb-hover);
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
-  background-color: #9aa0a6;
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ── Smooth UI (aman, tidak ganggu animasi) ─────────────────────────────── */
+html,
+body {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }

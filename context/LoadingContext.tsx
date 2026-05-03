@@ -7,6 +7,7 @@ import {
   useRef,
   ReactNode,
   useCallback,
+  useEffect,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
@@ -19,32 +20,97 @@ interface LoadingContextType {
 
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 
-// ── Skeleton block helper ───────────────────────────────────────────
-function SkeletonBlock({
-  className = "",
-  rounded = "rounded-full",
-}: {
-  className?: string;
-  rounded?: string;
-}) {
+const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
+
+// ── Google-style top progress bar ───────────────────────────────────
+function ProgressBar() {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    // Fase 1: cepat ke 70%
+    const t1 = setTimeout(() => setWidth(70), 50);
+    // Fase 2: lambat ke 85%
+    const t2 = setTimeout(() => setWidth(85), 800);
+    // Fase 3: sangat lambat ke 92%
+    const t3 = setTimeout(() => setWidth(92), 2000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, []);
+
   return (
-    <div
-      className={`${rounded} ${className} bg-[#DADCE0] dark:bg-[#5F6368]/50 overflow-hidden relative`}
-    >
-      {/* shimmer sweep */}
-      <div
-        className="absolute inset-0"
+    <div className="absolute top-0 left-0 right-0 h-0.75 z-50">
+      {/* Track */}
+      <div className="absolute inset-0 bg-[#DADCE0]/30 dark:bg-[#5F6368]/20" />
+
+      {/* Progress fill — gradient Google colors */}
+      <motion.div
+        className="absolute top-0 left-0 h-full"
         style={{
           background:
-            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%)",
-          animation: "skeletonShimmer 1.6s ease-in-out infinite",
-          backgroundSize: "200% 100%",
+            "linear-gradient(90deg, #4285F4, #34A853, #FABB05, #EA4335)",
+          backgroundSize: "300% 100%",
+          width: `${width}%`,
+        }}
+        animate={{
+          width: `${width}%`,
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{
+          width: { duration: width === 70 ? 0.4 : 1.2, ease: [0.4, 0, 0.2, 1] },
+          backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" },
+        }}
+      />
+
+      {/* Glowing head */}
+      <motion.div
+        className="absolute top-0 h-full w-24 rounded-full"
+        style={{
+          left: `${width}%`,
+          transform: "translateX(-100%)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(66,133,244,0.8), transparent)",
+          filter: "blur(3px)",
+        }}
+        animate={{ left: `${width}%` }}
+        transition={{
+          duration: width === 70 ? 0.4 : 1.2,
+          ease: [0.4, 0, 0.2, 1],
         }}
       />
     </div>
   );
 }
 
+// ── Google dots spinner ──────────────────────────────────────────────
+function GoogleDotsSpinner() {
+  return (
+    <div className="flex items-center gap-2">
+      {GOOGLE_COLORS.map((color, i) => (
+        <motion.span
+          key={color}
+          className="w-3 h-3 rounded-full"
+          style={{ background: color }}
+          animate={{
+            y: [0, -10, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0.7, 1, 0.7],
+          }}
+          transition={{
+            duration: 0.8,
+            repeat: Infinity,
+            delay: i * 0.12,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ── Provider ─────────────────────────────────────────────────────────
 export function LoadingProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -63,7 +129,7 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (autoStopMs) {
-        timeoutRef.current = setTimeout(() => stopLoading(), autoStopMs);
+        timeoutRef.current = setTimeout(stopLoading, autoStopMs);
       }
     },
     [stopLoading],
@@ -73,25 +139,20 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
     <LoadingContext.Provider value={{ isLoading, startLoading, stopLoading }}>
       {children}
 
-      {/* ── GLOBAL SKELETON LOADING OVERLAY ── */}
       <AnimatePresence>
         {isLoading && (
           <motion.div
+            key="loading-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] pointer-events-auto bg-[#F8F9FA] dark:bg-[#202124] overflow-hidden"
+            transition={{ duration: 0.15, ease: "easeInOut" }}
+            className="fixed inset-0 z-9999 pointer-events-auto bg-[#F8F9FA]/95 dark:bg-[#1c1c1e]/95 flex flex-col"
           >
-            {/* shimmer keyframe */}
-            <style>{`
-              @keyframes skeletonShimmer {
-                0%   { transform: translateX(-100%); }
-                100% { transform: translateX(200%); }
-              }
-            `}</style>
+            {/* Top progress bar */}
+            <ProgressBar />
 
-            {/* ── Subtle grid texture ── */}
+            {/* Grid overlay */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -102,108 +163,75 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
               }}
             />
 
-            {/* ── Fake navbar skeleton ── */}
-            <div className="absolute top-5 left-1/2 -translate-x-1/2 z-10">
-              <SkeletonBlock className="h-11 w-[480px] max-w-[90vw]" />
+            {/* Center content */}
+            <div className="flex-1 flex flex-col items-center justify-center gap-8">
+              {/* G logo mark */}
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.05, duration: 0.3, ease: "easeOut" }}
+                className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60"
+                style={{
+                  boxShadow:
+                    "0 1px 3px rgba(60,64,67,.10), 0 4px 12px rgba(60,64,67,.08)",
+                }}
+              >
+                {/* G-color corner dots */}
+                {GOOGLE_COLORS.map((color, i) => (
+                  <motion.span
+                    key={color}
+                    className="absolute w-2 h-2 rounded-full"
+                    style={{
+                      background: color,
+                      top: i < 2 ? 8 : "auto",
+                      bottom: i >= 2 ? 8 : "auto",
+                      left: i % 2 === 0 ? 8 : "auto",
+                      right: i % 2 === 1 ? 8 : "auto",
+                    }}
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+                    transition={{
+                      duration: 1.2,
+                      repeat: Infinity,
+                      delay: i * 0.2,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+                {/* Center letter */}
+                <span className="text-xl font-black text-[#1A73E8] dark:text-[#8AB4F8] select-none">
+                  K
+                </span>
+              </motion.div>
+
+              {/* Dots spinner */}
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.25 }}
+              >
+                <GoogleDotsSpinner />
+              </motion.div>
+
+              {/* Label */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
+                className="text-xs font-bold uppercase tracking-[0.16em] text-[#9AA0A6] dark:text-[#5F6368]"
+              >
+                {language === "id" ? "Memuat..." : "Loading..."}
+              </motion.p>
             </div>
 
-            {/* ── Page skeleton content ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08, duration: 0.35, ease: "easeOut" }}
-              className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-12 lg:px-20 gap-10 pt-20"
-            >
-              <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-                {/* Left column */}
-                <div className="flex-1 flex flex-col gap-5 w-full max-w-xl">
-                  {/* eyebrow badge */}
-                  <SkeletonBlock className="h-8 w-32" />
-                  {/* heading line 1 */}
-                  <SkeletonBlock
-                    className="h-14 md:h-16 w-full"
-                    rounded="rounded-2xl"
-                  />
-                  {/* heading line 2 */}
-                  <SkeletonBlock
-                    className="h-14 md:h-16 w-3/4"
-                    rounded="rounded-2xl"
-                  />
-                  {/* divider dot + line */}
-                  <div className="flex items-center gap-3 mt-1">
-                    <SkeletonBlock className="w-2 h-2 shrink-0" />
-                    <SkeletonBlock
-                      className="h-px flex-1"
-                      rounded="rounded-none"
-                    />
-                  </div>
-                  {/* description lines */}
-                  <div className="flex flex-col gap-2.5 mt-1">
-                    <SkeletonBlock
-                      className="h-4 w-full"
-                      rounded="rounded-lg"
-                    />
-                    <SkeletonBlock
-                      className="h-4 w-[90%]"
-                      rounded="rounded-lg"
-                    />
-                    <SkeletonBlock
-                      className="h-4 w-[75%]"
-                      rounded="rounded-lg"
-                    />
-                  </div>
-                  {/* CTA buttons */}
-                  <div className="flex gap-3 mt-3">
-                    <SkeletonBlock className="h-12 w-40" />
-                    <SkeletonBlock className="h-12 w-36" />
-                  </div>
-                </div>
-
-                {/* Right column — info cards */}
-                <div className="w-full max-w-sm lg:w-[400px] flex flex-col gap-4 shrink-0">
-                  <SkeletonBlock
-                    className="h-20 w-full"
-                    rounded="rounded-[2rem]"
-                  />
-                  <SkeletonBlock
-                    className="h-20 w-full"
-                    rounded="rounded-[2rem]"
-                  />
-                  <SkeletonBlock
-                    className="h-14 w-full"
-                    rounded="rounded-[2rem]"
-                  />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* ── G-4-color bottom bar ── */}
-            <div className="absolute bottom-0 left-0 right-0 flex h-[3px]">
-              {["#EA4335", "#FABB05", "#34A853", "#1A73E8"].map((c) => (
+            {/* G-color bottom bar */}
+            <div className="flex h-0.75 w-full shrink-0">
+              {GOOGLE_COLORS.map((c) => (
                 <div
                   key={c}
-                  className="flex-1 h-full"
-                  style={{ background: c, opacity: 0.7 }}
+                  className="flex-1 h-full opacity-70"
+                  style={{ background: c }}
                 />
               ))}
-            </div>
-
-            {/* ── Loading label bottom center ── */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2.5">
-              {/* animated dots */}
-              {[0, 0.2, 0.4].map((delay, i) => (
-                <span
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8]"
-                  style={{
-                    animation: `skeletonShimmer 1s ease-in-out ${delay}s infinite`,
-                    opacity: 0.6,
-                  }}
-                />
-              ))}
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#9AA0A6] dark:text-[#5F6368] ml-1">
-                {language === "id" ? "Memuat..." : "Loading..."}
-              </span>
             </div>
           </motion.div>
         )}
@@ -213,9 +241,8 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
 }
 
 export function useLoading() {
-  const context = useContext(LoadingContext);
-  if (!context) {
+  const ctx = useContext(LoadingContext);
+  if (!ctx)
     throw new Error("useLoading harus digunakan di dalam LoadingProvider");
-  }
-  return context;
+  return ctx;
 }

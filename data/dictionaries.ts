@@ -267,6 +267,23 @@ export const dictionaries = {
           ],
           link: "https://fkra-app.web.app/",
         },
+        {
+          id: "08",
+          title: "Sistem Informasi Akademik",
+          category: "Mobile Application",
+          image: "/projects/lms-mobile-app.png",
+          description:
+            "Aplikasi mobile berbasis React Native yang dikembangkan sebagai versi mobile dari Sistem Informasi Akademik (SIAKAD), memungkinkan mahasiswa dan dosen mengakses layanan akademik seperti bimbingan secara lebih praktis melalui integrasi API.",
+          tech: ["React Native", "React Navigation", "REST API"],
+          features: [
+            "Akses layanan akademik dalam satu aplikasi mobile",
+            "Pengelolaan dan pemantauan bimbingan akademik",
+            "Integrasi data dengan sistem SIAKAD melalui API",
+            "Menampilkan data secara real-time dari server",
+            "Antarmuka yang modern dan mudah digunakan",
+          ],
+          link: "",
+        },
       ],
     },
     tech: {
@@ -685,6 +702,23 @@ export const dictionaries = {
             "Transaction history management",
           ],
           link: "https://fkra-app.web.app/",
+        },
+        {
+          id: "08",
+          title: "Academic Information System",
+          category: "Mobile Application",
+          image: "/projects/lms-mobile-app.png",
+          description:
+            "A mobile application built with React Native as an extension of an existing Academic Information System (SIAKAD), enabling students and lecturers to access academic services such as guidance and scheduling more conveniently through API integration.",
+          tech: ["React Native", "React Navigation", "REST API"],
+          features: [
+            "Mobile access to academic services in one application",
+            "Academic guidance management and tracking",
+            "Seamless integration with existing SIAKAD via API",
+            "Real-time data synchronization from the server",
+            "Clean and intuitive mobile user interface",
+          ],
+          link: "",
         },
       ],
     },

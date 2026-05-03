@@ -1,11 +1,11 @@
 "use client";
 
-import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Experience from "@/components/sections/Experience";
-import Projects from "@/components/sections/Projects";
-import TechAndCerts from "@/components/sections/TechAndCerts";
-import Contact from "@/components/sections/Contact";
+import Hero from "@/components/hero";
+import About from "@/components/about";
+import Experience from "@/components/experience";
+import Projects from "@/components/projects";
+import TechAndCerts from "@/components/tech";
+import Contact from "@/components/contact";
 import Footer from "@/components/ui/Footer";
 
 import useSmoothScroll from "@/hooks/useSmoothScroll";

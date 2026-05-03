@@ -8,52 +8,66 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// ── Base reveal config ──────────────────────────────────────────────
-// "Fast Out, Slow In" — identik dengan Material Design motion spec
+type ContainerRef = React.RefObject<HTMLElement | null>;
+
+// ── Base configs ─────────────────────────────────────────────────────
 const materialReveal = {
-  y: 32,
+  y: 28,
   opacity: 0,
-  scale: 0.96,
-  duration: 0.9,
+  scale: 0.97,
+  duration: 0.85,
   ease: "expo.out",
   clearProps: "all",
-};
+} as const;
 
-// Varian lebih ringan untuk elemen dalam-halaman (form fields, chips)
 const subtleReveal = {
-  y: 18,
+  y: 16,
   opacity: 0,
   scale: 0.98,
-  duration: 0.75,
+  duration: 0.7,
   ease: "expo.out",
   clearProps: "all",
-};
+} as const;
 
-// ── HERO ────────────────────────────────────────────────────────────
-// Tidak pakai ScrollTrigger — langsung muncul saat halaman load
-export const useHeroAnimation = (containerRef: any) => {
+// ── Shared ScrollTrigger factory ─────────────────────────────────────
+function makeTrigger(trigger: HTMLElement | null | string, start = "top 82%") {
+  return { scrollTrigger: { trigger, start, once: true } };
+}
+
+// ── HERO ─────────────────────────────────────────────────────────────
+export const useHeroAnimation = (containerRef: ContainerRef) => {
   useGSAP(
     () => {
       gsap.from(".reveal-card", {
         ...materialReveal,
-        stagger: 0.12,
-        delay: 0.08,
+        stagger: 0.11,
+        delay: 0.06,
       });
     },
     { scope: containerRef },
   );
 };
 
-// ── ABOUT ───────────────────────────────────────────────────────────
-export const useAboutAnimation = (containerRef: any) => {
+// ── ABOUT ────────────────────────────────────────────────────────────
+export const useAboutAnimation = (containerRef: ContainerRef) => {
   useGSAP(
     () => {
       gsap.from(".about-animate", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 82%",
-          once: true,
-        },
+        ...makeTrigger(containerRef.current),
+        ...materialReveal,
+        stagger: 0.12,
+      });
+    },
+    { scope: containerRef },
+  );
+};
+
+// ── EXPERIENCE ───────────────────────────────────────────────────────
+export const useExperienceAnimation = (containerRef: ContainerRef) => {
+  useGSAP(
+    () => {
+      gsap.from(".exp-row", {
+        ...makeTrigger(containerRef.current),
         ...materialReveal,
         stagger: 0.13,
       });
@@ -62,40 +76,14 @@ export const useAboutAnimation = (containerRef: any) => {
   );
 };
 
-// ── EXPERIENCE ──────────────────────────────────────────────────────
-// Cards slide up satu per satu — stagger sedikit lebih panjang
-// agar timeline rail terasa seperti "mengisi" dari atas ke bawah
-export const useExperienceAnimation = (containerRef: any) => {
-  useGSAP(
-    () => {
-      gsap.from(".exp-row", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 82%",
-          once: true,
-        },
-        ...materialReveal,
-        stagger: 0.14,
-      });
-    },
-    { scope: containerRef },
-  );
-};
-
-// ── PROJECTS ────────────────────────────────────────────────────────
-// Cards carousel — y lebih kecil karena elemen sudah compact horizontal
-export const useProjectsAnimation = (containerRef: any) => {
+// ── PROJECTS ─────────────────────────────────────────────────────────
+export const useProjectsAnimation = (containerRef: ContainerRef) => {
   useGSAP(
     () => {
       gsap.from(".project-animate", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 82%",
-          once: true,
-        },
+        ...makeTrigger(containerRef.current),
         ...subtleReveal,
-        y: 22,
-        stagger: 0.1,
+        stagger: 0.09,
       });
     },
     { scope: containerRef },
@@ -103,42 +91,25 @@ export const useProjectsAnimation = (containerRef: any) => {
 };
 
 // ── TECH & CERTS ─────────────────────────────────────────────────────
-export const useTechCertsAnimation = (containerRef: any) => {
+export const useTechCertsAnimation = (containerRef: ContainerRef) => {
   useGSAP(
     () => {
-      // Tech stack header + card
       gsap.from(".tech-header", {
-        scrollTrigger: {
-          trigger: ".tech-header",
-          start: "top 82%",
-          once: true,
-        },
+        ...makeTrigger(".tech-header"),
         ...materialReveal,
-        stagger: 0.12,
+        stagger: 0.11,
       });
 
-      // Certificates header
       gsap.from(".cert-header", {
-        scrollTrigger: {
-          trigger: ".cert-header",
-          start: "top 82%",
-          once: true,
-        },
+        ...makeTrigger(".cert-header"),
         ...materialReveal,
-        stagger: 0.12,
+        stagger: 0.11,
       });
 
-      // Certificate cards in carousel
-      // Stagger lebih panjang agar mata bisa mengikuti horizontal flow
       gsap.from(".cert-card", {
-        scrollTrigger: {
-          trigger: ".cert-card",
-          start: "top 88%",
-          once: true,
-        },
+        ...makeTrigger(".cert-card", "top 88%"),
         ...subtleReveal,
-        y: 20,
-        stagger: 0.18,
+        stagger: 0.16,
       });
 
       ScrollTrigger.refresh();
@@ -147,39 +118,29 @@ export const useTechCertsAnimation = (containerRef: any) => {
   );
 };
 
-// ── CONTACT ─────────────────────────────────────────────────────────
-export const useContactAnimation = (containerRef: any) => {
+// ── CONTACT ──────────────────────────────────────────────────────────
+export const useContactAnimation = (containerRef: ContainerRef) => {
   useGSAP(
     () => {
       gsap.from(".contact-input", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 82%",
-          once: true,
-        },
+        ...makeTrigger(containerRef.current),
         ...subtleReveal,
-        stagger: 0.12,
+        stagger: 0.11,
       });
     },
     { scope: containerRef },
   );
 };
 
-// ── FOOTER ──────────────────────────────────────────────────────────
-// Footer sering muncul setelah scroll panjang —
-// trigger lebih awal (95%) dan durasi sedikit lebih cepat
-export const useFooterAnimation = (containerRef: any) => {
+// ── FOOTER ───────────────────────────────────────────────────────────
+export const useFooterAnimation = (containerRef: ContainerRef) => {
   useGSAP(
     () => {
       gsap.from(".footer-item", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 92%",
-          once: true,
-        },
+        ...makeTrigger(containerRef.current, "top 92%"),
         ...materialReveal,
-        duration: 0.75,
-        stagger: 0.09,
+        duration: 0.7,
+        stagger: 0.08,
       });
     },
     { scope: containerRef },
