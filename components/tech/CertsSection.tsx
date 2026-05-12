@@ -31,7 +31,10 @@ export function CertsSection({
     <div className="flex flex-col gap-8 md:gap-12 w-full">
       {/* Header */}
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-3 md:gap-4 px-6 md:px-12 lg:px-20">
-        <div className="cert-header inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit">
+        <div
+          data-aos="zoom-in-left"
+          className="inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
+        >
           <Award size={14} className="text-[#34A853] dark:text-[#81C995]" />
           <span className="text-xs font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
             {badgeCert}
@@ -40,7 +43,7 @@ export function CertsSection({
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <div className="cert-header flex items-end gap-4">
+            <div data-aos="fade-up" data-aos-delay="100" className="flex items-end gap-4">
               <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
                 {titleCert}
               </h2>
@@ -49,13 +52,21 @@ export function CertsSection({
                 <div className="h-px w-16 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
               </div>
             </div>
-            <p className="cert-header text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-2 leading-relaxed">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-2 leading-relaxed"
+            >
               {subtitleCert}
             </p>
           </div>
 
           {/* Nav arrows */}
-          <div className="cert-header hidden md:flex gap-2.5 shrink-0 pb-1">
+          <div
+            data-aos="fade-left"
+            data-aos-delay="300"
+            className="hidden md:flex gap-2.5 shrink-0 pb-1"
+          >
             {(["left", "right"] as const).map((dir) => (
               <button
                 key={dir}

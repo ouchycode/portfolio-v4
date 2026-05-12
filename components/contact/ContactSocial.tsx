@@ -2,7 +2,7 @@ import { Linkedin, Github } from "lucide-react";
 
 export function ContactSocial() {
   return (
-    <div className="contact-input">
+    <div data-aos="zoom-in-up" data-aos-delay="250">
       <div
         className="w-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-4 md:p-5 flex items-center justify-center gap-3"
         style={{

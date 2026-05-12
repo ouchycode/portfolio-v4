@@ -15,7 +15,11 @@ export function HeroCTA({
   onResumeClick,
 }: HeroCTAProps) {
   return (
-    <div className="reveal-card flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+    <div
+      data-aos="fade-up"
+      data-aos-delay="400"
+      className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
+    >
       {/* Primary */}
       <a
         href="#projects"

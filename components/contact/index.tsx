@@ -42,13 +42,21 @@ export default function Contact() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative items-stretch">
-          {/* Decorative icons — hidden mobile */}
-          <div className="contact-input absolute -top-6 right-[58%] z-20 hidden sm:block pointer-events-none">
+          {/* Decorative icons */}
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="400"
+            className="absolute -top-6 right-[58%] z-20 hidden sm:block pointer-events-none"
+          >
             <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
               <Paperclip className="w-5 h-5 text-[#1A73E8] dark:text-[#8AB4F8]" />
             </div>
           </div>
-          <div className="contact-input absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-8 z-20 pointer-events-none hidden sm:block">
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="500"
+            className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-8 z-20 pointer-events-none hidden sm:block"
+          >
             <div className="p-3 bg-white dark:bg-[#303134] rounded-full shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] rotate-12">
               <Star className="w-5 h-5 text-[#FABB05] fill-[#FABB05]/25" />
             </div>

@@ -38,7 +38,11 @@ export default function Hero() {
         <div className="flex-1 flex flex-col items-start w-full max-w-2xl">
           <HeroBadge label={t.hero.greeting} />
           <HeroHeadline role={t.hero.role} />
-          <p className="reveal-card text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-[40ch] md:max-w-[44ch] leading-relaxed mb-10 md:mb-12">
+          <p
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-[40ch] md:max-w-[44ch] leading-relaxed mb-10 md:mb-12"
+          >
             {t.hero.desc}
           </p>
           <HeroCTA

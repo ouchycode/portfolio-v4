@@ -12,7 +12,7 @@ export function AboutDescription({
   description,
 }: AboutDescriptionProps) {
   return (
-    <div className="about-animate flex-1">
+    <div data-aos="fade-left" data-aos-delay="150" className="flex-1">
       <div
         className="h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 flex flex-col justify-center"
         style={{

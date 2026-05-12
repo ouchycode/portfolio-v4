@@ -15,7 +15,10 @@ export function ContactHeader({
 }: ContactHeaderProps) {
   return (
     <div className="flex flex-col gap-3 md:gap-4">
-      <div className="contact-input inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit">
+      <div
+        data-aos="flip-right"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
+      >
         <MessageSquare
           size={14}
           className="text-[#1A73E8] dark:text-[#8AB4F8]"
@@ -27,7 +30,7 @@ export function ContactHeader({
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="max-w-2xl">
-          <div className="contact-input flex items-end gap-4">
+          <div data-aos="fade-up" data-aos-delay="100" className="flex items-end gap-4">
             <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
               {title}
             </h2>
@@ -36,13 +39,17 @@ export function ContactHeader({
               <div className="h-px flex-1 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
             </div>
           </div>
-          <p className="contact-input text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-2 leading-relaxed">
+          <p
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-2 leading-relaxed"
+          >
             {subtitle}
           </p>
         </div>
 
         {/* Fast response badge — desktop */}
-        <div className="contact-input hidden md:flex shrink-0 pb-2">
+        <div data-aos="zoom-in" data-aos-delay="300" className="hidden md:flex shrink-0 pb-2">
           <div
             className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134]"
             style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}

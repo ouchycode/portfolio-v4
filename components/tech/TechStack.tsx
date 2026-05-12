@@ -16,14 +16,17 @@ export function TechStack({
     <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-10 px-6 md:px-12 lg:px-20">
       {/* Header */}
       <div className="flex flex-col gap-3 md:gap-4">
-        <div className="tech-header inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit">
+        <div
+          data-aos="zoom-in-down"
+          className="inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
+        >
           <Cpu size={14} className="text-[#1A73E8] dark:text-[#8AB4F8]" />
           <span className="text-xs font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
             {badgeStack}
           </span>
         </div>
 
-        <div className="tech-header flex items-end gap-4">
+        <div data-aos="fade-right" data-aos-delay="100" className="flex items-end gap-4">
           <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
             {titleStack}
           </h2>
@@ -33,14 +36,20 @@ export function TechStack({
           </div>
         </div>
 
-        <p className="tech-header text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-2xl leading-relaxed">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-2xl leading-relaxed"
+        >
           {subtitleStack}
         </p>
       </div>
 
       {/* Card */}
       <div
-        className="tech-header w-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-6 sm:p-8 md:p-10"
+        data-aos="zoom-in-up"
+        data-aos-delay="100"
+        className="w-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-6 sm:p-8 md:p-10"
         style={{
           boxShadow:
             "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",

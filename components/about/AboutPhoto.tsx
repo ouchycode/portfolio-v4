@@ -4,22 +4,34 @@ import { Camera, Gamepad2 } from "lucide-react";
 export function AboutPhoto() {
   return (
     <div className="relative flex flex-col justify-center w-full max-w-sm sm:max-w-md lg:max-w-none mx-auto px-4 sm:px-0">
-      {/* Decorative icon — Camera, hidden mobile */}
-      <div className="about-animate absolute -top-6 -left-2 sm:-top-8 sm:-left-6 z-20 pointer-events-none hidden sm:block">
+      {/* Decorative icon — Camera */}
+      <div
+        data-aos="zoom-in-right"
+        data-aos-delay="200"
+        className="absolute -top-6 -left-2 sm:-top-8 sm:-left-6 z-20 pointer-events-none hidden sm:block"
+      >
         <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
           <Camera className="w-5 h-5 text-[#1A73E8] dark:text-[#8AB4F8]" />
         </div>
       </div>
 
       {/* Decorative icon — Gamepad */}
-      <div className="about-animate absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-6 z-20 pointer-events-none">
+      <div
+        data-aos="zoom-in-left"
+        data-aos-delay="400"
+        className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-6 z-20 pointer-events-none"
+      >
         <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] rotate-12">
           <Gamepad2 className="w-5 h-5 text-[#EA4335] dark:text-[#F28B82]" />
         </div>
       </div>
 
       {/* Photo card */}
-      <div className="about-animate relative w-full aspect-square sm:aspect-4/5 z-10">
+      <div
+        data-aos="fade-right"
+        data-aos-delay="100"
+        className="relative w-full aspect-square sm:aspect-4/5 z-10"
+      >
         <div
           className="relative w-full h-full rounded-4xl md:rounded-[2.5rem] overflow-hidden"
           style={{

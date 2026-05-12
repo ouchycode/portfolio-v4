@@ -7,7 +7,7 @@ interface AboutEducationProps {
 
 export function AboutEducation({ label, value }: AboutEducationProps) {
   return (
-    <div className="about-animate w-full">
+    <div data-aos="flip-up" data-aos-delay="250" className="w-full">
       <div
         className="w-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-5 sm:p-7 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left"
         style={{

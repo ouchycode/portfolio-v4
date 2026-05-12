@@ -5,6 +5,9 @@ interface ExperienceTimelineProps {
   onCardClick: () => void;
 }
 
+// AOS animations per-card — alternating left/right for timeline feel
+const aosAnimations = ["fade-right", "fade-left", "fade-right", "fade-left", "fade-right"];
+
 export function ExperienceTimeline({
   list,
   onCardClick,
@@ -17,11 +20,14 @@ export function ExperienceTimeline({
       {list.map((exp: any, index: number) => {
         const isLast = index === list.length - 1;
         const { accentColor } = { accentColor: getAccentColor(exp.type) };
+        const aosAnim = aosAnimations[index % aosAnimations.length];
 
         return (
           <div
             key={exp.id}
-            className={`exp-row relative z-10 flex gap-0 sm:gap-8 ${isLast ? "" : "mb-5 md:mb-7"}`}
+            data-aos={aosAnim}
+            data-aos-delay={index * 100}
+            className={`relative z-10 flex gap-0 sm:gap-8 ${isLast ? "" : "mb-5 md:mb-7"}`}
           >
             {/* Timeline dot — desktop */}
             <div className="hidden sm:flex flex-col items-center shrink-0 w-14 pt-8">

@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { LoadingProvider } from "@/context/LoadingContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Navbar from "@/components/ui/Navbar";
+import { AOSInit } from "@/components/ui/AOSInit";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -89,6 +90,7 @@ export default function RootLayout({
                 }}
               />
 
+              <AOSInit />
               <Navbar />
 
               <div

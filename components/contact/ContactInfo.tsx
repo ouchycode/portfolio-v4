@@ -2,7 +2,7 @@ import { Mail, MapPin } from "lucide-react";
 
 export function ContactInfo({ t }: { t: any }) {
   return (
-    <div className="contact-input flex-1">
+    <div data-aos="fade-right" data-aos-delay="100" className="flex-1">
       <div
         className="w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 flex flex-col justify-between"
         style={{

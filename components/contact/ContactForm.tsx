@@ -10,7 +10,7 @@ const labelClass =
 
 export function ContactForm({ t }: { t: any }) {
   return (
-    <div className="contact-input h-full">
+    <div data-aos="fade-left" data-aos-delay="150" className="h-full">
       <div
         className="w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 relative overflow-hidden"
         style={{
