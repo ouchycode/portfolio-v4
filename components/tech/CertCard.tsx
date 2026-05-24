@@ -1,25 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BadgeCheck } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, FileText } from "lucide-react";
+
+import { CertData } from "@/types";
 
 interface CertCardProps {
-  cert: any;
-  index: number;
+  cert: CertData;
   onCardClick: () => void;
 }
 
-export function CertCard({ cert, index, onCardClick }: CertCardProps) {
+export function CertCard({ cert, onCardClick }: CertCardProps) {
   return (
     <div className="cert-card shrink-0 w-[85vw] sm:w-85 md:w-95 lg:w-100">
       <Link
         href={`/certificate/${cert.id}`}
         onClick={onCardClick}
-        className="group relative w-full h-full flex flex-col p-5 sm:p-6 cursor-pointer rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 hover:-translate-y-1 transition-transform duration-200"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
+        className="group material-card relative w-full h-full flex flex-col p-5 sm:p-6 cursor-pointer rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40"
       >
         {/* Top accent line */}
         <span
@@ -27,9 +24,8 @@ export function CertCard({ cert, index, onCardClick }: CertCardProps) {
           className="absolute top-0 left-8 right-8 h-0.5 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-[#34A853]"
         />
 
-        {/* Thumbnail */}
         <div
-          className="relative w-full aspect-4/3 rounded-[1.25rem] overflow-hidden mb-4 md:mb-5 bg-[#F8F9FA] dark:bg-[#202124]"
+          className="relative w-full aspect-4/3 rounded-t-[1.75rem] rounded-b-xl overflow-hidden mb-4 md:mb-5 bg-[#F8F9FA] dark:bg-[#202124]"
           style={{ border: "1px solid rgba(218,220,224,0.5)" }}
         >
           {/* Badge top-left */}
@@ -40,12 +36,14 @@ export function CertCard({ cert, index, onCardClick }: CertCardProps) {
             />
           </div>
 
-          <iframe
-            src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-            className="w-full h-full pointer-events-none opacity-90 bg-white"
-            title={cert.title}
-          />
-          <div className="absolute inset-0 bg-transparent" />
+          <div className="w-full h-full flex flex-col items-center justify-center bg-[#F8F9FA] dark:bg-[#202124] group-hover:bg-[#E6F4EA]/40 dark:group-hover:bg-[#81C995]/10 transition-colors duration-300">
+             <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#E6F4EA] dark:bg-[#81C995]/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                <FileText className="w-8 h-8 md:w-10 md:h-10 text-[#34A853] dark:text-[#81C995]" strokeWidth={1.5} />
+             </div>
+             <p className="text-[10px] md:text-xs font-bold text-[#5F6368] dark:text-[#9AA0A6] uppercase tracking-[0.2em]">
+               Document
+             </p>
+          </div>
 
           {/* Arrow on hover */}
           <div className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white dark:bg-[#303134] flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-200 border border-[#DADCE0]/60 dark:border-[#5F6368]/40">

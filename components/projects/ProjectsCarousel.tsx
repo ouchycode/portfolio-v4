@@ -2,11 +2,11 @@
 
 import { RefObject } from "react";
 import { ProjectCard } from "./ProjectCard";
+import { ProjectData } from "@/types";
 
 interface ProjectsCarouselProps {
   scrollRef: RefObject<HTMLDivElement | null>;
-  list: any[];
-  isPaused: boolean;
+  list: ProjectData[];
   setIsPaused: (v: boolean) => void;
   onCardClick: () => void;
 }
@@ -14,7 +14,6 @@ interface ProjectsCarouselProps {
 export function ProjectsCarousel({
   scrollRef,
   list,
-  isPaused,
   setIsPaused,
   onCardClick,
 }: ProjectsCarouselProps) {
@@ -36,7 +35,6 @@ export function ProjectsCarousel({
           <ProjectCard
             key={`${project.id}-${index}`}
             project={project}
-            index={index}
             onCardClick={onCardClick}
           />
         ))}

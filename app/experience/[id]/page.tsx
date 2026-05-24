@@ -12,12 +12,13 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useLoading } from "@/context/LoadingContext";
+import { ExperienceData } from "@/types";
 
 const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
 
 const GOOGLE_THEME: Record<
   string,
-  { bg: string; text: string; icon: any; accent: string }
+  { bg: string; text: string; icon: React.ElementType; accent: string }
 > = {
   Education: {
     bg: "bg-[#E8F0FE] dark:bg-[#1A73E8]/15",
@@ -92,7 +93,7 @@ export default function ExperienceDetailPage() {
   const { startLoading } = useLoading();
   const id = params.id as string;
 
-  const data = t.experience.list.find((item: any) => item.id === id);
+  const data = t.experience.list.find((item: ExperienceData) => item.id === id);
 
   if (!data) {
     return (

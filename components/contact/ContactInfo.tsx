@@ -1,15 +1,10 @@
 import { Mail, MapPin } from "lucide-react";
 
-export function ContactInfo({ t }: { t: any }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ContactInfo({ t }: { t: Record<string, any> }) {
   return (
     <div data-aos="fade-right" data-aos-delay="100" className="flex-1">
-      <div
-        className="w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 flex flex-col justify-between"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
-      >
+      <div className="material-card w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 flex flex-col justify-between">
         <div>
           <h3 className="font-black tracking-[-0.02em] text-xl md:text-2xl lg:text-3xl text-[#202124] dark:text-white mb-3">
             {t.contact.infoTitle}

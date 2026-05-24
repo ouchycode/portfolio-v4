@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { LoadingProvider } from "@/context/LoadingContext";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -9,7 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const manrope = Manrope({
+const googleFont = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
@@ -17,6 +17,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio-bykevin.vercel.app/"),
   title: "Kevin Ardiansyah | Frontend Engineer",
   description:
     "Portfolio of Kevin Ardiansyah, a Frontend Engineer based in Tangerang, ID. Focused on creating intuitive user experiences and writing clean, scalable code.",
@@ -64,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body
-        className={`${manrope.variable} font-sans min-h-screen bg-background text-foreground`}
+        className={`${googleFont.variable} font-sans min-h-screen bg-background text-foreground`}
       >
         <LanguageProvider>
           <LoadingProvider>

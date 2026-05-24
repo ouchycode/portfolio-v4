@@ -1,4 +1,5 @@
 import { Cpu } from "lucide-react";
+import Image from "next/image";
 import { techStack, techGroups } from "../../data/tech/techData";
 
 interface TechStackProps {
@@ -85,9 +86,11 @@ export function TechStack({
                       key={tech.name}
                       className="flex items-center gap-2 md:gap-2.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#202124] cursor-default"
                     >
-                      <img
+                      <Image
                         src={tech.image}
                         alt={tech.name}
+                        width={20}
+                        height={20}
                         className="w-4 h-4 md:w-5 md:h-5 object-contain"
                       />
                       <span className="text-xs md:text-sm font-semibold text-[#3C4043] dark:text-[#E8EAED]">

@@ -4,13 +4,14 @@ import { RefObject } from "react";
 import { Award, ArrowLeft, ArrowRight } from "lucide-react";
 import { CertCard } from "./CertCard";
 
+import { CertData } from "@/types";
+
 interface CertsSectionProps {
   scrollRef: RefObject<HTMLDivElement | null>;
   badgeCert: string;
   titleCert: string;
   subtitleCert: string;
-  infiniteCerts: any[];
-  isPaused: boolean;
+  infiniteCerts: CertData[];
   setIsPaused: (v: boolean) => void;
   onSlide: (dir: "left" | "right") => void;
   onCardClick: () => void;
@@ -22,7 +23,6 @@ export function CertsSection({
   titleCert,
   subtitleCert,
   infiniteCerts,
-  isPaused,
   setIsPaused,
   onSlide,
   onCardClick,
@@ -106,11 +106,10 @@ export function CertsSection({
           onTouchEnd={() => setIsPaused(false)}
           className="flex overflow-x-auto gap-5 sm:gap-6 py-8 px-6 md:px-20 touch-pan-x [&::-webkit-scrollbar]:hidden select-none"
         >
-          {infiniteCerts.map((cert: any, index: number) => (
+          {infiniteCerts.map((cert, index) => (
             <CertCard
               key={`${cert.id}-${index}`}
               cert={cert}
-              index={index}
               onCardClick={onCardClick}
             />
           ))}

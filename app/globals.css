@@ -16,10 +16,10 @@
 }
 
 .dark {
-  --background: #1c1c1e;
+  --background: #202124;
   --foreground: #e8eaed;
-  --surface: #2d2d2f;
-  --surface-variant: #3c3c3e;
+  --surface: #303134;
+  --surface-variant: #3c4043;
   --outline: #5f6368;
   --scrollbar-thumb: #5f6368;
   --scrollbar-thumb-hover: #9aa0a6;
@@ -116,4 +116,19 @@ body {
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
+}
+
+/* ── Material 3 Elevation ────────────────────────────────────────────────── */
+.material-card {
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.15), 0 1px 3px 1px rgba(60,64,67,0.05);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.material-card:hover {
+  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.15), 0 4px 10px 2px rgba(60,64,67,0.10);
+}
+.dark .material-card {
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+}
+.dark .material-card:hover {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3), 0 4px 10px 2px rgba(0,0,0,0.15);
 }

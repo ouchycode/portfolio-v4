@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useLoading } from "@/context/LoadingContext";
+import { ProjectData } from "@/types";
 
 const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
 
@@ -80,7 +81,7 @@ export default function ProjectDetailPage() {
   const { startLoading } = useLoading();
   const id = params.id as string;
 
-  const project = t.projects.list.find((item: any) => item.id === id);
+  const project = t.projects.list.find((item: ProjectData) => item.id === id);
 
   if (!project) {
     return (

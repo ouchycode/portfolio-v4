@@ -8,16 +8,11 @@ const inputClass =
 const labelClass =
   "text-xs font-bold tracking-[0.08em] uppercase text-[#5F6368] dark:text-[#9AA0A6] pl-1";
 
-export function ContactForm({ t }: { t: any }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ContactForm({ t }: { t: Record<string, any> }) {
   return (
     <div data-aos="fade-left" data-aos-delay="150" className="h-full">
-      <div
-        className="w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 relative overflow-hidden"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
-      >
+      <div className="material-card w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 relative overflow-hidden">
         {/* Google 4-color top bar */}
         <div className="absolute top-0 left-0 right-0 h-0.75 flex">
           {["#EA4335", "#FABB05", "#34A853", "#1A73E8"].map((c) => (

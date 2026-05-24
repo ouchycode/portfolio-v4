@@ -15,7 +15,8 @@ import {
   X,
   ChevronDown,
 } from "lucide-react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 
 const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
@@ -102,13 +103,18 @@ function IconButton({
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { t, language, setLanguage } = useLanguage();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("#");
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const ticking = useRef(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const closeMenu = () => setIsOpen(false);
   const toggleLanguage = () => setLanguage(language === "id" ? "en" : "id");
@@ -139,37 +145,39 @@ export default function Navbar() {
   );
 
   const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 20);
-    if (isScrolling) return;
-
-    let current = "#";
-    if (window.scrollY >= 50) {
-      NAV_LINKS.forEach((link) => {
-        if (link.href === "#") return;
-        const el = document.querySelector<HTMLElement>(link.href);
-        if (el && window.scrollY >= el.offsetTop - 170) current = link.href;
+    if (!ticking.current) {
+      window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        if (!isScrolling) {
+          let current = "#";
+          if (window.scrollY >= 50) {
+            NAV_LINKS.forEach((link) => {
+              if (link.href === "#") return;
+              const el = document.getElementById(link.href.substring(1));
+              if (el && window.scrollY >= el.offsetTop - 170) current = link.href;
+            });
+          }
+          setActive(current);
+        }
+        ticking.current = false;
       });
+      ticking.current = true;
     }
-    setActive(current);
   }, [isScrolling]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   if (!mounted) return null;
 
-  const desktopBg = scrolled
-    ? "rgba(255,255,255,0.95)"
-    : "rgba(255,255,255,0.80)";
-  const desktopBorder = scrolled
-    ? "rgba(218,220,224,0.9)"
-    : "rgba(218,220,224,0.5)";
-  const desktopShadow = scrolled
-    ? "0 1px 3px rgba(60,64,67,.12), 0 4px 12px rgba(60,64,67,.08)"
-    : "0 1px 3px rgba(60,64,67,.06)";
+  // Sembunyikan Navbar sepenuhnya jika tidak di halaman utama (home)
+  if (pathname !== "/") return null;
+
+
 
   return (
     <>

@@ -5,6 +5,7 @@ interface InfoCardProps {
   accentColor: string;
   label: string;
   value: string;
+  className?: string;
 }
 
 export function InfoCard({
@@ -14,10 +15,11 @@ export function InfoCard({
   accentColor,
   label,
   value,
+  className = "rounded-2xl md:rounded-3xl",
 }: InfoCardProps) {
   return (
     <div className="reveal-card">
-      <div className="flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl md:rounded-3xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 shadow-sm hover:-translate-y-0.5 transition-transform duration-200">
+      <div className={`material-card flex items-center gap-4 md:gap-5 p-4 md:p-5 bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 ${className}`}>
         <div
           className={`w-10 h-10 md:w-12 md:h-12 shrink-0 flex items-center justify-center rounded-xl md:rounded-2xl ${iconBg} ${iconColor}`}
         >

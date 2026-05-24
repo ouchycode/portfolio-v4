@@ -79,7 +79,6 @@ export default function TechAndCerts() {
           titleCert={t.tech.titleCert}
           subtitleCert={t.tech.subtitleCert}
           infiniteCerts={infiniteCerts}
-          isPaused={isPaused}
           setIsPaused={setIsPaused}
           onSlide={slide}
           onCardClick={() => startLoading(800)}

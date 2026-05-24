@@ -7,27 +7,23 @@ import {
   getProjectTheme,
   getProjectIcon,
 } from "../../data/projects/getProjectTheme";
+import { ProjectData } from "@/types";
 
 interface ProjectCardProps {
-  project: any;
-  index: number;
+  project: ProjectData;
   onCardClick: () => void;
 }
 
-export function ProjectCard({ project, index, onCardClick }: ProjectCardProps) {
+export function ProjectCard({ project, onCardClick }: ProjectCardProps) {
   const theme = getProjectTheme(project.category);
-  const ProjectIcon = getProjectIcon(project.category);
+  const Icon = getProjectIcon(project.category);
 
   return (
     <div className="project-animate shrink-0 w-[85vw] sm:w-90 md:w-100 lg:w-105">
       <Link
         href={`/projects/${project.id}`}
         onClick={onCardClick}
-        className="group relative w-full h-full flex flex-col p-5 sm:p-6 cursor-pointer rounded-0.5 bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 hover:-translate-y-1 transition-transform duration-200"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
+        className="group material-card relative w-full h-full flex flex-col p-5 sm:p-6 cursor-pointer rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40"
       >
         {/* Top accent line */}
         <span
@@ -36,14 +32,14 @@ export function ProjectCard({ project, index, onCardClick }: ProjectCardProps) {
           style={{ background: theme.accent }}
         />
 
-        {/* Thumbnail */}
         <div
-          className="relative w-full aspect-16/10 rounded-[1.25rem] overflow-hidden mb-5 bg-[#F8F9FA] dark:bg-[#202124]"
+          className="relative w-full aspect-16/10 rounded-t-[1.75rem] rounded-b-xl overflow-hidden mb-5 bg-[#F8F9FA] dark:bg-[#202124]"
           style={{ border: "1px solid rgba(218,220,224,0.5)" }}
         >
           {/* Icon badge */}
           <div className="absolute top-3 left-3 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl border border-[#DADCE0]/60 dark:border-[#5F6368]/40">
-            <ProjectIcon className={`w-4 h-4 ${theme.text}`} strokeWidth={2} />
+            {/* eslint-disable-next-line */}
+            <Icon className={`w-4 h-4 ${theme.text}`} strokeWidth={2} />
           </div>
 
           <Image

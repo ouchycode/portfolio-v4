@@ -82,7 +82,6 @@ export default function Projects() {
         <ProjectsCarousel
           scrollRef={scrollRef}
           list={infiniteList}
-          isPaused={isPaused}
           setIsPaused={setIsPaused}
           onCardClick={() => startLoading(800)}
         />

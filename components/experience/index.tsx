@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { Briefcase } from "lucide-react";
 import { useExperienceAnimation } from "@/hooks/useAnimations";
 import { useLanguage } from "@/context/LanguageContext";
 import { useLoading } from "@/context/LoadingContext";

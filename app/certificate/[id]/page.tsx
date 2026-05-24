@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Award, BadgeCheck } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { CertData } from "@/types";
 
 const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
 
@@ -32,7 +33,7 @@ export default function CertificateDetailPage() {
   const { t, language } = useLanguage();
   const id = params.id as string;
 
-  const cert = t.tech.certs.find((item: any) => item.id === id);
+  const cert = t.tech.certs.find((item: CertData) => item.id === id);
 
   if (!cert) {
     return (

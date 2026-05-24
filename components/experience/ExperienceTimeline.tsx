@@ -1,7 +1,8 @@
 import { ExperienceCard } from "./ExperienceCard";
+import { ExperienceData } from "@/types";
 
 interface ExperienceTimelineProps {
-  list: any[];
+  list: ExperienceData[];
   onCardClick: () => void;
 }
 
@@ -17,7 +18,7 @@ export function ExperienceTimeline({
       {/* Vertical rail — desktop */}
       <div className="absolute left-6.75 top-0 bottom-0 w-px bg-linear-to-b from-[#DADCE0] via-[#DADCE0] to-transparent dark:from-[#5F6368]/50 dark:via-[#5F6368]/30 hidden sm:block" />
 
-      {list.map((exp: any, index: number) => {
+      {list.map((exp: ExperienceData, index: number) => {
         const isLast = index === list.length - 1;
         const { accentColor } = { accentColor: getAccentColor(exp.type) };
         const aosAnim = aosAnimations[index % aosAnimations.length];

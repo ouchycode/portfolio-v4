@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { getTypeStyle } from "../../data/experience/getTypeStyle";
+import { ExperienceData } from "@/types";
 
 interface ExperienceCardProps {
-  exp: any;
+  exp: ExperienceData;
   onCardClick: () => void;
 }
 
@@ -16,11 +17,7 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
     <Link
       href={`/experience/${exp.id}`}
       onClick={onCardClick}
-      className="group relative flex-1 flex flex-col sm:flex-row sm:items-start gap-5 md:gap-7 p-5 sm:p-8 rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer"
-      style={{
-        boxShadow:
-          "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-      }}
+      className="group material-card relative flex-1 flex flex-col sm:flex-row sm:items-start gap-5 md:gap-7 p-5 sm:p-8 rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 cursor-pointer"
     >
       {/* Left accent bar */}
       <span

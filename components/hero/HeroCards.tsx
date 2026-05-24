@@ -56,6 +56,7 @@ export function HeroCards({
           accentColor="from-[#EA4335]/30"
           label={locationLabel}
           value={locationValue}
+          className="rounded-tl-[2.25rem] rounded-tr-2xl rounded-bl-2xl rounded-br-[2.25rem]"
         />
       </div>
 
@@ -73,12 +74,13 @@ export function HeroCards({
           accentColor="from-[#34A853]/30"
           label={statusLabel}
           value={statusValue}
+          className="rounded-tl-2xl rounded-tr-[2.25rem] rounded-bl-[2.25rem] rounded-br-2xl"
         />
       </div>
 
       {/* Card 3 — Skill chips */}
       <div data-aos="fade-left" data-aos-delay="300">
-        <div className="flex flex-wrap items-center gap-2 p-4 md:p-5 rounded-2xl md:rounded-3xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 shadow-sm">
+        <div className="material-card flex flex-wrap items-center gap-2 p-4 md:p-5 bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 rounded-tl-[2.25rem] rounded-tr-2xl rounded-bl-2xl rounded-br-[2.25rem]">
           {[
             { label: "React", color: "#61DAFB", bg: "#E8F8FD" },
             { label: "Next.js", color: "#202124", bg: "#F1F3F4" },
