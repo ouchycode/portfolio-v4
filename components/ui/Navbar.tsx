@@ -52,7 +52,7 @@ function NavItem({
         relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors duration-200 group
         ${
           isActive
-            ? "bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]"
+            ? "bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/15 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]"
             : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-[#E8EAED]"
         }
       `}
@@ -66,7 +66,7 @@ function NavItem({
 
       {/* Active dot — icon-only breakpoint */}
       {isActive && (
-        <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8] lg:hidden" />
+        <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] lg:hidden" />
       )}
 
       {/* Tooltip — icon-only breakpoint */}
@@ -232,7 +232,7 @@ export default function Navbar() {
             {theme === "dark" ? (
               <Sun size={18} strokeWidth={2} className="text-[#FABB05]" />
             ) : (
-              <Moon size={18} strokeWidth={2} className="text-[#1A73E8]" />
+              <Moon size={18} strokeWidth={2} className="text-[var(--google-blue)]" />
             )}
           </IconButton>
         </nav>
@@ -261,7 +261,7 @@ export default function Navbar() {
               ) : (
                 <Menu
                   size={18}
-                  className="text-[#1A73E8] dark:text-[#8AB4F8]"
+                  className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]"
                   strokeWidth={2.5}
                 />
               )}
@@ -294,7 +294,7 @@ export default function Navbar() {
               {theme === "dark" ? (
                 <Sun size={16} strokeWidth={2} className="text-[#FABB05]" />
               ) : (
-                <Moon size={16} strokeWidth={2} className="text-[#1A73E8]" />
+                <Moon size={16} strokeWidth={2} className="text-[var(--google-blue)]" />
               )}
             </IconButton>
           </div>
@@ -344,7 +344,7 @@ export default function Navbar() {
                         flex items-center gap-3.5 px-4 py-3 rounded-2xl transition-colors duration-200 active:scale-[0.98]
                         ${
                           isActive
-                            ? "bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]"
+                            ? "bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/15 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]"
                             : "text-[#5F6368] dark:text-[#9AA0A6] hover:bg-[#F8F9FA] dark:hover:bg-[#3C4043] hover:text-[#202124] dark:hover:text-[#E8EAED]"
                         }
                       `}
@@ -356,7 +356,7 @@ export default function Navbar() {
                       {isActive && (
                         <motion.div
                           layoutId="mobile-active-dot"
-                          className="w-1.5 h-1.5 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8] shrink-0"
+                          className="w-1.5 h-1.5 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0"
                         />
                       )}
                     </a>

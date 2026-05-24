@@ -21,7 +21,7 @@ export function AboutDescription({
         }}
       >
         {/* Role pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-[#E8F0FE] dark:bg-[#8AB4F8]/12 text-[#1A73E8] dark:text-[#8AB4F8] w-fit">
+        <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/12 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] w-fit">
           <Code2 size={15} strokeWidth={2.2} />
           <span className="text-xs font-bold tracking-[0.08em] uppercase">
             {tag}

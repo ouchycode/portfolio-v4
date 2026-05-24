@@ -49,7 +49,7 @@ export default function Contact() {
             className="absolute -top-6 right-[58%] z-20 hidden sm:block pointer-events-none"
           >
             <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
-              <Paperclip className="w-5 h-5 text-[#1A73E8] dark:text-[#8AB4F8]" />
+              <Paperclip className="w-5 h-5 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
             </div>
           </div>
           <div

@@ -3,7 +3,7 @@
 import { Send } from "lucide-react";
 
 const inputClass =
-  "w-full rounded-2xl border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] px-5 py-3 md:py-3.5 text-sm md:text-base text-[#202124] dark:text-white placeholder:text-[#9AA0A6] dark:placeholder:text-[#5F6368] outline-none focus:bg-white dark:focus:bg-[#303134] focus:border-[#1A73E8] dark:focus:border-[#8AB4F8] focus:ring-4 focus:ring-[#1A73E8]/10 dark:focus:ring-[#8AB4F8]/10 transition-colors duration-200";
+  "w-full rounded-2xl border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] px-5 py-3 md:py-3.5 text-sm md:text-base text-[#202124] dark:text-white placeholder:text-[#9AA0A6] dark:placeholder:text-[#5F6368] outline-none focus:bg-white dark:focus:bg-[#303134] focus:border-[var(--google-blue)] dark:focus:border-[var(--google-blue-dark)] focus:ring-4 focus:ring-[var(--google-blue)]/10 dark:focus:ring-[var(--google-blue-dark)]/10 transition-colors duration-200";
 
 const labelClass =
   "text-xs font-bold tracking-[0.08em] uppercase text-[#5F6368] dark:text-[#9AA0A6] pl-1";
@@ -70,7 +70,7 @@ export function ContactForm({ t }: { t: Record<string, any> }) {
             </p>
             <button
               type="submit"
-              className="group inline-flex items-center justify-center gap-2.5 px-7 md:px-8 py-3 md:py-3.5 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#1A73E8]"
+              className="group inline-flex items-center justify-center gap-2.5 px-7 md:px-8 py-3 md:py-3.5 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--google-blue)]"
               style={{ background: "linear-gradient(135deg,#1A73E8,#4285F4)" }}
             >
               <Send

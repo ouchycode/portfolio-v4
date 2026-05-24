@@ -11,8 +11,18 @@
   --surface-variant: #f1f3f4;
   --outline: #dadce0;
   --google-blue: #1a73e8;
+  --google-blue-dark: #8ab4f8;
   --scrollbar-thumb: #dadce0;
   --scrollbar-thumb-hover: #bdc1c6;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide default cursor on desktop devices to use CustomCursor */
+@media (pointer: fine) {
+  body, a, button, input, textarea, select, [role="button"] {
+    cursor: none !important;
+  }
 }
 
 .dark {
@@ -21,6 +31,7 @@
   --surface: #303134;
   --surface-variant: #3c4043;
   --outline: #5f6368;
+  --google-blue: #8ab4f8;
   --scrollbar-thumb: #5f6368;
   --scrollbar-thumb-hover: #9aa0a6;
 }
@@ -33,6 +44,16 @@
   --color-surface-variant: var(--surface-variant);
   --color-outline: var(--outline);
   --color-google-blue: var(--google-blue);
+
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */

@@ -14,7 +14,7 @@ export function ContactSocial() {
           href="https://www.linkedin.com/in/kevin-ardiansyah-529b96386/"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#1A73E8] hover:border-[#1A73E8] text-[#5F6368] dark:text-[#9AA0A6] hover:text-white transition-colors duration-200 active:scale-95"
+          className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[var(--google-blue)] hover:border-[var(--google-blue)] text-[#5F6368] dark:text-[#9AA0A6] hover:text-white transition-colors duration-200 active:scale-95"
         >
           <Linkedin size={17} />
           <span className="text-sm font-semibold">LinkedIn</span>

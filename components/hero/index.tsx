@@ -8,6 +8,7 @@ import { HeroBadge } from "./HeroBadge";
 import { HeroHeadline } from "./HeroHeadline";
 import { HeroCTA } from "./HeroCTA";
 import { HeroCards } from "./HeroCards";
+import { TechMarquee } from "./TechMarquee";
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null);
@@ -59,6 +60,10 @@ export default function Hero() {
           statusLabel={t.hero.statusLabel}
           statusValue={t.hero.statusValue}
         />
+      </div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto mt-16 md:mt-24">
+        <TechMarquee />
       </div>
     </section>
   );

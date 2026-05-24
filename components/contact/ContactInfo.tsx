@@ -30,22 +30,22 @@ export function ContactInfo({ t }: { t: Record<string, any> }) {
           {/* Email */}
           <a
             href="mailto:kevinnardiansyahh19@gmail.com"
-            className="group flex items-center gap-4 p-3.5 md:p-4 rounded-2xl border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:border-[#1A73E8]/40 hover:bg-white dark:hover:bg-[#303134] transition-colors duration-200"
+            className="group flex items-center gap-4 p-3.5 md:p-4 rounded-2xl border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:border-[var(--google-blue)]/40 hover:bg-white dark:hover:bg-[#303134] transition-colors duration-200"
           >
-            <div className="w-10 h-10 md:w-11 md:h-11 flex shrink-0 items-center justify-center rounded-xl bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368] group-hover:bg-[#E8F0FE] group-hover:border-[#1A73E8]/30 group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] text-[#5F6368] dark:text-[#9AA0A6] transition-colors duration-200">
+            <div className="w-10 h-10 md:w-11 md:h-11 flex shrink-0 items-center justify-center rounded-xl bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368] group-hover:bg-[#E8F0FE] group-hover:border-[var(--google-blue)]/30 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] text-[#5F6368] dark:text-[#9AA0A6] transition-colors duration-200">
               <Mail size={18} strokeWidth={2} />
             </div>
             <div className="flex flex-col min-w-0">
               <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6] mb-0.5">
                 Email Address
               </span>
-              <span className="text-xs md:text-sm font-semibold text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors truncate">
+              <span className="text-xs md:text-sm font-semibold text-[#202124] dark:text-[#E8EAED] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors truncate">
                 kevinnardiansyahh19@gmail.com
               </span>
             </div>
             <span
               aria-hidden
-              className="ml-auto w-0.5 h-7 md:h-8 rounded-full shrink-0 bg-linear-to-b from-[#1A73E8]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              className="ml-auto w-0.5 h-7 md:h-8 rounded-full shrink-0 bg-linear-to-b from-[var(--google-blue)]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"
             />
           </a>
 

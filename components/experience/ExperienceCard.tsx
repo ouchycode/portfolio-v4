@@ -37,7 +37,7 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
       <div className="flex-1 flex flex-col min-w-0 pt-0.5">
         {/* Title + period */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-1.5">
-          <h3 className="text-base md:text-lg lg:text-xl font-bold text-[#202124] dark:text-[#E8EAED] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors leading-snug">
+          <h3 className="text-base md:text-lg lg:text-xl font-bold text-[#202124] dark:text-[#E8EAED] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors leading-snug">
             {exp.role}
           </h3>
           <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] text-xs font-semibold text-[#5F6368] dark:text-[#9AA0A6] whitespace-nowrap">
@@ -46,7 +46,7 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
         </div>
 
         {/* Company + type badge */}
-        <p className="text-sm font-semibold text-[#1A73E8] dark:text-[#8AB4F8] mb-3 flex items-center flex-wrap gap-2">
+        <div className="text-sm font-semibold text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] mb-3 flex items-center flex-wrap gap-2">
           {exp.company}
           <span
             className="text-[#DADCE0] dark:text-[#5F6368] hidden sm:inline"
@@ -54,6 +54,7 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
           >
             •
           </span>
+          <span className="block h-0.5 w-6 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] opacity-70" />
           <span
             className="px-2.5 py-0.5 rounded-full text-xs font-bold border"
             style={{
@@ -64,7 +65,7 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
           >
             {exp.type}
           </span>
-        </p>
+        </div>
 
         <p className="text-sm md:text-base text-[#5F6368] dark:text-[#9AA0A6] leading-relaxed mb-4">
           {exp.description}
@@ -84,7 +85,7 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
       </div>
 
       {/* Arrow — desktop only */}
-      <div className="hidden sm:flex shrink-0 w-9 h-9 md:w-10 md:h-10 items-center justify-center rounded-full text-[#DADCE0] dark:text-[#5F6368] group-hover:bg-[#E8F0FE] dark:group-hover:bg-[#1A73E8]/15 group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors duration-200 mt-0.5">
+      <div className="hidden sm:flex shrink-0 w-9 h-9 md:w-10 md:h-10 items-center justify-center rounded-full text-[#DADCE0] dark:text-[#5F6368] group-hover:bg-[#E8F0FE] dark:group-hover:bg-[var(--google-blue)]/15 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors duration-200 mt-0.5">
         <ArrowUpRight size={18} strokeWidth={2} />
       </div>
     </Link>

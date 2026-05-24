@@ -62,7 +62,7 @@ export default function CVPage() {
           {/* Top row */}
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-2xl bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]">
+              <div className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-2xl bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/15 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]">
                 <FileText size={19} strokeWidth={2} />
               </div>
               <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5F6368] dark:text-[#9AA0A6]">
@@ -73,15 +73,15 @@ export default function CVPage() {
             <Link
               href="/"
               onClick={() => startLoading(800)}
-              className="group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[#1A73E8]/12 hover:border-[#1A73E8]/30 active:scale-95 transition-colors duration-200"
+              className="group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/12 hover:border-[var(--google-blue)]/30 active:scale-95 transition-colors duration-200"
               style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
             >
               <ArrowLeft
                 size={16}
                 strokeWidth={2.5}
-                className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-all duration-200"
+                className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-all duration-200"
               />
-              <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+              <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors">
                 {language === "id" ? "Kembali" : "Back"}
               </span>
             </Link>
@@ -144,7 +144,7 @@ export default function CVPage() {
               href={CV_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-center gap-2.5 h-11 md:h-12 px-6 md:px-7 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] hover:bg-[#E8F0FE] dark:hover:bg-[#1A73E8]/12 hover:border-[#1A73E8]/30 text-[#1A73E8] dark:text-[#8AB4F8] font-semibold text-sm tracking-wide active:scale-95 transition-colors duration-200"
+              className="group flex items-center justify-center gap-2.5 h-11 md:h-12 px-6 md:px-7 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/12 hover:border-[var(--google-blue)]/30 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] font-semibold text-sm tracking-wide active:scale-95 transition-colors duration-200"
             >
               <Maximize2
                 size={16}
@@ -158,7 +158,7 @@ export default function CVPage() {
             <a
               href={CV_URL}
               download
-              className="group inline-flex items-center justify-center gap-2.5 h-11 md:h-12 px-6 md:px-7 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#1A73E8]"
+              className="group inline-flex items-center justify-center gap-2.5 h-11 md:h-12 px-6 md:px-7 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--google-blue)]"
               style={{ background: "linear-gradient(135deg,#1A73E8,#4285F4)" }}
             >
               <Download

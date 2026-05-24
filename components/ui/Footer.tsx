@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Github,
   Instagram,
@@ -12,6 +12,9 @@ import {
 import { FaTiktok } from "react-icons/fa";
 import { useFooterAnimation } from "@/hooks/useAnimations";
 import { useLanguage } from "@/context/LanguageContext";
+import { TerminalEasterEgg } from "./TerminalEasterEgg";
+import { PageViews } from "./PageViews";
+import { WeatherWidget } from "./WeatherWidget";
 
 const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
 
@@ -33,11 +36,24 @@ const SOCIALS = [
 export default function Footer() {
   const container = useRef<HTMLElement>(null);
   const { t } = useLanguage();
+  const [clickCount, setClickCount] = useState(0);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   useFooterAnimation(container);
 
+  const handleFingerprintClick = () => {
+    setClickCount((prev) => {
+      if (prev + 1 >= 3) {
+        setIsTerminalOpen(true);
+        return 0;
+      }
+      return prev + 1;
+    });
+  };
+
   return (
-    <footer
+    <>
+      <footer
       ref={container}
       className="relative overflow-hidden px-6 md:px-12 lg:px-20 pt-20 pb-10 md:pt-28 md:pb-12"
     >
@@ -110,7 +126,7 @@ export default function Footer() {
           <div className="footer-item shrink-0 w-full md:w-auto">
             <a
               href="mailto:kevinnardiansyahh19@gmail.com"
-              className="group inline-flex items-center justify-center gap-3 h-13 md:h-16 px-8 md:px-10 rounded-full font-semibold text-base md:text-lg tracking-wide text-white active:scale-95 w-full md:w-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#1A73E8]"
+              className="group inline-flex items-center justify-center gap-3 h-13 md:h-16 px-8 md:px-10 rounded-full font-semibold text-base md:text-lg tracking-wide text-white active:scale-95 w-full md:w-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--google-blue)]"
               style={{ background: "linear-gradient(135deg,#1A73E8,#4285F4)" }}
             >
               <Mail size={19} strokeWidth={2.2} />
@@ -131,7 +147,9 @@ export default function Footer() {
             {/* Identity */}
             <div className="footer-item flex items-center gap-4">
               <div
-                className="w-13 h-13 flex items-center justify-center rounded-2xl bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60 text-[#1A73E8] dark:text-[#8AB4F8]"
+                onClick={handleFingerprintClick}
+                title="Click me 3 times..."
+                className="w-13 h-13 flex items-center justify-center rounded-2xl bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60 text-[#041E42] dark:text-[#40C1AC] cursor-pointer hover:scale-105 transition-transform"
                 style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
               >
                 <Fingerprint size={23} strokeWidth={2} />
@@ -154,7 +172,7 @@ export default function Footer() {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60 text-[#5F6368] dark:text-[#9AA0A6] hover:text-[#1A73E8] dark:hover:text-[#8AB4F8] hover:border-[#1A73E8]/30 hover:bg-[#E8F0FE] dark:hover:bg-[#1A73E8]/10 active:scale-95 transition-colors duration-200"
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60 text-[#5F6368] dark:text-[#9AA0A6] hover:text-[var(--google-blue)] dark:hover:text-[var(--google-blue-dark)] hover:border-[var(--google-blue)]/30 hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/10 active:scale-95 transition-colors duration-200"
                   >
                     <Icon size={14} strokeWidth={2} />
                     <span className="text-[11px] font-bold uppercase tracking-widest">
@@ -167,32 +185,33 @@ export default function Footer() {
           </div>
 
           {/* Copyright row */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-            <div className="footer-item flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs font-semibold text-[#9AA0A6] dark:text-[#5F6368]">
-              <span>Tangerang, ID</span>
-              <span className="w-1 h-1 rounded-full bg-[#DADCE0] dark:bg-[#5F6368]" />
-              <span>UTC +7</span>
-              <span className="w-1 h-1 rounded-full bg-[#DADCE0] dark:bg-[#5F6368]" />
-              <span>Designed & Built with Precision</span>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="footer-item">
+              <WeatherWidget />
             </div>
 
-            <div className="footer-item flex items-center gap-2">
-              <div className="flex gap-1 items-center">
-                {GOOGLE_COLORS.map((c) => (
-                  <span
-                    key={c}
-                    className="w-1.5 h-1.5 rounded-full opacity-70"
-                    style={{ background: c }}
-                  />
-                ))}
+            <div className="footer-item flex items-center gap-4">
+              <PageViews />
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1 items-center">
+                  {GOOGLE_COLORS.map((c) => (
+                    <span
+                      key={c}
+                      className="w-1.5 h-1.5 rounded-full opacity-70"
+                      style={{ background: c }}
+                    />
+                  ))}
+                </div>
+                <p className="text-[11px] font-bold text-[#9AA0A6] dark:text-[#5F6368] uppercase tracking-[0.15em]">
+                  © {new Date().getFullYear()} K.A. All Rights Reserved.
+                </p>
               </div>
-              <p className="text-[11px] font-bold text-[#9AA0A6] dark:text-[#5F6368] uppercase tracking-[0.15em]">
-                © {new Date().getFullYear()} K.A. All Rights Reserved.
-              </p>
             </div>
           </div>
         </div>
       </div>
     </footer>
+    <TerminalEasterEgg isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+    </>
   );
 }

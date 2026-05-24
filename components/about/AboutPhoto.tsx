@@ -11,7 +11,7 @@ export function AboutPhoto() {
         className="absolute -top-6 -left-2 sm:-top-8 sm:-left-6 z-20 pointer-events-none hidden sm:block"
       >
         <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
-          <Camera className="w-5 h-5 text-[#1A73E8] dark:text-[#8AB4F8]" />
+          <Camera className="w-5 h-5 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
         </div>
       </div>
 

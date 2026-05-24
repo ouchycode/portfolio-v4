@@ -33,7 +33,7 @@ export function HeroHeadline({ role }: HeroHeadlineProps) {
         data-aos-delay="200"
         className="flex items-center gap-3 mb-6 md:mb-8 w-full max-w-xs md:max-w-md"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-[#1A73E8] dark:bg-[#8AB4F8] shrink-0" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0" />
         <div className="h-px flex-1 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
       </div>
     </>

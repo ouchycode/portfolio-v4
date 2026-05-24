@@ -12,8 +12,8 @@ export function getTypeStyle(type: string): TypeStyle {
     case "Education":
       return {
         icon: GraduationCap,
-        color: "text-[#1A73E8] dark:text-[#8AB4F8]",
-        bgColor: "bg-[#E8F0FE] dark:bg-[#8AB4F8]/15",
+        color: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
+        bgColor: "bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/15",
         accentColor: "#1A73E8",
       };
     case "Bootcamp":

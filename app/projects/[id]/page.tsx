@@ -52,8 +52,8 @@ function SectionLabel({ label, accent }: { label: string; accent: string }) {
 function getTheme(category: string) {
   if (["LMS Platform", "EdTech", "Web Application"].includes(category))
     return {
-      bg: "bg-[#E8F0FE] dark:bg-[#1A73E8]/15",
-      text: "text-[#1A73E8] dark:text-[#8AB4F8]",
+      bg: "bg-[#E8F0FE] dark:bg-[var(--google-blue)]/15",
+      text: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
       accent: "#1A73E8",
     };
   if (["E-Commerce", "Mobile Application"].includes(category))
@@ -125,15 +125,15 @@ export default function ProjectDetailPage() {
           <Link
             href="/#projects"
             onClick={() => startLoading(800)}
-            className="absolute top-5 right-5 md:top-9 md:right-9 group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[#1A73E8]/12 hover:border-[#1A73E8]/30 active:scale-95 transition-colors duration-200 z-10"
+            className="absolute top-5 right-5 md:top-9 md:right-9 group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/12 hover:border-[var(--google-blue)]/30 active:scale-95 transition-colors duration-200 z-10"
             style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
           >
             <ArrowLeft
               size={16}
               strokeWidth={2.5}
-              className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-all duration-200"
+              className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-all duration-200"
             />
-            <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+            <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors">
               {language === "id" ? "Kembali" : "Back"}
             </span>
           </Link>
@@ -264,7 +264,7 @@ export default function ProjectDetailPage() {
         {/* Footer actions */}
         <div className="border-t border-[#DADCE0]/60 dark:border-[#5F6368]/40 p-5 md:p-8 bg-white dark:bg-[#303134] flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="hidden sm:flex items-center gap-3">
-            <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#E8F0FE] dark:bg-[#8AB4F8]/15 text-[#1A73E8] dark:text-[#8AB4F8]">
+            <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/15 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]">
               <FolderGit2 size={17} strokeWidth={2} />
             </div>
             <div className="flex flex-col">
@@ -281,7 +281,7 @@ export default function ProjectDetailPage() {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-2.5 w-full sm:w-auto h-11 md:h-12 px-7 md:px-8 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#1A73E8]"
+            className="group inline-flex items-center justify-center gap-2.5 w-full sm:w-auto h-11 md:h-12 px-7 md:px-8 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--google-blue)]"
             style={{ background: "linear-gradient(135deg,#1A73E8,#4285F4)" }}
           >
             {t.projectModal.btn}

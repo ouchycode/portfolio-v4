@@ -15,7 +15,7 @@ export function AboutEducation({ label, value }: AboutEducationProps) {
             "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
         }}
       >
-        <div className="w-12 h-12 md:w-14 md:h-14 flex shrink-0 items-center justify-center rounded-2xl bg-[#E8F0FE] dark:bg-[#8AB4F8]/12 text-[#1A73E8] dark:text-[#8AB4F8]">
+        <div className="w-12 h-12 md:w-14 md:h-14 flex shrink-0 items-center justify-center rounded-2xl bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/12 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]">
           <GraduationCap size={24} strokeWidth={2} />
         </div>
 
@@ -30,7 +30,7 @@ export function AboutEducation({ label, value }: AboutEducationProps) {
 
         <span
           aria-hidden
-          className="hidden sm:block ml-auto w-0.5 h-10 rounded-full shrink-0 bg-linear-to-b from-[#1A73E8]/30 to-transparent"
+          className="hidden sm:block ml-auto w-0.5 h-10 rounded-full shrink-0 bg-linear-to-b from-[var(--google-blue)]/30 to-transparent"
         />
       </div>
     </div>

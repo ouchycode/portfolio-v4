@@ -36,9 +36,9 @@ export function CertCard({ cert, onCardClick }: CertCardProps) {
             />
           </div>
 
-          <div className="w-full h-full flex flex-col items-center justify-center bg-[#F8F9FA] dark:bg-[#202124] group-hover:bg-[#E6F4EA]/40 dark:group-hover:bg-[#81C995]/10 transition-colors duration-300">
-             <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#E6F4EA] dark:bg-[#81C995]/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                <FileText className="w-8 h-8 md:w-10 md:h-10 text-[#34A853] dark:text-[#81C995]" strokeWidth={1.5} />
+          <div className="w-full h-full flex flex-col items-center justify-center bg-[#F8F9FA] dark:bg-[#12161D] group-hover:bg-[var(--google-blue)]/5 dark:group-hover:bg-[var(--google-blue-dark)]/10 transition-colors duration-300">
+             <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#E8F0FE] dark:bg-[var(--google-blue)]/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                <FileText className="w-8 h-8 md:w-10 md:h-10 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" strokeWidth={1.5} />
              </div>
              <p className="text-[10px] md:text-xs font-bold text-[#5F6368] dark:text-[#9AA0A6] uppercase tracking-[0.2em]">
                Document

@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useLoading } from "@/context/LoadingContext";
 import { ExperienceHeader } from "./ExperienceHeader";
 import { ExperienceTimeline } from "./ExperienceTimeline";
+import { GithubGraph } from "./GithubGraph";
 
 export default function Experience() {
   const container = useRef<HTMLElement>(null);
@@ -38,6 +39,7 @@ export default function Experience() {
           title={t.experience.title}
           subtitle={t.experience.subtitle}
         />
+        <GithubGraph />
         <ExperienceTimeline
           list={t.experience.list}
           onCardClick={() => startLoading(800)}

@@ -23,7 +23,7 @@ export function HeroCards({
         className="absolute -top-10 -left-4 sm:-top-14 sm:-left-10 z-20 pointer-events-none select-none hidden sm:block"
       >
         <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
-          <Laptop className="w-5 h-5 text-[#1A73E8] dark:text-[#8AB4F8]" />
+          <Laptop className="w-5 h-5 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
         </div>
       </div>
 
@@ -76,27 +76,6 @@ export function HeroCards({
           value={statusValue}
           className="rounded-tl-2xl rounded-tr-[2.25rem] rounded-bl-[2.25rem] rounded-br-2xl"
         />
-      </div>
-
-      {/* Card 3 — Skill chips */}
-      <div data-aos="fade-left" data-aos-delay="300">
-        <div className="material-card flex flex-wrap items-center gap-2 p-4 md:p-5 bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 rounded-tl-[2.25rem] rounded-tr-2xl rounded-bl-2xl rounded-br-[2.25rem]">
-          {[
-            { label: "React", color: "#61DAFB", bg: "#E8F8FD" },
-            { label: "Next.js", color: "#202124", bg: "#F1F3F4" },
-            { label: "TypeScript", color: "#3178C6", bg: "#E8F0FD" },
-            { label: "Tailwind", color: "#06B6D4", bg: "#E0F7FA" },
-            { label: "Figma", color: "#F24E1E", bg: "#FEE8E4" },
-          ].map(({ label, color, bg }) => (
-            <span
-              key={label}
-              className="inline-flex items-center h-6 md:h-7 px-2.5 md:px-3 rounded-full text-[11px] md:text-xs font-semibold"
-              style={{ color, background: bg }}
-            >
-              {label}
-            </span>
-          ))}
-        </div>
       </div>
     </div>
   );

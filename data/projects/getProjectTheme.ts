@@ -16,8 +16,8 @@ export interface ProjectTheme {
 export function getProjectTheme(category: string): ProjectTheme {
   if (["LMS Platform", "EdTech", "Web Application"].includes(category))
     return {
-      bg: "bg-[#E8F0FE] dark:bg-[#1A73E8]/15",
-      text: "text-[#1A73E8] dark:text-[#8AB4F8]",
+      bg: "bg-[#E8F0FE] dark:bg-[var(--google-blue)]/15",
+      text: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
       accent: "#1A73E8",
     };
   if (["E-Commerce", "Mobile Application"].includes(category))

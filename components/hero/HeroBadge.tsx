@@ -13,7 +13,7 @@ export function HeroBadge({ label }: HeroBadgeProps) {
     >
       <Sparkles
         size={14}
-        className="text-[#1A73E8] dark:text-[#8AB4F8] shrink-0"
+        className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] shrink-0"
       />
       <span className="text-[11px] md:text-xs font-semibold tracking-widest uppercase text-[#5F6368] dark:text-[#9AA0A6]">
         {label}

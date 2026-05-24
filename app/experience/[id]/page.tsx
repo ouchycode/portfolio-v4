@@ -21,8 +21,8 @@ const GOOGLE_THEME: Record<
   { bg: string; text: string; icon: React.ElementType; accent: string }
 > = {
   Education: {
-    bg: "bg-[#E8F0FE] dark:bg-[#1A73E8]/15",
-    text: "text-[#1A73E8] dark:text-[#8AB4F8]",
+    bg: "bg-[#E8F0FE] dark:bg-[var(--google-blue)]/15",
+    text: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
     icon: GraduationCap,
     accent: "#1A73E8",
   },
@@ -138,15 +138,15 @@ export default function ExperienceDetailPage() {
           <Link
             href="/#experience"
             onClick={() => startLoading(800)}
-            className="absolute top-5 right-5 md:top-9 md:right-9 group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[#1A73E8]/12 hover:border-[#1A73E8]/30 active:scale-95 transition-colors duration-200 z-10"
+            className="absolute top-5 right-5 md:top-9 md:right-9 group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/12 hover:border-[var(--google-blue)]/30 active:scale-95 transition-colors duration-200 z-10"
             style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
           >
             <ArrowLeft
               size={16}
               strokeWidth={2.5}
-              className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-all duration-200"
+              className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-all duration-200"
             />
-            <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[#1A73E8] dark:group-hover:text-[#8AB4F8] transition-colors">
+            <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors">
               {language === "id" ? "Kembali" : "Back"}
             </span>
           </Link>
@@ -183,7 +183,7 @@ export default function ExperienceDetailPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-sm md:text-base font-semibold">
-              <span className="text-[#1A73E8] dark:text-[#8AB4F8]">
+              <span className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]">
                 {data.company}
               </span>
               <span
