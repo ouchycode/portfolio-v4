@@ -7,30 +7,36 @@ interface AboutEducationProps {
 
 export function AboutEducation({ label, value }: AboutEducationProps) {
   return (
-    <div data-aos="flip-up" data-aos-delay="250" className="w-full">
-      <div
-        className="w-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-5 sm:p-7 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
-      >
-        <div className="w-12 h-12 md:w-14 md:h-14 flex shrink-0 items-center justify-center rounded-2xl bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/12 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]">
-          <GraduationCap size={24} strokeWidth={2} />
+    <div data-vt="pop" className="w-full rv-window">
+      <div className="rv-titlebar">
+        <span className="rv-titlebar-label select-none">school.exe</span>
+        <span className="ml-auto flex items-center gap-1 select-none">
+          <span className="rv-titlebar-btn text-[8px]">─</span>
+          <span className="rv-titlebar-btn text-[8px]">□</span>
+          <span className="rv-titlebar-btn text-[9px]">×</span>
+        </span>
+      </div>
+
+      <div className="rv-panel p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 text-center sm:text-left">
+        <div className="w-11 h-11 md:w-12 md:h-12 shrink-0 flex items-center justify-center rv-raised bg-chrome text-vtblue">
+          <GraduationCap size={22} strokeWidth={2} />
         </div>
 
-        <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-          <p className="text-[10px] md:text-[11px] font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <p className="rv-pixel text-[10px] font-bold uppercase tracking-[0.18em] text-inkmute">
             {label}
           </p>
-          <p className="font-semibold text-sm md:text-base lg:text-lg text-[#202124] dark:text-[#E8EAED] truncate">
+          <p
+            className="font-bold text-sm md:text-base lg:text-[17px] text-ink truncate"
+            style={{ fontFamily: "var(--vt-font-display)" }}
+          >
             {value}
           </p>
         </div>
 
         <span
           aria-hidden
-          className="hidden sm:block ml-auto w-0.5 h-10 rounded-full shrink-0 bg-linear-to-b from-[var(--google-blue)]/30 to-transparent"
+          className="hidden sm:block ml-auto w-0.5 h-10 shrink-0 rv-sunken bg-linear-to-b from-vtpink to-transparent"
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Terminal as TerminalIcon, X, Maximize2, Minus } from "lucide-react";
+import { X, Maximize2, Minus } from "lucide-react";
 
 interface TerminalProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalProps) {
         output = "Available commands: whoami, skills, contact, clear, date, sudo";
         break;
       case "whoami":
-        output = "Kevin Ardiansyah. A passionate Frontend Engineer from Indonesia building cool things on the web.";
+        output = "Kevin Ardiansyah. A passionate Software Engineer from Indonesia building cool things across the web, systems, and infrastructure.";
         break;
       case "skills":
         output = "React, Next.js, TypeScript, Tailwind CSS, Node.js, Firebase, Vercel";
@@ -62,55 +62,57 @@ export function TerminalEasterEgg({ isOpen, onClose }: TerminalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202124]/40 dark:bg-[#12161D]/60 backdrop-blur-sm">
-      <div className="w-full max-w-2xl bg-[#1E1E1E] rounded-lg shadow-2xl border border-[#333] overflow-hidden flex flex-col h-[60vh] animate-in fade-in zoom-in duration-300">
+    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-desktop/60 backdrop-blur-sm">
+      <div className="rv-window w-full max-w-2xl overflow-hidden flex flex-col h-[60vh] animate-in fade-in zoom-in duration-300 bg-[#060a08]">
         {/* Terminal Header */}
-        <div className="flex items-center justify-between px-4 py-2.5 bg-[#323233] border-b border-[#1E1E1E]">
-          <div className="flex gap-2">
-            <button onClick={onClose} className="w-3.5 h-3.5 rounded-full bg-[#FF5F56] hover:bg-[#FF5F56]/80 flex items-center justify-center group">
-               <X className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 text-[#4D0000]" />
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label select-none">
+            kevin@portfolio — KevinOS v1.0
+          </span>
+          <span className="ml-auto flex items-center gap-1 select-none">
+            <span className="rv-titlebar-btn text-[8px]">
+              <Minus size={9} />
+            </span>
+            <span className="rv-titlebar-btn text-[8px]">
+              <Maximize2 size={8} />
+            </span>
+            <button
+              onClick={onClose}
+              aria-label="Close terminal"
+              className="rv-titlebar-btn text-[9px] rv-pixel"
+            >
+              <X size={10} />
             </button>
-            <button className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] flex items-center justify-center group">
-               <Minus className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 text-[#4D0000]" />
-            </button>
-            <button className="w-3.5 h-3.5 rounded-full bg-[#27C93F] flex items-center justify-center group">
-               <Maximize2 className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 text-[#4D0000]" />
-            </button>
-          </div>
-          <div className="flex items-center gap-2 text-[#9AA0A6] text-xs font-semibold select-none">
-            <TerminalIcon size={14} />
-            <span>kevin@portfolio:~</span>
-          </div>
-          <div className="w-16" /> {/* Spacer */}
+          </span>
         </div>
 
         {/* Terminal Body */}
-        <div className="flex-1 p-4 overflow-y-auto font-mono text-sm bg-[#1E1E1E] text-[#E8EAED]">
+        <div className="flex-1 p-4 overflow-y-auto font-mono text-sm text-vtcrt [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-vtcrt/50">
           {history.map((item, i) => (
             <div key={i} className="mb-3">
               {item.command && (
                 <div className="flex gap-2 mb-1">
-                  <span className="text-[#34A853]">kevin@portfolio</span>
-                  <span className="text-[#E8EAED]">:</span>
-                  <span className="text-[var(--google-blue-dark)]">~</span>
-                  <span className="text-[#E8EAED]">$</span>
-                  <span>{item.command}</span>
+                  <span className="text-vtcrt font-bold">kevin@portfolio</span>
+                  <span className="text-ink-soft">:</span>
+                  <span className="text-vtpink">~</span>
+                  <span className="text-ink">$</span>
+                  <span className="text-vtcrt">{item.command}</span>
                 </div>
               )}
-              <div className="text-[#9AA0A6] whitespace-pre-wrap">{item.output}</div>
+              <div className="text-vtcrt/80 whitespace-pre-wrap">{item.output}</div>
             </div>
           ))}
-          
-          <form onSubmit={handleCommand} className="flex gap-2 mt-2">
-            <span className="text-[#34A853]">kevin@portfolio</span>
-            <span className="text-[#E8EAED]">:</span>
-            <span className="text-[var(--google-blue-dark)]">~</span>
-            <span className="text-[#E8EAED]">$</span>
+
+          <form onSubmit={handleCommand} className="rv-pixel flex gap-2 mt-2 items-center">
+            <span className="text-vtcrt font-bold">kevin@portfolio</span>
+            <span className="text-ink-soft">:</span>
+            <span className="text-vtpink">~</span>
+            <span className="text-ink">$</span>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 bg-transparent outline-none border-none text-[#E8EAED] caret-white"
+              className="flex-1 bg-transparent outline-none border-none text-vtcrt caret-vtcrt font-mono text-[13px]"
               autoFocus
               spellCheck={false}
             />

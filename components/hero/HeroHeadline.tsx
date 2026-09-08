@@ -1,40 +1,48 @@
+import type { CSSProperties } from "react";
+
 interface HeroHeadlineProps {
   role: string;
 }
+
+const rise = (delay: string) => ({ "--vt-delay": delay } as CSSProperties);
 
 export function HeroHeadline({ role }: HeroHeadlineProps) {
   return (
     <>
       <h1
-        data-aos="fade-right"
-        data-aos-delay="100"
-        className="mb-6 leading-[1.05] tracking-[-0.03em]"
+        className="mb-6 leading-[1.02]"
+        style={{ fontFamily: "var(--vt-font-display)", fontWeight: 700 }}
       >
-        <span className="block text-[3.25rem] sm:text-6xl md:text-7xl lg:text-[6rem] font-black text-[#202124] dark:text-[#E8EAED]">
-          Frontend
+        <span className="block overflow-hidden">
+          <span
+            className="vt-rise-word block text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] text-ink"
+            style={rise("130ms")}
+          >
+            Software
+          </span>
         </span>
-        <span
-          className="block text-[3.25rem] sm:text-6xl md:text-7xl lg:text-[6rem] font-black"
-          style={{
-            background:
-              "linear-gradient(135deg,#1A73E8 0%,#4285F4 45%,#34A853 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          {role}
+        <span className="block overflow-hidden">
+          <span
+            className="vt-rise-word vt-glitch block text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.5rem]"
+            style={{
+              ...rise("240ms"),
+              background:
+                "linear-gradient(90deg, var(--vt-pink) 0%, var(--vt-violet) 45%, var(--vt-blue) 70%, var(--vt-crt) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            {role}
+          </span>
         </span>
       </h1>
 
-      {/* Divider */}
-      <div
-        data-aos="fade-right"
-        data-aos-delay="200"
-        className="flex items-center gap-3 mb-6 md:mb-8 w-full max-w-xs md:max-w-md"
-      >
-        <span className="w-1.5 h-1.5 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0" />
-        <div className="h-px flex-1 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
+      {/* CRT divider */}
+      <div className="flex items-center gap-3 mb-6 md:mb-8 w-full max-w-xs md:max-w-md">
+        <span className="w-2 h-2 bg-vtpink" />
+        <div className="h-1 flex-1 bg-repeating-linear-gradient-to-r from-inkmute/60 to-inkmute/60 bg-[length:6px_10px]" />
+        <span className="w-2 h-2 bg-vtcrt vt-blink" />
       </div>
     </>
   );

@@ -12,46 +12,50 @@ export function AboutDescription({
   description,
 }: AboutDescriptionProps) {
   return (
-    <div data-aos="fade-left" data-aos-delay="150" className="flex-1">
-      <div
-        className="h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 flex flex-col justify-center"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
-      >
+    <div data-vt="open" className="flex-1 rv-window">
+      <div className="rv-titlebar">
+        <span className="rv-titlebar-label select-none">readme.txt — Notepad</span>
+        <span className="ml-auto flex items-center gap-1 select-none">
+          <span className="rv-titlebar-btn text-[8px]">─</span>
+          <span className="rv-titlebar-btn text-[8px]">□</span>
+          <span className="rv-titlebar-btn text-[9px]">×</span>
+        </span>
+      </div>
+
+      <div className="rv-panel h-full p-6 sm:p-8 md:p-9 flex flex-col justify-center">
         {/* Role pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/12 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] w-fit">
-          <Code2 size={15} strokeWidth={2.2} />
-          <span className="text-xs font-bold tracking-[0.08em] uppercase">
+        <div className="rv-chip inline-flex items-center gap-2 px-3.5 py-1.5 w-fit mb-6 text-ink">
+          <Code2 size={15} strokeWidth={2.2} className="text-vtblue" />
+          <span className="rv-pixel text-[11px] font-bold uppercase tracking-[0.12em]">
             {tag}
           </span>
         </div>
 
         {/* Headline */}
-        <p className="text-xl md:text-2xl lg:text-[2rem] font-black leading-[1.15] tracking-[-0.02em] text-[#202124] dark:text-[#E8EAED] mb-5">
+        <p
+          className="text-lg sm:text-xl md:text-2xl lg:text-[1.7rem] font-bold leading-[1.18] tracking-tight text-ink mb-5"
+          style={{ fontFamily: "var(--vt-font-display)" }}
+        >
           {headline}
         </p>
 
-        {/* Google-color underline bar */}
-        <div className="flex gap-1 mb-6">
-          {(
-            [
-              ["#EA4335", "flex-1"],
-              ["#FABB05", "w-3"],
-              ["#34A853", "flex-1"],
-              ["#1A73E8", "w-3"],
-            ] as const
-          ).map(([color, size], i) => (
-            <div
+        {/* Retro color underline bar */}
+        <div className="flex gap-1 mb-6 w-full max-w-xs">
+          {[
+            ["#FF3E9A", "flex-[2]"],
+            ["#FFD400", "w-2"],
+            ["#22C7A9", "flex-1"],
+            ["#3B2FD6", "w-2"],
+          ].map(([color, size], i) => (
+            <span
               key={i}
-              className={`h-1 rounded-full ${size}`}
-              style={{ background: color, opacity: 0.85 }}
+              className={`h-1.5 rv-sunken ${size}`}
+              style={{ background: color }}
             />
           ))}
         </div>
 
-        <p className="text-sm sm:text-base md:text-[17px] text-[#5F6368] dark:text-[#9AA0A6] leading-relaxed">
+        <p className="text-sm sm:text-base md:text-[16px] text-ink-soft leading-relaxed">
           {description}
         </p>
       </div>

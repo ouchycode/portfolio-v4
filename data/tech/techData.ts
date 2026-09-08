@@ -20,9 +20,9 @@ export const techStack = [
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
   },
   {
-    name: "Dart",
+    name: "PHP",
     image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg",
   },
   {
     name: "React",
@@ -40,28 +40,19 @@ export const techStack = [
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
   },
   {
-    name: "GSAP",
-    image: "https://cdn.worldvectorlogo.com/logos/gsap-greensock.svg",
+    name: "Laravel",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
   },
   {
-    name: "Flutter",
+    name: "React Native",
     image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
+      "https://cdn.worldvectorlogo.com/logos/react-native-1.svg",
   },
   {
     name: "Node.js",
     image:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "PHP",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg",
-  },
-  {
-    name: "Laravel",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
   },
   {
     name: "MySQL",
@@ -74,14 +65,24 @@ export const techStack = [
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
   },
   {
-    name: "Git",
+    name: "Docker",
     image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
   },
   {
-    name: "Figma",
+    name: "Linux",
     image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+  },
+  {
+    name: "Nginx",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg",
+  },
+  {
+    name: "AWS",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
   },
   {
     name: "Vercel",
@@ -92,27 +93,47 @@ export const techStack = [
     name: "MikroTik",
     image: "https://cdn.worldvectorlogo.com/logos/mikrotik.svg",
   },
+  {
+    name: "Windows",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg",
+  },
+  {
+    name: "Git",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+  },
+  {
+    name: "Figma",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+  },
 ];
 
 export const techGroups = [
   {
     label: "Languages",
-    color: "#1A73E8",
-    items: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Dart", "PHP"],
+    color: "#3B2FD6",
+    items: ["HTML5", "CSS3", "JavaScript", "TypeScript", "PHP"],
   },
   {
     label: "Frameworks",
-    color: "#34A853",
-    items: ["React", "Next.js", "Tailwind", "Flutter", "Laravel", "GSAP"],
+    color: "#22C7A9",
+    items: ["React", "Next.js", "Tailwind", "Laravel", "React Native"],
   },
   {
     label: "Backend & DB",
-    color: "#EA4335",
+    color: "#FF3E9A",
     items: ["Node.js", "MySQL", "Firebase"],
   },
   {
+    label: "DevOps & Infra",
+    color: "#FFD400",
+    items: ["Docker", "Linux", "Nginx", "AWS", "Vercel", "MikroTik", "Windows"],
+  },
+  {
     label: "Tools",
-    color: "#FABB05",
-    items: ["Git", "Figma", "Vercel", "MikroTik"],
+    color: "#22C7A9",
+    items: ["Git", "Figma"],
   },
 ];

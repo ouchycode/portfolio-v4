@@ -13,10 +13,9 @@ import { FaTiktok } from "react-icons/fa";
 import { useFooterAnimation } from "@/hooks/useAnimations";
 import { useLanguage } from "@/context/LanguageContext";
 import { TerminalEasterEgg } from "./TerminalEasterEgg";
-import { PageViews } from "./PageViews";
 import { WeatherWidget } from "./WeatherWidget";
 
-const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
+const RETRO_COLORS = ["#FF3E9A", "#FFD400", "#22C7A9", "#3B2FD6"];
 
 const SOCIALS = [
   { name: "Github", url: "https://github.com/ouchycode", icon: Github },
@@ -36,7 +35,7 @@ const SOCIALS = [
 export default function Footer() {
   const container = useRef<HTMLElement>(null);
   const { t } = useLanguage();
-  const [clickCount, setClickCount] = useState(0);
+  const [, setClickCount] = useState(0);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   useFooterAnimation(container);
@@ -54,164 +53,164 @@ export default function Footer() {
   return (
     <>
       <footer
-      ref={container}
-      className="relative overflow-hidden px-6 md:px-12 lg:px-20 pt-20 pb-10 md:pt-28 md:pb-12"
-    >
-      {/* Grid overlay */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(#5F6368 1px,transparent 1px),linear-gradient(90deg,#5F6368 1px,transparent 1px)",
-          backgroundSize: "48px 48px",
-          opacity: 0.03,
-        }}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
-        {/* ── CTA Card ── */}
-        <div
-          className="footer-item w-full rounded-4xl md:rounded-[2.5rem] bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-8 sm:p-10 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 relative overflow-hidden"
-          style={{
-            boxShadow:
-              "0 1px 3px rgba(60,64,67,.08), 0 8px 24px rgba(60,64,67,.08)",
-          }}
-        >
-          {/* Top color bar */}
-          <div className="absolute top-0 left-0 right-0 h-0.75 flex">
-            {GOOGLE_COLORS.map((c) => (
-              <div
-                key={c}
-                className="flex-1 h-full"
-                style={{ background: c }}
-              />
-            ))}
-          </div>
-
-          {/* Left — text */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left gap-3 md:gap-4 mt-2">
-            {/* Available badge */}
-            <div className="footer-item inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#E6F4EA] dark:bg-[#81C995]/15 border border-[#34A853]/20 dark:border-[#81C995]/20">
-              <div className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-50" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#34A853]" />
-              </div>
-              <span className="text-[11px] font-bold text-[#137333] dark:text-[#81C995] uppercase tracking-[0.12em]">
-                {t.footer.available}
+        ref={container}
+        className="relative overflow-hidden px-4 md:px-8 pt-16 pb-28 md:pt-20 md:pb-32"
+      >
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
+          {/* ── Bootstrap dialog window ── */}
+          <div
+            data-vt="open"
+            className="footer-item rv-window w-full relative overflow-hidden"
+          >
+            {/* Window titlebar */}
+            <div className="rv-titlebar">
+              <span className="rv-titlebar-label select-none">
+                hire_kevin.exe — Install
+              </span>
+              <span className="ml-auto flex items-center gap-1 select-none">
+                <span className="rv-titlebar-btn text-[8px]">─</span>
+                <span className="rv-titlebar-btn text-[8px]">□</span>
+                <span className="rv-titlebar-btn text-[9px]">×</span>
               </span>
             </div>
 
-            <h2 className="footer-item font-black tracking-[-0.03em] text-3xl md:text-5xl lg:text-[3.25rem] text-[#202124] dark:text-white leading-[1.05]">
-              {t.footer.title}
-            </h2>
-
-            {/* G-color bar */}
-            <div className="flex gap-1 w-32">
-              {GOOGLE_COLORS.map((c) => (
-                <div
-                  key={c}
-                  className="h-1 flex-1 rounded-full opacity-60"
-                  style={{ background: c }}
-                />
+            {/* Retro color top bar */}
+            <div aria-hidden className="absolute top-0 left-0 right-0 h-1 flex">
+              {RETRO_COLORS.map((c) => (
+                <div key={c} className="flex-1 h-full" style={{ background: c }} />
               ))}
             </div>
 
-            <p className="footer-item text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-md leading-relaxed">
-              {t.footer.desc}
-            </p>
-          </div>
-
-          {/* Right — CTA button */}
-          <div className="footer-item shrink-0 w-full md:w-auto">
-            <a
-              href="mailto:kevinnardiansyahh19@gmail.com"
-              className="group inline-flex items-center justify-center gap-3 h-13 md:h-16 px-8 md:px-10 rounded-full font-semibold text-base md:text-lg tracking-wide text-white active:scale-95 w-full md:w-auto focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--google-blue)]"
-              style={{ background: "linear-gradient(135deg,#1A73E8,#4285F4)" }}
-            >
-              <Mail size={19} strokeWidth={2.2} />
-              {t.footer.btn}
-              <ArrowUpRight
-                size={17}
-                strokeWidth={2.2}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* ── Bottom section ── */}
-        <div className="flex flex-col gap-7 md:gap-8 pt-8 md:pt-10 border-t border-[#DADCE0]/60 dark:border-[#5F6368]/40">
-          {/* Identity + Social */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
-            {/* Identity */}
-            <div className="footer-item flex items-center gap-4">
-              <div
-                onClick={handleFingerprintClick}
-                title="Click me 3 times..."
-                className="w-13 h-13 flex items-center justify-center rounded-2xl bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60 text-[#041E42] dark:text-[#40C1AC] cursor-pointer hover:scale-105 transition-transform"
-                style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
-              >
-                <Fingerprint size={23} strokeWidth={2} />
-              </div>
-              <div className="flex flex-col">
-                <h3 className="font-black tracking-[-0.02em] text-xl md:text-2xl text-[#202124] dark:text-white leading-tight">
-                  Kevin Ardiansyah
-                </h3>
-                <p className="text-[10px] font-bold text-[#5F6368] dark:text-[#9AA0A6] uppercase tracking-[0.15em] mt-0.5">
-                  Frontend Engineer
-                </p>
-              </div>
-            </div>
-
-            {/* Social pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {SOCIALS.map(({ name, url, icon: Icon }) => (
-                <div key={name} className="footer-item">
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#303134] border border-[#DADCE0] dark:border-[#5F6368]/60 text-[#5F6368] dark:text-[#9AA0A6] hover:text-[var(--google-blue)] dark:hover:text-[var(--google-blue-dark)] hover:border-[var(--google-blue)]/30 hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/10 active:scale-95 transition-colors duration-200"
-                  >
-                    <Icon size={14} strokeWidth={2} />
-                    <span className="text-[11px] font-bold uppercase tracking-widest">
-                      {name}
-                    </span>
-                  </a>
+            <div className="rv-panel p-6 sm:p-8 md:p-12 rounded-none flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+              {/* Left — text */}
+              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-3 md:gap-4 mt-2">
+                {/* Available badge */}
+                <div className="rv-chip rv-pixel flex items-center gap-2.5 px-3.5 py-1.5 bg-vtcard">
+                  <span className="relative flex w-2 h-2">
+                    <span className="absolute inline-flex h-full w-full bg-vtcrt opacity-50 animate-ping" />
+                    <span className="relative inline-flex w-2 h-2 bg-vtcrt" />
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink">
+                    {t.footer.available}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Copyright row */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="footer-item">
-              <WeatherWidget />
-            </div>
+                <h2
+                  className="footer-item font-bold tracking-tight text-3xl md:text-5xl lg:text-[3.25rem] text-ink leading-[1.05]"
+                  style={{ fontFamily: "var(--vt-font-display)" }}
+                >
+                  {t.footer.title}
+                </h2>
 
-            <div className="footer-item flex items-center gap-4">
-              <PageViews />
-              <div className="flex items-center gap-2">
-                <div className="flex gap-1 items-center">
-                  {GOOGLE_COLORS.map((c) => (
-                    <span
+                {/* Retro color bar */}
+                <div className="flex gap-1 w-32">
+                  {RETRO_COLORS.map((c) => (
+                    <div
                       key={c}
-                      className="w-1.5 h-1.5 rounded-full opacity-70"
-                      style={{ background: c }}
+                      className="h-1.5 flex-1 rv-sunken"
+                      style={{ background: c, opacity: 0.75 }}
                     />
                   ))}
                 </div>
-                <p className="text-[11px] font-bold text-[#9AA0A6] dark:text-[#5F6368] uppercase tracking-[0.15em]">
-                  © {new Date().getFullYear()} K.A. All Rights Reserved.
+
+                <p className="footer-item text-sm md:text-base lg:text-lg text-ink-soft max-w-md leading-relaxed">
+                  {t.footer.desc}
                 </p>
+              </div>
+
+              {/* Right — CTA button */}
+              <div className="footer-item shrink-0 w-full md:w-auto">
+                <a
+                  href="mailto:kevinnardiansyahh19@gmail.com"
+                  className="rv-btn-primary rv-pixel group inline-flex items-center justify-center gap-3 h-13 md:h-16 px-8 md:px-10 text-[13px] md:text-[15px] tracking-wider w-full md:w-auto"
+                >
+                  <Mail size={19} strokeWidth={2.2} className="relative z-10" />
+                  <span className="relative z-10">{t.footer.btn}</span>
+                  <ArrowUpRight
+                    size={17}
+                    strokeWidth={2.2}
+                    className="relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Bottom section ── */}
+          <div className="flex flex-col gap-7 md:gap-8 pt-6 md:pt-8 border-t border-inkmute/30">
+            {/* Identity + Social */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+              {/* Identity */}
+              <div className="footer-item flex items-center gap-4">
+                <div
+                  onClick={handleFingerprintClick}
+                  title="Click me 3 times..."
+                  className="w-12 h-12 md:w-13 md:h-13 flex items-center justify-center rv-raised bg-chrome text-vtcrt cursor-pointer hover:bg-vtblue hover:text-white transition-colors"
+                >
+                  <Fingerprint size={23} strokeWidth={2} />
+                </div>
+                <div className="flex flex-col">
+                  <h3
+                    className="font-bold text-xl md:text-2xl text-ink leading-tight"
+                    style={{ fontFamily: "var(--vt-font-display)" }}
+                  >
+                    Kevin Ardiansyah
+                  </h3>
+                  <p className="rv-pixel text-[10px] text-inkmute uppercase tracking-[0.16em] mt-0.5">
+                    Software Engineer
+                  </p>
+                </div>
+              </div>
+
+              {/* Social buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {SOCIALS.map(({ name, url, icon: Icon }) => (
+                  <div key={name} className="footer-item">
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rv-btn rv-pixel group flex items-center gap-2 px-3.5 h-9 text-[10px] font-bold uppercase tracking-widest"
+                    >
+                      <Icon size={13} strokeWidth={2} className="relative z-10" />
+                      <span className="relative z-10">{name}</span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Copyright row */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="footer-item">
+                <WeatherWidget />
+              </div>
+
+              <div className="footer-item flex items-center gap-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex gap-1 items-center">
+                    {RETRO_COLORS.map((c) => (
+                      <span
+                        key={c}
+                        className="w-1.5 h-1.5"
+                        style={{ background: c, opacity: 0.75 }}
+                      />
+                    ))}
+                  </div>
+                  <p className="rv-pixel text-[10px] text-inkmute uppercase tracking-[0.16em]">
+                    © {new Date().getFullYear()} K.A. — KevinOS v1.0
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
-    <TerminalEasterEgg isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+      </footer>
+
+      <TerminalEasterEgg
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+      />
     </>
   );
 }

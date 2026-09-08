@@ -1,6 +1,7 @@
 import { Cpu } from "lucide-react";
 import Image from "next/image";
 import { techStack, techGroups } from "../../data/tech/techData";
+import { SectionWindow } from "@/components/ui/SectionWindow";
 
 interface TechStackProps {
   badgeStack: string;
@@ -14,105 +15,94 @@ export function TechStack({
   subtitleStack,
 }: TechStackProps) {
   return (
-    <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-10 px-6 md:px-12 lg:px-20">
+    <div className="max-w-7xl mx-auto w-full flex flex-col gap-10 md:gap-14 px-4 md:px-8">
       {/* Header */}
-      <div className="flex flex-col gap-3 md:gap-4">
-        <div
-          data-aos="zoom-in-down"
-          className="inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
-        >
-          <Cpu size={14} className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
-          <span className="text-xs font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
-            {badgeStack}
+      <SectionWindow
+        icon={<Cpu size={14} strokeWidth={2.4} />}
+        label={badgeStack}
+        title={titleStack}
+        subtitle={subtitleStack}
+        file="devices.exe — Device Manager"
+      />
+
+      {/* Card */}
+      <div data-vt="open" className="rv-window w-full">
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label select-none">
+            C:\Stack\inventory.dll
+          </span>
+          <span className="ml-auto flex items-center gap-1 select-none">
+            <span className="rv-titlebar-btn text-[8px]">─</span>
+            <span className="rv-titlebar-btn text-[8px]">□</span>
+            <span className="rv-titlebar-btn text-[9px]">×</span>
           </span>
         </div>
 
-        <div data-aos="fade-right" data-aos-delay="100" className="flex items-end gap-4">
-          <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
-            {titleStack}
-          </h2>
-          <div className="hidden md:flex items-center gap-2 mb-3 flex-1">
-            <span className="w-2 h-2 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0" />
-            <div className="h-px flex-1 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
-          </div>
-        </div>
-
-        <p
-          data-aos="fade-up"
-          data-aos-delay="200"
-          className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] max-w-2xl leading-relaxed"
-        >
-          {subtitleStack}
-        </p>
-      </div>
-
-      {/* Card */}
-      <div
-        data-aos="zoom-in-up"
-        data-aos-delay="100"
-        className="w-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-6 sm:p-8 md:p-10"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 4px 16px rgba(60,64,67,.07)",
-        }}
-      >
-        <div className="flex flex-col gap-7 md:gap-8">
-          {techGroups.map((group) => {
-            const items = techStack.filter((t) => group.items.includes(t.name));
-            return (
-              <div key={group.label} className="flex flex-col gap-3">
-                {/* Group label */}
-                <div className="flex items-center gap-2.5">
-                  <span
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ background: group.color }}
-                  />
-                  <span
-                    className="text-[11px] font-bold tracking-[0.12em] uppercase"
-                    style={{ color: group.color, opacity: 0.85 }}
-                  >
-                    {group.label}
-                  </span>
-                  <div
-                    className="h-px flex-1"
-                    style={{ background: `${group.color}20` }}
-                  />
-                </div>
-
-                {/* Chips */}
-                <div className="flex flex-wrap gap-2 md:gap-2.5">
-                  {items.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="flex items-center gap-2 md:gap-2.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#202124] cursor-default"
+        <div className="rv-panel p-5 sm:p-7 md:p-9">
+          <div className="flex flex-col gap-7 md:gap-8">
+            {techGroups.map((group) => {
+              const items = techStack.filter((t) => group.items.includes(t.name));
+              return (
+                <div key={group.label} className="flex flex-col gap-3">
+                  {/* Group label */}
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="w-2.5 h-2.5 shrink-0 rv-sunken"
+                      style={{ background: group.color }}
+                    />
+                    <span
+                      className="rv-pixel text-[11px] font-bold tracking-[0.18em] uppercase"
+                      style={{ color: group.color }}
                     >
-                      <Image
-                        src={tech.image}
-                        alt={tech.name}
-                        width={20}
-                        height={20}
-                        className="w-4 h-4 md:w-5 md:h-5 object-contain"
-                      />
-                      <span className="text-xs md:text-sm font-semibold text-[#3C4043] dark:text-[#E8EAED]">
-                        {tech.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                      {group.label}
+                    </span>
+                    <div
+                      className="h-px flex-1 rv-sunken"
+                      style={{
+                        backgroundImage:
+                          "repeating-linear-gradient(90deg, " +
+                          group.color +
+                          " 0 6px, transparent 6px 12px)",
+                        opacity: 0.5,
+                      }}
+                    />
+                  </div>
 
-        {/* Google color bar */}
-        <div className="flex gap-1 mt-7 md:mt-8 pt-5 md:pt-6 border-t border-[#F1F3F4] dark:border-[#5F6368]/30">
-          {["#EA4335", "#FABB05", "#34A853", "#1A73E8"].map((c) => (
-            <div
-              key={c}
-              className="h-1 flex-1 rounded-full opacity-60"
-              style={{ background: c }}
-            />
-          ))}
+                  {/* Chips */}
+                  <div className="flex flex-wrap gap-2 md:gap-2.5">
+                    {items.map((tech) => (
+                      <div
+                        key={tech.name}
+                        className="rv-chip rv-pixel flex items-center gap-2 md:gap-2.5 px-3 md:px-3.5 py-1.5 md:py-2 bg-vtcard text-ink"
+                      >
+                        <Image
+                          src={tech.image}
+                          alt={tech.name}
+                          width={20}
+                          height={20}
+                          className="w-4 h-4 md:w-5 md:h-5 object-contain"
+                        />
+                        <span className="text-[11px] md:text-[12px] font-bold uppercase tracking-wide">
+                          {tech.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Retro color bar */}
+          <div className="flex gap-1 mt-7 md:mt-8 pt-5 md:pt-6 border-t border-inkmute/40">
+            {["#FF3E9A", "#FFD400", "#22C7A9", "#3B2FD6"].map((c) => (
+              <div
+                key={c}
+                className="h-1.5 flex-1 rv-sunken"
+                style={{ background: c, opacity: 0.75 }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

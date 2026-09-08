@@ -1,23 +1,35 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Silkscreen, Azeret_Mono, Unbounded } from "next/font/google";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { LoadingProvider } from "@/context/LoadingContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeColorProvider } from "@/context/ThemeColorContext";
 import Navbar from "@/components/ui/Navbar";
 import { CommandMenu } from "@/components/ui/CommandMenu";
-import { CustomCursor } from "@/components/ui/CustomCursor";
-import { GlobalSoundEffects } from "@/components/ui/GlobalSoundEffects";
-import { AOSInit } from "@/components/ui/AOSInit";
+import { RevealObserver } from "@/components/ui/RevealObserver";
 import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const googleFont = DM_Sans({
+const pixelFont = Silkscreen({
+  weight: ["400", "700"],
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
+  variable: "--font-pixel",
+  display: "swap",
+});
+
+const monoFont = Azeret_Mono({
+  weight: ["300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  variable: "--font-body-set",
+  display: "swap",
+});
+
+const displayFont = Unbounded({
+  weight: ["300", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-display-set",
   display: "swap",
 });
 
@@ -25,14 +37,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-bykevin.vercel.app/"),
   title: {
     template: "%s | Kevin Ardiansyah",
-    default: "Kevin Ardiansyah | Frontend Engineer",
+    default: "Kevin Ardiansyah | Software Engineer",
   },
   description:
-    "Portfolio of Kevin Ardiansyah, a Frontend Engineer based in Tangerang, ID. Focused on creating intuitive user experiences and writing clean, scalable code.",
+    "Portfolio of Kevin Ardiansyah, a Software Engineer based in Tangerang, ID. Skilled in web development, DevOps, and IT support with clean, scalable code.",
   keywords: [
     "Kevin Ardiansyah",
-    "Frontend Engineer",
+    "Software Engineer",
     "Web Developer",
+    "DevOps",
+    "IT Support",
     "React",
     "Next.js",
     "Tailwind CSS",
@@ -42,9 +56,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Kevin Ardiansyah", url: "https://portfolio-bykevin.vercel.app/" }],
   creator: "Kevin Ardiansyah",
   openGraph: {
-    title: "Kevin Ardiansyah | Frontend Engineer",
+    title: "Kevin Ardiansyah | Software Engineer",
     description:
-      "Explore the selected works and career journey of Kevin Ardiansyah, a Frontend Engineer based in Tangerang, Indonesia.",
+      "Explore the selected works and career journey of Kevin Ardiansyah, a Software Engineer based in Tangerang, Indonesia.",
     url: "https://portfolio-bykevin.vercel.app/",
     siteName: "Kevin Ardiansyah Portfolio",
     images: [
@@ -52,7 +66,7 @@ export const metadata: Metadata = {
         url: "/profile_kevin.png",
         width: 1200,
         height: 630,
-        alt: "Kevin Ardiansyah - Frontend Engineer",
+        alt: "Kevin Ardiansyah - Software Engineer",
       },
     ],
     locale: "id_ID",
@@ -60,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kevin Ardiansyah | Frontend Engineer",
+    title: "Kevin Ardiansyah | Software Engineer",
     description:
       "Explore the selected works and career journey of Kevin Ardiansyah.",
     images: ["/profile_kevin.png"],
@@ -76,7 +90,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body
-        className={`${googleFont.variable} font-sans min-h-screen bg-background text-foreground`}
+        className={`${pixelFont.variable} ${monoFont.variable} ${displayFont.variable} min-h-screen bg-desktop text-ink`}
       >
         <LanguageProvider>
           <LoadingProvider>
@@ -87,9 +101,8 @@ export default function RootLayout({
                 enableSystem
                 disableTransitionOnChange
               >
-                <GlobalSoundEffects />
-                <NextTopLoader 
-                  color="#1a73e8"
+                <NextTopLoader
+                  color="#37ff9b"
                   initialPosition={0.08}
                   crawlSpeed={200}
                   height={3}
@@ -97,18 +110,17 @@ export default function RootLayout({
                   showSpinner={false}
                   easing="ease"
                   speed={200}
-                  shadow="0 0 10px #1a73e8,0 0 5px #1a73e8"
+                  shadow="0 0 10px #37ff9b,0 0 5px #22c7a9"
                 />
-                <CustomCursor />
-                {/* Grid blueprint — CSS only, no blur, no JS */}
+                {/* Retro scanline grid overlay (drifts slowly like the reference desktop) */}
                 <div
                   aria-hidden="true"
-                  className="fixed inset-0 z-0 pointer-events-none"
+                  className="vt-grid fixed inset-0 z-0 pointer-events-none"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to right, #1a73e8 1px, transparent 1px), linear-gradient(to bottom, #1a73e8 1px, transparent 1px)",
-                    backgroundSize: "40px 40px",
-                    opacity: 0.06,
+                      "linear-gradient(to right, #7c5cff 1px, transparent 1px), linear-gradient(to bottom, #7c5cff 1px, transparent 1px)",
+                    backgroundSize: "42px 42px",
+                    opacity: 0.05,
                     maskImage:
                       "radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%)",
                     WebkitMaskImage:
@@ -116,18 +128,14 @@ export default function RootLayout({
                   }}
                 />
 
-                <AOSInit />
+                {/* CRT film grain overlay (matches vintec .vt-grain) */}
+                <div aria-hidden="true" className="vt-grain" />
+
+                <RevealObserver />
                 <CommandMenu />
                 <Navbar />
 
-                <div
-                  id="smooth-wrapper"
-                  className="relative z-10 w-full min-h-screen"
-                >
-                  <div id="smooth-content" className="w-full flex flex-col">
-                    {children}
-                  </div>
-                </div>
+                {children}
 
                 <Analytics />
                 <SpeedInsights />

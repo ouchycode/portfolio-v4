@@ -12,37 +12,37 @@ export function getTypeStyle(type: string): TypeStyle {
     case "Education":
       return {
         icon: GraduationCap,
-        color: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
-        bgColor: "bg-[#E8F0FE] dark:bg-[var(--google-blue-dark)]/15",
-        accentColor: "#1A73E8",
+        color: "text-vtblue",
+        bgColor: "bg-[#E2DDFF] dark:bg-vtblue/15",
+        accentColor: "var(--vt-blue)",
       };
     case "Bootcamp":
       return {
         icon: Code,
-        color: "text-[#34A853] dark:text-[#81C995]",
-        bgColor: "bg-[#E6F4EA] dark:bg-[#81C995]/15",
-        accentColor: "#34A853",
+        color: "text-vtteal",
+        bgColor: "bg-[#DCF7F2] dark:bg-vtteal/15",
+        accentColor: "var(--vt-teal)",
       };
     case "Organization":
       return {
         icon: Users,
-        color: "text-[#FABB05] dark:text-[#FDE293]",
-        bgColor: "bg-[#FEF7E0] dark:bg-[#FDE293]/15",
-        accentColor: "#FABB05",
+        color: "text-vtamber",
+        bgColor: "bg-[#FFF6D6] dark:bg-vtamber/15",
+        accentColor: "var(--vt-amber)",
       };
     case "Internship":
       return {
         icon: Briefcase,
-        color: "text-[#EA4335] dark:text-[#F28B82]",
-        bgColor: "bg-[#FCE8E6] dark:bg-[#F28B82]/15",
-        accentColor: "#EA4335",
+        color: "text-vtpink",
+        bgColor: "bg-[#FFE0EF] dark:bg-vtpink/15",
+        accentColor: "var(--vt-pink)",
       };
     default:
       return {
         icon: Briefcase,
-        color: "text-[#5F6368] dark:text-[#9AA0A6]",
-        bgColor: "bg-[#F1F3F4] dark:bg-[#3C4043]/50",
-        accentColor: "#5F6368",
+        color: "text-ink-soft",
+        bgColor: "bg-vtcard dark:bg-vtcard",
+        accentColor: "var(--vt-ink-mute)",
       };
   }
 }

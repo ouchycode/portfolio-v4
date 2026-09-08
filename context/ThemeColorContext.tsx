@@ -9,11 +9,11 @@ type ThemeColor = {
 };
 
 export const THEME_COLORS: ThemeColor[] = [
-  { name: "Google Blue", color: "#1A73E8", darkColor: "#8AB4F8" },
-  { name: "Emerald", color: "#10b981", darkColor: "#34d399" },
-  { name: "Rose", color: "#f43f5e", darkColor: "#fb7185" },
-  { name: "Violet", color: "#8b5cf6", darkColor: "#a78bfa" },
-  { name: "Amber", color: "#f59e0b", darkColor: "#fbbf24" },
+  { name: "Neon Pink", color: "#FF3E9A", darkColor: "#FF4DA3" },
+  { name: "CRT Green", color: "#22C7A9", darkColor: "#2BD9B9" },
+  { name: "Cyber Violet", color: "#7C5CFF", darkColor: "#A48BFF" },
+  { name: "Terminal Green", color: "#37FF9B", darkColor: "#37FF9B" },
+  { name: "Retro Amber", color: "#FFD400", darkColor: "#FFD400" },
 ];
 
 interface ThemeColorContextType {
@@ -27,21 +27,21 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
   const [currentColor, setCurrentColor] = useState<ThemeColor>(THEME_COLORS[0]);
 
   useEffect(() => {
-    // Load from localStorage on mount
     const savedColor = localStorage.getItem("portfolio-accent-color");
     if (savedColor) {
       const parsed = JSON.parse(savedColor);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentColor(parsed);
-      document.documentElement.style.setProperty("--google-blue", parsed.color);
-      document.documentElement.style.setProperty("--google-blue-dark", parsed.darkColor);
+      document.documentElement.style.setProperty("--vt-pink", parsed.color);
+      document.documentElement.style.setProperty("--vt-crt", parsed.darkColor);
     }
   }, []);
 
   const setThemeColor = (color: ThemeColor) => {
     setCurrentColor(color);
     localStorage.setItem("portfolio-accent-color", JSON.stringify(color));
-    document.documentElement.style.setProperty("--google-blue", color.color);
-    document.documentElement.style.setProperty("--google-blue-dark", color.darkColor);
+    document.documentElement.style.setProperty("--vt-pink", color.color);
+    document.documentElement.style.setProperty("--vt-crt", color.darkColor);
   };
 
   return (

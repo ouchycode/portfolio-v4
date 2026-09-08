@@ -19,20 +19,8 @@ export default function Contact() {
     <section
       id="contact"
       ref={container}
-      className="relative overflow-hidden px-6 md:px-12 lg:px-20 py-24 md:py-32"
+      className="relative overflow-hidden px-4 md:px-8 py-16 md:py-24"
     >
-      {/* Grid overlay */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(#5F6368 1px,transparent 1px),linear-gradient(90deg,#5F6368 1px,transparent 1px)",
-          backgroundSize: "48px 48px",
-          opacity: 0.03,
-        }}
-      />
-
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-10 md:gap-14">
         <ContactHeader
           badge={t.nav.contact}
@@ -42,23 +30,29 @@ export default function Contact() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative items-stretch">
-          {/* Decorative icons */}
+          {/* Decorative desktop icons */}
           <div
             data-aos="zoom-in"
             data-aos-delay="400"
-            className="absolute -top-6 right-[58%] z-20 hidden sm:block pointer-events-none"
+            className="absolute -top-6 right-[58%] z-20 hidden sm:block pointer-events-none -rotate-12"
           >
-            <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
-              <Paperclip className="w-5 h-5 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
+            <div className="rv-chip w-12 h-12 flex flex-col items-center justify-center bg-chrome">
+              <Paperclip className="w-5 h-5 text-vtblue" strokeWidth={2.2} />
+              <span className="rv-pixel text-[8px] uppercase mt-0.5 text-ink">
+                attach
+              </span>
             </div>
           </div>
           <div
             data-aos="zoom-in"
             data-aos-delay="500"
-            className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-8 z-20 pointer-events-none hidden sm:block"
+            className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-8 z-20 pointer-events-none hidden sm:block rotate-12"
           >
-            <div className="p-3 bg-white dark:bg-[#303134] rounded-full shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] rotate-12">
-              <Star className="w-5 h-5 text-[#FABB05] fill-[#FABB05]/25" />
+            <div className="rv-chip w-12 h-12 flex flex-col items-center justify-center bg-chrome">
+              <Star className="w-5 h-5 text-vtamber" strokeWidth={2} />
+              <span className="rv-pixel text-[8px] uppercase mt-0.5 text-ink">
+                fave
+              </span>
             </div>
           </div>
 

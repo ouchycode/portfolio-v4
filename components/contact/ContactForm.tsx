@@ -3,19 +3,30 @@
 import { Send } from "lucide-react";
 
 const inputClass =
-  "w-full rounded-2xl border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] px-5 py-3 md:py-3.5 text-sm md:text-base text-[#202124] dark:text-white placeholder:text-[#9AA0A6] dark:placeholder:text-[#5F6368] outline-none focus:bg-white dark:focus:bg-[#303134] focus:border-[var(--google-blue)] dark:focus:border-[var(--google-blue-dark)] focus:ring-4 focus:ring-[var(--google-blue)]/10 dark:focus:ring-[var(--google-blue-dark)]/10 transition-colors duration-200";
+  "rv-sunken w-full px-4 py-3 md:py-3.5 text-sm md:text-base bg-vtcard text-ink placeholder:text-inkmute focus:bg-ink/[0.04] transition-colors duration-200";
 
 const labelClass =
-  "text-xs font-bold tracking-[0.08em] uppercase text-[#5F6368] dark:text-[#9AA0A6] pl-1";
+  "rv-pixel text-[11px] font-bold uppercase tracking-[0.12em] text-inkmute pl-0.5";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function ContactForm({ t }: { t: Record<string, any> }) {
   return (
-    <div data-aos="fade-left" data-aos-delay="150" className="h-full">
-      <div className="material-card w-full h-full rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 p-7 sm:p-10 relative overflow-hidden">
-        {/* Google 4-color top bar */}
-        <div className="absolute top-0 left-0 right-0 h-0.75 flex">
-          {["#EA4335", "#FABB05", "#34A853", "#1A73E8"].map((c) => (
+    <div data-vt="open" className="h-full rv-window">
+      <div className="rv-titlebar">
+        <span className="rv-titlebar-label select-none">
+          new_message.exe — Outlook
+        </span>
+        <span className="ml-auto flex items-center gap-1 select-none">
+          <span className="rv-titlebar-btn text-[8px]">─</span>
+          <span className="rv-titlebar-btn text-[8px]">□</span>
+          <span className="rv-titlebar-btn text-[9px]">×</span>
+        </span>
+      </div>
+
+      <div className="rv-panel p-6 sm:p-8 md:p-9 relative overflow-hidden">
+        {/* Retro color top bar */}
+        <div aria-hidden className="absolute top-0 left-0 right-0 h-1 flex">
+          {["#FF3E9A", "#FFD400", "#22C7A9", "#3B2FD6"].map((c) => (
             <div key={c} className="flex-1 h-full" style={{ background: c }} />
           ))}
         </div>
@@ -28,7 +39,7 @@ export function ContactForm({ t }: { t: Record<string, any> }) {
             {/* Name */}
             <div className="flex flex-col gap-1.5">
               <label className={labelClass}>
-                {t.contact.formName} <span className="text-[#EA4335]">*</span>
+                {t.contact.formName} <span className="text-vtpink">*</span>
               </label>
               <input
                 type="text"
@@ -40,7 +51,7 @@ export function ContactForm({ t }: { t: Record<string, any> }) {
             {/* Email */}
             <div className="flex flex-col gap-1.5">
               <label className={labelClass}>
-                {t.contact.formEmail} <span className="text-[#EA4335]">*</span>
+                {t.contact.formEmail} <span className="text-vtpink">*</span>
               </label>
               <input
                 type="email"
@@ -53,7 +64,7 @@ export function ContactForm({ t }: { t: Record<string, any> }) {
             <div className="flex flex-col gap-1.5">
               <label className={labelClass}>
                 {t.contact.formMessage}{" "}
-                <span className="text-[#EA4335]">*</span>
+                <span className="text-vtpink">*</span>
               </label>
               <textarea
                 rows={5}
@@ -65,20 +76,19 @@ export function ContactForm({ t }: { t: Record<string, any> }) {
 
           {/* Submit row */}
           <div className="flex items-center justify-between gap-4 mt-1">
-            <p className="text-xs text-[#9AA0A6] dark:text-[#5F6368]">
-              <span className="text-[#EA4335]">*</span> required fields
+            <p className="rv-pixel text-[10px] text-inkmute uppercase tracking-wider">
+              <span className="text-vtpink">*</span> required fields
             </p>
             <button
               type="submit"
-              className="group inline-flex items-center justify-center gap-2.5 px-7 md:px-8 py-3 md:py-3.5 rounded-full font-semibold text-sm tracking-wide text-white active:scale-95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[var(--google-blue)]"
-              style={{ background: "linear-gradient(135deg,#1A73E8,#4285F4)" }}
+              className="rv-btn-primary rv-pixel group inline-flex items-center justify-center gap-2.5 px-7 md:px-8 py-3 md:py-3.5 text-[12px] font-bold uppercase tracking-wider"
             >
               <Send
                 size={15}
                 strokeWidth={2.2}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                className="relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
               />
-              {t.contact.btnSubmit}
+              <span className="relative z-10">{t.contact.btnSubmit}</span>
             </button>
           </div>
         </form>

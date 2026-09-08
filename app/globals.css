@@ -1,59 +1,93 @@
 @import "tailwindcss";
 
-/* Dark mode via class .dark (dipakai oleh ThemeProvider) */
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* ── Tokens ──────────────────────────────────────────────────────────────── */
-:root {
-  --background: #f8f9fa;
-  --foreground: #202124;
-  --surface: #ffffff;
-  --surface-variant: #f1f3f4;
-  --outline: #dadce0;
-  --google-blue: #1a73e8;
-  --google-blue-dark: #8ab4f8;
-  --scrollbar-thumb: #dadce0;
-  --scrollbar-thumb-hover: #bdc1c6;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+/* Tailwind v4 - theme colors map to CSS vars below */
+@theme {
+  --color-desktop: var(--vt-desktop);
+  --color-chrome: var(--vt-chrome);
+  --color-paper: var(--vt-paper);
+  --color-card: var(--vt-card);
+  --color-ink: var(--vt-ink);
+  --color-inksoft: var(--vt-ink-soft);
+  --color-inkmute: var(--vt-ink-mute);
+  --color-vtblue: var(--vt-blue);
+  --color-vtviolet: var(--vt-violet);
+  --color-vtnavy: var(--vt-navy);
+  --color-vtpink: var(--vt-pink);
+  --color-vtteal: var(--vt-teal);
+  --color-vtcrt: var(--vt-crt);
+  --color-vtamber: var(--vt-amber);
+  --font-pixel: var(--vt-font-chrome);
+  --font-body: var(--vt-font-body);
+  --font-display: var(--vt-font-display);
+  --font-mono: var(--vt-font-mono);
 }
 
-/* Hide default cursor on desktop devices to use CustomCursor */
-@media (pointer: fine) {
-  body, a, button, input, textarea, select, [role="button"] {
-    cursor: none !important;
-  }
+/* ── Dark mode via .dark (next-themes) ──────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --vt-desktop: #0a1631;
+  --vt-chrome: #cfcdc8;
+  --vt-paper: #f3f2ee;
+  --vt-card: #e9e7e2;
+  --vt-ink: #12121a;
+  --vt-ink-soft: #42424c;
+  --vt-ink-mute: #6a6a74;
+  --vt-blue: #3b2fd6;
+  --vt-violet: #7c5cff;
+  --vt-navy: #0a0a5e;
+  --vt-pink: #ff3e9a;
+  --vt-teal: #22c7a9;
+  --vt-crt: #37ff9b;
+  --vt-amber: #ffd400;
+  --vt-edge-hi: #ffffff;
+  --vt-edge-hi-2: #eceae4;
+  --vt-edge-lo: #5a5750;
+  --vt-edge-lo-2: #9a968e;
+  --vt-drop: rgba(0, 0, 0, 0.4);
+  --vt-drop-btn: rgba(0, 0, 0, 0.28);
+  --vt-drop-offset: 7px;
+  --vt-drop-offset-btn: 4px;
+
+  --vt-font-chrome: var(--font-pixel, "Silkscreen", monospace);
+  --vt-font-body: var(--font-body-set, "Azeret Mono", ui-monospace, monospace);
+  --vt-font-display: var(--font-display-set, "Unbounded", var(--vt-font-body));
+  --vt-font-mono: "Azeret Mono", ui-monospace, monospace;
+
+  --vt-titlebar-bg: linear-gradient(90deg, var(--vt-navy) 0%, var(--vt-blue) 55%, var(--vt-violet) 100%);
+  --vt-titlebar-ink: #fff;
+
+  --scrollbar-thumb: #9a968e;
+  --scrollbar-thumb-hover: #6a6a74;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .dark {
-  --background: #202124;
-  --foreground: #e8eaed;
-  --surface: #303134;
-  --surface-variant: #3c4043;
-  --outline: #5f6368;
-  --google-blue: #8ab4f8;
-  --scrollbar-thumb: #5f6368;
-  --scrollbar-thumb-hover: #9aa0a6;
-}
+  --vt-desktop: #08080d;
+  --vt-chrome: #23232b;
+  --vt-paper: #16161d;
+  --vt-card: #1d1d26;
+  --vt-ink: #ececf3;
+  --vt-ink-soft: #b9b9c7;
+  --vt-ink-mute: #7c7c8c;
+  --vt-blue: #7a86ff;
+  --vt-violet: #a48bff;
+  --vt-navy: #101040;
+  --vt-pink: #ff4da3;
+  --vt-teal: #2bd9b9;
+  --vt-crt: #37ff9b;
+  --vt-amber: #ffd400;
+  --vt-edge-hi: #3a3a46;
+  --vt-edge-hi-2: #2c2c36;
+  --vt-edge-lo: #000000;
+  --vt-edge-lo-2: #101016;
+  --vt-drop: rgba(0, 0, 0, 0.75);
+  --vt-drop-btn: rgba(0, 0, 0, 0.6);
+  --vt-titlebar-bg: linear-gradient(90deg, #14142e 0%, #2b2470 55%, #5a3fd6 100%);
 
-/* ── Tailwind Theme (v4) ─────────────────────────────────────────────────── */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-surface-variant: var(--surface-variant);
-  --color-outline: var(--outline);
-  --color-google-blue: var(--google-blue);
-
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 35s linear infinite;
+  --scrollbar-thumb: #3a3a46;
+  --scrollbar-thumb-hover: #6a6a74;
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
@@ -66,40 +100,28 @@ html {
 
 body {
   min-height: 100%;
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--vt-desktop);
+  color: var(--vt-ink);
+  font-family: var(--vt-font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  letter-spacing: -0.01em;
   line-height: 1.6;
 }
 
-/* ── Typography ──────────────────────────────────────────────────────────── */
-h1,
-h2,
-h3 {
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+::selection {
+  background-color: var(--vt-pink);
+  color: #fff;
 }
 
-/* ── Media Defaults ──────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px dotted var(--vt-ink);
+  outline-offset: 2px;
+}
+
 img {
   max-width: 100%;
   display: block;
-}
-
-/* ── Selection ───────────────────────────────────────────────────────────── */
-::selection {
-  background-color: rgba(26, 115, 232, 0.15);
-  color: inherit;
-}
-
-/* ── Focus ring ──────────────────────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--google-blue);
-  outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────────────────────── */
@@ -118,8 +140,8 @@ img {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
-  border-radius: 100vh;
-  border: 4px solid var(--background);
+  border-radius: 0;
+  border: 3px solid var(--vt-desktop);
   background-clip: padding-box;
 }
 
@@ -131,7 +153,6 @@ img {
   background: transparent;
 }
 
-/* ── Smooth UI (aman, tidak ganggu animasi) ─────────────────────────────── */
 html,
 body {
   transition:
@@ -139,17 +160,380 @@ body {
     color 0.2s ease;
 }
 
-/* ── Material 3 Elevation ────────────────────────────────────────────────── */
-.material-card {
-  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.15), 0 1px 3px 1px rgba(60,64,67,0.05);
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+/* ── Retro OS building blocks ────────────────────────────────────────────── */
+
+/* Bevel helpers (classic chiseled 3D edges) */
+.rv {
+  background: var(--vt-chrome);
+  color: var(--vt-ink);
 }
-.material-card:hover {
-  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.15), 0 4px 10px 2px rgba(60,64,67,0.10);
+.rv-raised {
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2);
 }
-.dark .material-card {
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+.rv-sunken {
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo),
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 2px 2px 0 var(--vt-edge-lo-2),
+    inset -2px -2px 0 var(--vt-edge-hi-2);
 }
-.dark .material-card:hover {
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3), 0 4px 10px 2px rgba(0,0,0,0.15);
+.rv-chip {
+  background: var(--vt-card);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo-2);
+}
+
+/* OS Window */
+.rv-window {
+  background: var(--vt-chrome);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    var(--vt-drop-offset) var(--vt-drop-offset) 0 var(--vt-drop);
+}
+
+/* Titlebar — navy→blue→violet gradient, Silkscreen text */
+.rv-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px 5px 10px;
+  background: var(--vt-titlebar-bg);
+  color: var(--vt-titlebar-ink);
+}
+.rv-titlebar-label {
+  font-family: var(--vt-font-chrome);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--vt-titlebar-ink);
+}
+
+/* Titlebar `_ □ ×` buttons */
+.rv-titlebar-btn {
+  width: 20px;
+  height: 18px;
+  flex: none;
+  background: var(--vt-chrome);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--vt-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.rv-titlebar-btn:active {
+  box-shadow:
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 1px 1px 0 var(--vt-edge-lo);
+}
+
+/* Chrome button — beveled, rises + hard shadow, presses inward */
+.rv-btn {
+  background: var(--vt-chrome);
+  color: var(--vt-ink);
+  border-radius: 0;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    var(--vt-drop-offset-btn) var(--vt-drop-offset-btn) 0 var(--vt-drop-btn);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  user-select: none;
+  cursor: pointer;
+}
+.rv-btn:hover {
+  transform: translate(-1px, -1px);
+}
+.rv-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow:
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 1px 1px 0 var(--vt-edge-lo);
+}
+
+/* Primary neo-brutalist button — pink + hard shadow + sweep */
+.rv-btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: var(--vt-pink);
+  color: #fff;
+  font-weight: 700;
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.8),
+    inset -2px -2px rgba(0, 0, 0, 0.3),
+    4px 4px 0 var(--vt-drop);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  user-select: none;
+  cursor: pointer;
+}
+.rv-btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.8),
+    inset -2px -2px rgba(0, 0, 0, 0.3),
+    7px 7px 0 var(--vt-drop);
+}
+.rv-btn-primary:active {
+  transform: translate(3px, 3px);
+  box-shadow:
+    inset -1px -1px rgba(255, 255, 255, 0.4),
+    inset 2px 2px rgba(0, 0, 0, 0.3);
+}
+.rv-btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 34%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  animation: rv-sweep 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes rv-sweep {
+  0% { left: -35%; }
+  60%, 100% { left: 110%; }
+}
+
+/* Ring button (white) */
+.rv-btn-paper {
+  background: var(--vt-paper);
+  color: var(--vt-ink);
+  box-shadow:
+    inset 1px 1px 0 rgba(0, 0, 0, 0.08),
+    3px 3px 0 var(--vt-drop);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.rv-btn-paper:hover {
+  transform: translate(-1px, -1px);
+}
+.rv-btn-paper:active {
+  transform: translate(2px, 2px);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Insets / panels */
+.rv-panel {
+  background: var(--vt-paper);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo),
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 2px 2px 0 var(--vt-edge-lo-2),
+    inset -2px -2px 0 var(--vt-edge-hi-2);
+}
+
+/* CRT terminal panel */
+.rv-crt {
+  position: relative;
+  background: #050505;
+  color: var(--vt-crt);
+  font-family: var(--vt-font-mono);
+  box-shadow: inset 2px 2px #000, inset -1px -1px #4a4a4a, 0 0 0 3px var(--vt-chrome);
+}
+.rv-crt-glow {
+  text-shadow: 0 0 12px rgba(55, 255, 155, 0.45);
+}
+
+/* Pixel label */
+.rv-pixel {
+  font-family: var(--vt-font-chrome);
+  letter-spacing: 0.04em;
+}
+
+/* Progress/loading bar (taskbar style) */
+.rv-progress {
+  height: 9px;
+  background: #1a1a1a;
+}
+.rv-progressfill {
+  height: 100%;
+  background: var(--vt-crt);
+}
+
+/* Menu item hover (blue highlight like classic OS) */
+.rv-hover {
+  transition: background 0.1s ease, color 0.1s ease;
+}
+.rv-hover:hover,
+.rv-hover[data-active="true"] {
+  background: var(--vt-blue);
+  color: #fff;
+}
+
+/* ══ Vintec-style FX layer ════════════════════════════════════════════════ */
+
+:root {
+  --vt-motion-fast: 90ms;
+  --vt-motion-normal: 0.16s;
+  --vt-motion-slow: 0.26s;
+  --vt-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Desktop wallpaper grid drift (subtle, continuous) */
+@keyframes vt-grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 42px 42px; }
+}
+.vt-grid {
+  animation: vt-grid-drift 34s linear infinite;
+}
+
+/* CRT-grain overlay — fixed film-grain on the whole desktop */
+@keyframes vt-grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-6%, 4%); }
+  40% { transform: translate(5%, -7%); }
+  60% { transform: translate(-3%, 8%); }
+  80% { transform: translate(7%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+.vt-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  animation: vt-grain 7s steps(10) infinite;
+}
+
+/* Window / card reveal + float choreography (mirrors vintec) */
+@keyframes vt-open {
+  0% { opacity: 0; transform: scale(0.965) translateY(14px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes vt-pop {
+  0% { opacity: 0; transform: scale(0.94) translateY(8px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes vt-rise {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes vt-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes vt-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes vt-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@keyframes vt-nudge {
+  0%, 100% { transform: translate(0); }
+  50% { transform: translate(4px); }
+}
+@keyframes vt-rise-word {
+  0% { transform: translateY(110%); }
+  100% { transform: none; }
+}
+@keyframes vt-glitch {
+  0%, 100% { text-shadow: none; transform: none; }
+  2% { text-shadow: -3px 0 var(--vt-pink), 3px 0 var(--vt-teal); transform: translate(2px); }
+  3% { text-shadow: 3px 0 var(--vt-pink), -3px 0 var(--vt-teal); transform: translate(-2px); }
+  4% { text-shadow: none; transform: none; }
+  55% { text-shadow: 2px 0 var(--vt-teal), -2px 0 var(--vt-pink); }
+  56% { text-shadow: none; }
+}
+@keyframes vt-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes vt-fill {
+  0% { width: 0; }
+}
+
+/* Scroll-reveal system (IntersectionObserver adds .vt-in) */
+html.vt-hydrated [data-vt] { opacity: 0; }
+[data-vt].vt-in {
+  opacity: 1;
+  animation: var(--vt-anim, vt-open) var(--vt-motion-slow) var(--vt-ease) both;
+  animation-delay: var(--vt-delay, 0s);
+}
+[data-vt="open"].vt-in {
+  animation:
+    vt-open var(--vt-motion-slow) var(--vt-ease) both,
+    vt-float 5.5s ease-in-out 1.4s infinite;
+  animation-delay: var(--vt-delay, 0s), calc(var(--vt-delay, 0s) + 1.25s);
+}
+[data-vt="pop"].vt-in {
+  animation: vt-pop var(--vt-motion-slow) var(--vt-ease) both;
+  animation-delay: var(--vt-delay, 0s);
+}
+[data-vt="rise"].vt-in {
+  animation: vt-rise var(--vt-motion-normal) var(--vt-ease) both;
+  animation-delay: var(--vt-delay, 0s);
+}
+
+/* Marquee - continuous ticker (matches vintec vt-marquee) */
+.vt-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: vt-marquee var(--marquee-dur, 26s) linear infinite;
+}
+.vt-marquee-track:hover {
+  animation-play-state: paused;
+}
+.vt-marquee-track[data-reverse="true"] {
+  animation-direction: reverse;
+}
+
+/* Load-in utilities */
+.vt-rise {
+  opacity: 0;
+  animation: vt-rise var(--vt-motion-normal) var(--vt-ease) forwards;
+  animation-delay: var(--vt-delay, 0s);
+}
+.vt-blink {
+  animation: vt-blink 1.1s steps(1) infinite;
+}
+.vt-pulse-soft {
+  animation: vt-pulse 2.2s ease-in-out infinite;
+}
+.vt-bubble {
+  animation: vt-pulse 1.6s ease-in-out infinite;
+}
+.vt-rise-word {
+  display: inline-block;
+  animation: vt-rise-word var(--vt-motion-slow) var(--vt-ease) both;
+  animation-delay: var(--vt-delay, 0s);
+}
+.vt-glitch {
+  animation: vt-glitch 9s var(--vt-ease) 2.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.vt-hydrated [data-vt] { opacity: 1; }
+  [data-vt].vt-in,
+  .vt-rise,
+  .vt-rise-word {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .vt-grain,
+  .vt-grid,
+  .vt-blink,
+  .vt-glitch,
+  .vt-pulse-soft {
+    animation: none !important;
+  }
 }

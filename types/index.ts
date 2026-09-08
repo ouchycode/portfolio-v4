@@ -15,6 +15,7 @@ export interface CertData {
   issuer: string;
   year: string;
   pdf: string;
+  desc?: string;
 }
 
 export interface TimelineData {

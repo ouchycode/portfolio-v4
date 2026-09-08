@@ -16,26 +16,26 @@ export interface ProjectTheme {
 export function getProjectTheme(category: string): ProjectTheme {
   if (["LMS Platform", "EdTech", "Web Application"].includes(category))
     return {
-      bg: "bg-[#E8F0FE] dark:bg-[var(--google-blue)]/15",
-      text: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
-      accent: "#1A73E8",
+      bg: "bg-[#E2DDFF] dark:bg-vtblue/20",
+      text: "text-vtblue",
+      accent: "var(--vt-blue)",
     };
   if (["E-Commerce", "Mobile Application"].includes(category))
     return {
-      bg: "bg-[#E6F4EA] dark:bg-[#81C995]/15",
-      text: "text-[#137333] dark:text-[#81C995]",
-      accent: "#34A853",
+      bg: "bg-[#DCF7F2] dark:bg-vtteal/20",
+      text: "text-vtteal",
+      accent: "var(--vt-teal)",
     };
   if (["Event Management"].includes(category))
     return {
-      bg: "bg-[#FEF7E0] dark:bg-[#FDE293]/15",
-      text: "text-[#B06000] dark:text-[#FDE293]",
-      accent: "#FABB05",
+      bg: "bg-[#FFF6D6] dark:bg-vtamber/20",
+      text: "text-vtamber",
+      accent: "var(--vt-amber)",
     };
   return {
-    bg: "bg-[#FCE8E6] dark:bg-[#F28B82]/15",
-    text: "text-[#C5221F] dark:text-[#F28B82]",
-    accent: "#EA4335",
+    bg: "bg-[#FFE0EF] dark:bg-vtpink/20",
+    text: "text-vtpink",
+    accent: "var(--vt-pink)",
   };
 }
 

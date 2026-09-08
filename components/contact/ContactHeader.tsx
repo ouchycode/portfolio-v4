@@ -14,53 +14,63 @@ export function ContactHeader({
   fastResponse,
 }: ContactHeaderProps) {
   return (
-    <div className="flex flex-col gap-3 md:gap-4">
-      <div
-        data-aos="flip-right"
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
-      >
-        <MessageSquare
-          size={14}
-          className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]"
-        />
-        <span className="text-xs font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
-          {badge}
-        </span>
-      </div>
-
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="max-w-2xl">
-          <div data-aos="fade-up" data-aos-delay="100" className="flex items-end gap-4">
-            <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
-              {title}
-            </h2>
-            <div className="hidden md:flex items-center gap-2 mb-3 flex-1">
-              <span className="w-2 h-2 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0" />
-              <div className="h-px flex-1 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
-            </div>
-          </div>
-          <p
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-2 leading-relaxed"
-          >
-            {subtitle}
-          </p>
+    <div className="max-w-7xl mx-auto w-full px-4 md:px-8">
+      <div data-vt="open" className="rv-window max-w-3xl mx-auto">
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label select-none">
+            contact.exe — Send Message
+          </span>
+          <span className="ml-auto flex items-center gap-1 select-none">
+            <span className="rv-titlebar-btn text-[8px]">─</span>
+            <span className="rv-titlebar-btn text-[8px]">□</span>
+            <span className="rv-titlebar-btn text-[9px]">×</span>
+          </span>
         </div>
 
-        {/* Fast response badge — desktop */}
-        <div data-aos="zoom-in" data-aos-delay="300" className="hidden md:flex shrink-0 pb-2">
-          <div
-            className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134]"
-            style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
-          >
-            <div className="relative flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-50" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-[#34A853]" />
-            </div>
-            <span className="text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6]">
-              {fastResponse}
+        <div className="rv-panel p-5 sm:p-7 md:p-8 relative">
+          <div className="flex flex-col gap-2.5 lg:pr-48">
+            <span
+              data-aos="fade-right"
+              data-aos-delay="100"
+              className="rv-pixel inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-vtpink"
+            >
+              <MessageSquare size={14} strokeWidth={2.4} />
+              {badge}
             </span>
+
+            <h2
+              data-aos="fade-right"
+              data-aos-delay="150"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05] tracking-tight text-ink"
+              style={{ fontFamily: "var(--vt-font-display)" }}
+            >
+              {title}
+            </h2>
+
+            <p
+              data-aos="fade-right"
+              data-aos-delay="250"
+              className="text-sm md:text-base text-ink-soft mt-1 max-w-[52ch] leading-relaxed"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Fast response badge — desktop */}
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="300"
+            className="hidden lg:flex shrink-0 absolute right-8 top-1/2 -translate-y-1/2"
+          >
+            <div className="rv-chip rv-pixel flex items-center gap-2.5 px-4 py-2.5 bg-vtcard">
+              <span className="relative flex w-2.5 h-2.5">
+                <span className="absolute inline-flex h-full w-full bg-vtcrt opacity-50 animate-ping" />
+                <span className="relative inline-flex w-2.5 h-2.5 bg-vtcrt" />
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink">
+                {fastResponse}
+              </span>
+            </div>
           </div>
         </div>
       </div>

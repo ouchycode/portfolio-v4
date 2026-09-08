@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import Tilt from "react-parallax-tilt";
 import {
   getProjectTheme,
   getProjectIcon,
@@ -20,84 +19,95 @@ export function ProjectCard({ project, onCardClick }: ProjectCardProps) {
   const Icon = getProjectIcon(project.category);
 
   return (
-    <div className="project-animate shrink-0 w-[85vw] sm:w-90 md:w-100 lg:w-105">
-      <Tilt
-        tiltMaxAngleX={5}
-        tiltMaxAngleY={5}
-        perspective={1000}
-        scale={1.01}
-        transitionSpeed={2000}
-        gyroscope={true}
-        className="w-full h-full"
+    <div data-vt="pop" className="project-animate shrink-0 w-[85vw] sm:w-90 md:w-100 lg:w-105">
+      <Link
+        href={`/projects/${project.id}`}
+        onClick={onCardClick}
+        className="group rv-window relative w-full h-full flex flex-col cursor-pointer"
       >
-        <Link
-          href={`/projects/${project.id}`}
-          onClick={onCardClick}
-          className="group material-card relative w-full h-full flex flex-col p-5 sm:p-6 cursor-pointer rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40"
-        >
-          {/* Top accent line */}
-          <span
-            aria-hidden
-            className="absolute top-0 left-8 right-8 h-0.5 rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-            style={{ background: theme.accent }}
-          />
+        {/* Top accent line */}
+        <span
+          aria-hidden
+          className="absolute top-0 left-8 right-8 h-0.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          style={{ background: theme.accent }}
+        />
 
-          <div
-            className="relative w-full aspect-16/10 rounded-t-[1.75rem] rounded-b-xl overflow-hidden mb-5 bg-[#F8F9FA] dark:bg-[#202124]"
-            style={{ border: "1px solid rgba(218,220,224,0.5)" }}
-          >
-            {/* Icon badge */}
-            <div className="absolute top-3 left-3 z-20 p-2.5 bg-white dark:bg-[#303134] rounded-xl border border-[#DADCE0]/60 dark:border-[#5F6368]/40">
-              {/* eslint-disable-next-line */}
-              <Icon className={`w-4 h-4 ${theme.text}`} strokeWidth={2} />
-            </div>
+        {/* Window titlebar */}
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label select-none truncate">
+            {project.title}
+          </span>
+          <span className="flex items-center gap-1.5 ml-auto select-none">
+            <span className="rv-pixel text-[9px] uppercase tracking-wider text-white/70 hidden sm:inline">
+              {project.id}
+            </span>
+            <span className="rv-titlebar-btn text-[8px]">─</span>
+            <span className="rv-titlebar-btn text-[8px]">□</span>
+            <span className="rv-titlebar-btn text-[9px]">×</span>
+          </span>
+        </div>
 
+        <div className="rv-panel flex-1 flex flex-col p-4 sm:p-5">
+          {/* Screenshot area */}
+          <div className="rv-sunken relative w-full aspect-16/10 overflow-hidden mb-4 bg-vtcard">
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
               sizes="(max-width: 768px) 85vw, 420px"
             />
+            {/* Scanline overlay */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none mix-blend-multiply dark:mix-blend-screen"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(0deg, transparent 0 2px, rgba(8,8,13,0.16) 2px 3px)",
+              }}
+            />
+
+            {/* Icon badge */}
+            <div className="absolute top-2.5 left-2.5 z-20 rv-chip rv-pixel bg-paper/95 p-1.5 text-[10px]">
+              {/* eslint-disable-next-line */}
+              <Icon className={`w-4 h-4 ${theme.text}`} strokeWidth={2.2} />
+            </div>
 
             {/* Arrow badge on hover */}
-            <div className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white dark:bg-[#303134] flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-200 border border-[#DADCE0]/60 dark:border-[#5F6368]/40">
-              <ArrowUpRight
-                size={16}
-                className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]"
-                strokeWidth={2.5}
+            <div className="absolute top-2.5 right-2.5 z-20 rv-raised bg-chrome opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 grid place-items-center w-8 h-8 text-ink group-hover:bg-vtblue group-hover:text-white">
+              <ArrowUpRight size={15} strokeWidth={2.6} />
+            </div>
+
+            {/* Category chip */}
+            <div className="absolute bottom-2 left-2 z-20 rv-chip rv-pixel bg-paper/95 px-2 py-0.5 text-[9px] uppercase tracking-wider flex items-center gap-1.5">
+              <span
+                className="w-1.5 h-1.5"
+                style={{ background: theme.accent }}
               />
+              {project.category}
             </div>
           </div>
 
           {/* Text */}
           <div className="flex flex-col flex-1">
-            <div className="flex items-center justify-between mb-3">
-              <span
-                className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-[0.08em] uppercase ${theme.bg} ${theme.text}`}
-              >
-                {project.category}
-              </span>
-              <span className="text-[11px] font-semibold text-[#9AA0A6] dark:text-[#5F6368]">
-                {project.id}
-              </span>
-            </div>
-
-            <h3 className="font-bold text-lg md:text-xl leading-snug mb-2 text-[#202124] dark:text-[#E8EAED] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors">
+            <h3
+              className="font-bold text-lg md:text-xl leading-snug mb-2 text-ink group-hover:text-vtblue transition-colors"
+              style={{ fontFamily: "var(--vt-font-display)" }}
+            >
               {project.title}
             </h3>
 
-            <p className="text-sm text-[#5F6368] dark:text-[#9AA0A6] line-clamp-2 mb-4 leading-relaxed">
+            <p className="text-sm text-ink-soft line-clamp-2 mb-4 leading-relaxed">
               {project.description}
             </p>
 
             {/* Divider */}
             <div className="flex gap-1 mb-4">
               <div
-                className="h-0.5 w-6 rounded-full"
+                className="h-0.5 w-6 rv-sunken"
                 style={{ background: theme.accent }}
               />
-              <div className="h-0.5 flex-1 rounded-full bg-[#F1F3F4] dark:bg-[#3C4043]" />
+              <div className="h-0.5 flex-1 rv-sunken" />
             </div>
 
             {/* Tech chips */}
@@ -105,15 +115,15 @@ export function ProjectCard({ project, onCardClick }: ProjectCardProps) {
               {project.tech.map((tech: string, idx: number) => (
                 <span
                   key={idx}
-                  className="shrink-0 px-3 py-1 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 text-[11px] font-semibold text-[#5F6368] dark:text-[#9AA0A6]"
+                  className="shrink-0 rv-chip rv-pixel px-2.5 py-1 text-[10px] uppercase tracking-wide text-ink bg-vtcard"
                 >
                   {tech}
                 </span>
               ))}
             </div>
           </div>
-        </Link>
-      </Tilt>
+        </div>
+      </Link>
     </div>
   );
 }

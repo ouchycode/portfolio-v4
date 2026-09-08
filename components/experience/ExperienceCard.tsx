@@ -11,63 +11,69 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
-  const { icon: Icon, color, bgColor, accentColor } = getTypeStyle(exp.type);
+  const { icon: Icon, bgColor, accentColor } = getTypeStyle(exp.type);
 
   return (
     <Link
       href={`/experience/${exp.id}`}
       onClick={onCardClick}
-      className="group material-card relative flex-1 flex flex-col sm:flex-row sm:items-start gap-5 md:gap-7 p-5 sm:p-8 rounded-4xl bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 cursor-pointer"
+      className="group rv-window relative flex-1 flex flex-col"
     >
       {/* Left accent bar */}
       <span
         aria-hidden
-        className="absolute left-0 top-6 bottom-6 w-0.75 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        className="absolute left-0 top-0 bottom-0 w-1 z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
         style={{ background: accentColor }}
       />
 
-      {/* Icon */}
-      <div
-        className={`w-12 h-12 md:w-13 md:h-13 shrink-0 flex items-center justify-center rounded-2xl ${bgColor}`}
-      >
-        <Icon className={`w-5 h-5 md:w-6 md:h-6 ${color}`} strokeWidth={2} />
+      {/* Window titlebar */}
+      <div className="rv-titlebar">
+        <span className="rv-titlebar-label select-none truncate">
+          {exp.company}
+        </span>
+        <span className="ml-auto flex items-center gap-1 select-none">
+          <span className="rv-titlebar-btn text-[8px]">─</span>
+          <span className="rv-titlebar-btn text-[8px]">□</span>
+          <span className="rv-titlebar-btn text-[9px]">×</span>
+        </span>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 flex flex-col min-w-0 pt-0.5">
-        {/* Title + period */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-1.5">
-          <h3 className="text-base md:text-lg lg:text-xl font-bold text-[#202124] dark:text-[#E8EAED] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors leading-snug">
-            {exp.role}
-          </h3>
-          <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-[#F8F9FA] dark:bg-[#202124] border border-[#DADCE0] dark:border-[#5F6368] text-xs font-semibold text-[#5F6368] dark:text-[#9AA0A6] whitespace-nowrap">
-            {exp.period}
-          </span>
+      <div className="rv-panel flex-1 p-5 sm:p-7 flex flex-col">
+        {/* Icon + role */}
+        <div className="flex items-start gap-4 mb-4">
+          <div
+            className={`w-11 h-11 md:w-12 md:h-12 shrink-0 flex items-center justify-center rv-raised ${bgColor}`}
+          >
+            <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="rv-pixel text-[10px] uppercase tracking-[0.18em] text-inkmute">
+              {exp.period}
+            </p>
+            <h3
+              className="text-base md:text-lg font-bold text-ink leading-snug group-hover:text-vtblue transition-colors"
+              style={{ fontFamily: "var(--vt-font-display)" }}
+            >
+              {exp.role}
+            </h3>
+          </div>
         </div>
 
-        {/* Company + type badge */}
-        <div className="text-sm font-semibold text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] mb-3 flex items-center flex-wrap gap-2">
-          {exp.company}
+        {/* Type badge + divider */}
+        <div className="flex items-center gap-2.5 mb-3">
           <span
-            className="text-[#DADCE0] dark:text-[#5F6368] hidden sm:inline"
-            aria-hidden
-          >
-            •
-          </span>
-          <span className="block h-0.5 w-6 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] opacity-70" />
-          <span
-            className="px-2.5 py-0.5 rounded-full text-xs font-bold border"
+            className="rv-chip rv-pixel px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest"
             style={{
               color: accentColor,
-              borderColor: `${accentColor}30`,
-              background: `${accentColor}12`,
+              borderColor: "color-mix(in srgb, " + accentColor + " 45%, transparent)",
             }}
           >
             {exp.type}
           </span>
+          <span className="h-0.5 flex-1 rv-sunken" />
         </div>
 
-        <p className="text-sm md:text-base text-[#5F6368] dark:text-[#9AA0A6] leading-relaxed mb-4">
+        <p className="text-sm md:text-[15px] text-ink-soft leading-relaxed mb-4">
           {exp.description}
         </p>
 
@@ -76,17 +82,22 @@ export function ExperienceCard({ exp, onCardClick }: ExperienceCardProps) {
           {exp.skills.map((skill: string, idx: number) => (
             <span
               key={idx}
-              className="px-3 py-1 rounded-full border border-[#DADCE0] dark:border-[#5F6368] text-xs font-semibold text-[#5F6368] dark:text-[#E8EAED]"
+              className="rv-chip rv-pixel px-2.5 py-1 text-[10px] uppercase tracking-wide text-ink bg-vtcard"
             >
               {skill}
             </span>
           ))}
         </div>
-      </div>
 
-      {/* Arrow — desktop only */}
-      <div className="hidden sm:flex shrink-0 w-9 h-9 md:w-10 md:h-10 items-center justify-center rounded-full text-[#DADCE0] dark:text-[#5F6368] group-hover:bg-[#E8F0FE] dark:group-hover:bg-[var(--google-blue)]/15 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors duration-200 mt-0.5">
-        <ArrowUpRight size={18} strokeWidth={2} />
+        {/* Footer strip */}
+        <div className="mt-5 pt-3 border-t border-inkmute/40 flex items-center justify-between">
+          <span className="rv-pixel text-[10px] uppercase tracking-[0.2em] text-inkmute group-hover:text-vtpink transition-colors">
+            buka detail exe
+          </span>
+          <span className="grid place-items-center w-7 h-7 rv-raised bg-chrome text-ink group-hover:bg-vtblue group-hover:text-white transition-colors">
+            <ArrowUpRight size={15} strokeWidth={2.4} />
+          </span>
+        </div>
       </div>
     </Link>
   );

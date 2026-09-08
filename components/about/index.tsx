@@ -18,26 +18,17 @@ export default function About() {
     <section
       id="about"
       ref={container}
-      className="relative overflow-hidden px-6 md:px-12 lg:px-20 py-24"
+      className="relative overflow-hidden px-4 md:px-8 py-16 md:py-24"
     >
-      {/* Grid overlay — sama dengan Hero, satu layer CSS only */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(#5F6368 1px,transparent 1px),linear-gradient(90deg,#5F6368 1px,transparent 1px)",
-          backgroundSize: "48px 48px",
-          opacity: 0.03,
-        }}
-      />
-
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-10 md:gap-14">
         <AboutHeader label={t.nav.about} title={t.about.title} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch"
+          data-aos="zoom-in"
+        >
           {/* LEFT — photo */}
-          <div className="lg:col-span-5">
+          <div data-aos-delay="0" className="lg:col-span-5">
             <AboutPhoto />
           </div>
 

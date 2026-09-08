@@ -11,21 +11,19 @@ export const dictionaries = {
     hero: {
       greeting: "Halo, saya Kevin",
       role: "Developer.",
-      desc: "Membangun antarmuka web yang cepat, estetik, dan fungsional. Berfokus pada pengalaman pengguna yang intuitif serta penulisan kode yang bersih.",
+      desc: "Merancang dan membangun perangkat lunak end-to-end — antarmuka web yang cepat dan estetik, backend yang andal, otomatisasi DevOps, hingga penanganan kebutuhan IT dan infrastruktur.",
       btnProject: "Lihat Karya",
       btnResume: "Lihat Resume",
       locationLabel: "Lokasi",
       locationValue: "Tangerang, ID",
-      statusLabel: "Status",
-      statusValue: "Tersedia (Available)",
     },
     about: {
       title: "Mengenal Lebih Dekat",
-      tag: "Frontend Engineer",
+      tag: "Software Engineer",
       headline:
-        "Mahasiswa Universitas Yatsi Madani yang antusias menerjemahkan desain menjadi antarmuka web interaktif.",
+        "Mahasiswa Universitas Yatsi Madani yang antusias membangun perangkat lunak end-to-end — dari antarmuka web, backend, hingga infrastruktur dan otomatisasi.",
       description:
-        "Berbasis di Tangerang, keseharian saya berpusat pada ekosistem web modern. Selain menulis kode, saya gemar mengeksplorasi desain UI/UX, serta mengikuti tren dunia e-sports dan fotografi.",
+        "Berbasis di Tangerang, keseharian saya berpusat pada ekosistem web modern, perancangan otomatisasi DevOps, serta penanganan kebutuhan IT dan jaringan. Selain menulis kode, saya gemar mengeksplorasi desain UI/UX, serta mengikuti tren dunia e-sports dan fotografi.",
       eduLabel: "Pendidikan Terkini",
       eduValue: "S1 Ilmu Komputer - Universitas Yatsi Madani",
     },
@@ -35,6 +33,27 @@ export const dictionaries = {
       subtitle:
         "Jejak langkah akademis dan profesional dalam membangun fondasi keahlian pengembangan perangkat lunak.",
       list: [
+        {
+          id: "blueboox-intern",
+          type: "Internship",
+          role: "Magang IT Support & Programmer",
+          company: "PT. Adhy Mitra Permana (Blueboox)",
+          period: "2026 — Sekarang",
+          location: "Rumah Sakit Melati, Kota Tangerang, ID",
+          description:
+            "Magang sebagai IT Support sekaligus Programmer di PT. Adhy Mitra Permana (Blueboox) — perusahaan yang bergerak di bidang Rental LED Screen serta penyedia solusi IT berbasis web sejak 2013 — dan saat ini ditempatkan di Rumah Sakit Melati, Kota Tangerang.",
+          skills: [
+            "IT Support",
+            "Programming",
+            "Technical Support",
+            "System Maintenance",
+          ],
+          details: [
+            "Ditempatkan di Rumah Sakit Melati, Kota Tangerang untuk menangani dukungan teknis IT serta kebutuhan sistem dan aplikasi operasional.",
+            "Berperan sebagai programmer untuk mengembangkan dan memelihara situs web serta sistem berbasis web bagi perusahaan beserta kebutuhan klien.",
+            "Memberikan pendampingan teknis serta pemeliharaan perangkat dan sistem kepada pengguna harian.",
+          ],
+        },
         {
           id: "uym-study",
           type: "Education",
@@ -120,17 +139,19 @@ export const dictionaries = {
         {
           id: "dbs-2026",
           type: "Bootcamp",
-          role: "Full-Stack Dev Student",
+          role: "Distinction Graduate",
           company: "DBS Foundation Coding Camp",
-          period: "Feb '26 — Sekarang",
+          period: "Feb '26 — 2026",
           location: "Jakarta (Remote), ID",
           description:
-            "Program beasiswa intensif pengembangan Full-Stack Developer untuk menguasai ekosistem web development skala industri modern.",
+            "Program beasiswa intensif pengembangan Full-Stack Developer oleh DBS Foundation. Lulus dengan predikat Distinction dan berhasil menembus Top 10 Best Capstone Team.",
           skills: ["Next.js", "React", "Node.js", "Tailwind CSS"],
           details: [
             "Mempelajari arsitektur aplikasi web modern, manajemen state, dan skalabilitas sistem.",
             "Membangun proyek nyata yang menuntut penerapan clean code dan best practices industri.",
             "Mengembangkan soft skill esensial seperti produktivitas personal dan kolaborasi tim via Git.",
+            "Dinyatakan lulus dengan predikat Distinction Graduate.",
+            "Berhasil masuk Top 10 Best Capstone Team melalui proyek capstone tim.",
           ],
         },
         {
@@ -178,96 +199,6 @@ export const dictionaries = {
           link: "https://github.com/ouchycode/akad-meet-v2",
         },
         {
-          id: "02",
-          title: "NexLearn",
-          category: "EdTech",
-          image: "/projects/nex-learn.png",
-          description:
-            "Aplikasi e-learning interaktif dengan antarmuka modern yang memudahkan akses materi pendidikan secara daring.",
-          tech: ["React", "Next.js", "Tailwind CSS"],
-          features: [
-            "Katalog kelas & modul interaktif",
-            "Pelacakan (tracking) progres belajar",
-            "Desain responsif lintas perangkat",
-          ],
-          link: "https://github.com/ouchycode/nexlearn",
-        },
-        {
-          id: "03",
-          title: "KampusTix",
-          category: "Event Management",
-          image: "/projects/kampustix.png",
-          description:
-            "Sistem manajemen acara dan distribusi tiket digital yang dirancang khusus untuk memfasilitasi berbagai kegiatan di lingkungan kampus.",
-          tech: ["JavaScript", "React", "Tailwind CSS"],
-          features: [
-            "Registrasi peserta otomatis",
-            "Validasi tiket via QR Code",
-            "Dashboard manajemen panitia",
-          ],
-          link: "https://github.com/ouchycode/kampustix",
-        },
-        {
-          id: "04",
-          title: "KryoShop",
-          category: "E-Commerce",
-          image: "/projects/kryo-shop.png",
-          description:
-            "Aplikasi e-commerce modern yang menawarkan pengalaman berbelanja digital yang cepat, aman, dan interaktif.",
-          tech: ["Next.js", "TypeScript", "Tailwind CSS"],
-          features: [
-            "Katalog produk dinamis",
-            "Keranjang belanja (cart) real-time",
-            "Integrasi sistem pembayaran",
-          ],
-          link: "https://github.com/ouchycode/toko-online",
-        },
-        {
-          id: "05",
-          title: "Crafted by Kevin",
-          category: "Modern Portfolio",
-          image: "/projects/portfolio.png",
-          description:
-            "Website portofolio personal yang memadukan desain minimalis dengan animasi transisi yang modern untuk menampilkan hasil karya.",
-          tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
-          features: [
-            "Desain responsif & adaptif",
-            "Optimasi SEO & performa",
-            "Struktur konten yang dinamis",
-          ],
-          link: "https://craftedbykevin.vercel.app/",
-        },
-        {
-          id: "06",
-          title: "Movie App Ultimate",
-          category: "Web Application",
-          image: "/projects/movie-app.png",
-          description:
-            "Aplikasi katalog film yang terintegrasi dengan API eksternal untuk menyajikan informasi rating, sinopsis, dan tren film terkini.",
-          tech: ["React", "Tailwind CSS", "API Integration"],
-          features: [
-            "Pencarian judul real-time",
-            "Detail film & pemeran komprehensif",
-            "Katalog trending harian/mingguan",
-          ],
-          link: "https://movie-app-ultimate-hlye7zg8p-ouchycodes-projects.vercel.app/",
-        },
-        {
-          id: "07",
-          title: "Sistem Pembayaran Iuran",
-          category: "Mobile Application",
-          image: "/projects/iuran-warga.png",
-          description:
-            "Aplikasi berbasis web untuk mencatat dan memonitor transparansi pembayaran iuran warga pada kegiatan tingkat komunitas.",
-          tech: ["React", "Tailwind CSS", "Firebase"],
-          features: [
-            "Pelacakan status pembayaran real-time",
-            "Dashboard transparansi dana",
-            "Manajemen riwayat transaksi",
-          ],
-          link: "https://fkra-app.web.app/",
-        },
-        {
           id: "08",
           title: "Sistem Informasi Akademik",
           category: "Mobile Application",
@@ -283,6 +214,22 @@ export const dictionaries = {
             "Antarmuka yang modern dan mudah digunakan",
           ],
           link: "",
+        },
+        {
+          id: "09",
+          title: "Fair Price Finder",
+          category: "AI Web Platform",
+          image: "/projects/fairpricefinder.png",
+          description:
+            "Platform AI untuk membantu freelancer Indonesia menemukan estimasi harga jasa yang adil, objektif, dan berbasis data pasar nyata. Gratis, transparan, dan akurat — dikembangkan sebagai proyek capstone Coding Camp 2026 oleh DBS Foundation x Dicoding.",
+          tech: ["React", "Tailwind", "Vercel"],
+          features: [
+            "Estimasi harga jasa berbasis data pasar nyata",
+            "Pencarian & filter kategori jasa freelancer",
+            "Antarmuka cepat, responsif, dan mudah digunakan",
+            "Gratis, transparan, dan akurat",
+          ],
+          link: "https://fairpricefinder.vercel.app",
         },
       ],
     },
@@ -302,6 +249,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR DASAR CLOUD DAN GEN AI DI AWS.pdf",
+          desc: "Memahami konsep dasar cloud computing dan pemanfaatan Generative AI pada layanan AWS.",
         },
         {
           id: "02",
@@ -309,6 +257,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR DASAR PEMPROGRAMAN JAVASCRIPT.pdf",
+          desc: "Menguasai sintaks, tipe data, dan logika dasar JavaScript sebagai fondasi pengembangan web.",
         },
         {
           id: "03",
@@ -316,6 +265,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR MEMBUAT FRONT-END WEB UNTUK PEMULA.pdf",
+          desc: "Fondasi pengembangan antarmuka web menggunakan HTML, CSS, dan JavaScript.",
         },
         {
           id: "04",
@@ -323,6 +273,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_PROGRAMMING LOGIC 101.pdf",
+          desc: "Melatih cara berpikir logis dan algoritmik untuk menyelesaikan masalah pemrograman.",
         },
         {
           id: "05",
@@ -330,6 +281,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_INTRODUCTION TO FINANCIAL LITERACY.pdf",
+          desc: "Pemahaman dasar literasi keuangan untuk pengelolaan keuangan yang sehat.",
         },
         {
           id: "06",
@@ -337,6 +289,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR MEMBUAT APLIKASI WEB DENGAN REACT.pdf",
+          desc: "Membangun aplikasi web interaktif dengan React, mulai dari komponen hingga state management.",
         },
         {
           id: "07",
@@ -344,6 +297,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR FUNDAMENTAL APLIKASI WEB DENGAN REACT.pdf",
+          desc: "Memperkuat pemahaman fundamental React: hooks, lifecycle, dan best practices.",
         },
         {
           id: "08",
@@ -351,6 +305,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR BACK-END PEMULA DENGAN JAVASCRIPT.pdf",
+          desc: "Membangun RESTful API serta memahami konsep server, database, dan autentikasi.",
         },
         {
           id: "09",
@@ -358,6 +313,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2025",
           pdf: "/certs/DICODING_BELAJAR DASAR PEMPROGRAMAN WEB.pdf",
+          desc: "Pengenalan teknologi dasar web: HTML, CSS, dan dasar-dasar JavaScript.",
         },
         {
           id: "10",
@@ -365,6 +321,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2025",
           pdf: "/certs/DICODING_BELAJAR DASAR AI.pdf",
+          desc: "Memahami konsep dasar kecerdasan buatan, machine learning, dan penerapannya.",
         },
         {
           id: "11",
@@ -372,6 +329,7 @@ export const dictionaries = {
           issuer: "MathWorks",
           year: "2025",
           pdf: "/certs/CONTROL DESIGN ONRAMP WITH SIMULINK.pdf",
+          desc: "Pengenalan perancangan sistem kontrol menggunakan MATLAB Simulink.",
         },
         {
           id: "12",
@@ -379,6 +337,7 @@ export const dictionaries = {
           issuer: "MathWorks",
           year: "2025",
           pdf: "/certs/MATLAP ONRAMP.pdf",
+          desc: "Penguasaan dasar MATLAB untuk komputasi numerik, visualisasi data, dan penulisan skrip.",
         },
         {
           id: "13",
@@ -386,6 +345,31 @@ export const dictionaries = {
           issuer: "MathWorks",
           year: "2025",
           pdf: "/certs/SIMULINK ONRAMP.pdf",
+          desc: "Pengenalan pemodelan dan simulasi sistem dinamis menggunakan Simulink.",
+        },
+        {
+          id: "14",
+          title: "Coding Camp 2026 Certificate",
+          issuer: "DBS Foundation Coding Camp",
+          year: "2026",
+          pdf: "/certs/%5BCoding%20Camp%202026%5D%20Certificate%20-%20CFCC907D6Y1845.pdf",
+          desc: "Sertifikat kelulusan program Coding Camp 2026 oleh DBS Foundation sebagai bukti penyelesaian seluruh rangkaian pelatihan full-stack development.",
+        },
+        {
+          id: "15",
+          title: "Coding Camp 2026 Graduation Letter",
+          issuer: "DBS Foundation Coding Camp",
+          year: "2026",
+          pdf: "/certs/%5BCoding%20Camp%202026%5D%20Graduation%20Letter%20-%20CFCC907D6Y1845.pdf",
+          desc: "Surat kelulusan resmi Coding Camp 2026 yang menegaskan pencapaian predikat Distinction Graduate.",
+        },
+        {
+          id: "16",
+          title: "Coding Camp 2026 Best Capstone",
+          issuer: "DBS Foundation Coding Camp",
+          year: "2026",
+          pdf: "/certs/%5BCoding%20Camp%202026%5D%20Best%20Capstone%20-%20CFCC907D6Y1845.pdf",
+          desc: "Pengakuan atas proyek capstone tim yang berhasil masuk Top 10 Best Capstone Team.",
         },
       ],
     },
@@ -414,7 +398,7 @@ export const dictionaries = {
     cvModal: {
       badge: "Dokumen Resmi",
       title: "Curriculum Vitae",
-      subtitle: "Kevin Ardiansyah — Frontend Engineer",
+      subtitle: "Kevin Ardiansyah — Software Engineer",
       openFull: "Buka Tab Baru",
       download: "Unduh PDF",
     },
@@ -447,21 +431,19 @@ export const dictionaries = {
     hero: {
       greeting: "Hi, I'm Kevin",
       role: "Developer.",
-      desc: "Building fast, aesthetic, and functional web interfaces. Focused on delivering intuitive user experiences and writing clean code.",
+      desc: "Designing and building end-to-end software — fast, aesthetic web interfaces, reliable backends, DevOps automation, and hands-on IT & infrastructure support.",
       btnProject: "View Works",
       btnResume: "View Resume",
       locationLabel: "Location",
       locationValue: "Tangerang, ID",
-      statusLabel: "Status",
-      statusValue: "Available to Work",
     },
     about: {
       title: "Get to Know Me",
-      tag: "Frontend Engineer",
+      tag: "Software Engineer",
       headline:
-        "Undergraduate student at Universitas Yatsi Madani, enthusiastic about translating designs into interactive web interfaces.",
+        "Undergraduate student at Universitas Yatsi Madani, enthusiastic about building end-to-end software — from web interfaces and backends to infrastructure and automation.",
       description:
-        "Based in Tangerang, my daily routine revolves around the modern web ecosystem. Besides writing code, I enjoy exploring UI/UX design and keeping up with the latest trends in e-sports and photography.",
+        "Based in Tangerang, my daily routine revolves around the modern web ecosystem, DevOps automation, and IT & networking needs. Besides writing code, I enjoy exploring UI/UX design and keeping up with the latest trends in e-sports and photography.",
       eduLabel: "Current Education",
       eduValue: "B.Sc. in Computer Science - Universitas Yatsi Madani",
     },
@@ -471,6 +453,27 @@ export const dictionaries = {
       subtitle:
         "Academic and professional footsteps in building a solid foundation of software development expertise.",
       list: [
+        {
+          id: "blueboox-intern",
+          type: "Internship",
+          role: "IT Support & Programmer Intern",
+          company: "PT. Adhy Mitra Permana (Blueboox)",
+          period: "2026 — Present",
+          location: "Melati Hospital, Tangerang City, ID",
+          description:
+            "Interning as both IT Support and Programmer at PT. Adhy Mitra Permana (Blueboox) — a company specializing in LED screen rental and web-based IT solutions since 2013 — currently assigned to Melati Hospital, Tangerang City.",
+          skills: [
+            "IT Support",
+            "Programming",
+            "Technical Support",
+            "System Maintenance",
+          ],
+          details: [
+            "Assigned to Melati Hospital, Tangerang City, handling technical IT support and operational system & application needs.",
+            "Works as a programmer, developing and maintaining websites and web-based systems for the company and its clients' needs.",
+            "Provides technical assistance and system/device maintenance to daily users.",
+          ],
+        },
         {
           id: "uym-study",
           type: "Education",
@@ -556,17 +559,19 @@ export const dictionaries = {
         {
           id: "dbs-2026",
           type: "Bootcamp",
-          role: "Full-Stack Dev Student",
+          role: "Distinction Graduate",
           company: "DBS Foundation Coding Camp",
-          period: "Feb '26 — Present",
+          period: "Feb '26 — 2026",
           location: "Jakarta (Remote), ID",
           description:
-            "An intensive Full-Stack Developer scholarship program aimed at mastering the modern, industrial-scale web development ecosystem.",
+            "An intensive Full-Stack Developer scholarship program by DBS Foundation. Graduated with Distinction and made it into the Top 10 Best Capstone Team.",
           skills: ["Next.js", "React", "Node.js", "Tailwind CSS"],
           details: [
             "Studied modern web application architecture, state management, and system scalability.",
             "Built real-world projects emphasizing clean code application and industry best practices.",
             "Developed essential soft skills including personal productivity and team collaboration via Git.",
+            "Officially graduated with Distinction as a Distinction Graduate.",
+            "Earned a place in the Top 10 Best Capstone Team through the team capstone project.",
           ],
         },
         {
@@ -614,96 +619,6 @@ export const dictionaries = {
           link: "https://github.com/ouchycode/akad-meet-v2",
         },
         {
-          id: "02",
-          title: "NexLearn",
-          category: "EdTech",
-          image: "/projects/nex-learn.png",
-          description:
-            "An interactive digital e-learning application featuring a modern interface for easy access to educational materials.",
-          tech: ["React", "Next.js", "Tailwind CSS"],
-          features: [
-            "Interactive class & module catalog",
-            "Learning progress tracking",
-            "Cross-device responsive design",
-          ],
-          link: "https://github.com/ouchycode/nexlearn",
-        },
-        {
-          id: "03",
-          title: "KampusTix",
-          category: "Event Management",
-          image: "/projects/kampustix.png",
-          description:
-            "A digital event management and ticket distribution system specifically tailored to facilitate campus activities.",
-          tech: ["JavaScript", "React", "Tailwind CSS"],
-          features: [
-            "Automated participant registration",
-            "Ticket validation via QR Code",
-            "Committee management dashboard",
-          ],
-          link: "https://github.com/ouchycode/kampustix",
-        },
-        {
-          id: "04",
-          title: "KryoShop",
-          category: "E-Commerce",
-          image: "/projects/kryo-shop.png",
-          description:
-            "A modern e-commerce application offering a fast, secure, and interactive digital shopping experience.",
-          tech: ["Next.js", "TypeScript", "Tailwind CSS"],
-          features: [
-            "Dynamic product catalog",
-            "Real-time shopping cart",
-            "Payment gateway integration",
-          ],
-          link: "https://github.com/ouchycode/toko-online",
-        },
-        {
-          id: "05",
-          title: "Crafted by Kevin",
-          category: "Modern Portfolio",
-          image: "/projects/portfolio.png",
-          description:
-            "A personal interactive portfolio website combining minimalist design with modern transition animations to showcase works.",
-          tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
-          features: [
-            "Adaptive & responsive design",
-            "SEO & performance optimization",
-            "Dynamic content structure",
-          ],
-          link: "https://craftedbykevin.vercel.app/",
-        },
-        {
-          id: "06",
-          title: "Movie App Ultimate",
-          category: "Web Application",
-          image: "/projects/movie-app.png",
-          description:
-            "A movie catalog application integrated with an external API to present ratings, synopses, and the latest film trends.",
-          tech: ["React", "Tailwind CSS", "API Integration"],
-          features: [
-            "Real-time title search",
-            "Comprehensive movie & cast details",
-            "Daily/weekly trending catalog",
-          ],
-          link: "https://movie-app-ultimate-hlye7zg8p-ouchycodes-projects.vercel.app/",
-        },
-        {
-          id: "07",
-          title: "Dues Payment System",
-          category: "Mobile Application",
-          image: "/projects/iuran-warga.png",
-          description:
-            "A web-based application designed to record and monitor the transparency of citizen dues payments for community activities.",
-          tech: ["React", "Tailwind CSS", "Firebase"],
-          features: [
-            "Real-time payment status tracking",
-            "Fund transparency dashboard",
-            "Transaction history management",
-          ],
-          link: "https://fkra-app.web.app/",
-        },
-        {
           id: "08",
           title: "Academic Information System",
           category: "Mobile Application",
@@ -719,6 +634,22 @@ export const dictionaries = {
             "Clean and intuitive mobile user interface",
           ],
           link: "",
+        },
+        {
+          id: "09",
+          title: "Fair Price Finder",
+          category: "AI Web Platform",
+          image: "/projects/fairpricefinder.png",
+          description:
+            "An AI-powered platform that helps Indonesian freelancers find fair, objective service price estimates based on real market data. Free, transparent, and accurate — developed as a capstone project for the 2026 Coding Camp by DBS Foundation x Dicoding.",
+          tech: ["React", "Tailwind", "Vercel"],
+          features: [
+            "Data-driven freelance service price estimation",
+            "Search & filter freelance service categories",
+            "Fast, responsive, and easy-to-use interface",
+            "Free, transparent, and accurate",
+          ],
+          link: "https://fairpricefinder.vercel.app",
         },
       ],
     },
@@ -738,6 +669,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR DASAR CLOUD DAN GEN AI DI AWS.pdf",
+          desc: "Understanding cloud computing fundamentals and how Generative AI is leveraged across AWS services.",
         },
         {
           id: "02",
@@ -745,6 +677,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR DASAR PEMPROGRAMAN JAVASCRIPT.pdf",
+          desc: "Mastering JavaScript syntax, data types, and core logic as the foundation of web development.",
         },
         {
           id: "03",
@@ -752,6 +685,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR MEMBUAT FRONT-END WEB UNTUK PEMULA.pdf",
+          desc: "Foundations of front-end web development using HTML, CSS, and JavaScript.",
         },
         {
           id: "04",
@@ -759,6 +693,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_PROGRAMMING LOGIC 101.pdf",
+          desc: "Training algorithmic and logical thinking to solve programming problems.",
         },
         {
           id: "05",
@@ -766,6 +701,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_INTRODUCTION TO FINANCIAL LITERACY.pdf",
+          desc: "Essential financial literacy for healthy personal finance management.",
         },
         {
           id: "06",
@@ -773,6 +709,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR MEMBUAT APLIKASI WEB DENGAN REACT.pdf",
+          desc: "Building interactive web apps with React, from components to state management.",
         },
         {
           id: "07",
@@ -780,6 +717,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR FUNDAMENTAL APLIKASI WEB DENGAN REACT.pdf",
+          desc: "Strengthening React fundamentals: hooks, lifecycle, and best practices.",
         },
         {
           id: "08",
@@ -787,6 +725,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2026",
           pdf: "/certs/DICODING_BELAJAR BACK-END PEMULA DENGAN JAVASCRIPT.pdf",
+          desc: "Building RESTful APIs and understanding servers, databases, and authentication.",
         },
         {
           id: "09",
@@ -794,6 +733,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2025",
           pdf: "/certs/DICODING_BELAJAR DASAR PEMPROGRAMAN WEB.pdf",
+          desc: "Introduction to core web technologies: HTML, CSS, and the basics of JavaScript.",
         },
         {
           id: "10",
@@ -801,6 +741,7 @@ export const dictionaries = {
           issuer: "Dicoding Indonesia",
           year: "2025",
           pdf: "/certs/DICODING_BELAJAR DASAR AI.pdf",
+          desc: "Understanding AI fundamentals, machine learning, and its real-world applications.",
         },
         {
           id: "11",
@@ -808,6 +749,7 @@ export const dictionaries = {
           issuer: "MathWorks",
           year: "2025",
           pdf: "/certs/CONTROL DESIGN ONRAMP WITH SIMULINK.pdf",
+          desc: "Introduction to control system design using MATLAB Simulink.",
         },
         {
           id: "12",
@@ -815,6 +757,7 @@ export const dictionaries = {
           issuer: "MathWorks",
           year: "2025",
           pdf: "/certs/MATLAP ONRAMP.pdf",
+          desc: "Mastering MATLAB basics for numerical computing, data visualization, and scripting.",
         },
         {
           id: "13",
@@ -822,6 +765,31 @@ export const dictionaries = {
           issuer: "MathWorks",
           year: "2025",
           pdf: "/certs/SIMULINK ONRAMP.pdf",
+          desc: "Introduction to modeling and simulating dynamic systems with Simulink.",
+        },
+        {
+          id: "14",
+          title: "Coding Camp 2026 Certificate",
+          issuer: "DBS Foundation Coding Camp",
+          year: "2026",
+          pdf: "/certs/%5BCoding%20Camp%202026%5D%20Certificate%20-%20CFCC907D6Y1845.pdf",
+          desc: "Certificate of completion for the Coding Camp 2026 program by DBS Foundation, marking the completion of the full-stack development training.",
+        },
+        {
+          id: "15",
+          title: "Coding Camp 2026 Graduation Letter",
+          issuer: "DBS Foundation Coding Camp",
+          year: "2026",
+          pdf: "/certs/%5BCoding%20Camp%202026%5D%20Graduation%20Letter%20-%20CFCC907D6Y1845.pdf",
+          desc: "Official graduation letter for Coding Camp 2026 confirming the Distinction Graduate achievement.",
+        },
+        {
+          id: "16",
+          title: "Coding Camp 2026 Best Capstone",
+          issuer: "DBS Foundation Coding Camp",
+          year: "2026",
+          pdf: "/certs/%5BCoding%20Camp%202026%5D%20Best%20Capstone%20-%20CFCC907D6Y1845.pdf",
+          desc: "Recognition for the team capstone project that made it into the Top 10 Best Capstone Team.",
         },
       ],
     },
@@ -849,7 +817,7 @@ export const dictionaries = {
     cvModal: {
       badge: "Official Document",
       title: "Curriculum Vitae",
-      subtitle: "Kevin Ardiansyah — Frontend Engineer",
+      subtitle: "Kevin Ardiansyah — Software Engineer",
       openFull: "Open in New Tab",
       download: "Download PDF",
     },

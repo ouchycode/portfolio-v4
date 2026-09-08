@@ -53,21 +53,9 @@ export default function TechAndCerts() {
     <section
       id="tech"
       ref={container}
-      className="relative overflow-hidden px-0 py-24 md:py-32"
+      className="relative overflow-hidden px-0 py-16 md:py-24"
     >
-      {/* Grid overlay */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(#5F6368 1px,transparent 1px),linear-gradient(90deg,#5F6368 1px,transparent 1px)",
-          backgroundSize: "48px 48px",
-          opacity: 0.03,
-        }}
-      />
-
-      <div className="relative z-10 w-full flex flex-col gap-24 md:gap-32">
+      <div className="relative z-10 w-full flex flex-col gap-16 md:gap-24">
         <TechStack
           badgeStack={t.tech.badgeStack}
           titleStack={t.tech.titleStack}

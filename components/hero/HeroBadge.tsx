@@ -1,23 +1,20 @@
-import { Sparkles } from "lucide-react";
-
 interface HeroBadgeProps {
   label: string;
 }
 
 export function HeroBadge({ label }: HeroBadgeProps) {
   return (
-    <div
-      data-aos="zoom-in-down"
-      data-aos-delay="0"
-      className="inline-flex items-center gap-2 px-4 py-2 mb-8 md:mb-10 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm"
-    >
-      <Sparkles
-        size={14}
-        className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)] shrink-0"
+    <div className="rv-chip rv-pixel inline-flex items-center gap-2 px-3 py-1.5 uppercase tracking-widest text-[11px] text-vtcrt font-bold mb-6 md:mb-8">
+      <span
+        className="shrink-0 vt-bubble"
+        style={{
+          width: 7,
+          height: 7,
+          borderRadius: "50%",
+          background: "var(--vt-teal)",
+        }}
       />
-      <span className="text-[11px] md:text-xs font-semibold tracking-widest uppercase text-[#5F6368] dark:text-[#9AA0A6]">
-        {label}
-      </span>
+      {label}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { User } from "lucide-react";
+import { SectionWindow } from "@/components/ui/SectionWindow";
 
 interface AboutHeaderProps {
   label: string;
@@ -7,26 +8,11 @@ interface AboutHeaderProps {
 
 export function AboutHeader({ label, title }: AboutHeaderProps) {
   return (
-    <div className="flex flex-col gap-3 md:gap-4 mb-2 md:mb-4">
-      <div
-        data-aos="fade-down"
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
-      >
-        <User size={14} className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
-        <span className="text-xs font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
-          {label}
-        </span>
-      </div>
-
-      <div data-aos="fade-right" data-aos-delay="100" className="flex items-end gap-4">
-        <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
-          {title}
-        </h2>
-        <div className="hidden md:flex items-center gap-2 mb-3 flex-1">
-          <span className="w-2 h-2 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0" />
-          <div className="h-px flex-1 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
-        </div>
-      </div>
-    </div>
+    <SectionWindow
+      icon={<User size={14} strokeWidth={2.4} />}
+      label={label}
+      title={title}
+      file="about.txt — Notepad"
+    />
   );
 }

@@ -1,81 +1,88 @@
-import { MapPin, Laptop, Zap, Palette } from "lucide-react";
-import { InfoCard } from "./InfoCard";
+import type { CSSProperties } from "react";
+import { MapPin, FolderOpen, FileText } from "lucide-react";
 
 interface HeroCardsProps {
   locationLabel: string;
   locationValue: string;
-  statusLabel: string;
-  statusValue: string;
 }
 
-export function HeroCards({
-  locationLabel,
-  locationValue,
-  statusLabel,
-  statusValue,
-}: HeroCardsProps) {
+export function HeroCards({ locationLabel, locationValue }: HeroCardsProps) {
   return (
-    <div className="relative w-full max-w-sm lg:w-100 flex flex-col gap-3 md:gap-4 shrink-0 mt-8 lg:mt-0 px-4 sm:px-0">
-      {/* Decorative icons */}
+    <div className="relative w-full max-w-md mx-auto flex flex-col gap-4 shrink-0 mt-8 lg:mt-0">
+      {/* Desktop shortcuts row */}
       <div
-        data-aos="zoom-in"
-        data-aos-delay="150"
-        className="absolute -top-10 -left-4 sm:-top-14 sm:-left-10 z-20 pointer-events-none select-none hidden sm:block"
+        data-vt="pop"
+        style={{ "--vt-delay": "120ms" } as CSSProperties}
+        className="rv-panel p-3 flex items-center justify-center gap-5"
       >
-        <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] -rotate-12">
-          <Laptop className="w-5 h-5 text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
-        </div>
-      </div>
-
-      <div
-        data-aos="zoom-in"
-        data-aos-delay="400"
-        className="absolute -bottom-6 -right-2 sm:-bottom-10 sm:-right-8 z-20 pointer-events-none select-none hidden sm:block"
-      >
-        <div className="p-3 bg-white dark:bg-[#303134] rounded-full shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] rotate-12">
-          <Zap className="w-5 h-5 text-[#FABB05] fill-[#FABB05]/25" />
-        </div>
-      </div>
-
-      <div
-        data-aos="zoom-in"
-        data-aos-delay="300"
-        className="absolute top-[38%] -right-4 sm:-right-12 z-0 hidden sm:block pointer-events-none select-none"
-      >
-        <div className="p-3 bg-white dark:bg-[#303134] rounded-2xl shadow-sm border border-[#F1F3F4] dark:border-[#5F6368] rotate-12">
-          <Palette className="w-4 h-4 text-[#EA4335] dark:text-[#F28B82]" />
-        </div>
-      </div>
-
-      {/* Card 1 — Location */}
-      <div data-aos="fade-left" data-aos-delay="100">
-        <InfoCard
-          icon={<MapPin size={20} strokeWidth={2} />}
-          iconBg="bg-[#FCE8E6] dark:bg-[#F28B82]/10"
-          iconColor="text-[#EA4335] dark:text-[#F28B82]"
-          accentColor="from-[#EA4335]/30"
-          label={locationLabel}
-          value={locationValue}
-          className="rounded-tl-[2.25rem] rounded-tr-2xl rounded-bl-2xl rounded-br-[2.25rem]"
-        />
-      </div>
-
-      {/* Card 2 — Status */}
-      <div data-aos="fade-left" data-aos-delay="200">
-        <InfoCard
-          icon={
-            <div className="relative flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-50" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-[#34A853]" />
+        {[
+          { icon: FolderOpen, label: "projects", color: "text-vtblue" },
+          { icon: FileText, label: "resume.exe", color: "text-vtpink" },
+          { icon: MapPin, label: "tangerang", color: "text-vtcrt" },
+        ].map((s) => (
+          <div
+            key={s.label}
+            title={s.label}
+            className="flex flex-col items-center gap-1.5 w-16 group cursor-pointer"
+          >
+            <div className="rv-chip w-10 h-10 flex items-center justify-center group-hover:bg-vtblue group-hover:text-white transition-colors">
+              <s.icon size={18} className={s.color} strokeWidth={2} />
             </div>
-          }
-          iconBg="bg-[#E6F4EA] dark:bg-[#81C995]/10"
-          iconColor="text-[#34A853] dark:text-[#81C995]"
-          accentColor="from-[#34A853]/30"
-          label={statusLabel}
-          value={statusValue}
-          className="rounded-tl-2xl rounded-tr-[2.25rem] rounded-bl-[2.25rem] rounded-br-2xl"
-        />
+            <span className="rv-pixel text-[9px] uppercase tracking-wider text-inkmute group-hover:text-ink transition-colors truncate w-full text-center">
+              {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* CRT monitor window */}
+      <div
+        data-vt="open"
+        style={{ "--vt-delay": "200ms" } as CSSProperties}
+        className="rv-window"
+      >
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label">MONITOR.exe</span>
+          <span className="ml-auto flex items-center gap-1">
+            <span className="rv-titlebar-btn text-[8px]">─</span>
+            <span className="rv-titlebar-btn text-[8px]">□</span>
+            <span className="rv-titlebar-btn text-[9px]">×</span>
+          </span>
+        </div>
+
+        <div className="rv-crt p-4 font-mono text-[12px] leading-relaxed">
+          <p
+            className="rv-crt-glow vt-rise"
+            style={{ "--vt-delay": "300ms" } as CSSProperties}
+          >
+            C:\Users\Kevin&gt;<span className="vt-blink">▮</span>
+          </p>
+          <p
+            className="rv-crt-glow vt-rise"
+            style={{ "--vt-delay": "420ms" } as CSSProperties}
+          >
+            &gt; mount profile.dat
+          </p>
+          <p
+            className="text-vtcrt/70 vt-rise"
+            style={{ "--vt-delay": "540ms" } as CSSProperties}
+          >
+            &gt; OK
+          </p>
+          <div className="my-2 h-px bg-vtcrt/30" />
+          <div
+            className="flex items-center gap-3 py-1 vt-rise"
+            style={{ "--vt-delay": "660ms" } as CSSProperties}
+          >
+            <MapPin size={14} className="text-vtcrt/70 shrink-0" />
+            <div>
+              <p className="rv-pixel text-[9px] uppercase tracking-widest text-vtcrt/60">
+                {locationLabel}
+              </p>
+              <p className="text-vtcrt font-bold">{locationValue}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

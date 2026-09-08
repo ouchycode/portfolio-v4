@@ -18,65 +18,74 @@ export function ProjectsHeader({
   onNavLeave,
 }: ProjectsHeaderProps) {
   return (
-    <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col gap-3 md:gap-4 px-6 md:px-12 lg:px-20">
+    <div className="relative z-10 max-w-7xl mx-auto w-full px-4 md:px-8">
       <div
-        data-aos="zoom-in-right"
-        className="inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] shadow-sm w-fit"
+        data-vt="open"
+        className="rv-window lg:mr-auto lg:max-w-3xl"
       >
-        <FolderGit2 size={14} className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]" />
-        <span className="text-xs font-bold tracking-[0.12em] uppercase text-[#5F6368] dark:text-[#9AA0A6]">
-          {badge}
-        </span>
-      </div>
-
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="max-w-2xl">
-          <div data-aos="fade-up" data-aos-delay="100" className="flex items-end gap-4">
-            <h2 className="font-black tracking-[-0.03em] text-4xl md:text-5xl lg:text-6xl text-[#202124] dark:text-white leading-[1.05]">
-              {title}
-            </h2>
-            <div className="hidden md:flex items-center gap-2 mb-3 flex-1">
-              <span className="w-2 h-2 rounded-full bg-[var(--google-blue)] dark:bg-[var(--google-blue-dark)] shrink-0" />
-              <div className="h-px w-16 bg-linear-to-r from-[#DADCE0] to-transparent dark:from-[#5F6368]/50" />
-            </div>
-          </div>
-          <p
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="text-sm md:text-base lg:text-lg text-[#5F6368] dark:text-[#9AA0A6] mt-2 leading-relaxed"
-          >
-            {subtitle}
-          </p>
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label select-none">
+            projects.exe — File Explorer
+          </span>
+          <span className="ml-auto flex items-center gap-1 select-none">
+            <span className="rv-titlebar-btn text-[8px]">─</span>
+            <span className="rv-titlebar-btn text-[8px]">□</span>
+            <span className="rv-titlebar-btn text-[9px]">×</span>
+          </span>
         </div>
 
-        {/* Nav arrows — desktop only */}
-        <div
-          data-aos="fade-left"
-          data-aos-delay="300"
-          className="hidden md:flex gap-2.5 shrink-0 pb-1"
-        >
-          {(["left", "right"] as const).map((dir) => (
-            <button
-              key={dir}
-              onClick={() => onSlide(dir)}
-              onMouseEnter={onNavEnter}
-              onMouseLeave={onNavLeave}
-              className="group flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full border border-[#DADCE0] dark:border-[#5F6368] bg-white dark:bg-[#303134] hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/15 hover:border-[var(--google-blue)]/30 transition-colors duration-200 active:scale-95"
-              style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
+        <div className="rv-panel p-5 sm:p-7 md:p-8 relative">
+          <div className="flex flex-col gap-2.5 lg:pr-44">
+            <span
+              data-aos="fade-right"
+              data-aos-delay="100"
+              className="rv-pixel inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-vtpink"
             >
-              {dir === "left" ? (
-                <ArrowLeft
-                  size={18}
-                  className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors"
-                />
-              ) : (
-                <ArrowRight
-                  size={18}
-                  className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors"
-                />
-              )}
-            </button>
-          ))}
+              <FolderGit2 size={14} strokeWidth={2.4} />
+              {badge}
+            </span>
+
+            <h2
+              data-aos="fade-right"
+              data-aos-delay="150"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.05] tracking-tight text-ink"
+              style={{ fontFamily: "var(--vt-font-display)" }}
+            >
+              {title}
+            </h2>
+
+            <p
+              data-aos="fade-right"
+              data-aos-delay="250"
+              className="text-sm md:text-base text-ink-soft mt-1 max-w-[52ch] leading-relaxed"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Nav arrows — desktop only */}
+          <div
+            data-aos="fade-left"
+            data-aos-delay="300"
+            className="hidden lg:flex gap-2.5 shrink-0 absolute right-7 md:right-8 top-1/2 -translate-y-1/2"
+          >
+            {(["left", "right"] as const).map((dir) => (
+              <button
+                key={dir}
+                onClick={() => onSlide(dir)}
+                onMouseEnter={onNavEnter}
+                onMouseLeave={onNavLeave}
+                aria-label={dir === "left" ? "Previous" : "Next"}
+                className="rv-btn rv-pixel flex items-center justify-center w-11 h-11"
+              >
+                {dir === "left" ? (
+                  <ArrowLeft size={18} className="relative z-10" strokeWidth={2.4} />
+                ) : (
+                  <ArrowRight size={18} className="relative z-10" strokeWidth={2.4} />
+                )}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

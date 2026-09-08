@@ -9,40 +9,41 @@ import {
   Code,
   Users,
   CheckCircle2,
+  MonitorUp,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useLoading } from "@/context/LoadingContext";
 import { ExperienceData } from "@/types";
 
-const GOOGLE_COLORS = ["#EA4335", "#FABB05", "#34A853", "#1A73E8"];
+const RETRO_COLORS = ["#FF3E9A", "#FFD400", "#22C7A9", "#3B2FD6"];
 
-const GOOGLE_THEME: Record<
+const RETRO_THEME: Record<
   string,
   { bg: string; text: string; icon: React.ElementType; accent: string }
 > = {
   Education: {
-    bg: "bg-[#E8F0FE] dark:bg-[var(--google-blue)]/15",
-    text: "text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]",
+    bg: "bg-[#E2DDFF] dark:bg-vtblue/20",
+    text: "text-vtblue",
     icon: GraduationCap,
-    accent: "#1A73E8",
+    accent: "#3B2FD6",
   },
   Bootcamp: {
-    bg: "bg-[#E6F4EA] dark:bg-[#81C995]/15",
-    text: "text-[#137333] dark:text-[#81C995]",
+    bg: "bg-[#DCF7F2] dark:bg-vtteal/20",
+    text: "text-vtteal",
     icon: Code,
-    accent: "#34A853",
+    accent: "#22C7A9",
   },
   Internship: {
-    bg: "bg-[#FEF7E0] dark:bg-[#FDE293]/15",
-    text: "text-[#B06000] dark:text-[#FDE293]",
+    bg: "bg-[#FFE0EF] dark:bg-vtpink/20",
+    text: "text-vtpink",
     icon: Briefcase,
-    accent: "#FABB05",
+    accent: "#FF3E9A",
   },
   Organization: {
-    bg: "bg-[#FCE8E6] dark:bg-[#F28B82]/15",
-    text: "text-[#C5221F] dark:text-[#F28B82]",
+    bg: "bg-[#FFF6D6] dark:bg-vtamber/20",
+    text: "text-vtamber",
     icon: Users,
-    accent: "#EA4335",
+    accent: "#FFD400",
   },
 };
 
@@ -62,7 +63,7 @@ function ColorBar({
 }) {
   return (
     <div className="flex w-full shrink-0" style={{ height }}>
-      {GOOGLE_COLORS.map((c) => (
+      {RETRO_COLORS.map((c) => (
         <div
           key={c}
           className="flex-1 h-full"
@@ -77,10 +78,10 @@ function SectionLabel({ label, accent }: { label: string; accent: string }) {
   return (
     <div className="flex items-center gap-2.5">
       <span
-        className="w-2 h-2 rounded-full shrink-0"
+        className="w-2.5 h-2.5 rv-sunken shrink-0"
         style={{ background: accent }}
       />
-      <h3 className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5F6368] dark:text-[#9AA0A6]">
+      <h3 className="rv-pixel text-[11px] font-bold uppercase tracking-[0.18em] text-inkmute">
         {label}
       </h3>
     </div>
@@ -98,55 +99,60 @@ export default function ExperienceDetailPage() {
   if (!data) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="animate-pulse text-[#5F6368] dark:text-[#9AA0A6] font-bold tracking-widest uppercase text-sm">
+        <p className="rv-pixel animate-pulse text-inkmute font-bold tracking-widest uppercase text-sm">
           Memuat Data...
         </p>
       </div>
     );
   }
 
-  const theme = GOOGLE_THEME[data.type] ?? GOOGLE_THEME["Education"];
+  const theme = RETRO_THEME[data.type] ?? RETRO_THEME["Education"];
   const Icon = theme.icon;
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center px-4 md:px-12 py-12 pt-28 md:pt-36 overflow-hidden">
-      {/* Grid overlay */}
+    <main className="relative min-h-screen flex flex-col items-center px-4 md:px-12 py-12 pt-28 md:pt-32 overflow-hidden">
+      {/* Retro grid overlay */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0"
         style={{
           backgroundImage:
-            "linear-gradient(#5F6368 1px,transparent 1px),linear-gradient(90deg,#5F6368 1px,transparent 1px)",
-          backgroundSize: "48px 48px",
-          opacity: 0.03,
+            "linear-gradient(var(--vt-violet) 1px,transparent 1px),linear-gradient(90deg,var(--vt-violet) 1px,transparent 1px)",
+          backgroundSize: "42px 42px",
+          opacity: 0.05,
+          maskImage:
+            "radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%)",
         }}
       />
 
-      {/* Main card */}
-      <div
-        className="relative z-10 w-full max-w-4xl flex flex-col rounded-4xl md:rounded-[2.5rem] bg-white dark:bg-[#303134] border border-[#F1F3F4] dark:border-[#5F6368]/40 overflow-hidden"
-        style={{
-          boxShadow:
-            "0 1px 3px rgba(60,64,67,.08), 0 8px 32px rgba(60,64,67,.10)",
-        }}
-      >
+      {/* Main window */}
+      <div data-aos="zoom-in" className="relative z-10 w-full max-w-4xl rv-window flex flex-col">
+        {/* Titlebar */}
+        <div className="rv-titlebar">
+          <span className="rv-titlebar-label select-none truncate">
+            {data.role} — {data.company}
+          </span>
+          <span className="ml-auto flex items-center gap-1 select-none">
+            <span className="rv-titlebar-btn text-[8px]">─</span>
+            <span className="rv-titlebar-btn text-[8px]">□</span>
+            <span className="rv-titlebar-btn text-[9px]">×</span>
+          </span>
+        </div>
+
         <ColorBar />
 
         {/* Header */}
-        <div className="relative border-b border-[#DADCE0]/60 dark:border-[#5F6368]/40 p-6 md:p-10 pr-6 md:pr-20 flex flex-col gap-5">
+        <div className="relative border-b border-inkmute/40 p-6 md:p-9 pr-6 md:pr-24 flex flex-col gap-5 bg-paper">
           {/* Back button */}
           <Link
             href="/#experience"
             onClick={() => startLoading(800)}
-            className="absolute top-5 right-5 md:top-9 md:right-9 group flex items-center gap-2 px-4 py-2 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] hover:bg-[#E8F0FE] dark:hover:bg-[var(--google-blue)]/12 hover:border-[var(--google-blue)]/30 active:scale-95 transition-colors duration-200 z-10"
-            style={{ boxShadow: "0 1px 3px rgba(60,64,67,.08)" }}
+            className="absolute top-5 right-5 md:top-7 md:right-7 group rv-btn rv-pixel flex items-center gap-2 px-4 h-9 text-[11px] font-bold uppercase tracking-wider z-10"
           >
-            <ArrowLeft
-              size={16}
-              strokeWidth={2.5}
-              className="text-[#5F6368] dark:text-[#9AA0A6] group-hover:-translate-x-0.5 group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-all duration-200"
-            />
-            <span className="hidden sm:block text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] group-hover:text-[var(--google-blue)] dark:group-hover:text-[var(--google-blue-dark)] transition-colors">
+            <ArrowLeft size={16} strokeWidth={2.5} className="relative z-10" />
+            <span className="hidden sm:block relative z-10">
               {language === "id" ? "Kembali" : "Back"}
             </span>
           </Link>
@@ -154,60 +160,53 @@ export default function ExperienceDetailPage() {
           {/* Badges */}
           <div className="flex flex-wrap items-center gap-2.5 mt-10 sm:mt-0">
             <span
-              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest ${theme.bg} ${theme.text}`}
+              className={`rv-chip rv-pixel inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest ${theme.bg} ${theme.text}`}
             >
               <Icon size={13} strokeWidth={2.5} />
               {language === "id"
                 ? (TYPE_ID[data.type] ?? data.type)
                 : data.type}
             </span>
-            <span className="inline-flex items-center px-3.5 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-[#F8F9FA] dark:bg-[#202124] text-[11px] font-bold uppercase tracking-widest text-[#5F6368] dark:text-[#9AA0A6]">
+            <span className="rv-chip rv-pixel inline-flex items-center px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest bg-vtcard text-ink">
               {data.period}
             </span>
           </div>
 
           {/* Title */}
           <div>
-            <h1 className="font-black tracking-[-0.03em] text-2xl md:text-4xl lg:text-5xl text-[#202124] dark:text-[#E8EAED] leading-[1.05] mb-3">
+            <h1
+              className="font-bold tracking-tight text-2xl md:text-4xl lg:text-[2.75rem] text-ink leading-[1.05] mb-3"
+              style={{ fontFamily: "var(--vt-font-display)" }}
+            >
               {data.role}
             </h1>
 
             <div className="flex gap-1 mb-4 w-24">
-              {GOOGLE_COLORS.map((c) => (
+              {RETRO_COLORS.map((c) => (
                 <div
                   key={c}
-                  className="h-1 flex-1 rounded-full opacity-70"
-                  style={{ background: c }}
+                  className="h-1.5 flex-1 rv-sunken"
+                  style={{ background: c, opacity: 0.75 }}
                 />
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-sm md:text-base font-semibold">
-              <span className="text-[var(--google-blue)] dark:text-[var(--google-blue-dark)]">
-                {data.company}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-sm md:text-base font-bold">
+              <span className="text-vtblue">{data.company}</span>
+              <span className="rv-pixel text-inkmute hidden sm:inline" aria-hidden>
+                {"//"}
               </span>
-              <span
-                className="hidden sm:block text-[#DADCE0] dark:text-[#5F6368]"
-                aria-hidden
-              >
-                •
-              </span>
-              <span className="text-[#5F6368] dark:text-[#9AA0A6]">
-                {data.location}
-              </span>
+              <span className="text-ink-soft">{data.location}</span>
             </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="flex-1 p-6 md:p-10 bg-[#F8F9FA] dark:bg-[#202124]/40 flex flex-col gap-8 md:gap-9">
+        <div className="flex-1 p-6 md:p-9 bg-vtcard/60 flex flex-col gap-7 md:gap-8">
           {/* Summary */}
           <div className="flex flex-col gap-2.5">
-            <SectionLabel
-              label={t.experienceModal.summary}
-              accent={theme.accent}
-            />
-            <p className="text-sm md:text-base lg:text-lg leading-relaxed text-[#3C4043] dark:text-[#E8EAED] pl-4 border-l-2 border-[#DADCE0] dark:border-[#5F6368]/50">
+            <SectionLabel label={t.experienceModal.summary} accent={theme.accent} />
+            <p className="text-sm md:text-base lg:text-lg leading-relaxed text-ink pl-4 border-l-2 border-vtblue/40">
               {data.description}
             </p>
           </div>
@@ -216,23 +215,19 @@ export default function ExperienceDetailPage() {
 
           {/* Achievements */}
           <div className="flex flex-col gap-4">
-            <SectionLabel
-              label={t.experienceModal.achievements}
-              accent="#34A853"
-            />
-            <div className="flex flex-col gap-3">
+            <SectionLabel label={t.experienceModal.achievements} accent="#22C7A9" />
+            <div className="flex flex-col gap-2.5">
               {data.details.map((item: string, i: number) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 md:gap-4 p-3.5 md:p-4 rounded-2xl bg-white dark:bg-[#303134] border border-[#DADCE0]/60 dark:border-[#5F6368]/30"
-                  style={{ boxShadow: "0 1px 3px rgba(60,64,67,.05)" }}
+                  className="rv-chip flex items-start gap-3 md:gap-4 p-3.5 md:p-4 bg-vtcard text-ink"
                 >
                   <CheckCircle2
-                    size={18}
+                    size={17}
                     strokeWidth={2}
-                    className="shrink-0 mt-0.5 text-[#34A853] dark:text-[#81C995]"
+                    className="shrink-0 mt-0.5 text-vtcrt"
                   />
-                  <span className="text-sm md:text-base text-[#3C4043] dark:text-[#E8EAED] leading-relaxed">
+                  <span className="text-[12px] md:text-[13px] leading-relaxed uppercase tracking-wide">
                     {item}
                   </span>
                 </div>
@@ -244,20 +239,23 @@ export default function ExperienceDetailPage() {
 
           {/* Skills */}
           <div className="flex flex-col gap-4">
-            <SectionLabel
-              label={t.experienceModal.skills}
-              accent={theme.accent}
-            />
+            <SectionLabel label={t.experienceModal.skills} accent={theme.accent} />
             <div className="flex flex-wrap gap-2">
               {data.skills.map((skill: string) => (
                 <span
                   key={skill}
-                  className="inline-flex items-center px-3.5 py-1.5 rounded-full border border-[#DADCE0] dark:border-[#5F6368]/60 bg-white dark:bg-[#303134] text-xs font-semibold text-[#5F6368] dark:text-[#E8EAED] cursor-default"
+                  className="rv-chip rv-pixel inline-flex items-center px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide bg-vtcard text-ink"
                 >
                   {skill}
                 </span>
               ))}
             </div>
+          </div>
+
+          {/* Footer status */}
+          <div className="mt-2 rv-chip rv-pixel bg-paper flex items-center gap-2.5 px-4 py-3 text-[10px] uppercase tracking-widest text-inkmute">
+            <MonitorUp size={14} className="text-vtpink" />
+            C:\Experience\{data.id}.dat — load complete
           </div>
         </div>
       </div>
