@@ -10,8 +10,6 @@ import {
   MessageSquare,
   Sun,
   Moon,
-  X,
-  ChevronUp,
 } from "lucide-react";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -189,7 +187,7 @@ export default function Navbar() {
             portfolio_
           </span>
 
-          <nav className="flex items-center gap-0.5 flex-1 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          <nav className="hidden md:flex items-center gap-0.5 flex-1 overflow-x-auto [&::-webkit-scrollbar]:hidden">
             {NAV_LINKS.map((link) => {
               const isActive = active === link.href;
               return (
@@ -286,14 +284,6 @@ export default function Navbar() {
             <span className="w-px h-5 bg-inkmute/50" />
             <Clock />
           </div>
-
-          {/* Mobile menu trigger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden flex items-center justify-center w-9 h-9 rv-hover text-ink"
-          >
-            {menuOpen ? <X size={18} /> : <ChevronUp size={18} />}
-          </button>
         </div>
       </header>
     </>
