@@ -1,23 +1,25 @@
 "use client";
 
 import Hero from "@/components/hero";
-import About from "@/components/about";
 import Experience from "@/components/experience";
+import About from "@/components/about";
 import Projects from "@/components/projects";
-import TechAndCerts from "@/components/tech";
+import { TechMonitorGrid, CertificatesWindow } from "@/components/tech";
 import Contact from "@/components/contact";
-import Footer from "@/components/ui/Footer";
+import { StageController } from "@/components/vintec/StageController";
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col w-full">
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <TechAndCerts />
-      <Contact />
-      <Footer />
-    </main>
+    <StageController
+      rooms={[
+        <Hero key="hero" />,
+        <Experience key="experience" />,
+        <About key="about" />,
+        <Projects key="projects" />,
+        <TechMonitorGrid key="tech" />,
+        <CertificatesWindow key="certs" />,
+        <Contact key="contact" />,
+      ]}
+    />
   );
 }

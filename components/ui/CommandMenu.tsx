@@ -1,151 +1,198 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Command } from "cmdk";
-import { useTheme } from "next-themes";
-import { Search, Monitor, Moon, Sun, Briefcase, FileCode2, Mail, Palette } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
-import { useThemeColor, THEME_COLORS } from "@/context/ThemeColorContext";
-
-const itemClass =
-  "flex items-center gap-3 px-3 py-3 mt-1 rv-pixel text-[12px] uppercase tracking-wide text-ink cursor-pointer rv-hover aria-selected:!bg-vtblue aria-selected:!text-white";
-
-const groupClass =
-  "rv-pixel text-[10px] font-bold uppercase tracking-[0.2em] text-vtpink px-2 py-2";
+import { useVintecOS, VINTEC_THEMES } from "@/context/VintecOSContext";
+import { VintecWindow } from "@/components/vintec/VintecWindow";
 
 export function CommandMenu() {
-  const [open, setOpen] = useState(false);
-  const { setTheme } = useTheme();
+  const router = useRouter();
+  const pathname = usePathname();
   const { language, setLanguage } = useLanguage();
-  const { setThemeColor } = useThemeColor();
+  const {
+    commandOpen,
+    setCommandOpen,
+    theme,
+    setTheme,
+    setTerminalOpen,
+    setStatusOpen,
+    scrollToRoom,
+    reboot,
+  } = useVintecOS();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setCommandOpen(!commandOpen);
+      } else if (e.key === "Escape" && commandOpen) {
+        setCommandOpen(false);
       }
     };
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, []);
+  }, [commandOpen, setCommandOpen]);
 
-  const runCommand = (command: () => void) => {
-    setOpen(false);
-    command();
+  if (!commandOpen) return null;
+
+  const runCommand = (fn: () => void) => {
+    setCommandOpen(false);
+    fn();
   };
 
-  if (!open) return null;
+  const navRoom = (roomIdx: number, hash: string) => {
+    if (pathname === "/") {
+      scrollToRoom(roomIdx);
+    } else {
+      router.push(hash === "#" ? "/" : `/${hash}`);
+    }
+  };
 
   return (
-    <div className="fixed inset-0 z-[120] bg-desktop/50 backdrop-blur-sm flex items-start justify-center pt-[15vh]">
-      <div className="rv-window w-full max-w-xl mx-4 overflow-hidden bg-chrome">
-        {/* Titlebar */}
-        <div className="rv-titlebar">
-          <span className="rv-titlebar-label select-none">run.exe — Run...</span>
-          <div className="ml-auto flex items-center gap-1">
-            <button
-              onClick={() => setOpen(false)}
-              className="rv-titlebar-btn"
-              aria-label="Close"
-            >
-              <svg width="9" height="9" viewBox="0 0 10 10">
-                <path
-                  d="M1 1 L9 9 M9 1 L1 9"
-                  stroke="#fff"
-                  strokeWidth="1.6"
-                  strokeLinecap="square"
+    <div
+      className="fixed inset-0 z-[230] flex items-start justify-center pt-[14vh] px-4"
+      style={{ background: "rgba(0,0,0,0.45)" }}
+      onClick={() => setCommandOpen(false)}
+    >
+      <div className="w-full max-w-xl" onClick={(e) => e.stopPropagation()}>
+        <VintecWindow
+          title="run.exe — Command Palette"
+          onClose={() => setCommandOpen(false)}
+          draggable={false}
+          statusLeft="Ctrl+K · KevinOS Quick Launcher"
+          statusRight={["ESC"]}
+        >
+          <div style={{ background: "var(--vt-paper)", padding: 14 }}>
+            <Command label="Global Command Menu" shouldFilter={true}>
+              <div className="flex items-center gap-2 mb-3">
+                <Command.Input
+                  autoFocus
+                  placeholder={
+                    language === "id"
+                      ? "Ketik perintah atau bagian..."
+                      : "Type a command or section..."
+                  }
+                  className="vt-input flex-1"
                 />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <Command label="Global Command Menu" shouldFilter={true}>
-          <div className="flex items-center rv-sunken bg-vtcard px-3 m-3">
-            <Search className="w-4 h-4 text-vtpink shrink-0" />
-            <Command.Input
-              autoFocus
-              placeholder="Type a command or search..."
-              className="flex-1 h-12 px-3 bg-transparent outline-none text-ink placeholder:text-inkmute font-mono text-sm"
-            />
-            <button
-              onClick={() => setOpen(false)}
-              className="rv-chip rv-pixel bg-chrome px-2 py-1 text-[10px] font-bold text-ink"
-            >
-              ESC
-            </button>
-          </div>
-
-          <Command.List className="max-h-[300px] overflow-y-auto px-3 pb-3 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-vtblue">
-            <Command.Empty className="rv-pixel py-6 text-center text-[12px] uppercase tracking-wider text-inkmute">
-              No results found.
-            </Command.Empty>
-
-            <Command.Group heading="Navigation" className={groupClass}>
-              <Command.Item
-                onSelect={() => runCommand(() => window.location.hash = "#projects")}
-                className={itemClass}
-              >
-                <FileCode2 className="w-4 h-4 text-vtblue" /> Go to Projects
-              </Command.Item>
-              <Command.Item
-                onSelect={() => runCommand(() => window.location.hash = "#experience")}
-                className={itemClass}
-              >
-                <Briefcase className="w-4 h-4 text-vtpink" /> Go to Experience
-              </Command.Item>
-              <Command.Item
-                onSelect={() => runCommand(() => window.location.hash = "#contact")}
-                className={itemClass}
-              >
-                <Mail className="w-4 h-4 text-vtcrt" /> Contact Me
-              </Command.Item>
-            </Command.Group>
-
-            <Command.Group heading="Theme" className={groupClass}>
-              <Command.Item
-                onSelect={() => runCommand(() => setTheme("light"))}
-                className={itemClass}
-              >
-                <Sun className="w-4 h-4 text-vtamber" /> Light Mode
-              </Command.Item>
-              <Command.Item
-                onSelect={() => runCommand(() => setTheme("dark"))}
-                className={itemClass}
-              >
-                <Moon className="w-4 h-4 text-vtblue" /> Dark Mode
-              </Command.Item>
-              <Command.Item
-                onSelect={() => runCommand(() => setTheme("system"))}
-                className={itemClass}
-              >
-                <Monitor className="w-4 h-4 text-ink" /> System Theme
-              </Command.Item>
-            </Command.Group>
-
-            <Command.Group heading="Language" className={groupClass}>
-              <Command.Item
-                onSelect={() => runCommand(() => setLanguage(language === "en" ? "id" : "en"))}
-                className={itemClass}
-              >
-                <Palette className="w-4 h-4 text-vtteal" /> Toggle Language (Current: {language.toUpperCase()})
-              </Command.Item>
-            </Command.Group>
-            <Command.Group heading="Color Accent" className={groupClass}>
-              {THEME_COLORS.map((color) => (
-                <Command.Item
-                  key={color.name}
-                  onSelect={() => runCommand(() => setThemeColor(color))}
-                  className={itemClass}
+                <button
+                  type="button"
+                  onClick={() => setCommandOpen(false)}
+                  className="vt-btn vt-btn-flat"
+                  style={{ padding: "8px 12px", fontSize: 11 }}
                 >
-                  <span className="w-3.5 h-3.5 rv-sunken shrink-0" style={{ backgroundColor: color.color }} />
-                  Theme: {color.name}
-                </Command.Item>
-              ))}
-            </Command.Group>
-          </Command.List>
-        </Command>
+                  ESC
+                </button>
+              </div>
+
+              <Command.List className="max-h-[320px] overflow-y-auto flex flex-col gap-1">
+                <Command.Empty
+                  className="py-6 text-center text-xs"
+                  style={{ color: "var(--vt-ink-mute)" }}
+                >
+                  No results found.
+                </Command.Empty>
+
+                <Command.Group
+                  heading="NAVIGATION"
+                  className="text-[10px] tracking-widest uppercase py-1"
+                  style={{ color: "var(--vt-ink-mute)" }}
+                >
+                  {[
+                    { glyph: "⌂", label: "00 — Home / Desktop", room: 0, hash: "#" },
+                    { glyph: "▤", label: "01 — Experience / Career", room: 1, hash: "#experience" },
+                    { glyph: "✎", label: "02 — Manifesto & About", room: 2, hash: "#about" },
+                    { glyph: "▦", label: "03 — Projects Explorer", room: 3, hash: "#projects" },
+                    { glyph: "◈", label: "04 — Metrics & Tech Stack", room: 4, hash: "#tech" },
+                    { glyph: "▣", label: "05 — Certifications", room: 5, hash: "#certs" },
+                    { glyph: "✉", label: "06 — Contact & Collaborate", room: 6, hash: "#contact" },
+                  ].map((item) => (
+                    <Command.Item
+                      key={item.hash}
+                      onSelect={() =>
+                        runCommand(() => navRoom(item.room, item.hash))
+                      }
+                      className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                    >
+                      <span className="w-5 text-center">{item.glyph}</span>
+                      <span>{item.label}</span>
+                    </Command.Item>
+                  ))}
+                  <Command.Item
+                    onSelect={() => runCommand(() => router.push("/cv"))}
+                    className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                  >
+                    <span className="w-5 text-center">▣</span>
+                    <span>Curriculum Vitae (PDF)</span>
+                  </Command.Item>
+                </Command.Group>
+
+                <Command.Group
+                  heading="OS THEME"
+                  className="text-[10px] tracking-widest uppercase py-1 mt-2"
+                  style={{ color: "var(--vt-ink-mute)" }}
+                >
+                  {VINTEC_THEMES.map((opt) => (
+                    <Command.Item
+                      key={opt.id}
+                      onSelect={() => runCommand(() => setTheme(opt.id))}
+                      className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                    >
+                      <span className="w-5 text-center">
+                        {theme === opt.id ? "●" : "○"}
+                      </span>
+                      <span>
+                        {opt.label} — {opt.desc}
+                      </span>
+                    </Command.Item>
+                  ))}
+                </Command.Group>
+
+                <Command.Group
+                  heading="SYSTEM"
+                  className="text-[10px] tracking-widest uppercase py-1 mt-2"
+                  style={{ color: "var(--vt-ink-mute)" }}
+                >
+                  <Command.Item
+                    onSelect={() =>
+                      runCommand(() =>
+                        setLanguage(language === "id" ? "en" : "id"),
+                      )
+                    }
+                    className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                  >
+                    <span className="w-5 text-center">⇄</span>
+                    <span>
+                      Switch Language (Current: {language.toUpperCase()})
+                    </span>
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => runCommand(() => setStatusOpen(true))}
+                    className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                  >
+                    <span className="w-5 text-center">◉</span>
+                    <span>Open System Status</span>
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => runCommand(() => setTerminalOpen(true))}
+                    className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                  >
+                    <span className="w-5 text-center">&gt;_</span>
+                    <span>Open KevinOS Terminal</span>
+                  </Command.Item>
+                  <Command.Item
+                    onSelect={() => runCommand(() => reboot())}
+                    className="flex items-center gap-3 px-3 py-2 text-[13px] cursor-pointer text-[var(--vt-ink)] aria-selected:bg-[var(--vt-blue)] aria-selected:text-white"
+                  >
+                    <span className="w-5 text-center">↻</span>
+                    <span>Reboot KevinOS BIOS</span>
+                  </Command.Item>
+                </Command.Group>
+              </Command.List>
+            </Command>
+          </div>
+        </VintecWindow>
       </div>
     </div>
   );

@@ -81,8 +81,7 @@ export const techStack = [
   },
   {
     name: "AWS",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+    image: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
   },
   {
     name: "Vercel",

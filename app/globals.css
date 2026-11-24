@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Tailwind v4 - theme colors map to CSS vars below */
 @theme {
   --color-desktop: var(--vt-desktop);
   --color-chrome: var(--vt-chrome);
@@ -22,17 +21,23 @@
   --font-mono: var(--vt-font-mono);
 }
 
-/* ── Dark mode via .dark (next-themes) ──────────────────────────────────── */
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. BASE VINTEC DESIGN TOKENS (mirrors vinteclearning.com verbatim)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root,
+.vt-landing,
+.vt-retro,
+.vt-tokens {
   --vt-desktop: #0a1631;
   --vt-chrome: #cfcdc8;
   --vt-paper: #f3f2ee;
   --vt-card: #e9e7e2;
   --vt-ink: #12121a;
   --vt-ink-soft: #42424c;
-  --vt-ink-mute: #6a6a74;
+  --vt-ink-mute: #5b5b64;
   --vt-blue: #3b2fd6;
   --vt-violet: #7c5cff;
   --vt-navy: #0a0a5e;
@@ -46,31 +51,104 @@
   --vt-edge-lo-2: #9a968e;
   --vt-drop: rgba(0, 0, 0, 0.4);
   --vt-drop-btn: rgba(0, 0, 0, 0.28);
-  --vt-drop-offset: 7px;
-  --vt-drop-offset-btn: 4px;
-
-  --vt-font-chrome: var(--font-pixel, "Silkscreen", monospace);
-  --vt-font-body: var(--font-body-set, "Azeret Mono", ui-monospace, monospace);
+  --vt-drop-offset: 8px;
+  --vt-drop-offset-btn: 5px;
+  --vt-window-bg: var(--vt-chrome);
+  --vt-window-pad: 4px;
+  --vt-window-ring: 0 0 0 0 transparent;
+  --vt-window-blur: none;
+  --vt-radius: 0px;
+  --vt-titlebar-bg: linear-gradient(
+    90deg,
+    var(--vt-navy) 0%,
+    var(--vt-blue) 55%,
+    var(--vt-violet) 100%
+  );
+  --vt-titlebar-ink: #ffffff;
+  --vt-titlebar-rule: none;
+  --vt-titlebar-size: 12px;
+  --vt-titlebar-transform: none;
+  --vt-font-chrome: var(--font-pixel-set, "Silkscreen", monospace);
+  --vt-font-body: var(
+    --font-body-set,
+    "Azeret Mono",
+    ui-monospace,
+    SFMono-Regular,
+    monospace
+  );
   --vt-font-display: var(--font-display-set, "Unbounded", var(--vt-font-body));
-  --vt-font-mono: "Azeret Mono", ui-monospace, monospace;
-
-  --vt-titlebar-bg: linear-gradient(90deg, var(--vt-navy) 0%, var(--vt-blue) 55%, var(--vt-violet) 100%);
-  --vt-titlebar-ink: #fff;
-
-  --scrollbar-thumb: #9a968e;
-  --scrollbar-thumb-hover: #6a6a74;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  --vt-font-mono: var(
+    --font-mono-set,
+    "JetBrains Mono",
+    "Azeret Mono",
+    ui-monospace,
+    Consolas,
+    monospace
+  );
+  --vt-chrome-tracking: 0.04em;
+  --vt-body-tracking: 0;
+  --vt-travel: -2px;
+  --vt-press: 3px;
+  --vt-bar-size: 0.85;
+  --vt-motion-fast: 90ms;
+  --vt-motion-normal: 0.16s;
+  --vt-motion-slow: 0.26s;
+  --vt-ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
-.dark {
+/* ── Theme: Vintec 3.1 (DEFAULT — exact match to vinteclearning.com/) ───── */
+html[data-theme="win31"],
+html[data-theme="win31"] :is(.vt-landing, .vt-retro, .vt-tokens) {
+  --vt-desktop: #0a1631;
+  --vt-chrome: #c0c0c0;
+  --vt-paper: #ffffff;
+  --vt-card: #ffffff;
+  --vt-ink: #000000;
+  --vt-ink-soft: #000000;
+  --vt-ink-mute: #404040;
+  --vt-blue: #000080;
+  --vt-violet: #800080;
+  --vt-navy: #000080;
+  --vt-pink: #ff00ff;
+  --vt-teal: #00ffff;
+  --vt-crt: #00ff00;
+  --vt-amber: #ffff00;
+  --vt-edge-hi: #ffffff;
+  --vt-edge-hi-2: #ffffff;
+  --vt-edge-lo: #808080;
+  --vt-edge-lo-2: #808080;
+  --vt-drop: transparent;
+  --vt-drop-btn: transparent;
+  --vt-drop-offset: 0px;
+  --vt-drop-offset-btn: 0px;
+  --vt-window-bg: #c0c0c0;
+  --vt-window-ring: 0 0 0 1px #000000;
+  --vt-window-blur: none;
+  --vt-radius: 0px;
+  --vt-window-pad: 4px;
+  --vt-titlebar-bg: #000080;
+  --vt-titlebar-rule: 1px solid #000000;
+  --vt-titlebar-ink: #ffffff;
+  --vt-titlebar-size: 13px;
+  --vt-titlebar-transform: none;
+  --vt-font-chrome: "Microsoft Sans Serif", "MS Sans Serif", Arial, sans-serif;
+  --vt-font-body: "Microsoft Sans Serif", "MS Sans Serif", Arial, sans-serif;
+  --vt-chrome-tracking: 0;
+  --vt-body-tracking: 0;
+  --vt-travel: 0px;
+  --vt-press: 0px;
+}
+
+/* ── Theme: Dark Retro ──────────────────────────────────────────────────── */
+html[data-theme="dark"],
+html[data-theme="dark"] :is(.vt-landing, .vt-retro, .vt-tokens) {
   --vt-desktop: #08080d;
   --vt-chrome: #23232b;
   --vt-paper: #16161d;
   --vt-card: #1d1d26;
   --vt-ink: #ececf3;
   --vt-ink-soft: #b9b9c7;
-  --vt-ink-mute: #7c7c8c;
+  --vt-ink-mute: #848493;
   --vt-blue: #7a86ff;
   --vt-violet: #a48bff;
   --vt-navy: #101040;
@@ -84,34 +162,84 @@
   --vt-edge-lo-2: #101016;
   --vt-drop: rgba(0, 0, 0, 0.75);
   --vt-drop-btn: rgba(0, 0, 0, 0.6);
-  --vt-titlebar-bg: linear-gradient(90deg, #14142e 0%, #2b2470 55%, #5a3fd6 100%);
-
-  --scrollbar-thumb: #3a3a46;
-  --scrollbar-thumb-hover: #6a6a74;
+  --vt-window-bg: #23232b;
+  --vt-titlebar-bg: linear-gradient(
+    90deg,
+    #14142e 0%,
+    #2b2470 55%,
+    #5a3fd6 100%
+  );
+  --vt-titlebar-ink: #ffffff;
+  --vt-window-ring: 0 0 0 1px rgba(122, 134, 255, 0.28);
 }
 
-/* ── Base ────────────────────────────────────────────────────────────────── */
+/* ── Theme: Cyberpunk ───────────────────────────────────────────────────── */
+html[data-theme="cyberpunk"],
+html[data-theme="cyberpunk"] :is(.vt-landing, .vt-retro, .vt-tokens) {
+  --vt-desktop: #0b0913;
+  --vt-chrome: #1c1630;
+  --vt-paper: #150f22;
+  --vt-card: #1f1734;
+  --vt-ink: #e9e0f2;
+  --vt-ink-soft: #bcb0d4;
+  --vt-ink-mute: #9488ad;
+  --vt-blue: #5aa2ff;
+  --vt-violet: #b98bff;
+  --vt-navy: #241640;
+  --vt-pink: #ff3d9a;
+  --vt-teal: #2fe6cf;
+  --vt-crt: #39ff9b;
+  --vt-amber: #ffcf4d;
+  --vt-edge-hi: #33254a;
+  --vt-edge-hi-2: #26193c;
+  --vt-edge-lo: #05030a;
+  --vt-edge-lo-2: #0f0a1c;
+  --vt-drop: rgba(0, 0, 0, 0.7);
+  --vt-window-bg: #1c1630;
+  --vt-radius: 4px;
+  --vt-titlebar-bg: linear-gradient(
+    90deg,
+    #2a0f45 0%,
+    #7a1f8f 55%,
+    #ff3d9a 100%
+  );
+  --vt-titlebar-ink: #ffffff;
+  --vt-window-ring: 0 0 0 1px rgba(255, 61, 154, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. BASE RESET & SCROLLBARS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
   -webkit-tap-highlight-color: transparent;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   background-color: var(--vt-desktop);
   color: var(--vt-ink);
   font-family: var(--vt-font-body);
+  letter-spacing: var(--vt-body-tracking);
+  line-height: 1.5;
+  overflow-x: clip;
+  margin: 0;
+}
+
+html[data-theme="win31"] body {
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  line-height: 1.6;
 }
 
 ::selection {
-  background-color: var(--vt-pink);
-  color: #fff;
+  background: var(--vt-pink);
+  color: #ffffff;
+}
+
+html[data-theme="win31"] ::selection {
+  background: #000080;
+  color: #ffffff;
 }
 
 :focus-visible {
@@ -119,421 +247,2475 @@ body {
   outline-offset: 2px;
 }
 
-img {
-  max-width: 100%;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vt-edge-lo-2) transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. DESKTOP ATMOSPHERE (WALLPAPER, DRIFTING GRID, SCAN BAND, FILM GRAIN)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-landing {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: var(--vt-desktop);
+  color: var(--vt-ink);
+  font-family: var(--vt-font-body);
+  letter-spacing: var(--vt-body-tracking);
+  overflow-x: clip;
+}
+
+html[data-theme="win31"] .vt-landing {
+  background: #0a1631;
+}
+
+.vt-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: radial-gradient(
+    70% 65% at 64% 46%,
+    #1b2452 0%,
+    #0e1b3d 52%,
+    #09122b 100%
+  );
+}
+
+.vt-wallpaper canvas {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
-/* ── Scrollbar ───────────────────────────────────────────────────────────── */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) transparent;
+/* GPU-composited grid drift (transform instead of background-position = ZERO repaints!) */
+.vt-landing::before {
+  content: "";
+  position: fixed;
+  inset: -48px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.78;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.065) 1px, transparent 1.5px);
+  background-size:
+    48px 48px,
+    48px 48px,
+    12px 12px;
+  will-change: transform;
+  animation: vt-drift 18s linear infinite;
 }
 
-::-webkit-scrollbar {
-  width: 14px;
+.vt-landing::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 36vh;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(138, 92, 255, 0.12) 50%,
+    transparent
+  );
+  will-change: transform;
+  animation: vt-band 12s linear infinite;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+/* Lightweight static subtle CRT grain (eliminates 4x viewport overdraw!) */
+.vt-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb);
-  border-radius: 0;
-  border: 3px solid var(--vt-desktop);
-  background-clip: padding-box;
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. TYPOGRAPHY PRIMITIVES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-pixel {
+  font-family: var(--vt-font-chrome);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--scrollbar-thumb-hover);
+.vt-pixel-strict {
+  font-family: var(--font-pixel-set, "Silkscreen", monospace);
 }
 
-::-webkit-scrollbar-corner {
-  background: transparent;
+.vt-mono {
+  font-family: var(--vt-font-mono);
 }
 
-html,
-body {
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+.vt-big {
+  font-family: var(--vt-font-display);
 }
 
-/* ── Retro OS building blocks ────────────────────────────────────────────── */
+.vt-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vt-ink-mute);
+  margin-bottom: 20px;
+}
 
-/* Bevel helpers (classic chiseled 3D edges) */
-.rv {
-  background: var(--vt-chrome);
+.vt-big-h2 {
+  margin: 0 0 16px;
+  font-family: var(--vt-font-display);
+  font-size: clamp(26px, 3.8vw, 72px);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
   color: var(--vt-ink);
 }
-.rv-raised {
+
+html[data-theme="win31"] :is(.vt-landing, .vt-retro, .vt-tokens) :is(h1, h2, h3) {
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. WINDOW CHROME (WIN 3.1 AUTHENTIC + RETRO98/DARK/CYBERPUNK)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-raised {
+  background: var(--vt-window-bg);
+  border-radius: var(--vt-radius);
   box-shadow:
     inset 1px 1px 0 var(--vt-edge-hi),
     inset -1px -1px 0 var(--vt-edge-lo),
     inset 2px 2px 0 var(--vt-edge-hi-2),
-    inset -2px -2px 0 var(--vt-edge-lo-2);
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    var(--vt-window-ring);
 }
-.rv-sunken {
+
+.vt-window {
+  background: var(--vt-window-bg);
+  padding: var(--vt-window-pad);
+  border-radius: var(--vt-radius);
+  -webkit-backdrop-filter: var(--vt-window-blur);
+  backdrop-filter: var(--vt-window-blur);
   box-shadow:
-    inset 1px 1px 0 var(--vt-edge-lo),
-    inset -1px -1px 0 var(--vt-edge-hi),
-    inset 2px 2px 0 var(--vt-edge-lo-2),
-    inset -2px -2px 0 var(--vt-edge-hi-2);
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    var(--vt-drop-offset) var(--vt-drop-offset) 0 var(--vt-drop),
+    var(--vt-window-ring);
+  translate: var(--dx, 0px) var(--dy, 0px);
 }
-.rv-chip {
+
+/* Authentic Win 3.1 4px silver window border with corner resize ticks */
+html[data-theme="win31"] .vt-window {
+  box-shadow: 0 0 0 1px #000000;
+  background:
+    linear-gradient(#000000, #000000) 22px 0 / 1px 4px no-repeat,
+    linear-gradient(#000000, #000000) calc(100% - 22px) 0 / 1px 4px no-repeat,
+    linear-gradient(#000000, #000000) 22px 100% / 1px 4px no-repeat,
+    linear-gradient(#000000, #000000) calc(100% - 22px) 100% / 1px 4px no-repeat,
+    linear-gradient(#000000, #000000) 0 22px / 4px 1px no-repeat,
+    linear-gradient(#000000, #000000) 100% 22px / 4px 1px no-repeat,
+    linear-gradient(#000000, #000000) 0 calc(100% - 22px) / 4px 1px no-repeat,
+    linear-gradient(#000000, #000000) 100% calc(100% - 22px) / 4px 1px no-repeat,
+    #c0c0c0;
+}
+
+html[data-theme="win31"] .vt-window > * {
+  box-shadow: 0 0 0 1px #000000;
+}
+
+.vt-titlebar {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px 5px 10px;
+  background: var(--vt-titlebar-bg);
+  border-bottom: var(--vt-titlebar-rule);
+  color: var(--vt-titlebar-ink);
+}
+
+.vt-titlebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 28%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  transform: translate(-120%);
+  animation: vt-sheen 8s ease-in-out var(--sheen-delay, 1s) infinite;
+  pointer-events: none;
+}
+
+.vt-grab {
+  cursor: move;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+.vt-titlebar-text {
+  font-family: var(--vt-font-chrome);
+  font-size: var(--vt-titlebar-size);
+  letter-spacing: var(--vt-chrome-tracking);
+  text-transform: var(--vt-titlebar-transform);
+  color: var(--vt-titlebar-ink);
+}
+
+.vt-titlebar-spacer {
+  flex: 1;
+}
+
+.vt-titlebar-btn {
+  width: 20px;
+  height: 18px;
+  flex: none;
+  background: var(--vt-window-bg);
+  border-radius: calc(var(--vt-radius) / 2);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo);
+  font-size: 10px;
+  color: var(--vt-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Authentic Win 3.1 Titlebar: left system box [─], centered bold text, right ▼ ▲ triangles */
+html[data-theme="win31"] .vt-titlebar {
+  position: relative;
+  min-height: 22px;
+  padding: 0 0 0 22px;
+  gap: 0;
+}
+
+html[data-theme="win31"] .vt-titlebar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 21px;
+  border-right: 1px solid #000000;
+  background:
+    linear-gradient(#ffffff, #ffffff) center / 11px 3px no-repeat,
+    linear-gradient(#000000, #000000) center / 13px 5px no-repeat,
+    linear-gradient(gray, gray) calc(50% + 1px) calc(50% + 1px) / 13px 5px no-repeat,
+    #c0c0c0;
+}
+
+html[data-theme="win31"] .vt-titlebar-text {
+  flex: 1;
+  min-width: 0;
+  padding: 3px 8px;
+  text-align: center;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html[data-theme="win31"] .vt-titlebar-spacer {
+  display: none;
+}
+
+html[data-theme="win31"] .vt-titlebar-btn {
+  width: 21px;
+  height: auto;
+  min-height: 22px;
+  align-self: stretch;
+  padding: 0 !important;
+  border-radius: 0;
+  background: #c0c0c0;
+  color: #000000;
+  border: 0;
+  border-left: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px #ffffff,
+    inset -1px -1px #808080,
+    inset -2px -2px #808080;
+}
+
+html[data-theme="win31"] div.vt-titlebar-btn {
+  font-size: 0 !important;
+}
+
+html[data-theme="win31"] div.vt-titlebar-btn::before {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000000;
+}
+
+html[data-theme="win31"] .vt-titlebar > div.vt-titlebar-btn[data-btn="max"]::before {
+  border-top: 0;
+  border-bottom: 4px solid #000000;
+}
+
+html[data-theme="win31"] .vt-titlebar > div.vt-titlebar-btn[data-btn="close"] {
+  display: none;
+}
+
+html[data-theme="win31"] button.vt-titlebar-btn {
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+html[data-theme="win31"] .vt-titlebar-btn:active {
+  box-shadow: inset 1px 1px #808080;
+}
+
+/* ── Inset Cards ────────────────────────────────────────────────────────── */
+.vt-card-inset {
+  background: var(--vt-card);
+  border-radius: var(--vt-radius);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo-2);
+}
+
+html[data-theme="win31"] .vt-card-inset {
+  background: #ffffff;
+  box-shadow: 0 0 0 1px #000000;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. BUTTONS (WIN 3.1 BEVELED + RETRO98 PINK CTA + SHEEN SWEEP)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  border: 0;
+  font: inherit;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.vt-btn:focus-visible {
+  outline: 2px dotted var(--vt-ink);
+  outline-offset: 2px;
+}
+
+.vt-btn-chrome {
+  background: var(--vt-window-bg);
+  color: var(--vt-ink);
+  border-radius: var(--vt-radius);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    var(--vt-drop-offset-btn) var(--vt-drop-offset-btn) 0 var(--vt-drop-btn),
+    var(--vt-window-ring);
+}
+
+.vt-btn-chrome:hover {
+  transform: translate(var(--vt-travel), var(--vt-travel));
+}
+
+.vt-btn-chrome:active {
+  transform: translate(var(--vt-press), var(--vt-press));
+  box-shadow:
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 1px 1px 0 var(--vt-edge-lo);
+}
+
+.vt-btn-flat {
+  background: var(--vt-window-bg);
+  color: var(--vt-ink);
+  border-radius: var(--vt-radius);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    var(--vt-window-ring);
+}
+
+.vt-btn-flat:active {
+  transform: translate(1px, 1px);
+  box-shadow:
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 1px 1px 0 var(--vt-edge-lo);
+}
+
+.vt-btn-pink {
+  position: relative;
+  overflow: hidden;
+  background: var(--vt-pink);
+  color: #1a0611;
+  font-weight: 700;
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.8),
+    inset -2px -2px rgba(0, 0, 0, 0.3),
+    5px 5px rgba(0, 0, 0, 0.45);
+}
+
+.vt-btn-pink:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    inset 1px 1px rgba(255, 255, 255, 0.8),
+    inset -2px -2px rgba(0, 0, 0, 0.3),
+    8px 8px rgba(0, 0, 0, 0.45);
+}
+
+.vt-btn-pink:active {
+  transform: translate(3px, 3px);
+  box-shadow:
+    inset -1px -1px rgba(255, 255, 255, 0.4),
+    inset 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.vt-btn-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.vt-btn-sweep::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.48),
+    transparent
+  );
+  animation: vt-sweep 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  pointer-events: none;
+}
+
+/* Win 3.1 Authentic Beveled Silver Buttons (exact match to screenshots!) */
+html[data-theme="win31"] :is(.vt-btn-chrome, .vt-btn-flat, .vt-btn-pink) {
+  background: #c0c0c0;
+  color: #000000;
+  font-weight: 700;
+  text-shadow: none;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  box-shadow:
+    inset 1px 1px #ffffff,
+    inset 2px 2px #ffffff,
+    inset -1px -1px #808080,
+    inset -2px -2px #808080;
+  transform: none !important;
+  transition: none;
+}
+
+html[data-theme="win31"] .vt-btn-pink {
+  border-width: 2px;
+}
+
+html[data-theme="win31"] :is(.vt-btn-chrome, .vt-btn-flat, .vt-btn-pink):hover {
+  box-shadow:
+    inset 1px 1px #ffffff,
+    inset 2px 2px #ffffff,
+    inset -1px -1px #808080,
+    inset -2px -2px #808080;
+}
+
+html[data-theme="win31"] :is(.vt-btn-chrome, .vt-btn-flat, .vt-btn-pink):active {
+  box-shadow:
+    inset 1px 1px #808080,
+    inset 2px 2px #c0c0c0;
+}
+
+html[data-theme="win31"] :is(.vt-btn-chrome, .vt-btn-flat, .vt-btn-pink):focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: -6px;
+}
+
+.vt-arrow {
+  display: inline-block;
+  animation: vt-nudge 1.4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. MENUBAR & TASKBAR + START MENU
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 768px) {
+  .vt-menubar,
+  .vt-taskbar {
+    zoom: var(--vt-bar-size);
+  }
+}
+
+.vt-menubar {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 10px;
+  background: var(--vt-window-bg);
+  -webkit-backdrop-filter: var(--vt-window-blur);
+  backdrop-filter: var(--vt-window-blur);
+  box-shadow:
+    inset 0 1px 0 var(--vt-edge-hi),
+    inset 0 -1px 0 var(--vt-edge-lo),
+    0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="win31"] .vt-menubar {
+  background: #ffffff;
+  box-shadow: inset 0 -1px #000000;
+}
+
+.vt-menubar-item {
+  padding: 5px 12px;
+  font-size: 13px;
+  color: var(--vt-ink);
+  cursor: default;
+  text-decoration: none;
+  border-radius: calc(var(--vt-radius) / 2);
+  white-space: nowrap;
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+}
+
+.vt-menubar-item:hover,
+.vt-menubar-item[data-active="true"] {
+  background: var(--vt-blue);
+  color: #ffffff;
+}
+
+.vt-menubar-wrap {
+  position: relative;
+}
+
+.vt-menubar-drop {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 220px;
+  z-index: 160;
+  padding: 4px;
+  background: var(--vt-window-bg);
+  animation: vt-open 0.12s ease-out;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    5px 5px 0 var(--vt-drop);
+}
+
+html[data-theme="win31"] .vt-menubar-drop {
+  background: #ffffff;
+  box-shadow: 0 0 0 1px #000000;
+}
+
+.vt-menubar-drop > :is(button, a) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--vt-ink);
+  font: inherit;
+  font-size: 12.5px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.vt-menubar-drop > :is(button, a):hover,
+.vt-menubar-drop > :is(button, a)[data-current="true"] {
+  background: var(--vt-blue);
+  color: #ffffff;
+}
+
+.vt-menubar-drop-sep {
+  height: 1px;
+  margin: 4px 6px;
+  background: var(--vt-edge-lo-2);
+}
+
+.vt-taskbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--vt-chrome);
+  box-shadow:
+    inset 0 1px 0 var(--vt-edge-hi),
+    0 -2px 10px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="win31"] .vt-taskbar {
+  background: #c0c0c0;
+  box-shadow:
+    inset 0 1px #ffffff,
+    0 -1px #000000;
+}
+
+.vt-start {
+  position: relative;
+}
+
+.vt-start-btn {
+  padding: 5px 12px 5px 8px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vt-start-btn[aria-expanded="true"] {
+  transform: translate(1px, 1px);
+  box-shadow:
+    inset -1px -1px 0 var(--vt-edge-hi),
+    inset 1px 1px 0 var(--vt-edge-lo);
+}
+
+.vt-start-logo {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--vt-blue);
+  line-height: 1;
+}
+
+.vt-start-menu {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  min-width: 260px;
+  display: flex;
+  background: var(--vt-window-bg);
+  animation: vt-open 0.14s ease-out;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo),
+    inset 2px 2px 0 var(--vt-edge-hi-2),
+    inset -2px -2px 0 var(--vt-edge-lo-2),
+    6px 6px 0 var(--vt-drop);
+}
+
+html[data-theme="win31"] .vt-start-menu {
+  box-shadow:
+    0 0 0 1px #000000,
+    inset 1px 1px #ffffff,
+    inset -1px -1px #808080;
+}
+
+.vt-start-side {
+  width: 30px;
+  margin: 3px;
+  background: var(--vt-titlebar-bg);
+  color: #ffffff;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0;
+  font-family: var(--font-pixel-set, "Silkscreen", monospace);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.vt-start-side b {
+  color: var(--vt-amber);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.vt-start-items {
+  flex: 1;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.vt-start-items > :is(button, a) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 14px;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  font-size: 0.8125rem;
+  color: var(--vt-ink);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.vt-start-items > :is(button, a) > span:first-child {
+  width: 18px;
+  text-align: center;
+  color: var(--vt-blue);
+}
+
+.vt-start-items > :is(button, a):hover,
+.vt-start-items > :is(button, a):focus-visible {
+  background: var(--vt-blue);
+  color: #ffffff;
+  outline: 0;
+}
+
+.vt-start-items > :is(button, a):hover > span:first-child {
+  color: var(--vt-amber);
+}
+
+.vt-start-sep {
+  height: 2px;
+  margin: 4px 6px;
+  box-shadow:
+    inset 0 1px 0 var(--vt-edge-lo-2),
+    inset 0 -1px 0 var(--vt-edge-hi);
+}
+
+.vt-clock {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  margin-left: 4px;
+  font-family: var(--vt-font-chrome);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--vt-ink);
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo-2),
+    inset -1px -1px 0 var(--vt-edge-hi);
+}
+
+.vt-clock-colon {
+  animation: vt-blink 1s steps(1) infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. HERO DESKTOP LAYOUT, ICONS, PARALLAX, CRT MONITOR
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-main {
+  max-width: 1620px;
+  margin: 0 auto;
+  padding: 40px 28px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  position: relative;
+  z-index: 1;
+}
+
+.vt-first {
+  --px: 0;
+  --py: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 34px;
+  align-items: stretch;
+  min-height: calc(100vh - 150px);
+}
+
+.vt-desk-side {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 28px;
+  align-items: start;
+}
+
+.vt-crt-win {
+  width: min(100%, 500px);
+  justify-self: end;
+  align-self: end;
+}
+
+.vt-parallax-copy {
+  transform: translate(calc(var(--px) * 4px), calc(var(--py) * 3px));
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.vt-parallax-crt {
+  transform: translate(calc(var(--px) * -10px), calc(var(--py) * -8px));
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Desktop yellow shortcut icons */
+.vt-icons {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.vt-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 92px;
+  padding: 6px 4px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.vt-icon-glyph {
+  width: 48px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #3a2a00;
+  background: var(--vt-amber);
+  box-shadow:
+    inset -2px -2px #a08600,
+    inset 2px 2px #fff8c0,
+    3px 3px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s;
+}
+
+html[data-theme="win31"] .vt-icon-glyph {
+  color: #000000;
+  background: #ffff00;
+  box-shadow:
+    inset -2px -2px #808000,
+    inset 2px 2px #ffff80,
+    0 0 0 1px #000000;
+}
+
+.vt-icon-label {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.3;
+  padding: 1px 4px;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.vt-icon:hover .vt-icon-glyph {
+  transform: translate(-1px, -1px);
+}
+
+.vt-icon:hover .vt-icon-label,
+.vt-icon:focus-visible .vt-icon-label {
+  background: var(--vt-blue);
+  color: #ffffff;
+  outline: 1px dotted #ffffff;
+}
+
+html[data-theme="win31"] .vt-icon:hover .vt-icon-label,
+html[data-theme="win31"] .vt-icon:focus-visible .vt-icon-label {
+  background: #000080;
+  color: #ffffff;
+  outline: 1px dotted #000000;
+}
+
+/* Hero Display Title & Word Rise */
+.vt-hero-title {
+  margin: 0;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  animation: vt-glitch 7s steps(1) 3s infinite;
+}
+
+.vt-big-line {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.2em;
+}
+
+.vt-big-line[data-size="xl"] {
+  font-size: clamp(36px, 5.4vw, 108px);
+  font-weight: 700;
+}
+
+.vt-big-line[data-size="md"] {
+  font-size: clamp(16px, 2.2vw, 44px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  margin-top: 0.12em;
+}
+
+.vt-big-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+
+.vt-big-w > span {
+  display: inline-block;
+  transform: translateY(110%);
+}
+
+.vt-desktop[data-booting="false"] .vt-big-w > span {
+  animation: vt-rise-word 0.9s cubic-bezier(0.2, 0.85, 0.2, 1) both;
+  animation-delay: calc(0.25s + var(--i, 0) * 0.09s);
+}
+
+/* Reveal & Subtle Floating Windows */
+.vt-reveal {
+  animation:
+    vt-open 0.55s cubic-bezier(0.2, 0.85, 0.25, 1) both,
+    vt-float 7s ease-in-out var(--float-delay, 1.2s) infinite;
+}
+
+.vt-reveal-2 {
+  animation-delay: 0.1s, var(--float-delay, 1.2s);
+}
+
+.vt-reveal-3 {
+  animation-delay: 0.2s, var(--float-delay, 1.2s);
+}
+
+.vt-in {
+  animation: vt-in 0.5s cubic-bezier(0.2, 0.85, 0.25, 1) both;
+  animation-delay: calc(0.2s + var(--i, 0) * 0.1s);
+}
+
+/* Typewriter */
+.vt-typed {
+  position: relative;
+  display: inline-block;
+}
+
+.vt-typed-live {
+  position: absolute;
+  inset: 0;
+  white-space: inherit;
+}
+
+.vt-cursor {
+  display: inline-block;
+  width: 0;
+  overflow: visible;
+  white-space: nowrap;
+  margin-left: 0.04em;
+  font-weight: 400;
+  animation: vt-blink 1s steps(1) infinite;
+}
+
+.vt-cursor[data-done="true"] {
+  animation:
+    vt-blink 1s steps(1) 6,
+    vt-fade 0.4s 6s forwards;
+}
+
+/* CRT Monitor Panel */
+.vt-crt-panel {
+  position: relative;
+  background: #050505;
+  padding: 14px;
+  overflow: hidden;
+  box-shadow:
+    inset 2px 2px #000000,
+    inset -1px -1px #4a4a4a;
+  color: var(--vt-crt);
+  font-family: var(--vt-font-mono);
+}
+
+.vt-crt-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.22) 0 1px,
+    transparent 1px 3px
+  );
+  animation: vt-flicker 5s steps(1) infinite;
+}
+
+.vt-crt-panel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30%;
+  height: 30%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
+  animation: vt-crt-sweep 4.5s linear infinite;
+}
+
+.vt-crt-bar {
+  height: 9px;
+  background: #1a1a1a;
+}
+
+.vt-crt-fill {
+  height: 100%;
+  background: var(--vt-crt);
+  transform-origin: left;
+  animation: vt-fill 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(0.5s + var(--i, 0) * 0.2s);
+}
+
+.vt-idle {
+  animation: vt-blink 1.2s steps(1) infinite;
+}
+
+.vt-spin-glyph {
+  display: inline-block;
+  animation: vt-rotate 3s linear infinite;
+}
+
+.vt-crt-log {
+  margin-top: 10px;
+  padding-top: 8px;
+  height: 3.9em;
+  box-sizing: content-box;
+  border-top: 1px dashed rgba(255, 255, 255, 0.18);
+  font-size: 0.65rem;
+  line-height: 1.3em;
+  overflow: hidden;
+  opacity: 0.92;
+}
+
+.vt-crt-log-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+.vt-crt-log-row[data-latest="true"] {
+  opacity: 1;
+  animation: vt-rise 0.3s ease-out both;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   9. MARQUEE WALL (EXPERIENCE / CERTIFICATES) — MIRRORS vt-testi-*
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-testi-body {
+  background: var(--vt-paper);
+  padding: 26px 34px;
+}
+
+.vt-testi-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 40px;
+  margin-bottom: 18px;
+}
+
+.vt-testi-head .vt-eyebrow {
+  margin-bottom: 10px;
+}
+
+.vt-testi-head .vt-big-h2 {
+  margin: 0;
+  font-size: clamp(24px, 2.7vw, 52px);
+}
+
+.vt-testi-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--vt-ink-soft);
+}
+
+.vt-testi-stats > span {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.vt-testi-stats b {
+  font-family: var(--vt-font-display);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--vt-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.vt-testi-wall {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000000 5%,
+    #000000 95%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000000 5%,
+    #000000 95%,
+    transparent
+  );
+}
+
+.vt-testi-row {
+  overflow: hidden;
+}
+
+.vt-testi-track {
+  display: flex;
+  width: max-content;
+  animation: vt-testi-drift var(--dur, 55s) linear infinite;
+}
+
+.vt-testi-row[data-dir="rev"] .vt-testi-track {
+  animation-direction: reverse;
+}
+
+.vt-testi-row:hover .vt-testi-track,
+.vt-testi-row:focus-within .vt-testi-track {
+  animation-play-state: paused;
+}
+
+.vt-testi-set {
+  display: flex;
+  gap: 14px;
+  padding-right: 14px;
+}
+
+.vt-testi-card {
+  width: 340px;
+  flex: none;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--vt-ink);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+
+.vt-testi-card:hover .vt-course-bar > div {
+  width: 100%;
+}
+
+.vt-testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
+}
+
+.vt-testi-grid .vt-testi-card {
+  width: auto;
+}
+
+.vt-testi-all {
+  max-height: 48vh;
+  overflow-y: auto;
+  padding: 4px;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo-2),
+    inset -1px -1px 0 var(--vt-edge-hi);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   15b. SINGLE-VIEWPORT 3D SCROLL STAGE & SHATTER / SPLIT ENGINE (vintec.vt-stage)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-room {
+  position: relative;
+}
+
+.vt-room-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.vt-scroll-space {
+  pointer-events: none;
+}
+
+.vt-main.vt-stage {
+  position: fixed !important;
+  inset: 40px 0 38px 0;
+  z-index: 1;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: hidden;
+  perspective: 1200px;
+  perspective-origin: 50% 46%;
+}
+
+.vt-stage .vt-room {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+.vt-stage .vt-room > * {
+  width: 100%;
+  max-width: 1580px;
+}
+
+.vt-stage .vt-room[data-hidden="true"] {
+  visibility: hidden;
+}
+
+.vt-stage .vt-room[data-focus="true"] {
+  pointer-events: auto;
+}
+
+.vt-stage .vt-first {
+  min-height: 0;
+}
+
+.vt-stage .vt-gallery {
+  height: auto;
+}
+
+.vt-stage .vt-gallery-sticky {
+  position: static;
+  height: calc(100vh - 150px);
+}
+
+.vt-stage .vt-room[data-focus="false"] .vt-reveal,
+.vt-stage .vt-room[data-hidden="true"] *,
+.vt-stage .vt-room[data-hidden="true"] *::before,
+.vt-stage .vt-room[data-hidden="true"] *::after {
+  animation-play-state: paused !important;
+}
+
+.vt-stage .vt-shard {
+  position: absolute;
+  pointer-events: none;
+  animation: none !important;
+  will-change: translate, rotate;
+}
+
+.vt-stage .vt-shard * {
+  animation: none !important;
+}
+
+.vt-stage .vt-hero-win,
+.vt-stage .vt-crt-win,
+.vt-stage .vt-icons,
+.vt-stage .vt-explorer,
+.vt-stage .vt-mid-grid > div > section,
+.vt-stage .vt-mid-grid > section,
+.vt-stage .vt-room > .vt-window {
+  will-change: translate, rotate;
+}
+
+/* Subtle room scroll indicator pill on right edge of stage */
+.vt-stage-rail {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vt-stage-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid #000000;
+  background: rgba(192, 192, 192, 0.55);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.vt-stage-dot:hover {
+  background: var(--vt-teal);
+  transform: scale(1.25);
+}
+
+.vt-stage-dot[data-active="true"] {
+  background: var(--vt-amber);
+  transform: scale(1.3);
+}
+
+@media (max-width: 900px) {
+  .vt-stage-rail {
+    display: none;
+  }
+}
+
+.vt-testi-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.vt-testi-hint {
+  font-size: 12px;
+  color: var(--vt-ink-mute);
+}
+
+.vt-statusline {
+  display: flex;
+  gap: 6px;
+  padding: 4px 6px;
+  background: var(--vt-window-bg);
+  font-size: 11px;
+  color: var(--vt-ink-soft);
+}
+
+.vt-statusline > span {
+  padding: 2px 8px;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo-2),
+    inset -1px -1px 0 var(--vt-edge-hi);
+}
+
+.vt-statusline > span:first-child {
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   10. NOTEPAD MANIFESTO (SCROLL-LIT WORD REVEAL)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-notepad-menu {
+  display: flex;
+  gap: 2px;
+  padding: 3px 6px;
+  background: var(--vt-window-bg);
+  box-shadow: inset 0 -1px 0 var(--vt-edge-lo-2);
+  font-size: 12px;
+  color: var(--vt-ink);
+}
+
+.vt-notepad-menu > span {
+  padding: 2px 8px;
+}
+
+.vt-notepad-menu > span::first-letter {
+  text-decoration: underline;
+}
+
+.vt-manifesto {
+  margin: 0;
+  max-width: none;
+  font-family: var(--vt-font-display);
+  font-size: clamp(20px, 3vw, 54px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-wrap: pretty;
+}
+
+.vt-manifesto > span {
+  color: var(--vt-ink-mute);
+  opacity: 0.45;
+  transition: color 0.35s, opacity 0.35s;
+}
+
+.vt-manifesto > span[data-lit="true"] {
+  color: var(--vt-ink);
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   11. EXPLORER STICKY HORIZONTAL GALLERY (PROJECTS)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-gallery {
+  position: relative;
+  height: 220vh;
+}
+
+.vt-gallery-sticky {
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 116px);
+  display: flex;
+  align-items: center;
+}
+
+.vt-explorer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.vt-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  background: var(--vt-window-bg);
+  font-size: 12px;
+  color: var(--vt-ink);
+  box-shadow: inset 0 -1px 0 var(--vt-edge-lo-2);
+}
+
+.vt-address-field {
+  flex: 1;
+  padding: 4px 8px;
+  background: #ffffff;
+  color: #12121a;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo-2),
+    inset -1px -1px #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: var(--vt-font-mono);
+  font-size: 12px;
+}
+
+.vt-address-go {
+  padding: 3px 10px;
+  background: var(--vt-window-bg);
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-hi),
+    inset -1px -1px 0 var(--vt-edge-lo);
+}
+
+.vt-explorer-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--vt-paper);
+  padding: 28px 0;
+  display: flex;
+  align-items: center;
+}
+
+.vt-track {
+  display: flex;
+  align-items: stretch;
+  gap: 26px;
+  padding: 0 40px;
+  width: max-content;
+  will-change: transform;
+}
+
+.vt-track-intro {
+  flex: none;
+  width: min(32vw, 430px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 16px;
+}
+
+.vt-track-intro p {
+  margin: 0;
+  max-width: 36ch;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--vt-ink-soft);
+}
+
+.vt-course-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vt-track-card {
+  --gx: 50%;
+  --gy: 50%;
+  flex: none;
+  width: min(62vw, 400px);
+  min-height: 400px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  transform-style: preserve-3d;
+}
+
+.vt-track-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s;
+  background: radial-gradient(
+    320px circle at var(--gx) var(--gy),
+    rgba(124, 92, 255, 0.2),
+    transparent 60%
+  );
+}
+
+.vt-track-card:hover::before {
+  opacity: 1;
+}
+
+.vt-track-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.vt-folder {
+  width: 18px;
+  height: 14px;
+  display: inline-block;
+  flex: none;
+  background: var(--vt-amber);
+  box-shadow:
+    inset -1px -1px #a08600,
+    inset 1px 1px #fff8c0;
+  transform-origin: bottom left;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+html[data-theme="win31"] .vt-folder {
+  box-shadow:
+    inset -1px -1px #808000,
+    inset 1px 1px #ffff80,
+    0 0 0 1px #000000;
+}
+
+.vt-course-card:hover .vt-folder {
+  transform: skew(-14deg) translateY(-1px);
+}
+
+.vt-course-card:hover .vt-arrow {
+  animation-duration: 0.6s;
+}
+
+.vt-track-n {
+  font-family: var(--vt-font-display);
+  font-size: 38px;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  color: var(--vt-ink-mute);
+  line-height: 1;
+}
+
+.vt-track-title {
+  margin: 0 0 8px;
+  font-family: var(--vt-font-display);
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--vt-ink);
+}
+
+.vt-track-foot {
+  font-family: var(--font-pixel-set, "Silkscreen", monospace);
+  font-size: 10px;
+  color: var(--vt-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  border-top: 1px solid var(--vt-edge-lo-2);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+.vt-course-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: transparent;
+}
+
+.vt-course-bar > div {
+  height: 100%;
+  width: 0;
+  background: var(--vt-pink);
+  transition: width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.vt-course-card:hover .vt-course-bar > div {
+  width: 100%;
+}
+
+.vt-track-end {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 40px 0 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   12. MID-GRID (STATS, FEATURES, COMPANION RESUME)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-mid-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.vt-bigstats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.vt-bigstat-n {
+  font-family: var(--vt-font-display);
+  font-size: clamp(34px, 4.8vw, 96px);
+  font-weight: 300;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+  color: var(--vt-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.vt-bigstat-n > span {
+  font-size: 0.45em;
+  color: var(--vt-pink);
+  margin-left: 0.05em;
+}
+
+.vt-bigstat-bar {
+  margin: 14px 0 10px;
+  height: 10px;
+}
+
+.vt-bigstat-bar .vt-crt-fill {
+  animation: none;
+  transition: width 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.vt-bigstat-l {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vt-ink-mute);
+}
+
+.vt-bob {
+  display: inline-block;
+  animation: vt-bob 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.4s);
+}
+
+/* Launcher (mirrors Vintec_Companion.exe) */
+.vt-launcher-body {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: var(--vt-paper);
+  padding: 20px 20px 16px;
+}
+
+.vt-launcher-icon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.35));
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.vt-launcher:hover .vt-launcher-icon {
+  transform: translate(-1px, -1px);
+}
+
+.vt-launcher-name {
+  margin: 0 0 8px;
+  font-family: var(--vt-font-display);
+  font-size: clamp(18px, 1.35vw, 24px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--vt-ink);
+}
+
+.vt-launcher-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 0.7rem;
+  color: var(--vt-ink-mute);
+}
+
+.vt-platforms {
+  display: inline-flex;
+  gap: 6px;
+  color: var(--vt-ink-soft);
+}
+
+.vt-platforms > span {
+  display: inline-flex;
+  padding: 4px;
   background: var(--vt-card);
   box-shadow:
     inset 1px 1px 0 var(--vt-edge-hi),
     inset -1px -1px 0 var(--vt-edge-lo-2);
 }
 
-/* OS Window */
-.rv-window {
-  background: var(--vt-chrome);
-  box-shadow:
-    inset 1px 1px 0 var(--vt-edge-hi),
-    inset -1px -1px 0 var(--vt-edge-lo),
-    inset 2px 2px 0 var(--vt-edge-hi-2),
-    inset -2px -2px 0 var(--vt-edge-lo-2),
-    var(--vt-drop-offset) var(--vt-drop-offset) 0 var(--vt-drop);
+html[data-theme="win31"] .vt-platforms > span {
+  box-shadow: 0 0 0 1px #808080;
 }
 
-/* Titlebar — navy→blue→violet gradient, Silkscreen text */
-.rv-titlebar {
+.vt-launcher-foot {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 6px 5px 10px;
-  background: var(--vt-titlebar-bg);
-  color: var(--vt-titlebar-ink);
-}
-.rv-titlebar-label {
-  font-family: var(--vt-font-chrome);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--vt-titlebar-ink);
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: var(--vt-window-bg);
+  box-shadow: inset 0 1px 0 var(--vt-edge-hi);
 }
 
-/* Titlebar `_ □ ×` buttons */
-.rv-titlebar-btn {
-  width: 20px;
-  height: 18px;
-  flex: none;
-  background: var(--vt-chrome);
-  box-shadow:
-    inset 1px 1px 0 var(--vt-edge-hi),
-    inset -1px -1px 0 var(--vt-edge-lo);
-  font-size: 10px;
-  line-height: 1;
-  color: var(--vt-ink);
-  display: flex;
+.vt-launcher-status {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  user-select: none;
-}
-.rv-titlebar-btn:active {
-  box-shadow:
-    inset -1px -1px 0 var(--vt-edge-hi),
-    inset 1px 1px 0 var(--vt-edge-lo);
+  gap: 7px;
+  font-size: 0.7rem;
+  color: var(--vt-ink-soft);
 }
 
-/* Chrome button — beveled, rises + hard shadow, presses inward */
-.rv-btn {
-  background: var(--vt-chrome);
-  color: var(--vt-ink);
-  border-radius: 0;
-  box-shadow:
-    inset 1px 1px 0 var(--vt-edge-hi),
-    inset -1px -1px 0 var(--vt-edge-lo),
-    inset 2px 2px 0 var(--vt-edge-hi-2),
-    inset -2px -2px 0 var(--vt-edge-lo-2),
-    var(--vt-drop-offset-btn) var(--vt-drop-offset-btn) 0 var(--vt-drop-btn);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-  user-select: none;
-  cursor: pointer;
-}
-.rv-btn:hover {
-  transform: translate(-1px, -1px);
-}
-.rv-btn:active {
-  transform: translate(3px, 3px);
-  box-shadow:
-    inset -1px -1px 0 var(--vt-edge-hi),
-    inset 1px 1px 0 var(--vt-edge-lo);
-}
-
-/* Primary neo-brutalist button — pink + hard shadow + sweep */
-.rv-btn-primary {
-  position: relative;
-  overflow: hidden;
-  background: var(--vt-pink);
-  color: #fff;
-  font-weight: 700;
-  box-shadow:
-    inset 1px 1px rgba(255, 255, 255, 0.8),
-    inset -2px -2px rgba(0, 0, 0, 0.3),
-    4px 4px 0 var(--vt-drop);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-  user-select: none;
-  cursor: pointer;
-}
-.rv-btn-primary:hover {
-  transform: translate(-2px, -2px);
-  box-shadow:
-    inset 1px 1px rgba(255, 255, 255, 0.8),
-    inset -2px -2px rgba(0, 0, 0, 0.3),
-    7px 7px 0 var(--vt-drop);
-}
-.rv-btn-primary:active {
-  transform: translate(3px, 3px);
-  box-shadow:
-    inset -1px -1px rgba(255, 255, 255, 0.4),
-    inset 2px 2px rgba(0, 0, 0, 0.3);
-}
-.rv-btn-primary::before {
+.vt-launcher-status::before {
   content: "";
-  position: absolute;
-  top: 0;
-  left: -35%;
-  width: 34%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
-  animation: rv-sweep 2.6s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  pointer-events: none;
+  width: 7px;
+  height: 7px;
+  background: var(--vt-amber);
+  border-radius: 50%;
+  animation: vt-pulse 1.6s infinite;
 }
 
-@keyframes rv-sweep {
-  0% { left: -35%; }
-  60%, 100% { left: 110%; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   13. DOUBLE-ROW CRT MARQUEE & RUN.EXE FINAL CTA
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vt-marquee {
+  overflow: hidden;
+  background: #0d0d12;
+  padding: 9px 0;
+  box-shadow: inset 0 0 0 3px var(--vt-pink);
 }
 
-/* Ring button (white) */
-.rv-btn-paper {
-  background: var(--vt-paper);
-  color: var(--vt-ink);
-  box-shadow:
-    inset 1px 1px 0 rgba(0, 0, 0, 0.08),
-    3px 3px 0 var(--vt-drop);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-  cursor: pointer;
-  user-select: none;
-}
-.rv-btn-paper:hover {
-  transform: translate(-1px, -1px);
-}
-.rv-btn-paper:active {
-  transform: translate(2px, 2px);
-  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.15);
-}
-
-/* Insets / panels */
-.rv-panel {
-  background: var(--vt-paper);
-  box-shadow:
-    inset 1px 1px 0 var(--vt-edge-lo),
-    inset -1px -1px 0 var(--vt-edge-hi),
-    inset 2px 2px 0 var(--vt-edge-lo-2),
-    inset -2px -2px 0 var(--vt-edge-hi-2);
-}
-
-/* CRT terminal panel */
-.rv-crt {
-  position: relative;
-  background: #050505;
-  color: var(--vt-crt);
-  font-family: var(--vt-font-mono);
-  box-shadow: inset 2px 2px #000, inset -1px -1px #4a4a4a, 0 0 0 3px var(--vt-chrome);
-}
-.rv-crt-glow {
-  text-shadow: 0 0 12px rgba(55, 255, 155, 0.45);
-}
-
-/* Pixel label */
-.rv-pixel {
-  font-family: var(--vt-font-chrome);
-  letter-spacing: 0.04em;
-}
-
-/* Progress/loading bar (taskbar style) */
-.rv-progress {
-  height: 9px;
-  background: #1a1a1a;
-}
-.rv-progressfill {
-  height: 100%;
-  background: var(--vt-crt);
-}
-
-/* Menu item hover (blue highlight like classic OS) */
-.rv-hover {
-  transition: background 0.1s ease, color 0.1s ease;
-}
-.rv-hover:hover,
-.rv-hover[data-active="true"] {
-  background: var(--vt-blue);
-  color: #fff;
-}
-
-/* ══ Vintec-style FX layer ════════════════════════════════════════════════ */
-
-:root {
-  --vt-motion-fast: 90ms;
-  --vt-motion-normal: 0.16s;
-  --vt-motion-slow: 0.26s;
-  --vt-ease: cubic-bezier(0.2, 0, 0, 1);
-}
-
-/* Desktop wallpaper grid drift (subtle, continuous) */
-@keyframes vt-grid-drift {
-  0% { background-position: 0 0; }
-  100% { background-position: 42px 42px; }
-}
-.vt-grid {
-  animation: vt-grid-drift 34s linear infinite;
-}
-
-/* CRT-grain overlay — fixed film-grain on the whole desktop */
-@keyframes vt-grain {
-  0% { transform: translate(0, 0); }
-  20% { transform: translate(-6%, 4%); }
-  40% { transform: translate(5%, -7%); }
-  60% { transform: translate(-3%, 8%); }
-  80% { transform: translate(7%, 2%); }
-  100% { transform: translate(0, 0); }
-}
-.vt-grain {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
-  animation: vt-grain 7s steps(10) infinite;
-}
-
-/* Window / card reveal + float choreography (mirrors vintec) */
-@keyframes vt-open {
-  0% { opacity: 0; transform: scale(0.965) translateY(14px); }
-  100% { opacity: 1; transform: none; }
-}
-@keyframes vt-pop {
-  0% { opacity: 0; transform: scale(0.94) translateY(8px); }
-  100% { opacity: 1; transform: none; }
-}
-@keyframes vt-rise {
-  0% { opacity: 0; transform: translateY(6px); }
-  100% { opacity: 1; transform: none; }
-}
-@keyframes vt-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-@keyframes vt-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-@keyframes vt-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-@keyframes vt-nudge {
-  0%, 100% { transform: translate(0); }
-  50% { transform: translate(4px); }
-}
-@keyframes vt-rise-word {
-  0% { transform: translateY(110%); }
-  100% { transform: none; }
-}
-@keyframes vt-glitch {
-  0%, 100% { text-shadow: none; transform: none; }
-  2% { text-shadow: -3px 0 var(--vt-pink), 3px 0 var(--vt-teal); transform: translate(2px); }
-  3% { text-shadow: 3px 0 var(--vt-pink), -3px 0 var(--vt-teal); transform: translate(-2px); }
-  4% { text-shadow: none; transform: none; }
-  55% { text-shadow: 2px 0 var(--vt-teal), -2px 0 var(--vt-pink); }
-  56% { text-shadow: none; }
-}
-@keyframes vt-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes vt-fill {
-  0% { width: 0; }
-}
-
-/* Scroll-reveal system (IntersectionObserver adds .vt-in) */
-html.vt-hydrated [data-vt] { opacity: 0; }
-[data-vt].vt-in {
-  opacity: 1;
-  animation: var(--vt-anim, vt-open) var(--vt-motion-slow) var(--vt-ease) both;
-  animation-delay: var(--vt-delay, 0s);
-}
-[data-vt="open"].vt-in {
-  animation:
-    vt-open var(--vt-motion-slow) var(--vt-ease) both,
-    vt-float 5.5s ease-in-out 1.4s infinite;
-  animation-delay: var(--vt-delay, 0s), calc(var(--vt-delay, 0s) + 1.25s);
-}
-[data-vt="pop"].vt-in {
-  animation: vt-pop var(--vt-motion-slow) var(--vt-ease) both;
-  animation-delay: var(--vt-delay, 0s);
-}
-[data-vt="rise"].vt-in {
-  animation: vt-rise var(--vt-motion-normal) var(--vt-ease) both;
-  animation-delay: var(--vt-delay, 0s);
-}
-
-/* Marquee - continuous ticker (matches vintec vt-marquee) */
 .vt-marquee-track {
   display: flex;
   width: max-content;
-  animation: vt-marquee var(--marquee-dur, 26s) linear infinite;
-}
-.vt-marquee-track:hover {
-  animation-play-state: paused;
-}
-.vt-marquee-track[data-reverse="true"] {
-  animation-direction: reverse;
+  white-space: nowrap;
+  font-family: var(--font-pixel-set, "Silkscreen", monospace);
+  font-size: 12px;
+  color: var(--vt-crt);
+  animation: vt-marquee 24s linear infinite;
 }
 
-/* Load-in utilities */
-.vt-rise {
-  opacity: 0;
-  animation: vt-rise var(--vt-motion-normal) var(--vt-ease) forwards;
-  animation-delay: var(--vt-delay, 0s);
+.vt-marquee-rev {
+  margin-top: 6px;
+  color: var(--vt-pink);
+  animation-direction: reverse;
+  animation-duration: 30s;
 }
-.vt-blink {
-  animation: vt-blink 1.1s steps(1) infinite;
-}
-.vt-pulse-soft {
-  animation: vt-pulse 2.2s ease-in-out infinite;
-}
-.vt-bubble {
-  animation: vt-pulse 1.6s ease-in-out infinite;
-}
-.vt-rise-word {
+
+.vt-run-title {
+  position: relative;
   display: inline-block;
-  animation: vt-rise-word var(--vt-motion-slow) var(--vt-ease) both;
-  animation-delay: var(--vt-delay, 0s);
+  margin: 0;
+  max-width: 14ch;
+  font-family: var(--vt-font-display);
+  font-size: clamp(28px, 5vw, 96px);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  color: var(--vt-ink);
+  text-wrap: balance;
 }
-.vt-glitch {
-  animation: vt-glitch 9s var(--vt-ease) 2.4s infinite;
+
+.vt-run-title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--vt-pink);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+}
+
+.vt-run:hover .vt-run-title::after {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Win3.1 form inputs */
+.vt-input {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--vt-paper);
+  color: var(--vt-ink);
+  font-family: var(--vt-font-body);
+  font-size: 13.5px;
+  box-shadow:
+    inset 1px 1px 0 var(--vt-edge-lo),
+    inset -1px -1px 0 var(--vt-edge-hi);
+  outline: none;
+}
+
+html[data-theme="win31"] .vt-input {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  box-shadow: inset 1px 1px #808080;
+}
+
+.vt-input:focus {
+  outline: 2px solid var(--vt-blue);
+  outline-offset: -1px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   14. VINTEC BOOT SPLASH (3D TUMBLING CUBES + WIN95 BIOS WINDOW)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.vb {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #008080;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  perspective: 1200px;
+}
+
+.vb-cubes {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.vb-cube {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  transform-style: preserve-3d;
+  animation: vb-tumble linear infinite;
+}
+
+.vb-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  background: var(--vb-c, #11339e);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+.vb-face::after {
+  content: var(--vb-l, "");
+}
+
+.vb-f1 {
+  transform: translateZ(28px);
+}
+.vb-f2 {
+  transform: rotateY(180deg) translateZ(28px);
+}
+.vb-f3 {
+  transform: rotateY(90deg) translateZ(28px);
+  filter: brightness(0.78);
+}
+.vb-f4 {
+  transform: rotateY(-90deg) translateZ(28px);
+  filter: brightness(0.78);
+}
+.vb-f5 {
+  transform: rotateX(90deg) translateZ(28px);
+  filter: brightness(1.2);
+}
+.vb-f6 {
+  transform: rotateX(-90deg) translateZ(28px);
+  filter: brightness(0.6);
+}
+
+.vb-win {
+  position: relative;
+  z-index: 2;
+  width: min(440px, 90vw);
+  background: #c3c7cb;
+  color: #000000;
+  border: 1px solid #000000;
+  box-shadow:
+    inset -1px -1px #868a8e,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #5a5e62,
+    inset 2px 2px #dfe2e5,
+    3px 3px 0 rgba(0, 0, 0, 0.35);
+  padding: 3px;
+}
+
+.vb-title {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 6px;
+  background: linear-gradient(90deg, #000f9c, #2a6fd6);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.vb-body {
+  padding: 12px 14px 13px;
+}
+
+.vb-os {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.vb-copy {
+  font-size: 11px;
+  color: #333333;
+  margin-top: 1px;
+}
+
+.vb-console {
+  margin-top: 11px;
+  background: #f6f7f8;
+  border: 1px solid #868a8e;
+  box-shadow:
+    inset 1px 1px #5a5e62,
+    inset -1px -1px #ffffff;
+  padding: 9px 11px;
+  font-family: var(--vt-font-mono);
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #111111;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.vb-prog {
+  position: relative;
+  margin-top: 11px;
+  height: 18px;
+  background: #ffffff;
+  border: 1px solid #868a8e;
+  box-shadow:
+    inset 1px 1px #5a5e62,
+    inset -1px -1px #ffffff;
+  overflow: hidden;
+}
+
+.vb-prog > span {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #0a1f8c 0 10px,
+    transparent 10px 13px
+  );
+  transition: width 0.14s linear;
+}
+
+.vb-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 9px;
+  font-size: 11px;
+  color: #222222;
+}
+
+.vb-btn {
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background: #c3c7cb;
+  border: 1px solid #000000;
+  box-shadow:
+    inset -1px -1px #5a5e62,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #868a8e,
+    inset 2px 2px #dfe2e5;
+  padding: 3px 16px;
+  cursor: pointer;
+}
+
+.vb-btn:active {
+  box-shadow:
+    inset 1px 1px #5a5e62,
+    inset -1px -1px #ffffff;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   15. KEYFRAMES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes vb-tumble {
+  from {
+    transform: rotateX(0) rotateY(0);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(720deg);
+  }
+}
+
+@keyframes vt-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(48px, 48px, 0);
+  }
+}
+
+@keyframes vt-band {
+  0% {
+    transform: translateY(-40vh);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
+}
+
+@keyframes vt-grain {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-6%, 4%);
+  }
+  40% {
+    transform: translate(5%, -7%);
+  }
+  60% {
+    transform: translate(-3%, 8%);
+  }
+  80% {
+    transform: translate(7%, 2%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes vt-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.965) translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes vt-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes vt-sheen {
+  0%,
+  78% {
+    transform: translate(-120%);
+  }
+  100% {
+    transform: translate(460%);
+  }
+}
+
+@keyframes vt-sweep {
+  0% {
+    transform: translate(-100%);
+  }
+  100% {
+    transform: translate(320%);
+  }
+}
+
+@keyframes vt-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes vt-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes vt-rise-word {
+  0% {
+    transform: translateY(110%);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes vt-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes vt-nudge {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translate(4px);
+  }
+}
+
+@keyframes vt-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes vt-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vt-fill {
+  0% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes vt-crt-sweep {
+  to {
+    transform: translateY(433%);
+  }
+}
+
+@keyframes vt-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  7% {
+    opacity: 0.82;
+  }
+  8% {
+    opacity: 1;
+  }
+  43% {
+    opacity: 0.88;
+  }
+  44% {
+    opacity: 1;
+  }
+  71% {
+    opacity: 0.75;
+  }
+  72% {
+    opacity: 1;
+  }
+}
+
+@keyframes vt-glitch {
+  0%,
+  100% {
+    text-shadow: none;
+    transform: none;
+  }
+  2% {
+    text-shadow:
+      -3px 0 var(--vt-pink),
+      3px 0 var(--vt-teal);
+    transform: translate(2px);
+  }
+  3% {
+    text-shadow:
+      3px 0 var(--vt-pink),
+      -3px 0 var(--vt-teal);
+    transform: translate(-2px);
+  }
+  4% {
+    text-shadow: none;
+    transform: none;
+  }
+  55% {
+    text-shadow:
+      2px 0 var(--vt-teal),
+      -2px 0 var(--vt-pink);
+  }
+  56% {
+    text-shadow: none;
+  }
+}
+
+@keyframes vt-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes vt-testi-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   16. RESPONSIVE BREAKPOINTS (mirrors vinteclearning.com)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 901px) and (max-width: 1254px) {
+  .vt-desk-side {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    row-gap: 18px;
+  }
+  .vt-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 4px;
+  }
+  .vt-icons .vt-icon {
+    width: 84px;
+  }
+}
+
+@media (max-width: 900px) {
+  .vt-first,
+  .vt-mid-grid {
+    grid-template-columns: 1fr !important;
+    min-height: 0;
+  }
+  .vt-desk-side {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .vt-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .vt-crt-win {
+    width: 100%;
+  }
+  .vt-gallery {
+    height: auto;
+  }
+  .vt-gallery-sticky {
+    position: static;
+    height: auto;
+  }
+  .vt-explorer {
+    max-height: none;
+  }
+  .vt-explorer-body {
+    padding: 24px 0;
+  }
+  .vt-track {
+    transform: none !important;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 18px;
+  }
+  .vt-track-intro {
+    width: auto;
+    margin: 0 0 8px;
+  }
+  .vt-track-card {
+    width: 100%;
+    min-height: 0;
+  }
+  .vt-track-end {
+    padding: 8px 0 0;
+  }
+  .vt-bigstats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .vt-hero-body {
+    padding: 28px 22px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .vt-taskbar-copy,
+  .vt-menubar-nav {
+    display: none !important;
+  }
+  .vt-main {
+    padding: 22px 12px 92px;
+    gap: 22px;
+  }
+  .vt-testi-body {
+    padding: 18px 16px;
+  }
+  .vt-testi-card {
+    width: 260px;
+  }
+  .vt-testi-hint {
+    display: none;
+  }
+  .vt-launcher-body {
+    flex-direction: column;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.vt-hydrated [data-vt] { opacity: 1; }
-  [data-vt].vt-in,
-  .vt-rise,
-  .vt-rise-word {
-    animation: none !important;
-    opacity: 1 !important;
-  }
+  .vt-landing::before,
+  .vt-landing::after,
   .vt-grain,
-  .vt-grid,
-  .vt-blink,
-  .vt-glitch,
-  .vt-pulse-soft {
+  .vt-reveal,
+  .vt-titlebar::after,
+  .vt-in,
+  .vt-hero-title,
+  .vt-big-w > span,
+  .vt-cursor,
+  .vt-arrow,
+  .vt-crt-panel::before,
+  .vt-crt-panel::after,
+  .vt-crt-fill,
+  .vt-idle,
+  .vt-spin-glyph,
+  .vt-crt-log-row,
+  .vt-bob,
+  .vt-marquee-track,
+  .vt-testi-track,
+  .vt-clock-colon,
+  .vt-btn-sweep::before,
+  .vb-cube {
     animation: none !important;
+  }
+  .vt-big-w > span {
+    transform: none !important;
+  }
+  .vt-manifesto > span {
+    color: var(--vt-ink) !important;
+    opacity: 1 !important;
+    transition: none !important;
   }
 }

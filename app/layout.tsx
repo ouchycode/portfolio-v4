@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Silkscreen, Azeret_Mono, Unbounded } from "next/font/google";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import {
+  Silkscreen,
+  Azeret_Mono,
+  Unbounded,
+  JetBrains_Mono,
+} from "next/font/google";
 import { LoadingProvider } from "@/context/LoadingContext";
 import { LanguageProvider } from "@/context/LanguageContext";
-import { ThemeColorProvider } from "@/context/ThemeColorContext";
-import Navbar from "@/components/ui/Navbar";
+import { VintecOSProvider } from "@/context/VintecOSContext";
+import { VintecShell } from "@/components/vintec/VintecShell";
 import { CommandMenu } from "@/components/ui/CommandMenu";
-import { RevealObserver } from "@/components/ui/RevealObserver";
+import { TerminalEasterEgg } from "@/components/ui/TerminalEasterEgg";
 import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -15,21 +19,28 @@ import "./globals.css";
 const pixelFont = Silkscreen({
   weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-pixel",
+  variable: "--font-pixel-set",
   display: "swap",
 });
 
-const monoFont = Azeret_Mono({
-  weight: ["300", "400", "500", "600", "700", "800"],
+const bodyMonoFont = Azeret_Mono({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-body-set",
   display: "swap",
 });
 
 const displayFont = Unbounded({
-  weight: ["300", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-display-set",
+  display: "swap",
+});
+
+const codeMonoFont = JetBrains_Mono({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-mono-set",
   display: "swap",
 });
 
@@ -53,7 +64,9 @@ export const metadata: Metadata = {
     "Portfolio",
     "Tangerang",
   ],
-  authors: [{ name: "Kevin Ardiansyah", url: "https://portfolio-bykevin.vercel.app/" }],
+  authors: [
+    { name: "Kevin Ardiansyah", url: "https://portfolio-bykevin.vercel.app/" },
+  ],
   creator: "Kevin Ardiansyah",
   openGraph: {
     title: "Kevin Ardiansyah | Software Engineer",
@@ -63,7 +76,7 @@ export const metadata: Metadata = {
     siteName: "Kevin Ardiansyah Portfolio",
     images: [
       {
-        url: "/profile_kevin.png",
+        url: "/profile_kevin_hd.png",
         width: 1200,
         height: 630,
         alt: "Kevin Ardiansyah - Software Engineer",
@@ -77,7 +90,7 @@ export const metadata: Metadata = {
     title: "Kevin Ardiansyah | Software Engineer",
     description:
       "Explore the selected works and career journey of Kevin Ardiansyah.",
-    images: ["/profile_kevin.png"],
+    images: ["/profile_kevin_hd.png"],
     creator: "@ouchycode",
   },
 };
@@ -88,59 +101,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id" data-theme="win31" suppressHydrationWarning>
       <body
-        className={`${pixelFont.variable} ${monoFont.variable} ${displayFont.variable} min-h-screen bg-desktop text-ink`}
+        className={`${pixelFont.variable} ${bodyMonoFont.variable} ${displayFont.variable} ${codeMonoFont.variable}`}
       >
         <LanguageProvider>
           <LoadingProvider>
-            <ThemeColorProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <NextTopLoader
-                  color="#37ff9b"
-                  initialPosition={0.08}
-                  crawlSpeed={200}
-                  height={3}
-                  crawl={true}
-                  showSpinner={false}
-                  easing="ease"
-                  speed={200}
-                  shadow="0 0 10px #37ff9b,0 0 5px #22c7a9"
-                />
-                {/* Retro scanline grid overlay (drifts slowly like the reference desktop) */}
-                <div
-                  aria-hidden="true"
-                  className="vt-grid fixed inset-0 z-0 pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to right, #7c5cff 1px, transparent 1px), linear-gradient(to bottom, #7c5cff 1px, transparent 1px)",
-                    backgroundSize: "42px 42px",
-                    opacity: 0.05,
-                    maskImage:
-                      "radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%)",
-                    WebkitMaskImage:
-                      "radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%)",
-                  }}
-                />
-
-                {/* CRT film grain overlay (matches vintec .vt-grain) */}
-                <div aria-hidden="true" className="vt-grain" />
-
-                <RevealObserver />
-                <CommandMenu />
-                <Navbar />
-
+            <VintecOSProvider>
+              <NextTopLoader
+                color="#000080"
+                initialPosition={0.08}
+                crawlSpeed={200}
+                height={3}
+                crawl={true}
+                showSpinner={false}
+                easing="ease"
+                speed={200}
+              />
+              <VintecShell>
                 {children}
-
-                <Analytics />
-                <SpeedInsights />
-              </ThemeProvider>
-            </ThemeColorProvider>
+              </VintecShell>
+              <CommandMenu />
+              <TerminalEasterEgg />
+              <Analytics />
+              <SpeedInsights />
+            </VintecOSProvider>
           </LoadingProvider>
         </LanguageProvider>
       </body>
